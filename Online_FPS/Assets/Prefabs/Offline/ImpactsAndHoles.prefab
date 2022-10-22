@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3351587431471282224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3351587431471282230}
+  - component: {fileID: 3351587431471282231}
+  m_Layer: 0
+  m_Name: ImpactsAndHoles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3351587431471282230
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3351587431471282224}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.399819, y: 1.624552, z: 2.884901}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3351587431471282231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3351587431471282224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a05aa55ee51af04d893424e406b93b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactTypes: 000000000100000002000000030000000400000005000000
+  impactObjects:
+  - hole: {fileID: 100006, guid: 9e95c7b2183a4f345aaf86846f8f1918, type: 3}
+    hit: {fileID: 100006, guid: ad4728fbc0a69ec4ab02c5d9dfcc7a24, type: 3}
+  - hole: {fileID: 100002, guid: 2f9348d6583cde14eb0d82bb9732647e, type: 3}
+    hit: {fileID: 100002, guid: f3e00a1a8738d7b4b8bbe99f7df4874d, type: 3}
+  - hole: {fileID: 100002, guid: caa8bd0d2623acf4d915f16e0ab71218, type: 3}
+    hit: {fileID: 100002, guid: c58181ce8a19c1d43914a73fb6b740ee, type: 3}
+  - hole: {fileID: 100002, guid: 0b24f31f464fa614a84acdeac974ed6b, type: 3}
+    hit: {fileID: 100002, guid: 6123e9ed55ae4314fbc7b281bc0fd3c7, type: 3}
+  - hole: {fileID: 100002, guid: 5d73f72c6be7d0440bbc9c87d4f718c0, type: 3}
+    hit: {fileID: 100002, guid: 791e698b8cbed2b4786e36f16b6d37c5, type: 3}
+  - hole: {fileID: 0}
+    hit: {fileID: 1743637094903878, guid: 021a2f7a2c5bc4449b4c64a66a050e8c, type: 3}

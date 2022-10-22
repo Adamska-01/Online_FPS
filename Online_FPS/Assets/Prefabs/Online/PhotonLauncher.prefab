@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &234466025357483155
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 234466025357483153}
+  - component: {fileID: 234466025357483152}
+  m_Layer: 0
+  m_Name: PhotonLauncher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &234466025357483153
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234466025357483155}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &234466025357483152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234466025357483155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 412daaea6960c494c981aff8414dfff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomNameInputField: {fileID: 0}
+  nicknameInputField: {fileID: 0}
+  errorText: {fileID: 0}
+  roomNameText: {fileID: 0}
+  roomImage: {fileID: 0}
+  roomListContent: {fileID: 0}
+  roomListItemPrefab: {fileID: 7578368763792285662, guid: 48d8f1ef5eedb7847889bd4a22e7abd1, type: 3}
+  voteListContent: {fileID: 0}
+  mapVotePrefab: {fileID: 5058029986940111792, guid: 6388d79c39b2e4b4b9763c37afd4a9a8, type: 3}
+  mapDropdowns:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  playerListContent: {fileID: 0}
+  playerListItemPrefab: {fileID: 4854531495893198382, guid: b36e149fcaf8a1c4da2d494d08bae169, type: 3}
+  startGameButton: {fileID: 0}
+  findDropDown: {fileID: 0}
+  modes: 000000000100000002000000
+  mapIndexes:
+  - mapImage:
+    - {fileID: 21300000, guid: 2e9ba08b5a63d3e43ab1f171f6aa0d60, type: 3}
+    - {fileID: 21300000, guid: 344a6f77131e557439206677bfe5b33e, type: 3}
+    indexes: 0200000003000000
+  - mapImage:
+    - {fileID: 21300000, guid: 2e9ba08b5a63d3e43ab1f171f6aa0d60, type: 3}
+    - {fileID: 21300000, guid: 344a6f77131e557439206677bfe5b33e, type: 3}
+    indexes: 0200000003000000
+  - mapImage:
+    - {fileID: 21300000, guid: 2e9ba08b5a63d3e43ab1f171f6aa0d60, type: 3}
+    - {fileID: 21300000, guid: 344a6f77131e557439206677bfe5b33e, type: 3}
+    indexes: 0200000003000000
