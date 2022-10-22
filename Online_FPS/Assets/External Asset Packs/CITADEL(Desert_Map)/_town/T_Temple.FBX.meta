@@ -1,0 +1,114 @@
+fileFormatVersion: 2
+guid: 88eb32bc34785534dbb263f8fe0d1300
+timeCreated: 1504724710
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Box008
+    100002: Box009
+    100004: F_town_temple_001
+    100006: F_town_templeColum_001
+    100008: F_town_templeColum_002
+    100010: F_town_templeColum_003
+    100012: F_town_templefloor_001
+    100014: //RootNode
+    400000: Box008
+    400002: Box009
+    400004: F_town_temple_001
+    400006: F_town_templeColum_001
+    400008: F_town_templeColum_002
+    400010: F_town_templeColum_003
+    400012: F_town_templefloor_001
+    400014: //RootNode
+    2300000: Box008
+    2300002: Box009
+    2300004: F_town_temple_001
+    2300006: F_town_templeColum_001
+    2300008: F_town_templeColum_002
+    2300010: F_town_templeColum_003
+    2300012: F_town_templefloor_001
+    3300000: Box008
+    3300002: Box009
+    3300004: F_town_temple_001
+    3300006: F_town_templeColum_001
+    3300008: F_town_templeColum_002
+    3300010: F_town_templeColum_003
+    3300012: F_town_templefloor_001
+    4300000: F_town_templefloor_001
+    4300002: F_town_templeColum_002
+    4300004: F_town_templeColum_001
+    4300006: F_town_templeColum_003
+    4300008: Box009
+    4300010: F_town_temple_001
+    4300012: Box008
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
