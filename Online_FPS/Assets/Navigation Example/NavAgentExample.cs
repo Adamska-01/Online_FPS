@@ -10,11 +10,14 @@ public class NavAgentExample : MonoBehaviour
     public AIWaypointNetwork waypointNetwork = null;
     public int currentIndex = 0;
 
+    IEnumerator currentCoroutine = null;
+
     //
     public bool hasPath = false;
     public bool pathPending = false; 
     public bool pathStale = false; 
-    public NavMeshPathStatus pathStatus = NavMeshPathStatus.PathInvalid; 
+    public NavMeshPathStatus pathStatus = NavMeshPathStatus.PathInvalid;
+    public AnimationCurve jumpCurve = new AnimationCurve();
 
     private NavMeshAgent navAgent = null;
 
@@ -33,12 +36,23 @@ public class NavAgentExample : MonoBehaviour
 
     void Update()
     {
+        //Nav agent state
         hasPath = navAgent.hasPath;
         pathPending = navAgent.pathPending;
         pathStale = navAgent.isPathStale;
         pathStatus = navAgent.pathStatus;
 
-        if((!hasPath && !pathPending) || (pathStatus == NavMeshPathStatus.PathInvalid /*|| pathStatus == NavMeshPathStatus.PathPartial*/))
+        //Approachinng an off mesh link
+        if (navAgent.isOnOffMeshLink && currentCoroutine == null)
+        {
+            currentCoroutine = Jump(1.0f);
+            StartCoroutine(currentCoroutine);
+            return;
+        }
+
+        //If we do not have a path and one isn't oebdubg then set the next
+        //waypoint as the target, otherwise if the path is stale, regenerate path
+        if((navAgent.remainingDistance <= navAgent.stoppingDistance && !pathPending) || (pathStatus == NavMeshPathStatus.PathInvalid /*|| pathStatus == NavMeshPathStatus.PathPartial*/))
             SetNextDestination(true); 
         else if(pathStale)
             SetNextDestination(false);
@@ -69,5 +83,32 @@ public class NavAgentExample : MonoBehaviour
 
         // We did not find a valid waypoint in the list for this iteration
         currentIndex++;
+    }
+
+    IEnumerator Jump(float _duration)
+    {
+        //Retrieve off mesh data
+        OffMeshLinkData data = navAgent.currentOffMeshLinkData;
+
+        //Easier to set startPos to nav agent current position
+        Vector3 startPos = navAgent.transform.position;
+        //take nav agent offset into account (only Y)
+        Vector3 endPos = data.endPos + (navAgent.baseOffset * Vector3.up);
+
+        float time = 0.0f;
+
+        while(time <= _duration)
+        {
+            //Lerp from point A to point B
+            float t = time / _duration;
+            navAgent.transform.position = Vector3.Lerp(startPos, endPos, t) + jumpCurve.Evaluate(t) * Vector3.up;
+
+            time += Time.deltaTime;
+
+            yield return null;
+        }
+
+        navAgent.CompleteOffMeshLink();
+        currentCoroutine = null;
     }
 }
