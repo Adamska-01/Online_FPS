@@ -447,6 +447,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fac1f8441f00325459b6333ac560c8e9, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fac1f8441f00325459b6333ac560c8e9, type: 3}
       propertyPath: m_Name
       value: AI_Entity
@@ -2425,6 +2429,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1811530329}
   - component: {fileID: 1811530330}
+  - component: {fileID: 1811530331}
   m_Layer: 8
   m_Name: Sensor
   m_TagString: Untagged
@@ -2460,6 +2465,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 20
   m_Center: {x: 0, y: 1.05, z: 0}
+--- !u!114 &1811530331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811530328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6093116083c2f3740882dc0f41c12811, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1922898130
 GameObject:
   m_ObjectHideFlags: 0
