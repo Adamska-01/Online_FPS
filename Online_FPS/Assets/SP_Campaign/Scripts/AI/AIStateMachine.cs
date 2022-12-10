@@ -133,15 +133,6 @@ public abstract class AIStateMachine : MonoBehaviour
                 script.ParentStateMachine = this;
             }
         }
-        //Get all the state machine behaviours, and set ref to this state machine on each one
-        if (anim != null)
-        {
-            AIStateMachineLink[] sml = anim.GetBehaviours<AIStateMachineLink>();
-            foreach (AIStateMachineLink item in sml)
-            {
-                item.StateMachine = this;
-            }
-        }
 
         //Get all the AI states in this object
         AIState[] allStastes = GetComponents<AIState>();
@@ -166,6 +157,16 @@ public abstract class AIStateMachine : MonoBehaviour
         else
         {
             currentState = null;
+        }
+
+        //Get all the state machine behaviours, and set ref to this state machine on each one
+        if(anim != null)
+        {
+            AIStateMachineLink[] sml = anim.GetBehaviours<AIStateMachineLink>();
+            foreach (AIStateMachineLink item in sml)
+            {
+                item.StateMachine = this;
+            }
         }
     }
 

@@ -520,13 +520,6 @@ MonoBehaviour:
   targetTrigger: {fileID: 671930536}
   sensorTrigger: {fileID: 1811530330}
   stoppingDistance: 5.07
-  fov: 50
-  sight: 0.5
-  hearing: 1
-  aggression: 0.5
-  health: 100
-  intelligence: 0.5
-  satisfaction: 1
 --- !u!1 &671930534
 GameObject:
   m_ObjectHideFlags: 0
