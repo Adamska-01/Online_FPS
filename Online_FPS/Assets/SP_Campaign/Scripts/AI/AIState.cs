@@ -10,7 +10,17 @@ public abstract class AIState : MonoBehaviour
     //Default handlers
     public virtual void OnEnterState() { }
     public virtual void OnExitState() { }
-    public virtual void OnAnimatorUpdated() { }
+    public virtual void OnAnimatorUpdated() 
+    {
+        if(stateMachine.UseRootPosition)
+        {
+            stateMachine.NavAgent.velocity = stateMachine.Anim.deltaPosition / Time.deltaTime;
+        }
+        if (stateMachine.UseRootRotation)
+        {
+            stateMachine.transform.rotation = stateMachine.Anim.rootRotation;
+        }
+    }
     public virtual void OnAnimatorIKUpdated() { }
     public virtual void OnTriggerEvent(AITriggerEventType _eventType, Collider _other) { }
     public virtual void OnDestinationReached(bool _isReached) { }
