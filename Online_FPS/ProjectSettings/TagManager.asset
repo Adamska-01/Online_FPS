@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Concrete
+  - OnlyPlayerCanCollide
+  - Sand
+  - Metal
+  - Body
+  - AI_Sound_Emitter
+  - AI_Visual
+  - AI_Food
+  - Flashlight
   layers:
   - Default
   - TransparentFX
@@ -14,9 +23,9 @@ TagManager:
   - AI_Entity
   - AI_Entity_Trigger
   - AI_Trigger
-  - 
-  - 
-  - 
+  - Player
+  - Visual_Aggravator
+  - Audio_Aggravator
   - 
   - 
   - 
