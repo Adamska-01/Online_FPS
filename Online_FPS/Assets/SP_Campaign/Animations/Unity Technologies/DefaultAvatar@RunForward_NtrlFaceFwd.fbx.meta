@@ -1871,7 +1871,7 @@ ModelImporter:
     second: l_hipProxy_geo
   - first:
       74: 7400000
-    second: Run
+    second: Sprint
   - first:
       95: 9500000
     second: //RootNode
@@ -1888,10 +1888,9 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
-      copied configuration does not match position in animation file:\n\t'LeftLeg'
-      : position error = 7.696519 mm\n\t'LeftFoot' : position error = 15.233781 mm\n"
+    rigImportErrors: "Copied Avatar Rig Configuration mis-match. Transform hierarchy
+      does not match:\n\tTransform 'mixamorig:Hips' for human bone 'Hips' not found\n"
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -1907,7 +1906,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Run
+      name: Sprint
       takeName: _24_a_U1_M_P_RunForward_NtrlFaceFwd__Fb_p0_No_0_PJ_10
       internalID: 0
       firstFrame: 335.9

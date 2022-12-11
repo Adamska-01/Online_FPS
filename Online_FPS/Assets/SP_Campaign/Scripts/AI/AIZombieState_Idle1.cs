@@ -73,7 +73,7 @@ public class AIZombieState_Idle1 : AIZombieState
         }
 
         //Check if Food is around (lowest priority)
-        if (zombieStateMachine.audioThreat.Type == AITargetType.Visual_Food)
+        if (zombieStateMachine.visualThreat.Type == AITargetType.Visual_Food)
         {
             zombieStateMachine.SetTarget(zombieStateMachine.visualThreat);
             return AIStateType.Pursuit;

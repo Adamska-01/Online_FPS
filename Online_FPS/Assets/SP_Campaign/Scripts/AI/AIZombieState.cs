@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public abstract class AIZombieState : AIState
 {
     protected AIZombieStateMachine zombieStateMachine = null;
@@ -72,7 +73,7 @@ public abstract class AIZombieState : AIState
 
                 Vector3 agentSensorPosition = zombieStateMachine.SensorPosition;
 
-                AIState.ConverSphereColliderToWorldSpace(soundTrigger, out Vector3 soundPos, out float soundRadius);
+                AIState.ConvertSphereColliderToWorldSpace(soundTrigger, out Vector3 soundPos, out float soundRadius);
 
                 //Calculate distance from sound 
                 float distanceToThreat = (soundPos - agentSensorPosition).magnitude;

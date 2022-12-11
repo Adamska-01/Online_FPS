@@ -69,6 +69,8 @@ public abstract class AIStateMachine : MonoBehaviour
     public NavMeshAgent  NavAgent   { get { return navAgent; } }
     public bool UseRootPosition     { get { return rootPositionRefCount > 0; } }
     public bool UseRootRotation     { get { return rootRotationRefCount > 0; } }
+    public AITargetType TargetType  { get { return target.Type; } }
+    public Vector3 TargetPosition   { get { return target.Position; } }
     public Vector3 SensorPosition
     {
         get 
