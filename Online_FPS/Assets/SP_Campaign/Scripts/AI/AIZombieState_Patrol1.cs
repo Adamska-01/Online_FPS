@@ -159,8 +159,8 @@ public class AIZombieState_Patrol1 : AIZombieState
             return;
 
         //Make the head look at the target
-        zombieStateMachine.Anim.SetLookAtPosition(zombieStateMachine.TargetPosition + Vector3.up);
-        zombieStateMachine.Anim.SetLookAtWeight(0.55f);
+        //zombieStateMachine.Anim.SetLookAtPosition(zombieStateMachine.TargetPosition + Vector3.up);
+        //zombieStateMachine.Anim.SetLookAtWeight(0.55f);
     }
 
 
