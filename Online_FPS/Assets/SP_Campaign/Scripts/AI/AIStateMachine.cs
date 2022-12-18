@@ -53,10 +53,14 @@ public abstract class AIStateMachine : MonoBehaviour
     protected AITarget  target                          = new AITarget();
     protected int       rootPositionRefCount            = 0;
     protected int       rootRotationRefCount            = 0;
+    protected bool      isTargetReached                 = false;
 
-    [SerializeField] protected AIStateType      currentStateType    = AIStateType.Idle;
-    [SerializeField] protected SphereCollider   targetTrigger       = null;
-    [SerializeField] protected SphereCollider   sensorTrigger       = null;
+    [SerializeField] protected AIStateType          currentStateType    = AIStateType.Idle;
+    [SerializeField] protected SphereCollider       targetTrigger       = null;
+    [SerializeField] protected SphereCollider       sensorTrigger       = null;
+    [SerializeField] protected AIWaypointNetwork    waypointNetwork     = null;
+    [SerializeField] protected bool                 randomPatrol        = false;
+    [SerializeField] protected int                  currentWaypoint     = -1;
 
     [SerializeField, Range(0.0f, 15.0f)] protected float stoppingDistance = 1.0f;
 
@@ -69,6 +73,8 @@ public abstract class AIStateMachine : MonoBehaviour
     public NavMeshAgent  NavAgent   { get { return navAgent; } }
     public bool UseRootPosition     { get { return rootPositionRefCount > 0; } }
     public bool UseRootRotation     { get { return rootRotationRefCount > 0; } }
+    public bool InMeleeRange        { get; set; }
+    public bool IsTargetReached     { get { return isTargetReached; } }
     public AITargetType TargetType  { get { return target.Type; } }
     public Vector3 TargetPosition   { get { return target.Position; } }
     public Vector3 SensorPosition
@@ -100,6 +106,16 @@ public abstract class AIStateMachine : MonoBehaviour
             return Mathf.Max(sensorTrigger.radius * sensorTrigger.transform.lossyScale.x,
                              sensorTrigger.radius * sensorTrigger.transform.lossyScale.y,
                              sensorTrigger.radius * sensorTrigger.transform.lossyScale.z);
+        }
+    }
+    public int TargetColliderID
+    {
+        get
+        {
+            if(target.Collider != null)
+                return target.Collider.GetInstanceID();
+            else
+                return -1;
         }
     }
 
@@ -213,6 +229,10 @@ public abstract class AIStateMachine : MonoBehaviour
         {
             target.Distance = Vector3.Distance(transform.position, target.Position);
         }
+
+        //Handle the case where a target could get destroyed while this is true
+        //and it does not get the OnTriggerExit notification
+        isTargetReached = false;
     }
 
 
@@ -269,6 +289,8 @@ public abstract class AIStateMachine : MonoBehaviour
     {
         if (targetTrigger == null || other != targetTrigger)
             return; //Return if not our target trigger 
+
+        isTargetReached = true;
     
         //Notify child state
         if(currentState != null)
@@ -277,10 +299,20 @@ public abstract class AIStateMachine : MonoBehaviour
         }
     }
 
-    public void OnTriggerExit(Collider other)
+    protected void OnTriggerStay(Collider other)
     {
         if (targetTrigger == null || other != targetTrigger)
             return; //Return if not our target trigger 
+
+        isTargetReached = true;        
+    }
+
+    protected void OnTriggerExit(Collider other)
+    {
+        if (targetTrigger == null || other != targetTrigger)
+            return; //Return if not our target trigger 
+
+        isTargetReached = false;
 
         //Notify child state
         if (currentState != null)
@@ -326,5 +358,54 @@ public abstract class AIStateMachine : MonoBehaviour
     {
         rootPositionRefCount += _rootPosition;
         rootRotationRefCount += _rootRotation;
+    }
+
+    private void NextWaypoint()
+    {
+        //Increase current waypoint with wrap-around to zero (or choose a random waypoint)
+        if (randomPatrol && waypointNetwork.waypoints.Count > 1)
+        {
+            int oldWaypoint = currentWaypoint;
+            while (currentWaypoint == oldWaypoint)
+            {
+                currentWaypoint = Random.Range(0, waypointNetwork.waypoints.Count);
+            }
+        }
+        else
+        {
+            currentWaypoint = currentWaypoint == waypointNetwork.waypoints.Count - 1 ? 0 : currentWaypoint + 1;
+        }        
+    }
+
+    public Vector3 GetWaypointPosition(bool incrementWaypoint)
+    {
+        if (currentWaypoint == -1) //First time this gets called
+        {
+            if(randomPatrol)
+            {
+                currentWaypoint = Random.Range(0, waypointNetwork.waypoints.Count);
+            }
+            else
+            {
+                currentWaypoint = 0;
+            }
+        }
+        else if(incrementWaypoint)
+        {
+            NextWaypoint();
+        }
+
+        //Fetch new waypoint from the waypoint list
+        if (waypointNetwork.waypoints[currentWaypoint] != null)
+        {
+            Transform newWaypoint = waypointNetwork.waypoints[currentWaypoint];
+
+            //Set new target position        
+            SetTarget(AITargetType.WayPoint, null, newWaypoint.position, Vector3.Distance(transform.position, newWaypoint.position));
+        
+            return newWaypoint.position;
+        }
+        
+        return Vector3.zero;
     }
 }

@@ -90,7 +90,7 @@ public abstract class AIZombieState : AIState
                 //if we can hear it and it is closer than what we previously have stored
                 if(distanceToThreat < zombieStateMachine.audioThreat.Distance)
                 {
-                    zombieStateMachine.audioThreat.Set(AITargetType.Audio, _other, _other.transform.position, distanceToThreat);
+                    zombieStateMachine.audioThreat.Set(AITargetType.Audio, _other, soundPos, distanceToThreat);
                 }
             }
             else if (_other.CompareTag("AI_Food") && currentType != AITargetType.Visual_Player && currentType != AITargetType.Visual_Light &&

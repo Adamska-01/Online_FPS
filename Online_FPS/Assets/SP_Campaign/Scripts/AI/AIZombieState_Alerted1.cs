@@ -5,11 +5,13 @@ using UnityEngine;
 public class AIZombieState_Alerted1 : AIZombieState
 {
     //Inspector Assigned
-    [SerializeField, Range(1.0f, 60.0f)] float maxDuration = 10.0f;
-    [SerializeField, Range(0.0f, 360.0f)] float wayPointAngleThreshold = 90.0f;
-    [SerializeField, Range(0.0f, 360.0f)] float threatAngleThreshold = 10.0f;
+    [SerializeField, Range(1.0f, 60.0f)] private float maxDuration = 10.0f;
+    [SerializeField, Range(0.0f, 360.0f)] private float wayPointAngleThreshold = 90.0f;
+    [SerializeField, Range(0.0f, 360.0f)] private float threatAngleThreshold = 10.0f;
+    [SerializeField] private float directionChangeTime = 1.5f;
 
     private float timer = 0.0f;
+    private float directionChangeTimer = 0.0f;
 
 
     public override void OnEnterState()
@@ -29,6 +31,7 @@ public class AIZombieState_Alerted1 : AIZombieState
 
         //Set timer 
         timer = maxDuration;
+        directionChangeTimer = 0.0f;
     }
 
 
@@ -41,8 +44,14 @@ public class AIZombieState_Alerted1 : AIZombieState
     {
         //Decrement timer
         timer -= Time.deltaTime;
+        directionChangeTimer += Time.deltaTime;
         if (timer <= 0.0f)
-            return AIStateType.Patrol;
+        {
+            //Go back to the waypoint the zombie was on before he got disturbed (false)
+            zombieStateMachine.NavAgent.SetDestination(zombieStateMachine.GetWaypointPosition(false));
+            zombieStateMachine.NavAgent.isStopped = false;
+            timer = maxDuration;
+        }
 
         //Check if the player is around 
         if (zombieStateMachine.visualThreat.Type == AITargetType.Visual_Player)
@@ -79,7 +88,7 @@ public class AIZombieState_Alerted1 : AIZombieState
 
         float angle;
         //Handle visual and audio threats
-        if(zombieStateMachine.TargetType == AITargetType.Audio || zombieStateMachine.TargetType == AITargetType.Visual_Light)
+        if((zombieStateMachine.TargetType == AITargetType.Audio || zombieStateMachine.TargetType == AITargetType.Visual_Light) && !zombieStateMachine.IsTargetReached)
         {
             //Find angle between forward vec. and target
             angle = AIState.FindSignedAngle(zombieStateMachine.transform.forward, zombieStateMachine.TargetPosition - zombieStateMachine.transform.position);
@@ -90,17 +99,21 @@ public class AIZombieState_Alerted1 : AIZombieState
                 return AIStateType.Pursuit;
             }
 
-            //If more intelligent, the more chance to turn the right way 
-            if(Random.value < zombieStateMachine.Intelligence)
+            if(directionChangeTimer > directionChangeTime)
             {
-                zombieStateMachine.Seeking = (int)Mathf.Sign(angle);
-            }
-            else
-            {
-                zombieStateMachine.Seeking = (int)Mathf.Sign(Random.Range(-1.0f, 1.0f));
+                //If more intelligent, the more chance to turn the right way 
+                if(Random.value < zombieStateMachine.Intelligence)
+                {
+                    zombieStateMachine.Seeking = (int)Mathf.Sign(angle);
+                }
+                else
+                {
+                    zombieStateMachine.Seeking = (int)Mathf.Sign(Random.Range(-1.0f, 1.0f));
+                }
+                directionChangeTimer = 0.0f;
             }
         }
-        else if (zombieStateMachine.TargetType == AITargetType.WayPoint) //Handle waypoints
+        else if (zombieStateMachine.TargetType == AITargetType.WayPoint && !zombieStateMachine.NavAgent.pathPending) //Handle waypoints
         {
             //Find angle between forward vec. and steering target
             angle = AIState.FindSignedAngle(zombieStateMachine.transform.forward, zombieStateMachine.NavAgent.steeringTarget - zombieStateMachine.transform.position);
