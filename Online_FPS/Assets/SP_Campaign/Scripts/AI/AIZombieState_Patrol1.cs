@@ -106,7 +106,7 @@ public class AIZombieState_Patrol1 : AIZombieState
            !zombieStateMachine.NavAgent.hasPath     || 
            zombieStateMachine.NavAgent.pathStatus != UnityEngine.AI.NavMeshPathStatus.PathComplete)
         {
-            zombieStateMachine.GetWaypointPosition(true);
+            zombieStateMachine.NavAgent.SetDestination(zombieStateMachine.GetWaypointPosition(true));
         }
 
         //Stay in patrol state if none of the above  
