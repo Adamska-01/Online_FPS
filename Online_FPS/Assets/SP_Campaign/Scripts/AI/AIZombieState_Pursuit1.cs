@@ -198,7 +198,7 @@ public class AIZombieState_Pursuit1 : AIZombieState
             //Check if we currently have a lower priority target
             if (zombieStateMachine.TargetType == AITargetType.Visual_Food)
             {
-                //Make light the current target
+                //Make audio the current target
                 zombieStateMachine.SetTarget(zombieStateMachine.audioThreat);
                 return AIStateType.Alerted;
             }
