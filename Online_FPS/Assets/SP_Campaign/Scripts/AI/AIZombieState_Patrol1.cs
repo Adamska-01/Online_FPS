@@ -28,7 +28,6 @@ public class AIZombieState_Patrol1 : AIZombieState
 
         //Set zombie stats
         zombieStateMachine.NavAgentControl(true, false);
-        zombieStateMachine.Speed = speed;
         zombieStateMachine.Seeking = 0;
         zombieStateMachine.Feeding = false;
         zombieStateMachine.AttackType = 0;
@@ -81,6 +80,17 @@ public class AIZombieState_Patrol1 : AIZombieState
                 zombieStateMachine.SetTarget(zombieStateMachine.visualThreat);
                 return AIStateType.Pursuit;
             }
+        }
+        
+        //if the agent has no path just stop it
+        if(zombieStateMachine.NavAgent.pathPending)
+        {
+            zombieStateMachine.Speed = 0.0f;
+            return AIStateType.Patrol;
+        }
+        else
+        {
+            zombieStateMachine.Speed = speed;
         }
 
         //Find angle between current Forward and the position we need to steer at

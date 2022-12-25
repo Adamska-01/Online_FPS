@@ -85,7 +85,7 @@ public class AIZombieState_Feeding1 : AIZombieState
         //Icrement satisfation if in the "animation feeding" state 
         if(zombieStateMachine.Anim.GetCurrentAnimatorStateInfo(eatingLayerIndex).shortNameHash == eatingStateHash)
         {
-            zombieStateMachine.Satisfaction = Mathf.Min(zombieStateMachine.Satisfaction + (Time.deltaTime * zombieStateMachine.ReplenishRate), 1.0f);
+            zombieStateMachine.Satisfaction = Mathf.Min(zombieStateMachine.Satisfaction + ((Time.deltaTime * zombieStateMachine.ReplenishRate)/100.0f), 1.0f);
         }
 
         if (!zombieStateMachine.UseRootRotation)
@@ -95,7 +95,6 @@ public class AIZombieState_Feeding1 : AIZombieState
             targetPos.y = zombieStateMachine.transform.position.y;
             Quaternion newRot = Quaternion.LookRotation(targetPos - zombieStateMachine.transform.position);
             zombieStateMachine.transform.rotation = Quaternion.Slerp(zombieStateMachine.transform.rotation, newRot, Time.deltaTime * slerpSpeed);
-            zombieStateMachine.Satisfaction = Mathf.Min(zombieStateMachine.Satisfaction + ((Time.deltaTime * zombieStateMachine.ReplenishRate)/100.0f), 1.0f);
         }
 
         //Stay in the feeding state

@@ -34,7 +34,6 @@ public class AIZombieState_Pursuit1 : AIZombieState
 
         //Set zombie stats
         zombieStateMachine.NavAgentControl(true, false);
-        zombieStateMachine.Speed = speed;
         zombieStateMachine.Seeking = 0;
         zombieStateMachine.Feeding = false;
         zombieStateMachine.AttackType = 0;
@@ -89,37 +88,47 @@ public class AIZombieState_Pursuit1 : AIZombieState
         //If for any reaason the nav agent has lost its path then call then drop into alerted state
         //so it will try to re-acquire the target or eventually give up and resume patrolling 
         if(zombieStateMachine.NavAgent.isPathStale  ||
-           !zombieStateMachine.NavAgent.hasPath     ||
+           (!zombieStateMachine.NavAgent.hasPath && !zombieStateMachine.NavAgent.pathPending)    ||
            zombieStateMachine.NavAgent.pathStatus != UnityEngine.AI.NavMeshPathStatus.PathComplete)
         { 
             return AIStateType.Alerted;         
         }
 
-        //If we are close to the player and we still have the player in our vision then keep facing right at the player
-        if(!zombieStateMachine.UseRootRotation && 
-            zombieStateMachine.TargetType == AITargetType.Visual_Player && 
-            zombieStateMachine.visualThreat.Type == AITargetType.Visual_Player &&
-            zombieStateMachine.IsTargetReached)
+        //if the agent has no path just stop it
+        if (zombieStateMachine.NavAgent.pathPending)
         {
-            Vector3 targetPos = zombieStateMachine.TargetPosition;
-            targetPos.y = zombieStateMachine.transform.position.y;
-            Quaternion newRot = Quaternion.LookRotation(targetPos - zombieStateMachine.transform.position);
-
-            //We're extremely close to the player now and it's better to set the rotation instantly (NO slerp)
-            zombieStateMachine.transform.rotation = newRot;
+            zombieStateMachine.Speed = 0.0f;
+            return AIStateType.Patrol;
         }
-        else if(!zombieStateMachine.UseRootRotation && !zombieStateMachine.IsTargetReached) //Generic pursuit condition
+        else //Stop angent and do other things 
         {
-            Quaternion newRot = Quaternion.LookRotation(zombieStateMachine.NavAgent.desiredVelocity);
+            zombieStateMachine.Speed = speed;
 
-            //Use slerp as we are not close to the player (so it is ok to lose some "navigation accuracy")
-            zombieStateMachine.transform.rotation = Quaternion.Slerp(zombieStateMachine.transform.rotation, newRot, Time.deltaTime * slerpSpeed);
-        }
-        else if(zombieStateMachine.IsTargetReached) //target was not the player
-        {
-            return AIStateType.Alerted;
-        }
+            //If we are close to the player and we still have the player in our vision then keep facing right at the player
+            if (!zombieStateMachine.UseRootRotation &&
+                zombieStateMachine.TargetType == AITargetType.Visual_Player &&
+                zombieStateMachine.visualThreat.Type == AITargetType.Visual_Player &&
+                zombieStateMachine.IsTargetReached)
+            {
+                Vector3 targetPos = zombieStateMachine.TargetPosition;
+                targetPos.y = zombieStateMachine.transform.position.y;
+                Quaternion newRot = Quaternion.LookRotation(targetPos - zombieStateMachine.transform.position);
 
+                //We're extremely close to the player now and it's better to set the rotation instantly (NO slerp)
+                zombieStateMachine.transform.rotation = newRot;
+            }
+            else if (!zombieStateMachine.UseRootRotation && !zombieStateMachine.IsTargetReached) //Generic pursuit condition
+            {
+                Quaternion newRot = Quaternion.LookRotation(zombieStateMachine.NavAgent.desiredVelocity);
+
+                //Use slerp as we are not close to the player (so it is ok to lose some "navigation accuracy")
+                zombieStateMachine.transform.rotation = Quaternion.Slerp(zombieStateMachine.transform.rotation, newRot, Time.deltaTime * slerpSpeed);
+            }
+            else if (zombieStateMachine.IsTargetReached) //target was not the player
+            {
+                return AIStateType.Alerted;
+            }
+        }
 
         //Do we have a visual threat that is the player?
         if (zombieStateMachine.visualThreat.Type == AITargetType.Visual_Player)
