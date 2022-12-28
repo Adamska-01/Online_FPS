@@ -10,11 +10,16 @@ using UnityEngine;
 public class AIZombieState_Feeding1 : AIZombieState
 {
     //Inspector-Assigned
-    [SerializeField] private float slerpSpeed = 5.0f;
+    [SerializeField] private float      slerpSpeed = 5.0f;
+    [SerializeField] private Transform  bloodParticleMount = null;
+
+    [SerializeField, Range(0.01f, 1.0f)] private float bloodParticlesBurstTime = 0.1f;
+    [SerializeField, Range(1, 100)] private int bloodParticlesBurstAmount = 10;
 
     //Animation Hash
     private int eatingStateHash = Animator.StringToHash("Feeding_State");
     private int eatingLayerIndex = -1;
+    private float timer = 0.0f; 
 
 
     public override void OnEnterState()
@@ -30,6 +35,9 @@ public class AIZombieState_Feeding1 : AIZombieState
         {
             eatingLayerIndex = zombieStateMachine.Anim.GetLayerIndex("Cinematic");
         }
+
+        //Reset timer 
+        timer = 0.0f;
 
         //Set zombie stats
         zombieStateMachine.Feeding = true;
@@ -58,6 +66,8 @@ public class AIZombieState_Feeding1 : AIZombieState
 
     public override AIStateType OnUpdate()
     {
+        timer += Time.deltaTime;
+
         //Check satisfaction level every frame
         if (zombieStateMachine.Satisfaction > 0.9f)
         {
@@ -86,6 +96,27 @@ public class AIZombieState_Feeding1 : AIZombieState
         if(zombieStateMachine.Anim.GetCurrentAnimatorStateInfo(eatingLayerIndex).shortNameHash == eatingStateHash)
         {
             zombieStateMachine.Satisfaction = Mathf.Min(zombieStateMachine.Satisfaction + ((Time.deltaTime * zombieStateMachine.ReplenishRate)/100.0f), 1.0f);
+
+            //Emit blood particles 
+            if(GameSceneManager.Instance != null && 
+               GameSceneManager.Instance.BloodParticles != null && 
+               bloodParticleMount != null)
+            {
+                if(timer > bloodParticlesBurstTime)
+                {
+                    ParticleSystem system = GameSceneManager.Instance.BloodParticles;
+
+                    system.transform.position = bloodParticleMount.position;
+                    system.transform.rotation = bloodParticleMount.rotation;
+
+                    var simSpace = system.main.simulationSpace;
+                    simSpace = ParticleSystemSimulationSpace.World;
+                    
+                    system.Emit(bloodParticlesBurstAmount);
+
+                    timer = 0.0f;
+                }
+            }
         }
 
         if (!zombieStateMachine.UseRootRotation)

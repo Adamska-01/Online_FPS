@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// --------------------------------------------------------------------------
+// CLASS	:	GameSceneManager
+// DESC		:	Singleton class that acts as the scene database 
+// --------------------------------------------------------------------------
 public class GameSceneManager : MonoBehaviour
 {
     //Singleton
@@ -10,7 +15,7 @@ public class GameSceneManager : MonoBehaviour
     {
         get
         {
-            if(instance == null)
+            if (instance == null)
             {
                 instance = FindObjectOfType<GameSceneManager>();
             }
@@ -18,9 +23,16 @@ public class GameSceneManager : MonoBehaviour
             return instance;
         }
     }
-     
 
+    //Inspector-Assigned
+    [SerializeField] private ParticleSystem bloodParticles = null;
+     
+    //Private
     private Dictionary<int, AIStateMachine> stateMachines = new Dictionary<int, AIStateMachine>();
+
+    //Properties 
+    public ParticleSystem BloodParticles { get { return bloodParticles; } }
+
 
     public void RegisterAIStateMachine(int _key, AIStateMachine _sm)
     {
