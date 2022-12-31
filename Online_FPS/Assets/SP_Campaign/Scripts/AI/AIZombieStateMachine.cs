@@ -18,7 +18,7 @@ public class AIZombieStateMachine : AIStateMachine
     [SerializeField, Range(0, 100)]         private int     health          = 100;
     [SerializeField, Range(0.0f, 1.0f)]     private float   intelligence    = 0.5f;
     [SerializeField, Range(0.0f, 1.0f)]     private float   satisfaction    = 1.0f;
-    [SerializeField, Range(0.0f, 1.0f)]     private float   replenishRate   = 0.5f;
+    [SerializeField, Range(0.0f, 2.0f)]     private float   replenishRate   = 0.5f;
     [SerializeField, Range(0.0f, 1.0f)]     private float   depletionhRate  = 0.1f;
 
     //Private (Managed by the state machine) 
@@ -65,5 +65,7 @@ public class AIZombieStateMachine : AIStateMachine
             anim.SetBool(feedingHash, feeding);
             anim.SetInteger(attackHash, attackType);
         }
+
+        satisfaction = MathF.Max(0, satisfaction - ((depletionhRate * Time.deltaTime) / 100) * Mathf.Pow(speed, 3.0f));
     }
 }
