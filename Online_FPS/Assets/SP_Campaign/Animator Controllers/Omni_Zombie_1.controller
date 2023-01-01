@@ -153,6 +153,20 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-7786570747839884546
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c261989f447e7f49b466bbeb76e26fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rootPosition: 0
+  rootRotation: -10
 --- !u!1101 &-7722530539773660145
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -219,7 +233,8 @@ AnimatorState:
   m_Transitions:
   - {fileID: -3263290220145812503}
   - {fileID: 8001308182530758347}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 8659331773587856682}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -325,6 +340,20 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-6647952457433742471
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c261989f447e7f49b466bbeb76e26fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rootPosition: 0
+  rootRotation: -10
 --- !u!1101 &-6434554266214374520
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -334,10 +363,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 3
-    m_ConditionEvent: Speed
+    m_ConditionEvent: Attack
     m_EventTreshold: 70
   - m_ConditionMode: 4
-    m_ConditionEvent: Speed
+    m_ConditionEvent: Attack
     m_EventTreshold: 81
   - m_ConditionMode: 2
     m_ConditionEvent: Crawling
@@ -365,10 +394,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 3
-    m_ConditionEvent: Speed
+    m_ConditionEvent: Attack
     m_EventTreshold: 20
   - m_ConditionMode: 4
-    m_ConditionEvent: Speed
+    m_ConditionEvent: Attack
     m_EventTreshold: 36
   - m_ConditionMode: 2
     m_ConditionEvent: Crawling
@@ -437,6 +466,20 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-6135621213016878490
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c261989f447e7f49b466bbeb76e26fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rootPosition: 0
+  rootRotation: -10
 --- !u!1102 &-5833478975033158728
 AnimatorState:
   serializedVersion: 6
@@ -730,10 +773,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 3
-    m_ConditionEvent: Speed
+    m_ConditionEvent: Attack
     m_EventTreshold: 35
   - m_ConditionMode: 4
-    m_ConditionEvent: Speed
+    m_ConditionEvent: Attack
     m_EventTreshold: 51
   - m_ConditionMode: 2
     m_ConditionEvent: Crawling
@@ -765,7 +808,8 @@ AnimatorState:
   m_Transitions:
   - {fileID: -8702617653688374741}
   - {fileID: 4230582887164230065}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -6135621213016878490}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -797,7 +841,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 2
+  m_TransitionDuration: 1
   m_TransitionOffset: 0
   m_ExitTime: 0.9701493
   m_HasExitTime: 0
@@ -805,6 +849,20 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-2059293699406407321
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c261989f447e7f49b466bbeb76e26fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rootPosition: 0
+  rootRotation: -10
 --- !u!1102 &-1856164359237083003
 AnimatorState:
   serializedVersion: 6
@@ -923,7 +981,8 @@ AnimatorState:
   m_Transitions:
   - {fileID: 2806961367872054259}
   - {fileID: -6179840779566339397}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -6647952457433742471}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -951,7 +1010,8 @@ AnimatorState:
   m_Transitions:
   - {fileID: 4982466575436003473}
   - {fileID: 3846830552092114097}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -390261456418931457}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -991,6 +1051,20 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-390261456418931457
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c261989f447e7f49b466bbeb76e26fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rootPosition: 0
+  rootRotation: -10
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
@@ -1038,6 +1112,24 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - m_Name: Hit_Type
     m_Type: 3
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: LeftHand
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: RightHand
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: Mouth
+    m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -1160,10 +1252,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 3
-    m_ConditionEvent: Speed
+    m_ConditionEvent: Attack
     m_EventTreshold: 50
   - m_ConditionMode: 4
-    m_ConditionEvent: Speed
+    m_ConditionEvent: Attack
     m_EventTreshold: 61
   - m_ConditionMode: 2
     m_ConditionEvent: Crawling
@@ -1248,7 +1340,8 @@ AnimatorState:
   m_Transitions:
   - {fileID: -8031234254488497593}
   - {fileID: -3190798138715110173}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -7786570747839884546}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1276,7 +1369,8 @@ AnimatorState:
   m_Transitions:
   - {fileID: -7807320485074436080}
   - {fileID: 6644283340356746642}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -2059293699406407321}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1343,7 +1437,8 @@ AnimatorState:
   m_Transitions:
   - {fileID: 6357466600901462670}
   - {fileID: 598688224305486368}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 3622476827877629181}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1458,6 +1553,20 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &3622476827877629181
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c261989f447e7f49b466bbeb76e26fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rootPosition: 0
+  rootRotation: -10
 --- !u!1102 &3628448431252794050
 AnimatorState:
   serializedVersion: 6
@@ -1573,7 +1682,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 3
-    m_ConditionEvent: Speed
+    m_ConditionEvent: Attack
     m_EventTreshold: 90
   - m_ConditionMode: 2
     m_ConditionEvent: Crawling
@@ -1623,10 +1732,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 3
-    m_ConditionEvent: Speed
+    m_ConditionEvent: Attack
     m_EventTreshold: 60
   - m_ConditionMode: 4
-    m_ConditionEvent: Speed
+    m_ConditionEvent: Attack
     m_EventTreshold: 71
   - m_ConditionMode: 2
     m_ConditionEvent: Crawling
@@ -1686,6 +1795,20 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &4805050297041742830
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c261989f447e7f49b466bbeb76e26fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rootPosition: 0
+  rootRotation: -10
 --- !u!1101 &4982466575436003473
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1859,10 +1982,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 3
-    m_ConditionEvent: Speed
+    m_ConditionEvent: Attack
     m_EventTreshold: 80
   - m_ConditionMode: 4
-    m_ConditionEvent: Speed
+    m_ConditionEvent: Attack
     m_EventTreshold: 91
   - m_ConditionMode: 2
     m_ConditionEvent: Crawling
@@ -1916,7 +2039,8 @@ AnimatorState:
   m_Transitions:
   - {fileID: 1974506535233593803}
   - {fileID: -8760149236836768077}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 4805050297041742830}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -2108,3 +2232,17 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &8659331773587856682
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c261989f447e7f49b466bbeb76e26fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rootPosition: 0
+  rootRotation: -10

@@ -14,6 +14,7 @@ public class AIZombieState_Attack1 : AIZombieState
     [SerializeField, Range(0.0f, 1.0f)] private float lookAtWeight = 0.7f;
     [SerializeField, Range(0.0f, 90.0f)] private float lookAtAngleThreshold = 15.0f;
     [SerializeField] private float slerpSpeed = 5.0f;
+    [SerializeField] private float stoppingDistance = 1.0f;
 
     //Private variables 
     private float currentLookAtWeight = 0.0f;
@@ -53,6 +54,12 @@ public class AIZombieState_Attack1 : AIZombieState
         Vector3 targetPos;
         Quaternion newRot;
 
+        //Stop zombie from walking/running when too close to attack 
+        if (Vector3.Distance(zombieStateMachine.transform.position, zombieStateMachine.TargetPosition) < stoppingDistance)
+            zombieStateMachine.Speed = 0;
+        else
+            zombieStateMachine.Speed = speed;
+
         //Check if the player is still visible 
         if(zombieStateMachine.visualThreat.Type == AITargetType.Visual_Player)
         {
@@ -75,7 +82,7 @@ public class AIZombieState_Attack1 : AIZombieState
             }
 
             zombieStateMachine.AttackType = Random.Range(1, 100);
-
+            Debug.Log(zombieStateMachine.AttackType);
             return AIStateType.Attack;
         }
 
