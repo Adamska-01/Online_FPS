@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.05660379, g: 0.05660379, b: 0.05660379, a: 1}
+  m_AmbientSkyColor: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -35,7 +35,7 @@ RenderSettings:
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
-  m_ReflectionIntensity: 0
+  m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
   m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
@@ -333,7 +333,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39485b4252422e744825cde655056455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodTexture: {fileID: 2800000, guid: 2e6119669ae60d74d8afd1256dd7d887, type: 3}
+  bloodNormalMap: {fileID: 2800000, guid: 171b2027e94ebd14cb82b94728bf07f3, type: 3}
   shader: {fileID: 4800000, guid: 5cec30f02c9dc0c4fb24c0c92e63516d, type: 3}
+  bloodAmount: 0
+  minBloodAmount: 0
+  distortion: 0.21
+  fadeSpeed: 0.05
+  autoFade: 1
 --- !u!1 &279327939 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4728426434207774260, guid: fac1f8441f00325459b6333ac560c8e9, type: 3}
@@ -366,6 +373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animParameter: LeftHand
   bloodParticlesBurstAmount: 10
+  damageAmount: 50
 --- !u!1 &315580916
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,6 +689,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animParameter: RightHand
   bloodParticlesBurstAmount: 10
+  damageAmount: 50
 --- !u!1 &556128595
 GameObject:
   m_ObjectHideFlags: 0
@@ -1746,6 +1755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animParameter: Mouth
   bloodParticlesBurstAmount: 10
+  damageAmount: 10
 --- !u!1 &1574530830
 GameObject:
   m_ObjectHideFlags: 0
@@ -1926,8 +1936,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1664277648}
   - component: {fileID: 1664277647}
-  - component: {fileID: 1664277649}
   - component: {fileID: 1664277650}
+  - component: {fileID: 1664277651}
+  - component: {fileID: 1664277649}
   m_Layer: 9
   m_Name: FPS_Controller_Rig
   m_TagString: Player
@@ -2070,6 +2081,22 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &1664277651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664277646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd700e462db7c924580fa27407dc24b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeTrigger: {fileID: 0}
+  cameraBloodEffect: {fileID: 170418191}
+  playerCamera: {fileID: 170418189}
+  health: 100
 --- !u!1001 &1761844276
 PrefabInstance:
   m_ObjectHideFlags: 0

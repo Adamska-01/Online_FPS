@@ -3,6 +3,11 @@ Shader "Hidden/CameraBloodEffect"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _BloodTex ("Blood Texture", 2D) = "white" {}
+        _BloodBump ("Blood Normal", 2D) = "white" {}
+
+        _BloodAmount("Blood Amount", Range(0, 1)) = 0.0
+        _Distortion("Distortion", Range(0, 2)) = 1.0
     }
          
     SubShader
@@ -30,6 +35,7 @@ Shader "Hidden/CameraBloodEffect"
                 float4 vertex : SV_POSITION;
             };
 
+            //No need to alter the vertex shader as this is just an image shader
             v2f vert (appdata v)
             {
                 v2f o;
@@ -39,14 +45,34 @@ Shader "Hidden/CameraBloodEffect"
             }
 
             sampler2D _MainTex;
+            sampler2D _BloodTex;
+            sampler2D _BloodBump;
 
+            float _BloodAmount;
+            float _Distortion;
+
+            //Pixel shader == Fragment shader
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed4 col = tex2D(_MainTex, i.uv);
-                
-                half lum = Luminance(col.xyz);
 
-                return fixed4(lum, lum, lum, 1.0f);
+                //Same sample as up, but with the blood texture 
+                fixed4 bloodCol = tex2D(_BloodTex, i.uv);
+                //Map the Blood amount in a range of 0 and 1
+                bloodCol.a = saturate(bloodCol.a + (_BloodAmount * 2 - 1));
+                
+                //Calculate distortion
+                half2 bump = UnpackNormal(tex2D(_BloodBump, i.uv)).xy;
+
+                //Sample souce texture (what's in the image buffer/ what the player is seeing)
+                fixed4 srcCol = tex2D(_MainTex, i.uv + bump * bloodCol.a * _Distortion);
+                                
+                //Modulate 2 colors (mainTex and bloodTex) together
+                fixed4 overlayCol = srcCol * bloodCol * 2;
+                overlayCol = lerp(srcCol, overlayCol, 0.75); //Additional Lerp between mainCol and overlayCol to display more of the mainTex
+
+                //Blend between mainTex and blodTex and output it
+                fixed4 output = lerp(srcCol, overlayCol, bloodCol.a);
+                return output;
             }
             ENDCG
         }

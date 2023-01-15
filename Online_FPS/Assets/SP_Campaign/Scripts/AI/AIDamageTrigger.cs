@@ -7,11 +7,13 @@ public class AIDamageTrigger : MonoBehaviour
     //Inspector-Assigned
     [SerializeField] string animParameter = "";
     [SerializeField] int bloodParticlesBurstAmount = 10;
+    [SerializeField] float damageAmount = 1.0f;
 
     //Private fields 
     private AIStateMachine stateMachine = null;
     private Animator anim = null;
     private int parameterHash = -1;
+    GameSceneManager gameSceneManager = null;
 
 
     private void Start()
@@ -23,6 +25,8 @@ public class AIDamageTrigger : MonoBehaviour
         }
 
         parameterHash = Animator.StringToHash(animParameter);
+
+        gameSceneManager = GameSceneManager.Instance;
     }
 
 
@@ -46,7 +50,16 @@ public class AIDamageTrigger : MonoBehaviour
 
                 system.Emit(bloodParticlesBurstAmount);
             }
-            Debug.Log("Player being damaged");
+            
+            //Use character manager to apply damage
+            if(gameSceneManager != null)
+            {
+                Player_Info info = gameSceneManager.GetPlayerInfo(other.GetInstanceID());
+                if(info != null && info.characterManager != null)
+                {
+                    info.characterManager.TakeDamage(damageAmount);
+                }
+            }
         }
     }
 }
