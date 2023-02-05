@@ -68,4 +68,58 @@ public class AIZombieStateMachine : AIStateMachine
 
         satisfaction = MathF.Max(0, satisfaction - ((depletionhRate * Time.deltaTime) / 100) * Mathf.Pow(speed, 3.0f));
     }
+
+
+    public override void TakeDamage(Vector3 _position, Vector3 _force, int _damage, Rigidbody _bodyPart, CharacterManager _chrManager, int _hitDir = 0)
+    {
+        if (GameSceneManager.Instance != null && GameSceneManager.Instance.BloodParticles != null)
+        {
+            //Add blood particles 
+            ParticleSystem sys = GameSceneManager.Instance.BloodParticles;
+            sys.transform.position = _position;
+            //Set simulation World space
+            var settings = sys.main;
+            settings.simulationSpace = ParticleSystemSimulationSpace.World;
+            //Emission
+            sys.Emit(60);
+        }
+
+        health -= _damage;
+
+        float hitStrength = _force.magnitude;
+        bool shouldRagdoll = (hitStrength > 1.0f); //TODO: set with a function
+        if(health <= 0)
+        {
+            shouldRagdoll = true;
+        }
+
+        if(shouldRagdoll)
+        {
+            //"Clear" the state the AI is currently in 
+            if(currentState)
+            {
+                currentState.OnExitState();
+                currentState = null;
+                currentStateType = AIStateType.None;
+            }
+
+            //Disable anything that conflicts with the ragdoll
+            if(navAgent)    navAgent.enabled = false;
+            if(anim)        anim.enabled = false;
+            if(col)         col.enabled = false;
+
+            InMeleeRange = false;
+
+            foreach (Rigidbody body in bodyParts)
+            {
+                if(body != null)
+                {
+                    //Enable ragdoll
+                    body.isKinematic = false;
+                }
+            }
+
+            _bodyPart.AddForce(_force, ForceMode.Impulse);
+        }
+    }
 }

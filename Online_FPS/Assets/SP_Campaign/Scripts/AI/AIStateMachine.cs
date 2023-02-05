@@ -50,12 +50,15 @@ public abstract class AIStateMachine : MonoBehaviour
 
     protected AIState   currentState                    = null;
     protected Dictionary<AIStateType, AIState> states   = new Dictionary<AIStateType, AIState>();
+    protected List<Rigidbody> bodyParts               = new List<Rigidbody>();
     protected AITarget  target                          = new AITarget();
     protected int       rootPositionRefCount            = 0;
     protected int       rootRotationRefCount            = 0;
+    protected int       AI_BodyPartLayer                = -1;
     protected bool      isTargetReached                 = false;
 
     [SerializeField] protected AIStateType          currentStateType    = AIStateType.Idle;
+    [SerializeField] protected Transform            rootBone            = null;
     [SerializeField] protected SphereCollider       targetTrigger       = null;
     [SerializeField] protected SphereCollider       sensorTrigger       = null;
     [SerializeField] protected AIWaypointNetwork    waypointNetwork     = null;
@@ -126,6 +129,9 @@ public abstract class AIStateMachine : MonoBehaviour
         navAgent = GetComponent<NavMeshAgent>();
         col = GetComponent<Collider>();
 
+        //Get body part layer 
+        AI_BodyPartLayer = LayerMask.NameToLayer("AI_BodyPart");
+
         //Register state machines with scene database
         if(GameSceneManager.Instance != null)
         { 
@@ -137,6 +143,22 @@ public abstract class AIStateMachine : MonoBehaviour
             {
                 GameSceneManager.Instance.RegisterAIStateMachine(sensorTrigger.GetInstanceID(), this);
             }
+        }
+
+        //Get ragdoll body parts
+        if(rootBone != null)
+        {
+            Rigidbody[] bodies = rootBone.GetComponentsInChildren<Rigidbody>();
+            foreach (var bodyPart in bodies)
+            {
+                if(bodyPart != null && bodyPart.gameObject.layer == AI_BodyPartLayer)
+                {
+                    bodyParts.Add(bodyPart);
+                    //Also register this part in the dictionary (to retrieve state machine when dealing damage)
+                    GameSceneManager.Instance.RegisterAIStateMachine(bodyPart.GetInstanceID(), this);
+                }
+            }
+
         }
     }
 
@@ -407,5 +429,9 @@ public abstract class AIStateMachine : MonoBehaviour
         }
         
         return Vector3.zero;
+    }
+
+    public virtual void TakeDamage(Vector3 _position, Vector3 _force, int _damage, Rigidbody _bodyPart, CharacterManager _chrManager, int _hitDir = 0)
+    {                
     }
 }

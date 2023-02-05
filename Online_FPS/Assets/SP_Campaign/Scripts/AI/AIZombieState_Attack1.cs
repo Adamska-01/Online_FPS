@@ -82,7 +82,6 @@ public class AIZombieState_Attack1 : AIZombieState
             }
 
             zombieStateMachine.AttackType = Random.Range(1, 100);
-            Debug.Log(zombieStateMachine.AttackType);
             return AIStateType.Attack;
         }
 
