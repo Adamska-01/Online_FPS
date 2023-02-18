@@ -1182,10 +1182,15 @@ MonoBehaviour:
   hearing: 1
   aggression: 0.5
   health: 100
+  lowerBodyDamage: 0
+  upperBodyDamage: 0
+  upperBodyThreshold: 30
+  limpThreshold: 30
+  crawlThreshold: 90
   intelligence: 1
   satisfaction: 0.613
   replenishRate: 2
-  depletionhRate: 0.1
+  depletionRate: 0.1
 --- !u!114 &601345080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2130,7 +2135,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1364398922}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -13.725707, y: 0, z: 21.084871}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2139,7 +2144,7 @@ Transform:
   - {fileID: 671930535}
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &1403539995 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3321919801592875672, guid: 6422c540b67aadf489878d2d30a2de3d, type: 3}

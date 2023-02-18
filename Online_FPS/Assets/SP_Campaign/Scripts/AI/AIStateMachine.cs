@@ -48,14 +48,15 @@ public abstract class AIStateMachine : MonoBehaviour
     public AITarget visualThreat    = new AITarget();
     public AITarget audioThreat     = new AITarget();
 
-    protected AIState   currentState                    = null;
+    protected AIState           currentState            = null;
     protected Dictionary<AIStateType, AIState> states   = new Dictionary<AIStateType, AIState>();
-    protected List<Rigidbody> bodyParts               = new List<Rigidbody>();
-    protected AITarget  target                          = new AITarget();
-    protected int       rootPositionRefCount            = 0;
-    protected int       rootRotationRefCount            = 0;
-    protected int       AI_BodyPartLayer                = -1;
-    protected bool      isTargetReached                 = false;
+    protected List<Rigidbody>   bodyParts               = new List<Rigidbody>();
+    protected AITarget          target                  = new AITarget();
+    protected int               rootPositionRefCount    = 0;
+    protected int               rootRotationRefCount    = 0;
+    protected int               AI_BodyPartLayer        = -1;
+    protected bool              isTargetReached         = false;
+    protected bool              cinematicEnabled        = false;
 
     [SerializeField] protected AIStateType          currentStateType    = AIStateType.Idle;
     [SerializeField] protected Transform            rootBone            = null;
@@ -77,6 +78,7 @@ public abstract class AIStateMachine : MonoBehaviour
     public bool UseRootPosition     { get { return rootPositionRefCount > 0; } }
     public bool UseRootRotation     { get { return rootRotationRefCount > 0; } }
     public bool InMeleeRange        { get; set; }
+    public bool CinematicEnabled    { get { return cinematicEnabled; } set { cinematicEnabled = value; } }
     public bool IsTargetReached     { get { return isTargetReached; } }
     public AITargetType TargetType  { get { return target.Type; } }
     public Vector3 TargetPosition   { get { return target.Position; } }
