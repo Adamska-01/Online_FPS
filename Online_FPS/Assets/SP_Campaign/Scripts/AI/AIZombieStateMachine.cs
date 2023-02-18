@@ -5,6 +5,22 @@ using UnityEngine;
 
 public enum AIBoneControlType { Animated, Ragdoll, RagdollToAnim }
 
+
+// --------------------------------------------------------------------------
+// CLASS	:	BodyPartSnapshot
+// DESC		:	Used to store information about the position of each body 
+//              part when transitioning from a ragdoll
+// --------------------------------------------------------------------------
+public class BodyPartSnapshot
+{
+    public Transform transform;
+
+    public Vector3      position;
+    public Quaternion   rotation;
+    public Quaternion   localtRotation;
+}
+
+
 // --------------------------------------------------------------------------
 // CLASS	:	AIZombieStateMachine
 // DESC		:	State Machine used by zombie characters
@@ -27,6 +43,9 @@ public class AIZombieStateMachine : AIStateMachine
     [SerializeField, Range(0.0f, 1.0f)]     private float   satisfaction    = 1.0f;
     [SerializeField, Range(0.0f, 2.0f)]     private float   replenishRate   = 0.5f;
     [SerializeField, Range(0.0f, 1.0f)]     private float   depletionRate   = 0.1f;
+    
+    [SerializeField] private float reanimationBlendTime = 1.0f;
+    [SerializeField] private float reanimationWaitTime = 3.0f;
 
     //Private (Managed by the state machine) 
     private int     seeking     = 0;
@@ -37,6 +56,13 @@ public class AIZombieStateMachine : AIStateMachine
 
     //Ragdoll stuff
     private AIBoneControlType boneControlType = AIBoneControlType.Animated;
+    private List<BodyPartSnapshot> bodyPartSnapshots = new List<BodyPartSnapshot>();
+    private float ragdollEndTime = float.MinValue;
+    private Vector3 ragdollHipPosition;
+    private Vector3 ragdollFeetPosition;
+    private Vector3 ragdollHeadPosition;
+    private IEnumerator reanimationCorutine = null;
+    private float mechanimTransitionTime = 0.1f;
 
     // Hashes
     private int speedHash       = Animator.StringToHash("Speed");
@@ -71,6 +97,19 @@ public class AIZombieStateMachine : AIStateMachine
     protected override void Start()
     {
         base.Start();
+
+        //Get all the bones under the hip and add them to the list (Needed for transitioning from a ragdoll state to normal animations)
+        if(rootBone != null)
+        {
+            Transform[] transforms = rootBone.GetComponentsInChildren<Transform>();
+            foreach (Transform item in transforms)
+            {
+                BodyPartSnapshot snapShot = new BodyPartSnapshot();
+                snapShot.transform = item;
+
+                bodyPartSnapshots.Add(snapShot);
+            }
+        }
 
         UpdateAnimatorDamage();
     }
@@ -145,7 +184,15 @@ public class AIZombieStateMachine : AIStateMachine
 
                 if(health > 0)
                 {
-                    //TODO: "Reanimate" zombie from ragdoll state
+                    //Only one EdoTensei per time
+                    if (reanimationCorutine != null)
+                    {
+                        StopCoroutine(reanimationCorutine);
+                    }
+
+                    //Reanimate zombie
+                    reanimationCorutine = EdoTensei();
+                    StartCoroutine(reanimationCorutine);
                 }
             }
 
@@ -280,8 +327,21 @@ public class AIZombieStateMachine : AIStateMachine
 
             if(health > 0)
             {
-                //TODO: Reanimate zombie
+                //Only one EdoTensei per time
+                if(reanimationCorutine != null)
+                {
+                    StopCoroutine(reanimationCorutine);
+                }
+
+                //Reanimate zombie
+                reanimationCorutine = EdoTensei();
+                StartCoroutine(reanimationCorutine);
             }
         }
+    }
+
+    private IEnumerator EdoTensei()
+    {
+        yield return null;
     }
 }

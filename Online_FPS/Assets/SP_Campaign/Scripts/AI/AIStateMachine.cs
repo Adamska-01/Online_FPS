@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
+//Public enums of the AI System
 public enum AIStateType         { None, Idle, Alerted, Patrol, Attack, Feeding, Pursuit, Dead }
 public enum AITargetType        { None, WayPoint, Visual_Player, Visual_Light, Visual_Food, Audio }
 public enum AITriggerEventType  { Enter, Stay, Exit }
+public enum AIBoneAlignmentType { XAxis, YAxis, ZAxis, XAxisInverted, YAxisInverted, ZAxisInverted }
+
 
 public struct AITarget
 {
@@ -59,6 +63,7 @@ public abstract class AIStateMachine : MonoBehaviour
     protected bool              cinematicEnabled        = false;
 
     [SerializeField] protected AIStateType          currentStateType    = AIStateType.Idle;
+    [SerializeField] protected AIBoneAlignmentType  rootBoneAlignment   = AIBoneAlignmentType.ZAxis;
     [SerializeField] protected Transform            rootBone            = null;
     [SerializeField] protected SphereCollider       targetTrigger       = null;
     [SerializeField] protected SphereCollider       sensorTrigger       = null;
