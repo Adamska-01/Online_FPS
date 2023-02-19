@@ -1170,6 +1170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentStateType: 1
+  rootBoneAlignment: 2
   rootBone: {fileID: 1285285845}
   targetTrigger: {fileID: 671930536}
   sensorTrigger: {fileID: 1811530330}
@@ -1191,6 +1192,11 @@ MonoBehaviour:
   satisfaction: 0.613
   replenishRate: 2
   depletionRate: 0.1
+  reanimationBlendTime: 1
+  reanimationWaitTime: 2.5
+  geometryLayer:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!114 &601345080
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public enum AIBoneControlType { Animated, Ragdoll, RagdollToAnim }
 
@@ -46,6 +47,7 @@ public class AIZombieStateMachine : AIStateMachine
     
     [SerializeField] private float reanimationBlendTime = 1.0f;
     [SerializeField] private float reanimationWaitTime = 3.0f;
+    [SerializeField] private LayerMask geometryLayer = 0;
 
     //Private (Managed by the state machine) 
     private int     seeking     = 0;
@@ -65,13 +67,17 @@ public class AIZombieStateMachine : AIStateMachine
     private float mechanimTransitionTime = 0.1f;
 
     // Hashes
-    private int speedHash       = Animator.StringToHash("Speed");
-    private int seekingHash     = Animator.StringToHash("Seeking");
-    private int feedingHash     = Animator.StringToHash("Feeding");
-    private int attackHash      = Animator.StringToHash("Attack");
-    private int crawlingHash    = Animator.StringToHash("Crawling");
-    private int hitTriggerHash  = Animator.StringToHash("Hit");
-    private int hitTypeHash     = Animator.StringToHash("Hit_Type");
+    private int speedHash               = Animator.StringToHash("Speed");
+    private int seekingHash             = Animator.StringToHash("Seeking");
+    private int feedingHash             = Animator.StringToHash("Feeding");
+    private int attackHash              = Animator.StringToHash("Attack");
+    private int crawlingHash            = Animator.StringToHash("Crawling");
+    private int hitTriggerHash          = Animator.StringToHash("Hit");
+    private int hitTypeHash             = Animator.StringToHash("Hit_Type");
+    private int reanimateFromFrontHash  = Animator.StringToHash("ReanimateFromFront");
+    private int reanimateFromBackHash   = Animator.StringToHash("ReanimateFromBack");
+    private int upperBodyDamageHash     = Animator.StringToHash("UpperBodyDamage");
+    private int lowerBodyDamageHash     = Animator.StringToHash("LowerBodyDamage");
 
     // Public Properties
     public float ReplenishRate  { get { return replenishRate; } }
@@ -130,12 +136,95 @@ public class AIZombieStateMachine : AIStateMachine
         satisfaction = MathF.Max(0, satisfaction - ((depletionRate * Time.deltaTime) / 100) * Mathf.Pow(speed, 3.0f));
     }
 
+    protected void LateUpdate()
+    {
+        if(boneControlType == AIBoneControlType.RagdollToAnim)
+        {
+            //Position the root parent object back to the ragdolled zombie 
+            if (Time.time <= ragdollEndTime + mechanimTransitionTime)
+            {
+                Vector3 animatedToRagdoll = ragdollHipPosition - rootBone.position;
+                Vector3 newRootPosition = transform.position + animatedToRagdoll;
+
+                //Get the closest hit point (floor)
+                RaycastHit[] hits = Physics.RaycastAll(newRootPosition + Vector3.up * 0.25f, Vector3.down, float.MaxValue, geometryLayer);
+                newRootPosition.y = float.MinValue;
+                foreach (RaycastHit hit in hits)
+                {
+                    if (hit.transform.IsChildOf(transform))
+                        continue;
+
+                    newRootPosition.y = Math.Max(hit.point.y, newRootPosition.y);
+                }
+
+                //Get the closest valid nav mesh point and set it to the root object this zombie is contained in
+                if(NavMesh.SamplePosition(newRootPosition, out NavMeshHit navMeshHit, 2.0f, NavMesh.AllAreas))
+                {
+                    transform.position = navMeshHit.position;
+                }
+
+                //Rotate the root object towards the direction the zombie is facing 
+                Vector3 ragdollDirection = ragdollHeadPosition - ragdollFeetPosition;
+                ragdollDirection.y = 0.0f; //rotate only on the y
+
+                Vector3 meanFeetposition = 0.5f * (anim.GetBoneTransform(HumanBodyBones.LeftFoot).position + anim.GetBoneTransform(HumanBodyBones.RightFoot).position);
+                Vector3 animatedDirection = anim.GetBoneTransform(HumanBodyBones.Head).position - meanFeetposition;
+                animatedDirection.y = 0.0f; //rotate only on the y
+
+                //Apply rotation (face ragdoll direction)
+                transform.rotation *= Quaternion.FromToRotation(animatedDirection.normalized, ragdollDirection.normalized);
+            }
+
+            //T lerp value
+            float blendAmount = Math.Clamp(((Time.time - ragdollEndTime - mechanimTransitionTime) / reanimationBlendTime), 0.0f, 1.0f);
+            //Perform the interpolation between the snapshot positions and the current animation positions
+            foreach (BodyPartSnapshot snapShot in bodyPartSnapshots)
+            {
+                //lerp pos/rot of the hip 
+                if(snapShot.transform == rootBone)
+                {
+                    snapShot.transform.position = Vector3.Lerp(snapShot.position, snapShot.transform.position, blendAmount);
+                    snapShot.transform.rotation = Quaternion.Slerp(snapShot.rotation, snapShot.transform.rotation, blendAmount);
+                }
+                else //This might be mind blowing, but animations don't actually move the bones under the hip, it just rotates them 0.0
+                {
+                    snapShot.transform.localRotation = Quaternion.Slerp(snapShot.localtRotation, snapShot.transform.localRotation, blendAmount);
+                }
+            }
+
+            //End reanimation
+            if(blendAmount >= 1.0f)
+            {
+                boneControlType = AIBoneControlType.Animated;
+             
+                //Enable components back again
+                if (navAgent) navAgent.enabled = true;
+                if (col) col.enabled = true;
+
+                //Set AI state to alerted
+                if(states.TryGetValue(AIStateType.Alerted, out AIState newState))
+                {
+                    if(currentState != null) //Safe check (this should never be executed)
+                    {
+                        currentState.OnExitState();
+                    }
+
+                    newState.OnEnterState();
+                    currentState = newState;
+                    currentStateType = AIStateType.Alerted;
+                }
+            }
+        }
+    }
+
 
     protected void UpdateAnimatorDamage()
     {
-        if(anim != null)
+        if (anim != null)
         {
             anim.SetBool(crawlingHash, IsCrawling);
+            anim.SetInteger(upperBodyDamageHash, upperBodyDamage);
+            anim.SetInteger(lowerBodyDamageHash, lowerBodyDamage);
         }
     }
 
@@ -340,8 +429,78 @@ public class AIZombieStateMachine : AIStateMachine
         }
     }
 
-    private IEnumerator EdoTensei()
+    protected IEnumerator EdoTensei()
     {
-        yield return null;
+        if (boneControlType != AIBoneControlType.Ragdoll || anim == null)
+            yield break;
+        
+        //Wait some time before reanimating 
+        yield return new WaitForSeconds(reanimationWaitTime);
+
+        //Record time at this point 
+        ragdollEndTime = Time.time;
+
+        //Give control to the animator (disable ragdoll)
+        foreach (var item in bodyParts)
+        {
+            item.isKinematic = true;
+        }
+
+        boneControlType = AIBoneControlType.RagdollToAnim;
+
+        foreach (BodyPartSnapshot snapShot in bodyPartSnapshots)
+        {
+            //Record a snapshot of the bone pos/rot
+            snapShot.position = snapShot.transform.position;
+            snapShot.rotation = snapShot.transform.rotation;
+            snapShot.localtRotation = snapShot.transform.localRotation;
+        }
+
+        //Record Head - feet (mid-point) - 
+        ragdollHeadPosition = anim.GetBoneTransform(HumanBodyBones.Head).position;
+        ragdollFeetPosition = (anim.GetBoneTransform(HumanBodyBones.LeftFoot).position + anim.GetBoneTransform(HumanBodyBones.RightFoot).position) * 0.5f;
+        ragdollHipPosition = rootBone.position;
+
+        //Enable Animator
+        anim.enabled = true;
+
+        //Check the alignment of the hip bone (to determine the "forward")
+        if(rootBone != null)
+        {
+            float forwardTest;
+            switch (rootBoneAlignment)
+            {
+                case AIBoneAlignmentType.XAxis:
+                    forwardTest = rootBone.right.y;
+                    break;
+                case AIBoneAlignmentType.YAxis:
+                    forwardTest = rootBone.up.y;
+                    break;
+                case AIBoneAlignmentType.ZAxis:
+                    forwardTest = rootBone.forward.y;
+                    break;
+                case AIBoneAlignmentType.XAxisInverted:
+                    forwardTest = -rootBone.right.y;
+                    break;
+                case AIBoneAlignmentType.YAxisInverted:
+                    forwardTest = -rootBone.up.y;
+                    break;
+                case AIBoneAlignmentType.ZAxisInverted:
+                    forwardTest = -rootBone.forward.y;
+                    break;
+                default:
+                    forwardTest = rootBone.forward.y;
+                    break;
+            }
+
+            if (forwardTest >= 0)
+            {
+                anim.SetTrigger(reanimateFromBackHash);
+            }
+            else
+            {
+                anim.SetTrigger(reanimateFromFrontHash);
+            }
+        }
     }
-}
+}      

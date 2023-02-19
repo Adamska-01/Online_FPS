@@ -80,7 +80,6 @@ public class AIZombieState_Pursuit1 : AIZombieState
                 case AITargetType.Visual_Light:
                     zombieStateMachine.ClearTarget();   //Clear threat
                     return AIStateType.Alerted;         //Become alert and scan for targets
-                
                 case AITargetType.Visual_Food:
                     return AIStateType.Feeding;       
                 default:
