@@ -78,6 +78,7 @@ public class AIZombieStateMachine : AIStateMachine
     private int reanimateFromBackHash   = Animator.StringToHash("ReanimateFromBack");
     private int upperBodyDamageHash     = Animator.StringToHash("UpperBodyDamage");
     private int lowerBodyDamageHash     = Animator.StringToHash("LowerBodyDamage");
+    private int stateHash               = Animator.StringToHash("State");
 
     // Public Properties
     public float ReplenishRate  { get { return replenishRate; } }
@@ -131,6 +132,7 @@ public class AIZombieStateMachine : AIStateMachine
             anim.SetInteger(seekingHash, seeking);
             anim.SetBool(feedingHash, feeding);
             anim.SetInteger(attackHash, attackType);
+            anim.SetInteger(stateHash, (int)currentStateType);
         }
 
         satisfaction = MathF.Max(0, satisfaction - ((depletionRate * Time.deltaTime) / 100) * Mathf.Pow(speed, 3.0f));
@@ -158,9 +160,18 @@ public class AIZombieStateMachine : AIStateMachine
                 }
 
                 //Get the closest valid nav mesh point and set it to the root object this zombie is contained in
-                if(NavMesh.SamplePosition(newRootPosition, out NavMeshHit navMeshHit, 2.0f, NavMesh.AllAreas))
+                Vector3 baseOffset = Vector3.zero;
+                if (NavAgent != null)
                 {
-                    transform.position = navMeshHit.position;
+                    baseOffset.y = NavAgent.baseOffset;
+                }
+                if(NavMesh.SamplePosition(newRootPosition, out NavMeshHit navMeshHit, 25.0f, NavMesh.AllAreas))
+                {
+                    transform.position = navMeshHit.position + baseOffset;
+                }
+                else
+                {
+                    transform.position = newRootPosition + baseOffset;
                 }
 
                 //Rotate the root object towards the direction the zombie is facing 
