@@ -131,7 +131,7 @@ public class AIZombieState_Patrol1 : AIZombieState
         //Set next destination
         if(zombieStateMachine.TargetType == AITargetType.WayPoint)
         {
-            zombieStateMachine.GetWaypointPosition(true);
+            zombieStateMachine.NavAgent.SetDestination(zombieStateMachine.GetWaypointPosition(true));
         }
     }
 

@@ -80,6 +80,9 @@ public class AIZombieStateMachine : AIStateMachine
     private int lowerBodyDamageHash     = Animator.StringToHash("LowerBodyDamage");
     private int stateHash               = Animator.StringToHash("State");
 
+    private int upperBodyLayer = -1;
+    private int lowerBodyLayer = -1;
+
     // Public Properties
     public float ReplenishRate  { get { return replenishRate; } }
     public float Fov            { get { return fov; } }
@@ -105,8 +108,15 @@ public class AIZombieStateMachine : AIStateMachine
     {
         base.Start();
 
+        if (anim != null)
+        {
+            //Cache animation layer indexes
+            upperBodyLayer = anim.GetLayerIndex("Upper_Body");
+            lowerBodyLayer = anim.GetLayerIndex("Lower_Body");
+        }
+
         //Get all the bones under the hip and add them to the list (Needed for transitioning from a ragdoll state to normal animations)
-        if(rootBone != null)
+        if (rootBone != null)
         {
             Transform[] transforms = rootBone.GetComponentsInChildren<Transform>();
             foreach (Transform item in transforms)
@@ -233,6 +243,17 @@ public class AIZombieStateMachine : AIStateMachine
     {
         if (anim != null)
         {
+            if(lowerBodyLayer != -1) //Set layer weights 
+            {
+                anim.SetLayerWeight(lowerBodyLayer, (lowerBodyDamage > limpThreshold && lowerBodyDamage < crawlThreshold) ? 1.0f : 0.0f);
+            }
+            if (upperBodyLayer != -1) //Set layer weights 
+            {
+                Debug.Log("Setting upper body damage");
+                anim.SetLayerWeight(upperBodyLayer, (upperBodyDamage > upperBodyThreshold && lowerBodyDamage < crawlThreshold) ? 1.0f : 0.0f);
+            }
+
+            //Set animator parameters
             anim.SetBool(crawlingHash, IsCrawling);
             anim.SetInteger(upperBodyDamageHash, upperBodyDamage);
             anim.SetInteger(lowerBodyDamageHash, lowerBodyDamage);

@@ -221,6 +221,7 @@ public abstract class AIStateMachine : MonoBehaviour
     {
         if (currentState == null)
             return;
+        Debug.Log(rootRotationRefCount);
 
         AIStateType newStateType = currentState.OnUpdate();
         if(newStateType != currentStateType)

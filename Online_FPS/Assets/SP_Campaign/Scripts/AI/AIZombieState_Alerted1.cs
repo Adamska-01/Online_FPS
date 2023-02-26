@@ -122,10 +122,13 @@ public class AIZombieState_Alerted1 : AIZombieState
 
             //Check if alligned enough (resume patro)
             if (Mathf.Abs(angle) < wayPointAngleThreshold)
-            {
                 return AIStateType.Patrol;
+            
+            if(directionChangeTimer > directionChangeTime)
+            {
+                zombieStateMachine.Seeking = (int)Mathf.Sign(angle);
+                directionChangeTimer = 0.0f;
             }
-            zombieStateMachine.Seeking = (int)Mathf.Sign(angle);
         }
         else
         {

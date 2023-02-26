@@ -77,7 +77,7 @@ public class CharacterManager : MonoBehaviour
             AIStateMachine stateMachine = gameSceneManger.GetAIStateMachine(hit.rigidbody.GetInstanceID());
             if(stateMachine != null)
             {
-                stateMachine.TakeDamage(hit.point, ray.direction * 5.0f, 95, hit.rigidbody, this, 0);
+                stateMachine.TakeDamage(hit.point, ray.direction * 1.0f, 50, hit.rigidbody, this, 0);
             }
         }
     }

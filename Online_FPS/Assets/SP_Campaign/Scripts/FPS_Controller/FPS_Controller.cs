@@ -77,7 +77,6 @@ public class CurveControlledBob
         // Process Events
         for (int i = 0; i < events.Count; i++)
         {
-
             CurveControlledBobEvent ev = events[i];
             if (ev != null)
             {
