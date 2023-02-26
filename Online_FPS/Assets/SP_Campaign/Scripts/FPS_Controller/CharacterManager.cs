@@ -8,7 +8,12 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private CapsuleCollider meleeTrigger = null;
     [SerializeField] private CameraBloodEffect cameraBloodEffect = null;
     [SerializeField] private Camera playerCamera = null;
+    [SerializeField] private AISoundEmitter soundEmitter = null;
     [SerializeField] private float health = 100.0f;
+    [SerializeField] private float walkRadius = 0.0f;
+    [SerializeField] private float runRadius = 7.0f;
+    [SerializeField] private float landingRadius = 12.0f;
+    [SerializeField] private float bloodRadiusScale = 6.0f;
 
     //Private
     private Collider col= null;
@@ -44,6 +49,23 @@ public class CharacterManager : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             DoDamage();
+        }
+
+        //Set sound emitter radius (take damage value into account as well)
+        if (fpsController != null || soundEmitter != null)
+        {
+            float newRadius = Mathf.Max(walkRadius, (100.0f - health) / bloodRadiusScale);
+            switch (fpsController.MovementStatus)
+            {
+                case PlayerMoveStatus.Running:
+                    newRadius = Mathf.Max(newRadius, runRadius);
+                    break;
+                case PlayerMoveStatus.Landing:
+                    newRadius = Mathf.Max(newRadius, landingRadius);
+                    break;
+            }
+
+            soundEmitter.SetRadius(newRadius);
         }
     }
 
