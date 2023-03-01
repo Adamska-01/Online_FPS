@@ -60,7 +60,6 @@ public class AISoundEmitter : MonoBehaviour
     {
         if (col == null || newRadius == targetRadius)
             return;
-        Debug.Log("landing " + newRadius);
 
         //Don't apply interpolation if instantResize == true OR the newRadius is smaller than the current
         sourceRadius = (instantResize || newRadius > col.radius) ? newRadius : col.radius;
