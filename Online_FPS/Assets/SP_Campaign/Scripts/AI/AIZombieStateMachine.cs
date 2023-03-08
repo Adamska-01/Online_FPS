@@ -249,7 +249,6 @@ public class AIZombieStateMachine : AIStateMachine
             }
             if (upperBodyLayer != -1) //Set layer weights 
             {
-                Debug.Log("Setting upper body damage");
                 anim.SetLayerWeight(upperBodyLayer, (upperBodyDamage > upperBodyThreshold && lowerBodyDamage < crawlThreshold) ? 1.0f : 0.0f);
             }
 

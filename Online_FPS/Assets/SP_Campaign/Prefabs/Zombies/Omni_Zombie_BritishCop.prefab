@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7215955056292277999}
   m_Layer: 6
-  m_Name: Omni_Zombie
+  m_Name: Omni_Zombie_BritishCop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -598,8 +598,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4103965, y: 0.26074782, z: 0.31749493}
-  m_Center: {x: -0.00000025331974, y: 0.16, z: 0.005}
+  m_Size: {x: 0.4103965, y: 0.34, z: 0.31749493}
+  m_Center: {x: -0.00000025331974, y: 0.2, z: 0.005}
 --- !u!144 &7215955056446243164
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -1472,51 +1472,6 @@ MonoBehaviour:
   geometryLayer:
     serializedVersion: 2
     m_Bits: 1
---- !u!114 &7215955055528702364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7558536840974027974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2c02693baa960e4bb56137faff38973, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  idleTimeRange: {x: 5, y: 10}
---- !u!114 &7215955055528702365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7558536840974027974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c69964b88f7dc741a8d5c51133edc98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slerpSpeed: 5
-  turnOnSpotThreshold: 90
-  speed: 1
---- !u!114 &7215955055528702367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7558536840974027974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 912a884eb4bf86d49b828703240691a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxDuration: 10
-  wayPointAngleThreshold: 25
-  threatAngleThreshold: 10
-  directionChangeTime: 1.5
-  slerpSpeed: 60
 --- !u!114 &7215955055528702360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1572,6 +1527,51 @@ MonoBehaviour:
   lookAtAngleThreshold: 15
   slerpSpeed: 5
   stoppingDistance: 1.2
+--- !u!114 &7215955055528702364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7558536840974027974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2c02693baa960e4bb56137faff38973, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleTimeRange: {x: 5, y: 10}
+--- !u!114 &7215955055528702365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7558536840974027974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c69964b88f7dc741a8d5c51133edc98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slerpSpeed: 5
+  turnOnSpotThreshold: 90
+  speed: 1
+--- !u!114 &7215955055528702367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7558536840974027974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 912a884eb4bf86d49b828703240691a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDuration: 10
+  wayPointAngleThreshold: 25
+  threatAngleThreshold: 10
+  directionChangeTime: 1.5
+  slerpSpeed: 60
 --- !u!1 &7719513327014260637 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1082271958561512970, guid: fac1f8441f00325459b6333ac560c8e9, type: 3}
