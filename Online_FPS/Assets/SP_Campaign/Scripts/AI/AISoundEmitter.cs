@@ -15,9 +15,10 @@ public class AISoundEmitter : MonoBehaviour
     private float interpolatorSpeed = 0.0f;
 
 
-    void Start()
+    private void Awake()
     {
         col = GetComponent<SphereCollider>();
+
         if (col == null)
             return;
 
@@ -26,7 +27,7 @@ public class AISoundEmitter : MonoBehaviour
 
         //Setup Interpolator 
         interpolator = 0.0f;
-        if(decayRate > 0.02f)
+        if (decayRate > 0.02f)
         {
             interpolatorSpeed = 1.0f / decayRate; //eg. 1.0f/2.0f = .5f (will take 2sec for interpolator to go from 0 to 1)
         }
@@ -35,7 +36,6 @@ public class AISoundEmitter : MonoBehaviour
             interpolatorSpeed = 0.0f; //No interpolation
         }
     }
-
 
     private void Update()
     {

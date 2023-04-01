@@ -59,7 +59,7 @@ public class AIZombieState_Attack1 : AIZombieState
             zombieStateMachine.Speed = 0;
         else
             zombieStateMachine.Speed = speed;
-        Debug.Log(stateMachine.visualThreat.Type);
+
         //Check if the player is still visible 
         if(zombieStateMachine.visualThreat.Type == AITargetType.Visual_Player)
         {

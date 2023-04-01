@@ -11,8 +11,10 @@ public class AIZombieState_Alerted1 : AIZombieState
     [SerializeField] private float directionChangeTime = 1.5f;
     [SerializeField] private float slerpSpeed = 45.0f;
 
+    //Private fields
     private float timer = 0.0f;
     private float directionChangeTimer = 0.0f;
+    private float screamChance = 0.0f;
 
 
     public override void OnEnterState()
@@ -33,6 +35,9 @@ public class AIZombieState_Alerted1 : AIZombieState
         //Set timer 
         timer = maxDuration;
         directionChangeTimer = 0.0f;
+
+        //Calculate scream chance 
+        screamChance = zombieStateMachine.ScreamChance - Random.value;
     }
 
 
@@ -58,6 +63,15 @@ public class AIZombieState_Alerted1 : AIZombieState
         if (zombieStateMachine.visualThreat.Type == AITargetType.Visual_Player)
         {
             zombieStateMachine.SetTarget(zombieStateMachine.visualThreat);
+            if(screamChance > 0.0f)
+            {
+                if(zombieStateMachine.Scream())
+                {
+                    screamChance = float.MinValue; //Make sure not to trigger scream again
+                    return AIStateType.Alerted;
+                }
+            }
+
             return AIStateType.Pursuit;
         }
 

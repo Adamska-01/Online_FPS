@@ -2154,6 +2154,10 @@ MonoBehaviour:
   satisfaction: 1
   replenishRate: 2
   depletionRate: 0.1
+  screamChance: 0.2
+  screamRadius: 20
+  screamPosition: 1
+  screamPrefab: {fileID: 0}
   reanimationBlendTime: 1
   reanimationWaitTime: 2.5
   geometryLayer:

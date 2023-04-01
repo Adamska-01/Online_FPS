@@ -66,6 +66,8 @@ public class CharacterManager : MonoBehaviour
             }
 
             soundEmitter.SetRadius(newRadius);
+
+            fpsController.DragMultiplier = Mathf.Max(health / 100.0f, 0.25f); //Set drag limit
         }
     }
 
@@ -73,6 +75,13 @@ public class CharacterManager : MonoBehaviour
     public void TakeDamage(float dmg)
     {
         health = Mathf.Max(health - (dmg * Time.deltaTime), 0.0f);
+        
+        //Set player drag 
+        if(fpsController != null)
+        {
+            fpsController.DragMultiplier = 0.0f;
+        }
+
         if (cameraBloodEffect != null)
         {
             //Apply blood on screen (but 3 times less than what should be)

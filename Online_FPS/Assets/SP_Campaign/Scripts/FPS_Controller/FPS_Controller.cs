@@ -140,6 +140,10 @@ public class FPS_Controller : MonoBehaviour
     private bool    isCrouching         = false;
     private float   controllerHeight    = 0.0f;
 
+    private float dragMultiplier        = 1.0f;
+    private float dragMultiplierLimit   = 1.0f;
+    [SerializeField, Range(0.0f, 1.0f)] private float npcStickiness = 0.5f;
+    
     //Timers
     private float fallingTimer = 0.0f;
 
@@ -148,8 +152,11 @@ public class FPS_Controller : MonoBehaviour
 
     //Public Properties 
     public PlayerMoveStatus MovementStatus { get { return movementStatus; } }
-    public float WalkSpeed { get { return walkSpeed; } }
-    public float RunSpeed { get { return runSpeed; } }
+    public float WalkSpeed           { get { return walkSpeed; } }
+    public float RunSpeed            { get { return runSpeed; } }
+    public float DragMultiplierLimit { get { return dragMultiplierLimit; } set { dragMultiplierLimit = Mathf.Clamp01(value); } }
+    public float DragMultiplier      { get { return dragMultiplier; } set { dragMultiplier = Mathf.Min(value, dragMultiplierLimit); } }
+    public float NPCStickines        { get { return npcStickiness; } }
 
 
     protected void Start()
@@ -249,6 +256,8 @@ public class FPS_Controller : MonoBehaviour
         }
 
         previouslyGrounded = characterController.isGrounded;
+
+        dragMultiplier = Mathf.Min(dragMultiplier + Time.deltaTime, dragMultiplierLimit);
     }
 
     protected void FixedUpdate()
@@ -279,8 +288,8 @@ public class FPS_Controller : MonoBehaviour
         }
 
         //Scale movement by speed 
-        moveDirection.x = desiredMove.x * speed;
-        moveDirection.z = desiredMove.z * speed;
+        moveDirection.x = desiredMove.x * speed * dragMultiplier;
+        moveDirection.z = desiredMove.z * speed * dragMultiplier;
         if(characterController.isGrounded)
         {
             //Apply severe down force to keep it stuck to the floor
@@ -313,6 +322,16 @@ public class FPS_Controller : MonoBehaviour
         else //Not moving 
         {
             cam.transform.localPosition = localSpaceCameraPos;
+        }
+    }
+
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if(GameSceneManager.Instance.GetAIStateMachine(hit.collider.GetInstanceID()) != null)
+        {
+            Debug.Log(DragMultiplier);
+            dragMultiplier = 1.0f - npcStickiness; //Decrease player speed
         }
     }
 }

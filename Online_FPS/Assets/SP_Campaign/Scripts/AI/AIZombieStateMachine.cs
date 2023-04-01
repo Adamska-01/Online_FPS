@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public enum AIBoneControlType { Animated, Ragdoll, RagdollToAnim }
+public enum AIScreamPosition  { Entity, Player }
 
 
 // --------------------------------------------------------------------------
@@ -44,6 +45,11 @@ public class AIZombieStateMachine : AIStateMachine
     [SerializeField, Range(0.0f, 1.0f)]     private float   satisfaction    = 1.0f;
     [SerializeField, Range(0.0f, 2.0f)]     private float   replenishRate   = 0.5f;
     [SerializeField, Range(0.0f, 1.0f)]     private float   depletionRate   = 0.1f;
+    [SerializeField, Range(0.0f, 1.0f)]     private float   screamChance    = 1.0f;
+    [SerializeField, Range(0.0f, 50.0f)]    private float   screamRadius    = 20.0f;
+
+    [SerializeField] private AIScreamPosition screamPosition = AIScreamPosition.Entity;
+    [SerializeField] private GameObject screamPrefab = null;
     
     [SerializeField] private float reanimationBlendTime = 1.0f;
     [SerializeField] private float reanimationWaitTime = 3.0f;
@@ -54,7 +60,8 @@ public class AIZombieStateMachine : AIStateMachine
     private bool    feeding     = false;
     private bool    crawling    = false;
     private int     attackType  = 0;
-    private float   speed       = 0;
+    private float   speed       = 0.0f;
+    private float   isScreaming = 0.0f;
 
     //Ragdoll stuff
     private AIBoneControlType boneControlType = AIBoneControlType.Animated;
@@ -72,6 +79,8 @@ public class AIZombieStateMachine : AIStateMachine
     private int feedingHash             = Animator.StringToHash("Feeding");
     private int attackHash              = Animator.StringToHash("Attack");
     private int crawlingHash            = Animator.StringToHash("Crawling");
+    private int screamHash              = Animator.StringToHash("Scream");
+    private int screamingHash           = Animator.StringToHash("Screaming");
     private int hitTriggerHash          = Animator.StringToHash("Hit");
     private int hitTypeHash             = Animator.StringToHash("Hit_Type");
     private int reanimateFromFrontHash  = Animator.StringToHash("ReanimateFromFront");
@@ -96,12 +105,11 @@ public class AIZombieStateMachine : AIStateMachine
     public int AttackType       { get { return attackType; } set { attackType = value; } }
     public bool Feeding         { get { return feeding; } set { feeding = value; } }
     public bool IsCrawling      { get { return lowerBodyDamage >= crawlThreshold; } }
+    public bool IsScreaming     { get { return isScreaming > 0.1f; } }
+    public float Speed          { get { return speed; } set { speed = value; } }
+    public float ScreamChance   { get { return screamChance; } }
     public int Seeking          { get { return seeking; } set { seeking = value; } }
-    public float Speed
-    {
-        get { return speed; }
-        set { speed = value; }
-    }
+
 
 
     protected override void Start()
@@ -143,6 +151,8 @@ public class AIZombieStateMachine : AIStateMachine
             anim.SetBool(feedingHash, feeding);
             anim.SetInteger(attackHash, attackType);
             anim.SetInteger(stateHash, (int)currentStateType);
+
+            isScreaming = cinematicEnabled ? 0.0f : anim.GetFloat(screamingHash);
         }
 
         satisfaction = MathF.Max(0, satisfaction - ((depletionRate * Time.deltaTime) / 100) * Mathf.Pow(speed, 3.0f));
@@ -534,4 +544,29 @@ public class AIZombieStateMachine : AIStateMachine
             }
         }
     }
+
+    public bool Scream()
+    {
+        if (IsScreaming) //We are already screaming, no need to scream again 
+            return true;
+
+        if (anim == null || cinematicEnabled || screamPrefab == null)
+            return false;
+
+        anim.SetTrigger(screamHash); //Play scream animation
+
+        //Instantiate scream emitter
+        Vector3 spawnPos = screamPosition == AIScreamPosition.Entity ? transform.position : visualThreat.Position;
+        AISoundEmitter screamEmitter = Instantiate(screamPrefab, spawnPos, Quaternion.identity).GetComponent<AISoundEmitter>();
+
+        //Set scream emitter radius (decreases over time)
+        if(screamEmitter != null)
+        {
+            screamEmitter.SetRadius(screamRadius);
+        }
+
+        return true;
+    }
+
+    
 }      
