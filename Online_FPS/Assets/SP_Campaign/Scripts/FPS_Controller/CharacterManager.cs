@@ -67,7 +67,7 @@ public class CharacterManager : MonoBehaviour
 
             soundEmitter.SetRadius(newRadius);
 
-            fpsController.DragMultiplier = Mathf.Max(health / 100.0f, 0.25f); //Set drag limit
+            fpsController.DragMultiplierLimit = Mathf.Max(health / 100.0f, 0.25f); //Set drag limit
         }
     }
 

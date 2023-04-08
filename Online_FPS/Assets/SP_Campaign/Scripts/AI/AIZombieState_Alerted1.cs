@@ -15,6 +15,8 @@ public class AIZombieState_Alerted1 : AIZombieState
     private float timer = 0.0f;
     private float directionChangeTimer = 0.0f;
     private float screamChance = 0.0f;
+    private float nextScream = 0.0f;
+    private float screamFrequency = 120.0f;
 
 
     public override void OnEnterState()
@@ -63,11 +65,12 @@ public class AIZombieState_Alerted1 : AIZombieState
         if (zombieStateMachine.visualThreat.Type == AITargetType.Visual_Player)
         {
             zombieStateMachine.SetTarget(zombieStateMachine.visualThreat);
-            if(screamChance > 0.0f)
+            if(screamChance > 0.0f && Time.time > nextScream) 
             {
                 if(zombieStateMachine.Scream())
                 {
                     screamChance = float.MinValue; //Make sure not to trigger scream again
+                    nextScream = Time.time + screamFrequency; //Can't scream for the next 2 min
                     return AIStateType.Alerted;
                 }
             }

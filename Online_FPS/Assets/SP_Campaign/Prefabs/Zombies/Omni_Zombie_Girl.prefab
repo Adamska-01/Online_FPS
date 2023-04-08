@@ -2157,7 +2157,7 @@ MonoBehaviour:
   screamChance: 0.2
   screamRadius: 20
   screamPosition: 1
-  screamPrefab: {fileID: 0}
+  screamPrefab: {fileID: 2535818550275208760, guid: e37f67cef96f63846912dee83ee354ab, type: 3}
   reanimationBlendTime: 1
   reanimationWaitTime: 2.5
   geometryLayer:

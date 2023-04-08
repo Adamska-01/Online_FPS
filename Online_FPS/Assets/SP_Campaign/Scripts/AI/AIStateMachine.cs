@@ -438,7 +438,23 @@ public abstract class AIStateMachine : MonoBehaviour
         return Vector3.zero;
     }
 
+    public void SetStateOverride(AIStateType state)
+    {
+        if(state != currentStateType && states.ContainsKey(state))
+        {
+            if(currentState != null)
+            {
+                currentState.OnExitState();
+            }
+
+            currentState = states[state];
+            currentStateType = state;
+            currentState.OnEnterState();
+        }
+    }
+
     public virtual void TakeDamage(Vector3 _position, Vector3 _force, int _damage, Rigidbody _bodyPart, CharacterManager _chrManager, int _hitDir = 0)
-    {                
+    {     
+        //Implemeted in subclasses
     }
 }

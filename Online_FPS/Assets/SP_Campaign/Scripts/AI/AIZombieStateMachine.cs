@@ -49,7 +49,7 @@ public class AIZombieStateMachine : AIStateMachine
     [SerializeField, Range(0.0f, 50.0f)]    private float   screamRadius    = 20.0f;
 
     [SerializeField] private AIScreamPosition screamPosition = AIScreamPosition.Entity;
-    [SerializeField] private GameObject screamPrefab = null;
+    [SerializeField] private AISoundEmitter screamPrefab = null;
     
     [SerializeField] private float reanimationBlendTime = 1.0f;
     [SerializeField] private float reanimationWaitTime = 3.0f;
@@ -557,7 +557,7 @@ public class AIZombieStateMachine : AIStateMachine
 
         //Instantiate scream emitter
         Vector3 spawnPos = screamPosition == AIScreamPosition.Entity ? transform.position : visualThreat.Position;
-        AISoundEmitter screamEmitter = Instantiate(screamPrefab, spawnPos, Quaternion.identity).GetComponent<AISoundEmitter>();
+        AISoundEmitter screamEmitter = Instantiate(screamPrefab, spawnPos, Quaternion.identity) as AISoundEmitter;
 
         //Set scream emitter radius (decreases over time)
         if(screamEmitter != null)

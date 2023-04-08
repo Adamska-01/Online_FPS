@@ -1417,8 +1417,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c261989f447e7f49b466bbeb76e26fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rootPosition: 1
-  rootRotation: 1
+  rootPosition: 0
+  rootRotation: 0
 --- !u!114 &-5166524647445446044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1908,8 +1908,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c261989f447e7f49b466bbeb76e26fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rootPosition: 1
-  rootRotation: 1
+  rootPosition: 0
+  rootRotation: 0
 --- !u!1102 &-3195406432907596053
 AnimatorState:
   serializedVersion: 6
@@ -3278,8 +3278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c261989f447e7f49b466bbeb76e26fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rootPosition: 1
-  rootRotation: 1
+  rootPosition: 0
+  rootRotation: 0
 --- !u!1101 &731729695659430138
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -3742,8 +3742,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c261989f447e7f49b466bbeb76e26fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rootPosition: 1
-  rootRotation: 1
+  rootPosition: 0
+  rootRotation: 0
 --- !u!1102 &1692339299214778377
 AnimatorState:
   serializedVersion: 6
@@ -3944,8 +3944,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c261989f447e7f49b466bbeb76e26fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rootPosition: 1
-  rootRotation: 1
+  rootPosition: 0
+  rootRotation: 0
 --- !u!114 &2438948547984109696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3958,8 +3958,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c261989f447e7f49b466bbeb76e26fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rootPosition: 1
-  rootRotation: 1
+  rootPosition: 0
+  rootRotation: 0
 --- !u!1101 &2513787792195793099
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

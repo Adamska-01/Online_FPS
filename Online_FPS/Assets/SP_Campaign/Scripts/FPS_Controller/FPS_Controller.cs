@@ -152,21 +152,24 @@ public class FPS_Controller : MonoBehaviour
 
     //Public Properties 
     public PlayerMoveStatus MovementStatus { get { return movementStatus; } }
+    public CharacterController CHRController { get { return characterController; } }
     public float WalkSpeed           { get { return walkSpeed; } }
     public float RunSpeed            { get { return runSpeed; } }
     public float DragMultiplierLimit { get { return dragMultiplierLimit; } set { dragMultiplierLimit = Mathf.Clamp01(value); } }
     public float DragMultiplier      { get { return dragMultiplier; } set { dragMultiplier = Mathf.Min(value, dragMultiplierLimit); } }
-    public float NPCStickines        { get { return npcStickiness; } }
 
 
-    protected void Start()
+    protected void Awake()
     {
         //Cache components references
         characterController = GetComponent<CharacterController>();
         controllerHeight = characterController.height;
-
-        cam = Camera.main;
         
+        cam = Camera.main;
+    }
+
+    protected void Start()
+    {
         //Init headbob
         localSpaceCameraPos = cam.transform.localPosition;
         headBob.Initialize();
@@ -325,13 +328,8 @@ public class FPS_Controller : MonoBehaviour
         }
     }
 
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    public void DoStickiness()
     {
-        if(GameSceneManager.Instance.GetAIStateMachine(hit.collider.GetInstanceID()) != null)
-        {
-            Debug.Log(DragMultiplier);
-            dragMultiplier = 1.0f - npcStickiness; //Decrease player speed
-        }
+        dragMultiplier = 1.0f - npcStickiness;
     }
 }
