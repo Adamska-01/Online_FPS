@@ -9,7 +9,7 @@ public class NavAgentRootMotion : MonoBehaviour
     public AIWaypointNetwork waypointNetwork = null;
     public int currentIndex = 0;
 
-    IEnumerator currentCoroutine = null;
+    //IEnumerator currentCoroutine = null;
 
     public bool hasPath = false;
     public bool pathPending = false;
@@ -134,7 +134,7 @@ public class NavAgentRootMotion : MonoBehaviour
         }
 
         navAgent.CompleteOffMeshLink();
-        currentCoroutine = null;
+        //currentCoroutine = null;
     }
 
     private void OnAnimatorMove()
