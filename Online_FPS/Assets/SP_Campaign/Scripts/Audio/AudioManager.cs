@@ -1,17 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 
+// -----------------------------------------------------------------------------
+// CLASS	:	TrackInfo
+// DESC		:	Wraps an AudioMixerGroup in Unity's AudioMixer. Contains the 
+//              name of the group (which is also its exposed volume parameter), 
+//              the group itself, and an IEnumerator for doing track fades over
+//              time.
+// -----------------------------------------------------------------------------
 public class TrackInfo
 {
     public string           name = string.Empty;
     public AudioMixerGroup  group = null;
     public IEnumerator      trackFader = null;
-
 }
 
+
+// -----------------------------------------------------------------------------
+// CLASS	:	AudioPoolItem
+// DESC		:	Describes an audio entity in the pooling system
+// -----------------------------------------------------------------------------
+public class AudioPoolItem
+{
+    public GameObject   gameObj      = null;
+    public Transform    transf       = null;
+    public AudioSource  audioSrc     = null;
+    public float        unImportance = float.MaxValue;
+    public bool         isPlaying    = false;
+    public IEnumerator  coroutine    = null;
+    public ulong        ID           = 0;
+}
+
+
+// -----------------------------------------------------------------------------
+// CLASS	:	AudioManager
+// DESC		:	Provides pooled one-shot functionality with priority system and
+//              also wraos the Unity Audio Mixer to make easier manipulation of
+//              audio group volumes
+// -----------------------------------------------------------------------------
 public class AudioManager : MonoBehaviour
 {
     //Singleton
@@ -30,10 +60,16 @@ public class AudioManager : MonoBehaviour
     }
 
     //Inspector Assigned
-    [SerializeField] AudioMixer mixer = null;
+    [SerializeField] AudioMixer mixer       = null;
+    [SerializeField] int        maxSounds   = 10;
 
     //Private
-    Dictionary<string, TrackInfo> tracks = new Dictionary<string, TrackInfo>();
+    private Dictionary<string, TrackInfo> tracks = new Dictionary<string, TrackInfo>();
+
+    private List<AudioPoolItem> pool = new List<AudioPoolItem>();
+    private Dictionary<ulong, AudioPoolItem> activePool = new Dictionary<ulong, AudioPoolItem>();
+    private ulong idGiver = 0;
+    private Transform listenerPos = null;
 
 
     void Awake()
@@ -55,6 +91,40 @@ public class AudioManager : MonoBehaviour
            
             tracks[group.name] = trackInfo; //Add track info to the dictionary 
         }
+
+        for (int i = 0; i < maxSounds; i++)
+        {
+            //Create GameObject and assigned AudioSource and Parent 
+            GameObject go = new GameObject("Pool Item");
+            AudioSource audioSource = go.AddComponent<AudioSource>();
+            go.transform.parent = transform;
+
+            //Create and configure pool item 
+            AudioPoolItem poolItem = new AudioPoolItem();
+            poolItem.gameObj    = go;
+            poolItem.audioSrc   = audioSource;
+            poolItem.transf     = go.transform;
+            poolItem.isPlaying  = false;
+
+            go.SetActive(false); //Deactivate
+
+            //Add it to the list 
+            pool.Add(poolItem);
+        }
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        listenerPos = FindObjectOfType<AudioListener>().transform;
     }
 
 
@@ -120,5 +190,118 @@ public class AudioManager : MonoBehaviour
         }
 
         mixer.SetFloat(_track, _volume);
+    }
+
+    public IEnumerator PlayOneShotSound(string _track, AudioClip _clip, Vector3 _pos, float _volume, float _duration, float _spatialBlend, float _priority = 128)
+    {
+        yield return new WaitForSeconds(_duration);
+
+        PlayOneShotSound(_track, _clip, _pos, _volume, _duration, _spatialBlend, _priority);
+    }
+
+    public ulong PlayOneShotSound(string _track, AudioClip _clip, Vector3 _pos, float _volume, float _spatialBlend, float _priority = 128)
+    {
+        if (!tracks.ContainsKey(_track) || _clip == null || _volume.Equals(0.0f))
+            return 0;
+
+        //Lower is the value, the more important is the sound (should be a value between 1 and 255
+        float unImportance = (listenerPos.position - _pos).sqrMagnitude / Mathf.Max(1, _priority);
+
+        //Record least important sound from the pool
+        int leastImportantIndex = -1;
+        float leastImportantValue = float.MaxValue;
+        for(int i = 0; i < pool.Count; i++)
+        {
+            AudioPoolItem poolItem = pool[i];
+            if (!poolItem.isPlaying) //Return pool item if available
+            {
+                return ConfigurePoolObject(i, _track, _clip, _pos, _volume, _spatialBlend, unImportance);
+            }
+            else if(poolItem.unImportance > leastImportantValue) //Record least important sound
+            {
+                leastImportantIndex = i;
+                leastImportantValue = poolItem.unImportance;
+            }
+        }
+
+        //Check if the sound can be played (if the importance is less than the recorde importance from the pool
+        if(leastImportantValue > unImportance)
+            return ConfigurePoolObject(leastImportantIndex, _track, _clip, _pos, _volume, _spatialBlend, unImportance);
+
+        return 0;
+    }
+
+    public void StopOneShotSound(ulong id)
+    {
+        if (activePool.TryGetValue(id, out AudioPoolItem activeSound))
+        {
+            //Stop fade corutine
+            StopCoroutine(activeSound.coroutine);
+
+            //Stop sound
+            activeSound.audioSrc.Stop();
+            activeSound.isPlaying = false;
+
+            activeSound.audioSrc.clip = null;
+            activeSound.gameObj.SetActive(false);
+
+            //Remove from pool
+            activePool.Remove(id);
+        }
+    }
+
+    protected IEnumerator StopSoundDelayed(ulong _id, float _duration)
+    {
+        yield return new WaitForSeconds(_duration);
+
+        if (activePool.TryGetValue(_id, out AudioPoolItem activeSound))
+        {
+            //Stop sound
+            activeSound.audioSrc.Stop();
+            activeSound.isPlaying = false;
+
+            activeSound.audioSrc.clip = null;
+            activeSound.gameObj.SetActive(false);
+
+            //Remove from pool
+            activePool.Remove(_id);
+        }
+    }
+
+    protected ulong ConfigurePoolObject(int _poolIndex, string _track, AudioClip _clip, Vector3 _pos, float _volume, float _spatialBlend, float _unImportance)
+    {
+        if (_poolIndex < 0 || _poolIndex > pool.Count)
+            return 0;
+
+        AudioPoolItem poolItem = pool[_poolIndex];
+
+        //"Generate" new ID so we can stop it later if we want
+        idGiver++;
+
+        //Configure the audio source's position
+        AudioSource source  = poolItem.audioSrc;
+        source.clip         = _clip;
+        source.volume       = _volume;
+        source.spatialBlend = _spatialBlend;
+        //Assign to requested audio group
+        source.outputAudioMixerGroup = tracks[_track].group;
+        //Position source at requested position
+        source.transform.position = _pos;
+
+        //Enable Gameobejct and record that it is now playing 
+        poolItem.isPlaying      = true;
+        poolItem.unImportance   = _unImportance;
+        poolItem.ID             = idGiver;        
+        //Play
+        poolItem.gameObj.SetActive(true);
+        source.Play();
+        //Coroutine to stop sound and put it back to the pool
+        poolItem.coroutine = StopSoundDelayed(idGiver, source.clip.length);
+        StartCoroutine(poolItem.coroutine);
+
+        //Add this sound to our active pool with its unique ID
+        activePool[idGiver] = poolItem;
+
+        return idGiver;
     }
 }

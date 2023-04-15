@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// ----------------------------------------------------------------------------
+// CLASS	:	AIZombieState_Alerted1
+// DESC		:	A Zombie state that allows the zombie to look around and decide
+//              the next action
+// ----------------------------------------------------------------------------
 public class AIZombieState_Alerted1 : AIZombieState
 {
     //Inspector Assigned

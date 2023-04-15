@@ -5042,6 +5042,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: 1e82c55813ca67846beca00799828caa, type: 2}
+  maxSounds: 10
 --- !u!4 &1794951702
 Transform:
   m_ObjectHideFlags: 0
