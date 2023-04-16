@@ -114,6 +114,9 @@ public class CurveControlledBob
 [RequireComponent(typeof(CharacterController))]
 public class FPS_Controller : MonoBehaviour
 {
+    [SerializeField] private AudioCollection footsteps = null;
+    [SerializeField] private float crouchVolumeAttenuation = 0.2f;
+
     [Header("Locomotion Settings")]
     [SerializeField] private float walkSpeed = 2.0f;
     [SerializeField] private float runSpeed = 4.5f;
@@ -172,16 +175,19 @@ public class FPS_Controller : MonoBehaviour
     {
         //Init headbob
         localSpaceCameraPos = cam.transform.localPosition;
-        headBob.Initialize();
 
         movementStatus = PlayerMoveStatus.NotMoving;
 
         fallingTimer = 0.0f;
 
-        //init mouse look
+        //Setup Mouse Look Script
         mouseLook.Init(transform, cam.transform);
-    
-        if(flashLight != null)
+
+        //Initiate Head Bob Object
+        headBob.Initialize();
+        headBob.RegisterEventCallback(1.5f, PlayFootStepSound, CurveControlledBobCallbackType.Vertical);
+
+        if (flashLight != null)
         {
             flashLight.SetActive(false);
         }
@@ -325,6 +331,30 @@ public class FPS_Controller : MonoBehaviour
         else //Not moving 
         {
             cam.transform.localPosition = localSpaceCameraPos;
+        }
+    }
+
+    private void PlayFootStepSound()
+    {
+        if (AudioManager.Instance != null && footsteps != null)
+        {
+            AudioClip soundToPlay;
+            if(isCrouching)
+            {
+                soundToPlay = footsteps[1];
+            }
+            else
+            {
+                soundToPlay = footsteps[0];
+            }
+
+            //Play sound
+            AudioManager.Instance.PlayOneShotSound(footsteps.AudioGroup, 
+                                                    soundToPlay, 
+                                                    transform.position, 
+                                                    isCrouching ? crouchVolumeAttenuation * footsteps.Volume : footsteps.Volume, 
+                                                    footsteps.SpatialBlend, 
+                                                    footsteps.Priority);
         }
     }
 
