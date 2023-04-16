@@ -166,6 +166,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2535818550275208760, guid: e37f67cef96f63846912dee83ee354ab, type: 3}
     - target: {fileID: 7215955055528702355, guid: ea359344778d1354c881c57a9d8cc4a4, type: 3}
+      propertyPath: lowerBodyDamage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7215955055528702355, guid: ea359344778d1354c881c57a9d8cc4a4, type: 3}
       propertyPath: waypointNetwork
       value: 
       objectReference: {fileID: 390715179}
@@ -1666,6 +1670,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5251a968273296d418b8c79ba62124c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  footsteps: {fileID: 11400000, guid: d1804aebb0519764eb190269e4916939, type: 2}
+  crouchVolumeAttenuation: 0.2
   walkSpeed: 2
   runSpeed: 4.5
   jumpSpeed: 7.5

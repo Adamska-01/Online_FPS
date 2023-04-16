@@ -1223,9 +1223,6 @@ AnimatorStateMachine:
     m_State: {fileID: -7327891993276990291}
     m_Position: {x: 270, y: 470, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -3195406432907596053}
-    m_Position: {x: 0, y: 0, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: 5086515747323140044}
     m_Position: {x: 570, y: 500, z: 0}
   - serializedVersion: 1
@@ -1910,32 +1907,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootPosition: 0
   rootRotation: 0
---- !u!1102 &-3195406432907596053
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Crawl_CrawlSwipe 0
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -777471022172367679, guid: 2c6bfff025660cd4caa58caee2276ad3, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1101 &-3190798138715110173
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

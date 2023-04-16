@@ -192,11 +192,11 @@ public class AudioManager : MonoBehaviour
         mixer.SetFloat(_track, _volume);
     }
 
-    public IEnumerator PlayOneShotSound(string _track, AudioClip _clip, Vector3 _pos, float _volume, float _duration, float _spatialBlend, float _priority = 128)
+    public IEnumerator PlayOneShotSoundDelayed(string _track, AudioClip _clip, Vector3 _pos, float _volume, float _duration, float _spatialBlend, float _priority = 128)
     {
         yield return new WaitForSeconds(_duration);
 
-        PlayOneShotSound(_track, _clip, _pos, _volume, _duration, _spatialBlend, _priority);
+        PlayOneShotSound(_track, _clip, _pos, _volume, _spatialBlend, _priority);
     }
 
     public ulong PlayOneShotSound(string _track, AudioClip _clip, Vector3 _pos, float _volume, float _spatialBlend, float _priority = 128)
