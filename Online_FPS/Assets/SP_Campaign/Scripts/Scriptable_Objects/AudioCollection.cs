@@ -15,11 +15,12 @@ public class AudioCollection : ScriptableObject
 {
     //Inspector Assigned 
     [SerializeField] private string audioGroup = string.Empty;
-    [SerializeField] private List<ClipBank> audioClipBanks = new List<ClipBank>();
 
     [SerializeField, Range(0.0f, 1.0f)] private float volume = 1.0f;
     [SerializeField, Range(0.0f, 1.0f)] private float spatialBlend = 1.0f;
     [SerializeField, Range(0, 256)] private int priority = 128;
+
+    [SerializeField] private List<ClipBank> audioClipBanks = new List<ClipBank>();
 
     //Properties
     public string AudioGroup    { get { return audioGroup; } }

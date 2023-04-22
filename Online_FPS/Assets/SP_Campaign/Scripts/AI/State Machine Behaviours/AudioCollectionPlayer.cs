@@ -8,6 +8,7 @@ public class AudioCollectionPlayer : AIStateMachineLink
     [SerializeField] private ComChannelName commandChannel = ComChannelName.ComChannel1; //The bank to play
     [SerializeField] private AudioCollection collection = null;
     [SerializeField] private CustomCurve customCurve = null;
+    [SerializeField] private StringList layerExclusions = null;
 
     //Private
     private int previousCommand = 0;
@@ -35,6 +36,15 @@ public class AudioCollectionPlayer : AIStateMachineLink
 
         if (stateMachine == null)
             return;
+
+        if(layerExclusions != null)
+        {
+            for (int i = 0; i < layerExclusions.Count; i++)
+            {
+                if (stateMachine.IsLayerActive(layerExclusions[i]))
+                    return;
+            }
+        }
 
         //Process Animation curve (from either the animation itself or a custom one)
         //In the customCommand we subtract the int portion of the normalizedTime we are only interested in the decimal portion

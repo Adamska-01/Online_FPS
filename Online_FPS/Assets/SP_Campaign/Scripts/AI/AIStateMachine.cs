@@ -60,7 +60,8 @@ public abstract class AIStateMachine : MonoBehaviour
     protected int               rootRotationRefCount    = 0;
     protected int               AI_BodyPartLayer        = -1;
     protected bool              isTargetReached         = false;
-    protected bool              cinematicEnabled        = false;
+    //Animation Layer Manager
+    protected Dictionary<string, bool> animLayersActive = new Dictionary<string, bool>();
 
     [SerializeField] protected AIStateType          currentStateType    = AIStateType.Idle;
     [SerializeField] protected AIBoneAlignmentType  rootBoneAlignment   = AIBoneAlignmentType.ZAxis;
@@ -83,7 +84,6 @@ public abstract class AIStateMachine : MonoBehaviour
     public bool UseRootPosition     { get { return rootPositionRefCount > 0; } }
     public bool UseRootRotation     { get { return rootRotationRefCount > 0; } }
     public bool InMeleeRange        { get; set; }
-    public bool CinematicEnabled    { get { return cinematicEnabled; } set { cinematicEnabled = value; } }
     public bool IsTargetReached     { get { return isTargetReached; } }
     public AITargetType TargetType  { get { return target.Type; } }
     public Vector3 TargetPosition   { get { return target.Position; } }
@@ -387,6 +387,20 @@ public abstract class AIStateMachine : MonoBehaviour
     {
         rootPositionRefCount += _rootPosition;
         rootRotationRefCount += _rootRotation;
+    }
+
+    public void SetLayerActive(string layerName, bool active)
+    {
+        animLayersActive[layerName] = active;
+    }
+
+    public bool IsLayerActive(string layerName)
+    {
+        if(animLayersActive.TryGetValue(layerName, out bool result))
+        {
+            return result;
+        }
+        return false;
     }
 
     private void NextWaypoint()

@@ -152,7 +152,7 @@ public class AIZombieStateMachine : AIStateMachine
             anim.SetInteger(attackHash, attackType);
             anim.SetInteger(stateHash, (int)currentStateType);
 
-            isScreaming = cinematicEnabled ? 0.0f : anim.GetFloat(screamingHash);
+            isScreaming = IsLayerActive("Cinematic") ? 0.0f : anim.GetFloat(screamingHash);
         }
 
         satisfaction = MathF.Max(0, satisfaction - ((depletionRate * Time.deltaTime) / 100) * Mathf.Pow(speed, 3.0f));
@@ -266,6 +266,24 @@ public class AIZombieStateMachine : AIStateMachine
             anim.SetBool(crawlingHash, IsCrawling);
             anim.SetInteger(upperBodyDamageHash, upperBodyDamage);
             anim.SetInteger(lowerBodyDamageHash, lowerBodyDamage);
+
+            //Set lower/upper body animation layer active/unactive
+            if(lowerBodyDamage > limpThreshold && lowerBodyDamage < crawlThreshold)
+            {
+                SetLayerActive("Lower_Body", true);
+            }
+            else
+            {
+                SetLayerActive("Lower_Body", false);
+            }
+            if (upperBodyDamage > upperBodyThreshold && lowerBodyDamage < crawlThreshold)
+            {
+                SetLayerActive("Upper_Body", true);
+            }
+            else
+            {
+                SetLayerActive("Upper_Body", false);
+            }
         }
     }
 
@@ -359,7 +377,7 @@ public class AIZombieStateMachine : AIStateMachine
             }
         }
 
-        if(boneControlType != AIBoneControlType.Animated || IsCrawling || cinematicEnabled || attackerLocalPos.z < 0) //Attack from behind (z < 0)
+        if(boneControlType != AIBoneControlType.Animated || IsCrawling || IsLayerActive("Cinematic") || attackerLocalPos.z < 0) //Attack from behind (z < 0)
         {
             shouldRagdoll = true;
         }
@@ -550,7 +568,7 @@ public class AIZombieStateMachine : AIStateMachine
         if (IsScreaming) //We are already screaming, no need to scream again 
             return true;
 
-        if (anim == null || cinematicEnabled || screamPrefab == null)
+        if (anim == null || IsLayerActive("Cinematic") || screamPrefab == null)
             return false;
 
         anim.SetTrigger(screamHash); //Play scream animation
