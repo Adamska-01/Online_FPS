@@ -74,6 +74,8 @@ public abstract class AIStateMachine : MonoBehaviour
 
     [SerializeField, Range(0.0f, 15.0f)] protected float stoppingDistance = 1.0f;
 
+    protected ILayeredAudioSource layeredAudioSource = null;
+
     protected Animator      anim        = null;
     protected NavMeshAgent  navAgent    = null;
     protected Collider      col         = null;
@@ -135,7 +137,7 @@ public abstract class AIStateMachine : MonoBehaviour
         anim = GetComponent<Animator>();
         navAgent = GetComponent<NavMeshAgent>();
         col = GetComponent<Collider>();
-
+        
         //Get body part layer 
         AI_BodyPartLayer = LayerMask.NameToLayer("AI_BodyPart");
 
@@ -166,6 +168,13 @@ public abstract class AIStateMachine : MonoBehaviour
                 }
             }
 
+        }
+
+        //Register layered audio source
+        AudioSource audioSource = GetComponent<AudioSource>();
+        if(anim != null && audioSource != null)
+        {
+            layeredAudioSource = AudioManager.Instance?.RegisterLayeredAudioSource(audioSource, anim.layerCount);
         }
     }
 
@@ -262,6 +271,15 @@ public abstract class AIStateMachine : MonoBehaviour
         //Handle the case where a target could get destroyed while this is true
         //and it does not get the OnTriggerExit notification
         isTargetReached = false;
+    }
+
+    //Used to unregister all audio sources
+    protected virtual void OnDestroy()
+    {
+        if(layeredAudioSource != null)
+        {
+            AudioManager.Instance?.UnregisterLayeredAudioSource(layeredAudioSource);
+        }
     }
 
 
@@ -392,6 +410,12 @@ public abstract class AIStateMachine : MonoBehaviour
     public void SetLayerActive(string layerName, bool active)
     {
         animLayersActive[layerName] = active;
+
+        //Stop layered audio if the layer is not active
+        if(!active && layeredAudioSource != null)
+        {
+            layeredAudioSource.Stop(anim.GetLayerIndex(layerName));
+        }
     }
 
     public bool IsLayerActive(string layerName)
@@ -401,6 +425,30 @@ public abstract class AIStateMachine : MonoBehaviour
             return result;
         }
         return false;
+    }
+
+    public bool PlayAudio(AudioCollection _collection, int _bank, int _layer, bool _looping = true)
+    {
+        if (layeredAudioSource == null)
+            return false;
+
+        return layeredAudioSource.Play(_collection, _bank, _layer, _looping);
+    }
+
+    public void StopAudio(int _layer)
+    {
+        if (layeredAudioSource != null)
+        {
+            layeredAudioSource.Stop(_layer);
+        }
+    }
+
+    public void MuteAudio(bool _mute) //mute all layers
+    {
+        if (layeredAudioSource != null)
+        {
+            layeredAudioSource.Mute(_mute);
+        }
     }
 
     private void NextWaypoint()

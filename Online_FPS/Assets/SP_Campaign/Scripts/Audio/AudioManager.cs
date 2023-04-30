@@ -65,6 +65,7 @@ public class AudioManager : MonoBehaviour
 
     //Private
     private Dictionary<string, TrackInfo> tracks = new Dictionary<string, TrackInfo>();
+    private List<LayeredAudioSource> layeredAudio = new List<LayeredAudioSource>();
 
     private List<AudioPoolItem> pool = new List<AudioPoolItem>();
     private Dictionary<ulong, AudioPoolItem> activePool = new Dictionary<ulong, AudioPoolItem>();
@@ -125,6 +126,17 @@ public class AudioManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         listenerPos = FindObjectOfType<AudioListener>().transform;
+    }
+
+    private void Update()
+    {
+        foreach (LayeredAudioSource layeredSrc in layeredAudio)
+        {
+            if (layeredSrc != null)
+            {
+                layeredSrc.Update();
+            }
+        } 
     }
 
 
@@ -303,5 +315,55 @@ public class AudioManager : MonoBehaviour
         activePool[idGiver] = poolItem;
 
         return idGiver;
+    }
+
+    public ILayeredAudioSource RegisterLayeredAudioSource(AudioSource source, int layers)
+    {
+        if(source != null && layers > 0)
+        {
+            //Check it's not the same source contained in the layeredAudio
+            for (int i = 0; i < layeredAudio.Count; i++)
+            {
+                LayeredAudioSource item = layeredAudio[i];
+                if(item != null)
+                {
+                    if (item.AudioSrc == source)
+                        return item;
+                }
+            }
+
+            //Create a new layered audio item and add it to the managed list
+            LayeredAudioSource newLayeredAudio = new LayeredAudioSource(source, layers);
+            layeredAudio.Add(newLayeredAudio);
+
+            return newLayeredAudio;
+        }
+
+        return null;
+    }
+
+    public void UnregisterLayeredAudioSource(ILayeredAudioSource source)
+    {
+        layeredAudio.Remove((LayeredAudioSource)source);
+    }
+
+    public void UnregisterLayeredAudioSource(AudioSource source)
+    {
+        if (source == null)
+            return;
+
+        //Check if there is a LayeredAudioSource with that source
+        for (int i = 0; i < layeredAudio.Count; i++)
+        {
+            LayeredAudioSource item = layeredAudio[i];
+            if (item != null)
+            {
+                if (item.AudioSrc == source)
+                {
+                    layeredAudio.Remove(item);
+                    return;
+                }
+            }
+        }
     }
 }

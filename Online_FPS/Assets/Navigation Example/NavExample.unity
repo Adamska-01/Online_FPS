@@ -167,12 +167,16 @@ PrefabInstance:
       objectReference: {fileID: 2535818550275208760, guid: e37f67cef96f63846912dee83ee354ab, type: 3}
     - target: {fileID: 7215955055528702355, guid: ea359344778d1354c881c57a9d8cc4a4, type: 3}
       propertyPath: lowerBodyDamage
-      value: 0
+      value: 37
       objectReference: {fileID: 0}
     - target: {fileID: 7215955055528702355, guid: ea359344778d1354c881c57a9d8cc4a4, type: 3}
       propertyPath: waypointNetwork
       value: 
       objectReference: {fileID: 390715179}
+    - target: {fileID: 7215955055528702360, guid: ea359344778d1354c881c57a9d8cc4a4, type: 3}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7215955056292277998, guid: ea359344778d1354c881c57a9d8cc4a4, type: 3}
       propertyPath: m_Name
       value: Omni_Zombie_BritishCop
