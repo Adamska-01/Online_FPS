@@ -70,7 +70,7 @@ public class AIZombieState_Feeding1 : AIZombieState
         timer += Time.deltaTime;
 
         //Check satisfaction level every frame
-        if (zombieStateMachine.Satisfaction > 0.9f)
+        if (zombieStateMachine.Satisfaction > 0.95f)
         {
             zombieStateMachine.GetWaypointPosition(false);
             return AIStateType.Alerted;

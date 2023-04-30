@@ -449,6 +449,12 @@ public class AIZombieStateMachine : AIStateMachine
             if(anim)        anim.enabled = false;
             if(col)         col.enabled = false;
 
+            //Mute audio while ragdoll is happening
+            if(layeredAudioSource != null)
+            {
+                layeredAudioSource.Mute(true);
+            }
+
             InMeleeRange = false;
 
             //Enable ragdoll

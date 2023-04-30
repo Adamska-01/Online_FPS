@@ -162,21 +162,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 7215955055528702355, guid: ea359344778d1354c881c57a9d8cc4a4, type: 3}
-      propertyPath: screamPrefab
-      value: 
-      objectReference: {fileID: 2535818550275208760, guid: e37f67cef96f63846912dee83ee354ab, type: 3}
-    - target: {fileID: 7215955055528702355, guid: ea359344778d1354c881c57a9d8cc4a4, type: 3}
-      propertyPath: lowerBodyDamage
-      value: 37
+      propertyPath: screamChance
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 7215955055528702355, guid: ea359344778d1354c881c57a9d8cc4a4, type: 3}
       propertyPath: waypointNetwork
       value: 
       objectReference: {fileID: 390715179}
-    - target: {fileID: 7215955055528702360, guid: ea359344778d1354c881c57a9d8cc4a4, type: 3}
-      propertyPath: speed
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 7215955056292277998, guid: ea359344778d1354c881c57a9d8cc4a4, type: 3}
       propertyPath: m_Name
       value: Omni_Zombie_BritishCop
@@ -1465,6 +1457,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2120275191}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1618676907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1618676909}
+  - component: {fileID: 1618676908}
+  m_Layer: 10
+  m_Name: Food
+  m_TagString: AI_Food
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!135 &1618676908
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618676907}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1618676909
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618676907}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.15, y: 0.485, z: 7.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1622591991
 GameObject:
