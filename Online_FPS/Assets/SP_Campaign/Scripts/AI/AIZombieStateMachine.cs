@@ -430,6 +430,10 @@ public class AIZombieStateMachine : AIStateMachine
             {
                 anim.SetInteger(hitTypeHash, hitType);
                 anim.SetTrigger(hitTriggerHash);
+
+                //Reset trigger if player shoots again at the same body part 
+                //(the zombie, after the coroutine, should already be playing the hit animation)
+                StartCoroutine(ResetHitTrigger());
             }
 
             return;
@@ -592,5 +596,13 @@ public class AIZombieStateMachine : AIStateMachine
         return true;
     }
 
-    
+    private IEnumerator ResetHitTrigger()
+    {
+        yield return new WaitForSecondsRealtime(Time.deltaTime);
+
+        if(anim.GetBool(hitTriggerHash))
+        {
+            anim.ResetTrigger(hitTriggerHash);
+        }
+    }
 }      

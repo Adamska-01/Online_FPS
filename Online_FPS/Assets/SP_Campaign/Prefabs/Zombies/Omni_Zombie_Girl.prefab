@@ -772,6 +772,8 @@ MonoBehaviour:
   animParameter: RightHand
   bloodParticlesBurstAmount: 10
   damageAmount: 50
+  doDamageSound: 1
+  doPainSound: 1
 --- !u!1 &2835229372371442159
 GameObject:
   m_ObjectHideFlags: 0
@@ -1795,6 +1797,8 @@ MonoBehaviour:
   animParameter: LeftHand
   bloodParticlesBurstAmount: 10
   damageAmount: 50
+  doDamageSound: 1
+  doPainSound: 1
 --- !u!1 &4603130094627439679
 GameObject:
   m_ObjectHideFlags: 0
@@ -2058,7 +2062,7 @@ Animator:
   m_GameObject: {fileID: 5160196873958397591}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 6422c540b67aadf489878d2d30a2de3d, type: 3}
-  m_Controller: {fileID: 9100000, guid: cad6f9638a43ea34a84544326c8116a7, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7261c15a6d5cda241965cf364c6870e8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -2150,17 +2154,17 @@ MonoBehaviour:
   upperBodyDamage: 0
   upperBodyThreshold: 30
   limpThreshold: 30
-  crawlThreshold: 90
-  intelligence: 0.5
-  satisfaction: 1
+  crawlThreshold: 70
+  intelligence: 1
+  satisfaction: 0
   replenishRate: 2
   depletionRate: 0.1
-  screamChance: 0.2
+  screamChance: 0
   screamRadius: 20
   screamPosition: 1
   screamPrefab: {fileID: 2535818550275208760, guid: e37f67cef96f63846912dee83ee354ab, type: 3}
-  reanimationBlendTime: 1
-  reanimationWaitTime: 2.5
+  reanimationBlendTime: 1.5
+  reanimationWaitTime: 3
   geometryLayer:
     serializedVersion: 2
     m_Bits: 1
@@ -2176,7 +2180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5abb9d2ddf90e46a7a2b3cbd7f69b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 2
   lookAtWeight: 0.7
   lookAtAngleThreshold: 15
   slerpSpeed: 5
@@ -2231,7 +2235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2c02693baa960e4bb56137faff38973, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleTimeRange: {x: 5, y: 10}
+  idleTimeRange: {x: 2, y: 3}
 --- !u!114 &5430736859167861708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2263,7 +2267,7 @@ MonoBehaviour:
   wayPointAngleThreshold: 25
   threatAngleThreshold: 10
   directionChangeTime: 1.5
-  slerpSpeed: 60
+  slerpSpeed: 45
 --- !u!82 &4478697493213333523
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3714,6 +3718,8 @@ MonoBehaviour:
   animParameter: Mouth
   bloodParticlesBurstAmount: 10
   damageAmount: 10
+  doDamageSound: 0
+  doPainSound: 1
 --- !u!136 &5570541631531161066
 CapsuleCollider:
   m_ObjectHideFlags: 0

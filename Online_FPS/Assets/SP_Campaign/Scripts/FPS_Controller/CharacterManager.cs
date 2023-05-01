@@ -14,6 +14,11 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private float runRadius = 7.0f;
     [SerializeField] private float landingRadius = 12.0f;
     [SerializeField] private float bloodRadiusScale = 6.0f;
+    //Pain/Damage Audio
+    [SerializeField] private AudioCollection damageSounds = null;
+    [SerializeField] private AudioCollection painSounds = null;
+    [SerializeField] private float nextPainSoundTime = 0.0f;
+    [SerializeField] private float painSoundOffset = 0.35f;
 
     //Private
     private Collider col= null;
@@ -72,9 +77,9 @@ public class CharacterManager : MonoBehaviour
     }
 
 
-    public void TakeDamage(float dmg)
+    public void TakeDamage(float _dmg, bool _doDamage, bool _doPain)
     {
-        health = Mathf.Max(health - (dmg * Time.deltaTime), 0.0f);
+        health = Mathf.Max(health - (_dmg * Time.deltaTime), 0.0f);
         
         //Set player drag 
         if(fpsController != null)
@@ -85,9 +90,40 @@ public class CharacterManager : MonoBehaviour
         if (cameraBloodEffect != null)
         {
             //Apply blood on screen (but 3 times less than what should be)
-            cameraBloodEffect.MinBloodAmount = 1.0f - (health / 100.0f);
+            cameraBloodEffect.MinBloodAmount = (1.0f - (health / 100.0f)) * 0.5f;
             cameraBloodEffect.BloodAmount = Mathf.Min(cameraBloodEffect.MinBloodAmount + 0.3f, 1.0f);
         }
+
+        //Play Player Pain/Damage sounds
+        if (AudioManager.Instance != null)
+        {
+            if(_doDamage && damageSounds != null)
+            {
+                AudioManager.Instance.PlayOneShotSound(damageSounds.AudioGroup,
+                                                        damageSounds.RandomClip,
+                                                        transform.position,
+                                                        damageSounds.Volume,
+                                                        damageSounds.SpatialBlend,
+                                                        damageSounds.Priority);
+
+                //Play Pain click after damage sound
+                if(_doPain && painSounds != null && nextPainSoundTime < Time.time)
+                {
+                    AudioClip painClip = painSounds.RandomClip;
+                    if(painClip != null)
+                    {
+                        nextPainSoundTime = Time.time + painClip.length + painSoundOffset;
+                        StartCoroutine(AudioManager.Instance?.PlayOneShotSoundDelayed(painSounds.AudioGroup,
+                                                                                      painClip,
+                                                                                      transform.position,
+                                                                                      painSounds.Volume,
+                                                                                      painSounds.SpatialBlend,
+                                                                                      painSounds.Priority));
+                    }
+                }
+            }
+        }
+  
     }
 
     public void DoDamage(int _hitDir = 0)

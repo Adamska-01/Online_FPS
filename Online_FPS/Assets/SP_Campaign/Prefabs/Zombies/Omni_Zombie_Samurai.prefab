@@ -48,6 +48,8 @@ MonoBehaviour:
   animParameter: Mouth
   bloodParticlesBurstAmount: 10
   damageAmount: 10
+  doDamageSound: 0
+  doPainSound: 1
 --- !u!136 &257550636
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1741,6 +1743,8 @@ MonoBehaviour:
   animParameter: LeftHand
   bloodParticlesBurstAmount: 10
   damageAmount: 50
+  doDamageSound: 1
+  doPainSound: 1
 --- !u!1 &5114419302371117779
 GameObject:
   m_ObjectHideFlags: 0
@@ -2735,6 +2739,8 @@ MonoBehaviour:
   animParameter: RightHand
   bloodParticlesBurstAmount: 10
   damageAmount: 50
+  doDamageSound: 1
+  doPainSound: 1
 --- !u!1 &6864774114997579431
 GameObject:
   m_ObjectHideFlags: 0
@@ -3364,7 +3370,7 @@ Animator:
   m_GameObject: {fileID: 9122598436830641977}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 85a4c76e23f1d604b85dd6b301d9b1f0, type: 3}
-  m_Controller: {fileID: 9100000, guid: cad6f9638a43ea34a84544326c8116a7, type: 2}
+  m_Controller: {fileID: 9100000, guid: 494998668d3183748a0a35263ec242b1, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -3456,13 +3462,13 @@ MonoBehaviour:
   upperBodyDamage: 0
   upperBodyThreshold: 30
   limpThreshold: 30
-  crawlThreshold: 90
+  crawlThreshold: 70
   intelligence: 0.5
-  satisfaction: 1
+  satisfaction: 0.6
   replenishRate: 2
   depletionRate: 0.1
-  screamChance: 1
-  screamRadius: 20
+  screamChance: 0.04
+  screamRadius: 25
   screamPosition: 1
   screamPrefab: {fileID: 2535818550275208760, guid: e37f67cef96f63846912dee83ee354ab, type: 3}
   reanimationBlendTime: 1
@@ -3537,7 +3543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2c02693baa960e4bb56137faff38973, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleTimeRange: {x: 5, y: 10}
+  idleTimeRange: {x: 5, y: 8}
 --- !u!114 &8239497284792861282
 MonoBehaviour:
   m_ObjectHideFlags: 0
