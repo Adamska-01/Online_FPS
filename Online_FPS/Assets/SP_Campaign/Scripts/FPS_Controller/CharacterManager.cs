@@ -30,6 +30,7 @@ public class CharacterManager : MonoBehaviour
     private CharacterController characterController = null;
     private GameSceneManager gameSceneManger = null;
     private int AI_BodyPartLayer = -1;
+    private int interactiveMask = 0;
 
     //Properties
     public float Health  { get { return health; } }
@@ -43,6 +44,7 @@ public class CharacterManager : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         gameSceneManger = GameSceneManager.Instance;
         AI_BodyPartLayer = LayerMask.NameToLayer("AI_BodyPart");
+        interactiveMask = 1 << LayerMask.NameToLayer("Interactive");
 
         if(gameSceneManger != null)
         {
@@ -56,6 +58,10 @@ public class CharacterManager : MonoBehaviour
             gameSceneManger.RegisterPlayerInfo(col.GetInstanceID(), info);
         }
 
+        //Hide Curesor and lock it to center
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         //Start fading in
         if(playerHUD != null)
         {
@@ -67,7 +73,9 @@ public class CharacterManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        ProcessInteractableItems();
+
+        if (Input.GetMouseButtonDown(0))
         {
             DoDamage();
         }
@@ -91,12 +99,67 @@ public class CharacterManager : MonoBehaviour
             fpsController.DragMultiplierLimit = Mathf.Max(health / MAX_HEALTH, 0.25f); //Set drag limit
         }
 
-        if(playerHUD != null)
+        if (playerHUD != null)
         {
             playerHUD.Invalidate(this);
         }
     }
 
+    private void ProcessInteractableItems()
+    {
+        //Process interactive objects
+        Ray ray;
+        RaycastHit hit;
+        RaycastHit[] hits;
+
+        //Cast Ray
+        ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0.0f));
+        //Calculate ray length based on where the player is looking (becomes longer if looking down, shortest is when looking forward)
+        float rayLength = Mathf.Lerp(1.0f, 1.8f, Mathf.Abs(Vector3.Dot(playerCamera.transform.forward, Vector3.up)));
+
+        //Collect hits
+        hits = Physics.RaycastAll(ray, rayLength, interactiveMask);
+        if (hits.Length > 0)
+        {
+            //Get the one with the highest priority
+            int highestPriority = int.MinValue;
+            InteractiveItem priorityObject = null;
+            for (int i = 0; i < hits.Length; i++)
+            {
+                hit = hits[i];
+
+                //Fetch interactive script from GameSceneManager and cache if it has an higher priority
+                InteractiveItem interactiveObject = gameSceneManger.GetInteractiveItem(hit.collider.GetInstanceID());
+                if (interactiveObject != null && interactiveObject.Priority > highestPriority)
+                {
+                    priorityObject = interactiveObject;
+                    highestPriority = priorityObject.Priority;
+                }
+            }
+
+            //Display Text if we found an interactive item
+            if (priorityObject != null)
+            {
+                if (playerHUD != null)
+                {
+                    playerHUD.SetInteractionText(priorityObject.GetText());
+                }
+
+                //Use/Get Iteractable 
+                if (Input.GetButtonDown("Use"))
+                {
+                    priorityObject.Activate(this);
+                }
+            }
+        }
+        else //No Item found
+        {
+            if (playerHUD != null)
+            {
+                playerHUD.SetInteractionText(null);
+            }
+        }
+    }
 
     public void TakeDamage(float _dmg, bool _doDamage, bool _doPain)
     {

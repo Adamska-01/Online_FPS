@@ -45,7 +45,7 @@ public class PlayerHUD : MonoBehaviour
         {
             if(_text == null)
             {
-                interactionText.SetText("");
+                interactionText.SetText(string.Empty);
                 interactionText.gameObject.SetActive(false);
             }
             else
