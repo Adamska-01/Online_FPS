@@ -114,6 +114,10 @@ public class CurveControlledBob
 [RequireComponent(typeof(CharacterController))]
 public class FPS_Controller : MonoBehaviour
 {
+    //Constants
+    private const float MAX_STAMINA = 100.0f;
+
+    [Header("Sound Settings")]
     [SerializeField] private AudioCollection footsteps = null;
     [SerializeField] private float crouchVolumeAttenuation = 0.2f;
 
@@ -122,12 +126,14 @@ public class FPS_Controller : MonoBehaviour
     [SerializeField] private float runSpeed = 4.5f;
     [SerializeField] private float jumpSpeed = 7.5f;
     [SerializeField] private float crouchSpeed = 1.0f;
+    [SerializeField] private float staminaDepletion = 5.0f;
+    [SerializeField] private float staminaRecovery = 10.0f;
     [SerializeField] private float stickToGroundForce = 5.0f;
     [SerializeField] private float gravityMultiplier = 2.5f;
     [SerializeField] private float runStepLengthen = 0.75f;
     [SerializeField] private CurveControlledBob headBob = new CurveControlledBob();
     [SerializeField] private GameObject flashLight = null;
-
+    [SerializeField] private bool flashlightOnAtStart = false;
     //Takes care of mouse look
     [SerializeField] private UnityStandardAssets.Characters.FirstPerson.MouseLook mouseLook;
 
@@ -141,8 +147,9 @@ public class FPS_Controller : MonoBehaviour
     private bool    isWalking           = true;
     private bool    isJumping           = false;
     private bool    isCrouching         = false;
+    private bool    freezeMovement      = false;
     private float   controllerHeight    = 0.0f;
-
+    private float   stamina             = MAX_STAMINA;
     private float dragMultiplier        = 1.0f;
     private float dragMultiplierLimit   = 1.0f;
     [SerializeField, Range(0.0f, 1.0f)] private float npcStickiness = 0.5f;
@@ -160,6 +167,9 @@ public class FPS_Controller : MonoBehaviour
     public float RunSpeed            { get { return runSpeed; } }
     public float DragMultiplierLimit { get { return dragMultiplierLimit; } set { dragMultiplierLimit = Mathf.Clamp01(value); } }
     public float DragMultiplier      { get { return dragMultiplier; } set { dragMultiplier = Mathf.Min(value, dragMultiplierLimit); } }
+    public float Stamina             { get { return stamina; } }
+    public bool FreezeMovement       { get { return freezeMovement; } set { freezeMovement = value; } }
+
 
 
     protected void Awake()
@@ -189,7 +199,7 @@ public class FPS_Controller : MonoBehaviour
 
         if (flashLight != null)
         {
-            flashLight.SetActive(false);
+            flashLight.SetActive(flashlightOnAtStart);
         }
     }
 
@@ -266,6 +276,16 @@ public class FPS_Controller : MonoBehaviour
 
         previouslyGrounded = characterController.isGrounded;
 
+        //Calculate Stamina
+        if(movementStatus == PlayerMoveStatus.Running) //Deplete
+        {
+            stamina = Mathf.Max(stamina - staminaDepletion * Time.deltaTime, 0.0f);
+        }
+        else //Recovery
+        {
+            stamina = Mathf.Min(stamina + staminaRecovery * Time.deltaTime, MAX_STAMINA);
+        }
+
         dragMultiplier = Mathf.Min(dragMultiplier + Time.deltaTime, dragMultiplierLimit);
     }
 
@@ -280,8 +300,9 @@ public class FPS_Controller : MonoBehaviour
         isWalking = !Input.GetKey(KeyCode.LeftShift);
 
         //Set the desired speed to be either our walking speed or our running speed
-        float speed = isCrouching ? crouchSpeed : isWalking ? walkSpeed : runSpeed;
+        float speed = isCrouching ? crouchSpeed : isWalking ? walkSpeed : Mathf.Lerp(walkSpeed, RunSpeed, stamina / MAX_STAMINA);
 
+        //Normalize input if less than 1
         inputVector = new Vector2(horizontal, veritical);
         if (inputVector.sqrMagnitude > 1)
             inputVector.Normalize();
@@ -297,8 +318,8 @@ public class FPS_Controller : MonoBehaviour
         }
 
         //Scale movement by speed 
-        moveDirection.x = desiredMove.x * speed * dragMultiplier;
-        moveDirection.z = desiredMove.z * speed * dragMultiplier;
+        moveDirection.x = !freezeMovement ? desiredMove.x * speed * dragMultiplier : 0.0f;
+        moveDirection.z = !freezeMovement ? desiredMove.z * speed * dragMultiplier : 0.0f;
         if(characterController.isGrounded)
         {
             //Apply severe down force to keep it stuck to the floor

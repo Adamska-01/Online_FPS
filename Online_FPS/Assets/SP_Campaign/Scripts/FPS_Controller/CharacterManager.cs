@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
+    //Constants
+    private const float MAX_HEALTH = 100.0f;
+
     //Inspector-Assigned
     [SerializeField] private CapsuleCollider meleeTrigger = null;
     [SerializeField] private CameraBloodEffect cameraBloodEffect = null;
     [SerializeField] private Camera playerCamera = null;
     [SerializeField] private AISoundEmitter soundEmitter = null;
-    [SerializeField] private float health = 100.0f;
+    [SerializeField] private float health = MAX_HEALTH;
     [SerializeField] private float walkRadius = 0.0f;
     [SerializeField] private float runRadius = 7.0f;
     [SerializeField] private float landingRadius = 12.0f;
     [SerializeField] private float bloodRadiusScale = 6.0f;
+    [SerializeField] private PlayerHUD playerHUD = null;
     //Pain/Damage Audio
     [SerializeField] private AudioCollection damageSounds = null;
     [SerializeField] private AudioCollection painSounds = null;
@@ -26,6 +30,11 @@ public class CharacterManager : MonoBehaviour
     private CharacterController characterController = null;
     private GameSceneManager gameSceneManger = null;
     private int AI_BodyPartLayer = -1;
+
+    //Properties
+    public float Health  { get { return health; } }
+    public float Stamina { get { return fpsController != null ? fpsController.Stamina : 0.0f; } }
+
 
     void Start()
     {
@@ -46,6 +55,13 @@ public class CharacterManager : MonoBehaviour
             //Register this player
             gameSceneManger.RegisterPlayerInfo(col.GetInstanceID(), info);
         }
+
+        //Start fading in
+        if(playerHUD != null)
+        {
+        Debug.Log("fade internal");
+            playerHUD.Fade(2.0f, ScreenFadeType.FadeIn);
+        }
     }
 
 
@@ -59,7 +75,7 @@ public class CharacterManager : MonoBehaviour
         //Set sound emitter radius (take damage value into account as well)
         if (fpsController != null || soundEmitter != null)
         {
-            float newRadius = Mathf.Max(walkRadius, (100.0f - health) / bloodRadiusScale);
+            float newRadius = Mathf.Max(walkRadius, (MAX_HEALTH - health) / bloodRadiusScale);
             switch (fpsController.MovementStatus)
             {
                 case PlayerMoveStatus.Running:
@@ -72,7 +88,12 @@ public class CharacterManager : MonoBehaviour
 
             soundEmitter.SetRadius(newRadius);
 
-            fpsController.DragMultiplierLimit = Mathf.Max(health / 100.0f, 0.25f); //Set drag limit
+            fpsController.DragMultiplierLimit = Mathf.Max(health / MAX_HEALTH, 0.25f); //Set drag limit
+        }
+
+        if(playerHUD != null)
+        {
+            playerHUD.Invalidate(this);
         }
     }
 
@@ -90,7 +111,7 @@ public class CharacterManager : MonoBehaviour
         if (cameraBloodEffect != null)
         {
             //Apply blood on screen (but 3 times less than what should be)
-            cameraBloodEffect.MinBloodAmount = (1.0f - (health / 100.0f)) * 0.5f;
+            cameraBloodEffect.MinBloodAmount = (1.0f - (health / MAX_HEALTH)) * 0.5f;
             cameraBloodEffect.BloodAmount = Mathf.Min(cameraBloodEffect.MinBloodAmount + 0.3f, 1.0f);
         }
 
