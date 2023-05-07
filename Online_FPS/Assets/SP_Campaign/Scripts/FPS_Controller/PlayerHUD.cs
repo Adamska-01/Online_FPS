@@ -118,7 +118,7 @@ public class PlayerHUD : MonoBehaviour
         staminaText?.SetText("Stamina: " + ((int)_chrManager.Stamina).ToString());
     }
     
-    private void ShowMissionText(string _text)
+    public void ShowMissionText(string _text)
     {
         if(missionText != null)
         {

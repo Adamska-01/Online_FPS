@@ -35,6 +35,7 @@ public class CharacterManager : MonoBehaviour
     //Properties
     public float Health  { get { return health; } }
     public float Stamina { get { return fpsController != null ? fpsController.Stamina : 0.0f; } }
+    public FPS_Controller FPSController { get { return fpsController; } }
 
 
     void Start()
@@ -231,5 +232,24 @@ public class CharacterManager : MonoBehaviour
                 stateMachine.TakeDamage(hit.point, ray.direction * 1.0f, 50, hit.rigidbody, this, 0);
             }
         }
+    }
+
+    public void CompleteLevel()
+    {
+        if(playerHUD != null)
+        {
+            playerHUD.Fade(4.0f, ScreenFadeType.FadeOut);
+            playerHUD.ShowMissionText("Mission Completed");
+        }
+
+        Invoke("GameOver", 4.0f);
+    }
+    public void GameOver()
+    {
+        //TODO: Go back to main menu
+
+        //Show Cursor Again (for now)
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

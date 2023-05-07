@@ -230,7 +230,7 @@ public class FPS_Controller : MonoBehaviour
         }
 
         //Process jump
-        if(!jumpButtonPressed && !isCrouching)
+        if(!jumpButtonPressed && !isCrouching && characterController.isGrounded)
         {
             jumpButtonPressed = Input.GetButtonDown("Jump");
         }
@@ -342,7 +342,7 @@ public class FPS_Controller : MonoBehaviour
 
         //Move
         characterController.Move(moveDirection * Time.fixedDeltaTime);
-
+        
         //Head bob
         Vector3 speedXZ = new Vector3(characterController.velocity.x, 0.0f, characterController.velocity.z);
         if(speedXZ.magnitude > 0.01f)
