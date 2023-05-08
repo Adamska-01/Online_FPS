@@ -66,7 +66,6 @@ public class CharacterManager : MonoBehaviour
         //Start fading in
         if(playerHUD != null)
         {
-        Debug.Log("fade internal");
             playerHUD.Fade(2.0f, ScreenFadeType.FadeIn);
         }
     }

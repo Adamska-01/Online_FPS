@@ -40,9 +40,18 @@ public class GameSceneManager : MonoBehaviour
     private Dictionary<int, AIStateMachine>  stateMachines     = new Dictionary<int, AIStateMachine>();
     private Dictionary<int, Player_Info>     playerInfos       = new Dictionary<int, Player_Info>();
     private Dictionary<int, InteractiveItem> interactiveItems  = new Dictionary<int, InteractiveItem>();
+    private Dictionary<int, MaterialController> materialControllers = new Dictionary<int, MaterialController>();
 
     //Properties 
     public ParticleSystem BloodParticles { get { return bloodParticles; } }
+
+    private void OnDestroy()
+    {
+        foreach (KeyValuePair<int, MaterialController> controller in materialControllers)
+        {
+            controller.Value.OnReset();
+        }
+    }
 
 
     //----------------------------------------------------------------------------
@@ -69,6 +78,13 @@ public class GameSceneManager : MonoBehaviour
             interactiveItems.Add(_key, _interactiveItem);
         }
     }
+    public void RegisterMaterialController(int _key, MaterialController _controller)
+    {
+        if (!materialControllers.ContainsKey(_key))
+        {
+            materialControllers.Add(_key, _controller);
+        }
+    }
 
     //----------------------------------------------------------------------------
     //----------------------------- Getter Functions -----------------------------
@@ -85,7 +101,6 @@ public class GameSceneManager : MonoBehaviour
 
         return info;
     }
-
     public InteractiveItem GetInteractiveItem(int _key)
     {
         interactiveItems.TryGetValue(_key, out InteractiveItem interactive);

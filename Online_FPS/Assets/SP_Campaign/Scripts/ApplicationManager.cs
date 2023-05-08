@@ -43,6 +43,8 @@ public class ApplicationManager : MonoBehaviour
         {
             gameStateDictionary.Add(state.key, state.value);
         }
+
+        SetGameState("fesa", "deasfc");
     }
 
     private void Start()
@@ -63,7 +65,7 @@ public class ApplicationManager : MonoBehaviour
         if (_key == null || _val == null)
             return false;
 
-        gameStateDictionary.Add(_key, _val);
+        gameStateDictionary[_key] = _val;
 
         return true;
     }
