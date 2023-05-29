@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,8 +22,10 @@ public class CharacterManager : MonoBehaviour
     //Pain/Damage Audio
     [SerializeField] private AudioCollection damageSounds = null;
     [SerializeField] private AudioCollection painSounds = null;
+    [SerializeField] private AudioCollection tauntSounds = null;
     [SerializeField] private float nextPainSoundTime = 0.0f;
     [SerializeField] private float painSoundOffset = 0.35f;
+    [SerializeField] private float tauntRadius = 10.0f;
 
     //Private
     private Collider col= null;
@@ -31,6 +34,8 @@ public class CharacterManager : MonoBehaviour
     private GameSceneManager gameSceneManger = null;
     private int AI_BodyPartLayer = -1;
     private int interactiveMask = 0;
+    private float nextAttackTime = 0.0f;
+    private float nextTauntTime = 0.0f;
 
     //Properties
     public float Health  { get { return health; } }
@@ -75,11 +80,12 @@ public class CharacterManager : MonoBehaviour
     {
         ProcessInteractableItems();
 
-        if (Input.GetMouseButtonDown(0))
+        //Push (Attack)
+        if (Input.GetMouseButtonDown(0) && Time.time > nextAttackTime)
         {
             DoDamage();
         }
-
+        
         //Set sound emitter radius (take damage value into account as well)
         if (fpsController != null || soundEmitter != null)
         {
@@ -99,10 +105,39 @@ public class CharacterManager : MonoBehaviour
             fpsController.DragMultiplierLimit = Mathf.Max(health / MAX_HEALTH, 0.25f); //Set drag limit
         }
 
+        //Taunt 
+        if (Input.GetMouseButtonDown(1))
+        {
+            DoTaunt();
+        }
+
         if (playerHUD != null)
         {
-            playerHUD.Invalidate(this);
+            playerHUD.RefreshUI(this);
         }
+    }
+
+    private void DoTaunt()
+    {
+        if (tauntSounds == null || Time.time < nextTauntTime)
+            return;
+
+        //Play tount sound
+        AudioClip tauntClip = tauntSounds[0];
+        AudioManager.Instance.PlayOneShotSound(tauntSounds.AudioGroup,
+                                               tauntClip,
+                                               transform.position,
+                                               tauntSounds.Volume,
+                                               tauntSounds.SpatialBlend,
+                                               tauntSounds.Priority);
+
+        //Set sound emitter radius
+        if(soundEmitter != null)
+        {
+            soundEmitter.SetRadius(tauntRadius);
+        }
+
+        nextTauntTime = Time.time + tauntClip.length;
     }
 
     private void ProcessInteractableItems()
@@ -207,7 +242,31 @@ public class CharacterManager : MonoBehaviour
                 }
             }
         }
-  
+        
+        if(health <= 0)
+        {
+            DoDeath();
+        }
+    }
+
+
+    private void DoDeath()
+    {
+        if (fpsController != null)
+        {
+            fpsController.FreezeMovement = true;
+        }
+
+        //GameOver Screen
+        if (playerHUD != null)
+        {
+            playerHUD.Fade(2.5f, ScreenFadeType.FadeOut);
+            playerHUD.ShowMissionText("Mission Failed");
+            playerHUD.RefreshUI(this);
+        }
+
+        //Back to main menu
+        Invoke("GameOver", 3.2f);
     }
 
     public void DoDamage(int _hitDir = 0)
@@ -221,14 +280,15 @@ public class CharacterManager : MonoBehaviour
 
         //Perform raycast from the crosshair (screen center)
         ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-        isSomethingHit = Physics.Raycast(ray, out hit, 1000.0f, 1 << AI_BodyPartLayer);
+        isSomethingHit = Physics.Raycast(ray, out hit, 1.0f, 1 << AI_BodyPartLayer);
 
         if(isSomethingHit)
         {
             AIStateMachine stateMachine = gameSceneManger.GetAIStateMachine(hit.rigidbody.GetInstanceID());
             if(stateMachine != null)
             {
-                stateMachine.TakeDamage(hit.point, ray.direction * 1.0f, 50, hit.rigidbody, this, 0);
+                stateMachine.TakeDamage(hit.point, ray.direction * 1.0f, 1, hit.rigidbody, this, 0);
+                nextAttackTime = Time.time + 0.5f;
             }
         }
     }
@@ -241,14 +301,16 @@ public class CharacterManager : MonoBehaviour
             playerHUD.ShowMissionText("Mission Completed");
         }
 
-        Invoke("GameOver", 4.0f);
+        Invoke("GameOver", 4.5f);
     }
+
     public void GameOver()
     {
-        //TODO: Go back to main menu
-
         //Show Cursor Again (for now)
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        //Open Main Menu
+        ApplicationManager.Instance.LoadMainMenu();
     }
 }

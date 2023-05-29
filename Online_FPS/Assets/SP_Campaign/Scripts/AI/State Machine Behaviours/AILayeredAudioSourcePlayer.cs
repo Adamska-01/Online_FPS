@@ -26,10 +26,12 @@ public class AILayeredAudioSourcePlayer : AIStateMachineLink
             //and also because the layer 0 does not have a weight
             if(layerIndex == 0 || layerWeight > 0.5f)
             {
+                Debug.Log("Playing layered sound");
                 stateMachine.PlayAudio(collection, bank, layerIndex, looping);
             }
             else
             {
+                Debug.Log("Stopping");
                 stateMachine.StopAudio(layerIndex);
             }
         }
@@ -52,10 +54,12 @@ public class AILayeredAudioSourcePlayer : AIStateMachineLink
             {
                 if (layerWeight > 0.5f)
                 {
+                    Debug.Log("Playing layered sound");
                     stateMachine.PlayAudio(collection, bank, layerIndex, true);
                 }
                 else
                 {
+                    Debug.Log("Stopping");
                     stateMachine.StopAudio(layerIndex);
                 }
             }

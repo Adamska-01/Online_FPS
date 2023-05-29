@@ -286,23 +286,31 @@ public abstract class AIStateMachine : MonoBehaviour
     public void SetTarget(AITargetType t, Collider c, Vector3 p, float d)
     {
         target.Set(t, c, p, d);
-
+        if (t == AITargetType.Visual_Player)
+        {
+            Debug.Log("Player");
+        }
         //Reposition and resize target trigger
-        if(targetTrigger != null)
+        if (targetTrigger != null)
         {
             targetTrigger.radius = stoppingDistance;
             targetTrigger.transform.position = target.Position;
             targetTrigger.enabled = true;
         }
     }
-    public void SetTarget(AITargetType t, Collider c, Vector3 p, float d, float s)
+    public void SetTarget(AITargetType t, Collider c, Vector3 p, float d, float r)
     {
         target.Set(t, c, p, d);
+
+        if (t == AITargetType.Visual_Player)
+        {
+            Debug.Log("Player");
+        }
 
         //Reposition and resize target trigger
         if (targetTrigger != null)
         {
-            targetTrigger.radius = s;
+            targetTrigger.radius = r;
             targetTrigger.transform.position = target.Position;
             targetTrigger.enabled = true;
         }
@@ -310,6 +318,11 @@ public abstract class AIStateMachine : MonoBehaviour
     public void SetTarget(AITarget t)
     {
         target = t;
+
+        if(t.Type == AITargetType.Visual_Player)
+        {
+            Debug.Log("Player");
+        }
 
         //Reposition and resize target trigger
         if (targetTrigger != null)

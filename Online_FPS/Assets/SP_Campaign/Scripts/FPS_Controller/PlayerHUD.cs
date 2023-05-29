@@ -109,7 +109,7 @@ public class PlayerHUD : MonoBehaviour
     }
 
     //Refreshes the values of UI elements
-    public void Invalidate(CharacterManager _chrManager)
+    public void RefreshUI(CharacterManager _chrManager)
     {
         if (_chrManager == null)
             return;

@@ -5,16 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Online_FPS/Scenes/Online_FPS/Menu.unity
     guid: 1a4f1e222237d904598401098dd4ce39
-  - enabled: 1
+  - enabled: 0
     path: Assets/Online_FPS/Scenes/Online_FPS/SinglePlayer.unity
     guid: 027f5cc008e2f1c4890f37dc49486b55
-  - enabled: 1
+  - enabled: 0
     path: Assets/Online_FPS/Scenes/Online_FPS/Map1/Map1.unity
     guid: b65e7a9cb86cf994faa3c87d283d8624
-  - enabled: 1
+  - enabled: 0
     path: Assets/Online_FPS/Scenes/Online_FPS/Deathmatch map/Deathmatch map.unity
     guid: 14c9e36890028be46989b2b10f1ed01c
+  - enabled: 1
+    path: Assets/SP_Campaign/Scenes/Bootstrapper.unity
+    guid: 28244f63c5078e147b402750f176c362
+  - enabled: 1
+    path: Assets/SP_Campaign/Scenes/SP_MainMenu.unity
+    guid: 50a1aaea126094d42a00d58680556f20
+  - enabled: 1
+    path: Assets/SP_Campaign/Scenes/SP_Game.unity
+    guid: 3142e3781500e6741b254c934319585f
   m_configObjects: {}

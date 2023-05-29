@@ -149,6 +149,8 @@ public class FPS_Controller : MonoBehaviour
     private bool    isCrouching         = false;
     private bool    freezeMovement      = false;
     private float   controllerHeight    = 0.0f;
+    private float   inAirTime           = 0.1f;
+    private float   inAirCounter        = 0.0f;
     private float   stamina             = MAX_STAMINA;
     private float dragMultiplier        = 1.0f;
     private float dragMultiplierLimit   = 1.0f;
@@ -214,6 +216,12 @@ public class FPS_Controller : MonoBehaviour
         {
             fallingTimer += Time.deltaTime;
         }
+        
+        //Process mouse look
+        if(Time.deltaTime > Mathf.Epsilon)
+        {
+            mouseLook.LookRotation(transform, cam.transform);
+        }
 
         if(Input.GetButtonDown("Flashlight"))
         {
@@ -221,12 +229,6 @@ public class FPS_Controller : MonoBehaviour
             {
                 flashLight.SetActive(!flashLight.activeSelf);
             }
-        }
-
-        //Process mouse look
-        if(Time.deltaTime > Mathf.Epsilon)
-        {
-            mouseLook.LookRotation(transform, cam.transform);
         }
 
         //Process jump
@@ -242,7 +244,7 @@ public class FPS_Controller : MonoBehaviour
         }
 
         //Calculate character status 
-        if(!previouslyGrounded && characterController.isGrounded)
+        if(!previouslyGrounded && characterController.isGrounded && inAirCounter > inAirTime)
         {
             if(fallingTimer > 0.5f)
             {
@@ -255,6 +257,7 @@ public class FPS_Controller : MonoBehaviour
         }
         else if(!characterController.isGrounded)
         {
+            inAirCounter += Time.deltaTime;
             movementStatus = PlayerMoveStatus.NotGrounded;
         }
         else if (characterController.velocity.sqrMagnitude < 0.01f)
@@ -296,7 +299,6 @@ public class FPS_Controller : MonoBehaviour
         float veritical = Input.GetAxisRaw("Vertical");
 
         //Is Running?
-        bool wasWalking = isWalking;
         isWalking = !Input.GetKey(KeyCode.LeftShift);
 
         //Set the desired speed to be either our walking speed or our running speed
@@ -334,10 +336,13 @@ public class FPS_Controller : MonoBehaviour
 
                 //TODO: Play Jump Sound
             }
+
+            inAirCounter = 0.0f;
         }
         else //Apply standard gravity (not in the air)
         {
             moveDirection += Physics.gravity * gravityMultiplier * Time.fixedDeltaTime;
+            inAirCounter += Time.fixedDeltaTime;
         }
 
         //Move

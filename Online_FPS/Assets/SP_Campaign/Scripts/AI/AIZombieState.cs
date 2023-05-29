@@ -15,6 +15,7 @@ public abstract class AIZombieState : AIState
     private void Awake()
     {
         playerLayerMask = LayerMask.GetMask("Player", "AI_Body_Part") + 1; // + Default layer
+        Debug.Log(playerLayerMask);
         bodyPartLayerMask = LayerMask.NameToLayer("AI_Body_Part");
         visualRaycastMask = LayerMask.GetMask("Player", "AI_Body_Part", "Visual_Aggravator") + 1; // + Default layer
     }
@@ -49,6 +50,10 @@ public abstract class AIZombieState : AIState
                     {
                         //Target is close and within FOV so store as the current most dangerous threat
                         zombieStateMachine.visualThreat.Set(AITargetType.Visual_Player, _other, _other.transform.position, distance);
+                        
+                        
+                            Debug.Log("Player");
+                        
                     }
                 }
             }
@@ -125,10 +130,9 @@ public abstract class AIZombieState : AIState
         if(angle > zombieStateMachine.Fov * 0.5f)
             return false;
 
-
         //Return all things in the layerMask                                        (sight controls the radius portion)
         RaycastHit[] hits = Physics.RaycastAll(head, direction.normalized, zombieStateMachine.SensorRadius * zombieStateMachine.Sight, layerMask);
-
+        Debug.DrawRay(head, direction * 100.0f, Color.green);
         //Find the closest collider that is NOT at the AIs own body part. If it's not the target then the target is obstructed 
         float       closestColliderDistance = float.MaxValue;
         Collider    closestCollider         = null;

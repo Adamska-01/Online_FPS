@@ -126,7 +126,7 @@ public class AIZombieState_Alerted1 : AIZombieState
 
             if (directionChangeTimer > directionChangeTime)
             {
-                //If more intelligent, the more chance to turn the right way 
+                //The more intelligent, the more chance to turn the right way 
                 if (Random.value < zombieStateMachine.Intelligence)
                 {
                     zombieStateMachine.Seeking = (int)Mathf.Sign(angle);

@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 [System.Serializable]
@@ -38,18 +40,7 @@ public class ApplicationManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
-        //Copy starting game states into the game 
-        foreach (GameState state in startingGameStates)
-        {
-            gameStateDictionary.Add(state.key, state.value);
-        }
-
-        SetGameState("fesa", "deasfc");
-    }
-
-    private void Start()
-    {
-        
+        ResetGameStates();
     }
 
 
@@ -68,5 +59,43 @@ public class ApplicationManager : MonoBehaviour
         gameStateDictionary[_key] = _val;
 
         return true;
+    }
+
+    private void ResetGameStates()
+    {
+        gameStateDictionary.Clear();
+
+        //Copy starting game states into the game 
+        foreach (GameState state in startingGameStates)
+        {
+            if(gameStateDictionary.ContainsKey(state.key))
+            {
+                gameStateDictionary[state.key] = state.value;
+            }
+            else
+            {
+                gameStateDictionary.Add(state.key, state.value);
+            }
+        }
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("SP_MainMenu");
+    }
+
+    public void LoadGame()
+    {
+        ResetGameStates();
+        SceneManager.LoadScene("SP_Game");
+    }
+
+    public void QuitGame()
+    {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 }

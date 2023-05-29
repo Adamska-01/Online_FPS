@@ -50,18 +50,21 @@ public class AIZombieStateMachine : AIStateMachine
 
     [SerializeField] private AIScreamPosition screamPosition = AIScreamPosition.Entity;
     [SerializeField] private AISoundEmitter screamPrefab = null;
+    [SerializeField] private AudioCollection ragdollCollection = null;
+
     
     [SerializeField] private float reanimationBlendTime = 1.0f;
     [SerializeField] private float reanimationWaitTime = 3.0f;
     [SerializeField] private LayerMask geometryLayer = 0;
 
     //Private (Managed by the state machine) 
-    private int     seeking     = 0;
-    private bool    feeding     = false;
-    private bool    crawling    = false;
-    private int     attackType  = 0;
-    private float   speed       = 0.0f;
-    private float   isScreaming = 0.0f;
+    private int     seeking              = 0;
+    private bool    feeding              = false;
+    private bool    crawling             = false;
+    private int     attackType           = 0;
+    private float   speed                = 0.0f;
+    private float   isScreaming          = 0.0f;
+    private float   nextRagdollSoundTime = 0.0f;
 
     //Ragdoll stuff
     private AIBoneControlType boneControlType = AIBoneControlType.Animated;
@@ -301,14 +304,32 @@ public class AIZombieStateMachine : AIStateMachine
             sys.Emit(55);
         }
 
-        //Damage
+        float prevHealth = health; //Cache previous health
+
+        //Damage 
         float hitStrength = _force.magnitude;
         if (boneControlType == AIBoneControlType.Ragdoll)
         {
             if(_bodyPart != null)
             {
+                //Play grounting sound
+                if (Time.time > nextRagdollSoundTime && ragdollCollection != null && health > 0)
+                {
+                    AudioClip clip = ragdollCollection[1]; //bank 1 (shoot zombie while in ragdoll)
+                    if (clip)
+                    {
+                        nextRagdollSoundTime = Time.time + clip.length; //Avoid playing multiple sound at the same time and if already dead
+                        AudioManager.Instance.PlayOneShotSound(ragdollCollection.AudioGroup,
+                                                               clip,
+                                                               _position,
+                                                               ragdollCollection.Volume,
+                                                               ragdollCollection.SpatialBlend,
+                                                               ragdollCollection.Priority);
+                    }
+                }
+
                 //Apply hit force 
-                if(hitStrength > 1.0f)
+                if (hitStrength > 1.0f)
                 {
                     _bodyPart.AddForce(_force, ForceMode.Impulse);
                 }
@@ -457,6 +478,22 @@ public class AIZombieStateMachine : AIStateMachine
             if(layeredAudioSource != null)
             {
                 layeredAudioSource.Mute(true);
+            }
+
+            //Play hit sound
+            if (Time.time > nextRagdollSoundTime && ragdollCollection != null && prevHealth > 0)
+            {
+                AudioClip clip = ragdollCollection[0]; //bank 0 (shoot zombie before ragdoll)
+                if(clip)
+                {
+                    nextRagdollSoundTime = Time.time + clip.length; //Avoid playing multiple sound at the same time and if already dead
+                    AudioManager.Instance.PlayOneShotSound(ragdollCollection.AudioGroup,
+                                                           clip,
+                                                           _position,
+                                                           ragdollCollection.Volume,
+                                                           ragdollCollection.SpatialBlend,
+                                                           ragdollCollection.Priority);
+                }
             }
 
             InMeleeRange = false;
