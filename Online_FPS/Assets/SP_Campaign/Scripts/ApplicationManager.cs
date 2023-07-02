@@ -79,6 +79,22 @@ public class ApplicationManager : MonoBehaviour
         }
     }
 
+    public bool AreRequiredStatesSet(List<GameState> requiredStates)
+    {
+        //Assume the states are all set and then loop to find a state to disprove this 
+        for (int i = 0; i < requiredStates.Count; i++)
+        {
+            GameState state = requiredStates[i];
+
+            //Does the current state exist in the app dictionary?
+            string result = GetGameState(state.key);
+            if (string.IsNullOrEmpty(result) || !result.Equals(state.value))
+                return false;
+        }
+
+        return true;
+    }
+
     public void LoadMainMenu()
     {
         SceneManager.LoadScene("SP_MainMenu");

@@ -211,12 +211,12 @@ public class AudioManager : MonoBehaviour
         PlayOneShotSound(_track, _clip, _pos, _volume, _spatialBlend, _priority);
     }
 
-    public ulong PlayOneShotSound(string _track, AudioClip _clip, Vector3 _pos, float _volume, float _spatialBlend, float _priority = 128)
+    public ulong PlayOneShotSound(string _track, AudioClip _clip, Vector3 _pos, float _volume, float _spatialBlend, float _priority = 128, float startTime = 0.0f)
     {
         if (!tracks.ContainsKey(_track) || _clip == null || _volume.Equals(0.0f))
             return 0;
 
-        //Lower is the value, the more important is the sound (should be a value between 1 and 255
+        //Lower is the value, the more important is the sound (should be a value between 1 and 255)
         float unImportance = (listenerPos.position - _pos).sqrMagnitude / Mathf.Max(1, _priority);
 
         //Record least important sound from the pool
@@ -227,7 +227,7 @@ public class AudioManager : MonoBehaviour
             AudioPoolItem poolItem = pool[i];
             if (!poolItem.isPlaying) //Return pool item if available
             {
-                return ConfigurePoolObject(i, _track, _clip, _pos, _volume, _spatialBlend, unImportance);
+                return ConfigurePoolObject(i, _track, _clip, _pos, _volume, _spatialBlend, unImportance, startTime);
             }
             else if(poolItem.unImportance > leastImportantValue) //Record least important sound
             {
@@ -236,9 +236,9 @@ public class AudioManager : MonoBehaviour
             }
         }
 
-        //Check if the sound can be played (if the importance is less than the recorde importance from the pool
+        //Check if the sound can be played (if the importance is less than the recorded importance from the pool)
         if(leastImportantValue > unImportance)
-            return ConfigurePoolObject(leastImportantIndex, _track, _clip, _pos, _volume, _spatialBlend, unImportance);
+            return ConfigurePoolObject(leastImportantIndex, _track, _clip, _pos, _volume, _spatialBlend, unImportance, startTime);
 
         return 0;
     }
@@ -280,7 +280,23 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    protected ulong ConfigurePoolObject(int _poolIndex, string _track, AudioClip _clip, Vector3 _pos, float _volume, float _spatialBlend, float _unImportance)
+    public void StopSound(ulong _id)
+    {
+        if (activePool.TryGetValue(_id, out AudioPoolItem activeSound))
+        {
+            //Stop sound
+            activeSound.audioSrc.Stop();
+            activeSound.isPlaying = false;
+
+            activeSound.audioSrc.clip = null;
+            activeSound.gameObj.SetActive(false);
+
+            //Remove from pool
+            activePool.Remove(_id);
+        }
+    }
+
+    protected ulong ConfigurePoolObject(int _poolIndex, string _track, AudioClip _clip, Vector3 _pos, float _volume, float _spatialBlend, float _unImportance, float startTime)
     {
         if (_poolIndex < 0 || _poolIndex > pool.Count)
             return 0;
@@ -290,23 +306,25 @@ public class AudioManager : MonoBehaviour
         //"Generate" new ID so we can stop it later if we want
         idGiver++;
 
-        //Configure the audio source's position
+        //Configure the audio source's clip properties
         AudioSource source  = poolItem.audioSrc;
         source.clip         = _clip;
         source.volume       = _volume;
         source.spatialBlend = _spatialBlend;
+        source.time         = Mathf.Min(startTime, source.clip.length - 0.01f);
         //Assign to requested audio group
         source.outputAudioMixerGroup = tracks[_track].group;
         //Position source at requested position
         source.transform.position = _pos;
-
+        Debug.Log($"start time: {startTime}, Clip Length: {source.clip.length}");
         //Enable Gameobejct and record that it is now playing 
         poolItem.isPlaying      = true;
         poolItem.unImportance   = _unImportance;
-        poolItem.ID             = idGiver;        
-        //Play
+        poolItem.ID             = idGiver;
         poolItem.gameObj.SetActive(true);
-        source.Play();
+        //Play
+            source.Play();
+
         //Coroutine to stop sound and put it back to the pool
         poolItem.coroutine = StopSoundDelayed(idGiver, source.clip.length);
         StartCoroutine(poolItem.coroutine);

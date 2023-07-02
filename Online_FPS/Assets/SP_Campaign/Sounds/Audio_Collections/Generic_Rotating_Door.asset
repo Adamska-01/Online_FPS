@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeef5d7690aeaf04f8cf716bff21cf5c, type: 3}
+  m_Name: Generic_Rotating_Door
+  m_EditorClassIdentifier: 
+  audioGroup: Scene
+  volume: 0.7
+  spatialBlend: 1
+  priority: 128
+  audioClipBanks:
+  - clips:
+    - {fileID: 8300000, guid: 77f6b68797bd7af4eb3264e9405f2ef5, type: 3}
+    - {fileID: 8300000, guid: fce8c93d163c0cf4cb7e47b592858d48, type: 3}
+    - {fileID: 8300000, guid: 5dd2b77068ad4614aaee2a8c48b10225, type: 3}
+    - {fileID: 8300000, guid: c850aef5790878a46bf35d3eade45396, type: 3}
+  - clips:
+    - {fileID: 8300000, guid: a74f42e09a81c5e44a519deebc80002c, type: 3}
+  - clips:
+    - {fileID: 8300000, guid: 6e6a133d9ef87654983a59e06720ae24, type: 3}
+  - clips:
+    - {fileID: 8300000, guid: eb0a80e88aa60364d84d36712d6ee752, type: 3}
