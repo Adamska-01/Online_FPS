@@ -98,6 +98,7 @@ public class InteractiveDoor : InteractiveItem
     protected bool openedFrontSide = true;
     //Used to store info about the door progress during a coroutine
     protected float normalizedTime = 0.0f;
+    protected float startAnimTime = 0.0f;
     protected ulong oneShotSoundID = 0;
 
 
@@ -255,12 +256,15 @@ public class InteractiveDoor : InteractiveItem
         //Area all requirements met?
         if(haveRequiredStates && HasRequiredInventoryItems())
         {
-            if(coroutine != null)
+            if(startAnimTime <= 0.0f) //The sound still needs to reach the starting time for the animation (fixes the snap)
             {
-                StopCoroutine(coroutine);
+                if(coroutine != null)
+                {
+                    StopCoroutine(coroutine);
+                }
+                coroutine = Activate(plane.GetSide(_chrManager.transform.position));
+                StartCoroutine(coroutine);
             }
-            coroutine = Activate(plane.GetSide(_chrManager.transform.position));
-            StartCoroutine(coroutine);
         }
         else
         {
@@ -283,15 +287,15 @@ public class InteractiveDoor : InteractiveItem
 
     protected virtual IEnumerator Activate(bool frontSide, bool autoClosing = false, float delay = 0.0f)
     {
-        AudioClip clip = null;
-
         //Wait for delay
         yield return new WaitForSeconds(delay);
+        
+        AudioClip clip = null;
 
         //Used to sync animation with sound 
         float duration = 1.5f;
         float time = 0.0f;
-        float startAnimTime = 0.0f;
+        startAnimTime = 0.0f;
 
         if(!isTwoWay) //Always front side
         {
@@ -413,6 +417,7 @@ public class InteractiveDoor : InteractiveItem
             if(startAnimTime > 0.0f)
             {
                 yield return new WaitForSeconds(startAnimTime);
+                startAnimTime = 0.0f;
             }
 
             //Set the starting time of the animation
@@ -535,6 +540,7 @@ public class InteractiveDoor : InteractiveItem
             if (startAnimTime > 0.0f)
             {
                 yield return new WaitForSeconds(startAnimTime);
+                startAnimTime = 0.0f;
             }
 
             //Set the starting time of the animation

@@ -1,0 +1,930 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1300374852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1300374853}
+  m_Layer: 13
+  m_Name: Contents_Mount
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1300374853
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300374852}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 460456506801085108}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1344986242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1344986243}
+  m_Layer: 13
+  m_Name: Contents_Mount
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1344986243
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344986242}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9008911348463714994}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1504787984
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1504787985}
+  m_Layer: 13
+  m_Name: Contents_Mount
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1504787985
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504787984}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1474965087187059236}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1934872707
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1934872708}
+  m_Layer: 13
+  m_Name: Contents_Mount
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1934872708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934872707}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1767207033694834846}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2069683507
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2069683508}
+  m_Layer: 13
+  m_Name: Contents_Mount
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2069683508
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069683507}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5620838929784281953}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2344434704094796779
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5620838929784281953}
+  - component: {fileID: 4111091369996293611}
+  - component: {fileID: 2225645547433000243}
+  - component: {fileID: 7351158275743245735}
+  - component: {fileID: 7351158275743245734}
+  m_Layer: 13
+  m_Name: Drawer_010
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5620838929784281953
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2344434704094796779}
+  m_LocalRotation: {x: 1.7763568e-15, y: 2.5261885e-30, z: 1.4221177e-15, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0.00000036799906}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2069683508}
+  m_Father: {fileID: 3651168307779097463}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &4111091369996293611
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2344434704094796779}
+  m_Mesh: {fileID: -4420791210502263308, guid: 3e249f0b2bb906647a4a89bec50c5962, type: 3}
+--- !u!23 &2225645547433000243
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2344434704094796779}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 598294a24c1f3484680de6a6005f0b25, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7351158275743245735
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2344434704094796779}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.46130377, y: 0.470424, z: 0.10211369}
+  m_Center: {x: -0.00013874471, y: -0.049953114, z: 0.44215128}
+--- !u!114 &7351158275743245734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2344434704094796779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 123bd9211c5e5eb43a8c54151cbf6298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 4
+  isClosed: 1
+  isTwoWay: 0
+  autoOpen: 0
+  autoClose: 0
+  autoCloseDelay: {x: 5, y: 5}
+  disableManualActivation: 0
+  colliderLengthOpenScale: 1
+  offsetCollider: 0
+  contentsMount: {fileID: 2069683508}
+  localFoewardAxis: 1
+  requiredStates: []
+  requiredItems: []
+  openedHintText: 'Trolley Door: Press ''Use'' to close'
+  closedHintText: 'Trolley Door: Press ''Use'' to open'
+  cantActivateText: 'Trolley Door: It''s Locked'
+  doors:
+  - transf: {fileID: 5620838929784281953}
+    rotation: {x: 0, y: 0, z: 0}
+    movement: {x: 0, y: 0.3, z: 0}
+    closedRotation: {x: 0, y: 0, z: 0, w: 0}
+    openedRotation: {x: 0, y: 0, z: 0, w: 0}
+    openedPosition: {x: 0, y: 0, z: 0}
+    closedPosition: {x: 0, y: 0, z: 0}
+  doorSounds: {fileID: 11400000, guid: 0cb4d497f30fde0488d9893385938310, type: 2}
+  audioPunchInPunchOutDatabase: {fileID: 11400000, guid: b9df95f37c97c304592278e55f1d7ceb, type: 2}
+--- !u!1 &3194043933140161842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1474965087187059236}
+  - component: {fileID: 2359046050257109860}
+  - component: {fileID: 503762800597137921}
+  - component: {fileID: 4358803118058683618}
+  - component: {fileID: 4358803118058683617}
+  m_Layer: 13
+  m_Name: Drawer_009
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1474965087187059236
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3194043933140161842}
+  m_LocalRotation: {x: 1.7763568e-15, y: 2.5261885e-30, z: 1.4221177e-15, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0.00000036799906}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1504787985}
+  m_Father: {fileID: 3651168307779097463}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &2359046050257109860
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3194043933140161842}
+  m_Mesh: {fileID: 3908696662179567952, guid: 3e249f0b2bb906647a4a89bec50c5962, type: 3}
+--- !u!23 &503762800597137921
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3194043933140161842}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 598294a24c1f3484680de6a6005f0b25, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4358803118058683618
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3194043933140161842}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.4614134, y: 0.470424, z: 0.17602524}
+  m_Center: {x: -0.00011664629, y: -0.049953114, z: 0.30308178}
+--- !u!114 &4358803118058683617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3194043933140161842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 123bd9211c5e5eb43a8c54151cbf6298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 3
+  isClosed: 1
+  isTwoWay: 0
+  autoOpen: 0
+  autoClose: 0
+  autoCloseDelay: {x: 5, y: 5}
+  disableManualActivation: 0
+  colliderLengthOpenScale: 1
+  offsetCollider: 0
+  contentsMount: {fileID: 1504787985}
+  localFoewardAxis: 1
+  requiredStates: []
+  requiredItems: []
+  openedHintText: 'Trolley Door: Press ''Use'' to close'
+  closedHintText: 'Trolley Door: Press ''Use'' to open'
+  cantActivateText: 'Trolley Door: It''s Locked'
+  doors:
+  - transf: {fileID: 1474965087187059236}
+    rotation: {x: 0, y: 0, z: 0}
+    movement: {x: 0, y: 0.3, z: 0}
+    closedRotation: {x: 0, y: 0, z: 0, w: 0}
+    openedRotation: {x: 0, y: 0, z: 0, w: 0}
+    openedPosition: {x: 0, y: 0, z: 0}
+    closedPosition: {x: 0, y: 0, z: 0}
+  doorSounds: {fileID: 11400000, guid: 0cb4d497f30fde0488d9893385938310, type: 2}
+  audioPunchInPunchOutDatabase: {fileID: 11400000, guid: b9df95f37c97c304592278e55f1d7ceb, type: 2}
+--- !u!1 &4170437260445354445
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3651168307779097463}
+  - component: {fileID: 361508077894720722}
+  - component: {fileID: 2513187707715954712}
+  m_Layer: 0
+  m_Name: Office Drawer Trolley
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3651168307779097463
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4170437260445354445}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0, y: 0.644, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 9008911348463714994}
+  - {fileID: 460456506801085108}
+  - {fileID: 1767207033694834846}
+  - {fileID: 1474965087187059236}
+  - {fileID: 5620838929784281953}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!33 &361508077894720722
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4170437260445354445}
+  m_Mesh: {fileID: 2392966919289613022, guid: 3e249f0b2bb906647a4a89bec50c5962, type: 3}
+--- !u!23 &2513187707715954712
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4170437260445354445}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 598294a24c1f3484680de6a6005f0b25, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &4205102297363570298
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1767207033694834846}
+  - component: {fileID: 5965273551991638177}
+  - component: {fileID: 2571945234622181381}
+  - component: {fileID: 8848830039704041063}
+  - component: {fileID: 8848830039704041062}
+  m_Layer: 13
+  m_Name: Drawer_008
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1767207033694834846
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4205102297363570298}
+  m_LocalRotation: {x: 1.7763568e-15, y: 2.5261885e-30, z: 1.4221177e-15, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0.00000036799906}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1934872708}
+  m_Father: {fileID: 3651168307779097463}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &5965273551991638177
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4205102297363570298}
+  m_Mesh: {fileID: 966149226741910571, guid: 3e249f0b2bb906647a4a89bec50c5962, type: 3}
+--- !u!23 &2571945234622181381
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4205102297363570298}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 598294a24c1f3484680de6a6005f0b25, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8848830039704041063
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4205102297363570298}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.46151245, y: 0.470424, z: 0.16905917}
+  m_Center: {x: -0.00009696931, y: -0.049953114, z: 0.1305396}
+--- !u!114 &8848830039704041062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4205102297363570298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 123bd9211c5e5eb43a8c54151cbf6298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 2
+  isClosed: 1
+  isTwoWay: 0
+  autoOpen: 0
+  autoClose: 0
+  autoCloseDelay: {x: 5, y: 5}
+  disableManualActivation: 0
+  colliderLengthOpenScale: 1
+  offsetCollider: 0
+  contentsMount: {fileID: 1934872708}
+  localFoewardAxis: 1
+  requiredStates: []
+  requiredItems: []
+  openedHintText: 'Trolley Door: Press ''Use'' to close'
+  closedHintText: 'Trolley Door: Press ''Use'' to open'
+  cantActivateText: 'Trolley Door: It''s Locked'
+  doors:
+  - transf: {fileID: 1767207033694834846}
+    rotation: {x: 0, y: 0, z: 0}
+    movement: {x: 0, y: 0.3, z: 0}
+    closedRotation: {x: 0, y: 0, z: 0, w: 0}
+    openedRotation: {x: 0, y: 0, z: 0, w: 0}
+    openedPosition: {x: 0, y: 0, z: 0}
+    closedPosition: {x: 0, y: 0, z: 0}
+  doorSounds: {fileID: 11400000, guid: 0cb4d497f30fde0488d9893385938310, type: 2}
+  audioPunchInPunchOutDatabase: {fileID: 11400000, guid: b9df95f37c97c304592278e55f1d7ceb, type: 2}
+--- !u!1 &4789450354090277160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 460456506801085108}
+  - component: {fileID: 159239580502807555}
+  - component: {fileID: 3984743581080010827}
+  - component: {fileID: 7670262391657498606}
+  - component: {fileID: 7670262391657498605}
+  m_Layer: 13
+  m_Name: Drawer_007
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &460456506801085108
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4789450354090277160}
+  m_LocalRotation: {x: 1.7763568e-15, y: 2.5261885e-30, z: 1.4221177e-15, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0.00000036799906}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1300374853}
+  m_Father: {fileID: 3651168307779097463}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &159239580502807555
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4789450354090277160}
+  m_Mesh: {fileID: 7737183696200200843, guid: 3e249f0b2bb906647a4a89bec50c5962, type: 3}
+--- !u!23 &3984743581080010827
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4789450354090277160}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 598294a24c1f3484680de6a6005f0b25, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7670262391657498606
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4789450354090277160}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.46161032, y: 0.470424, z: 0.16731763}
+  m_Center: {x: -0.000077456236, y: -0.049953114, z: -0.03764879}
+--- !u!114 &7670262391657498605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4789450354090277160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 123bd9211c5e5eb43a8c54151cbf6298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 1
+  isClosed: 1
+  isTwoWay: 0
+  autoOpen: 0
+  autoClose: 0
+  autoCloseDelay: {x: 5, y: 5}
+  disableManualActivation: 0
+  colliderLengthOpenScale: 1
+  offsetCollider: 0
+  contentsMount: {fileID: 1300374853}
+  localFoewardAxis: 1
+  requiredStates: []
+  requiredItems: []
+  openedHintText: 'Trolley Door: Press ''Use'' to close'
+  closedHintText: 'Trolley Door: Press ''Use'' to open'
+  cantActivateText: 'Trolley Door: It''s Locked'
+  doors:
+  - transf: {fileID: 460456506801085108}
+    rotation: {x: 0, y: 0, z: 0}
+    movement: {x: 0, y: 0.3, z: 0}
+    closedRotation: {x: 0, y: 0, z: 0, w: 0}
+    openedRotation: {x: 0, y: 0, z: 0, w: 0}
+    openedPosition: {x: 0, y: 0, z: 0}
+    closedPosition: {x: 0, y: 0, z: 0}
+  doorSounds: {fileID: 11400000, guid: 0cb4d497f30fde0488d9893385938310, type: 2}
+  audioPunchInPunchOutDatabase: {fileID: 11400000, guid: b9df95f37c97c304592278e55f1d7ceb, type: 2}
+--- !u!1 &6053392388244169426
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9008911348463714994}
+  - component: {fileID: 1095813943998941502}
+  - component: {fileID: 6237301704269575168}
+  - component: {fileID: 9118360307185404614}
+  - component: {fileID: 9118360307185404613}
+  m_Layer: 13
+  m_Name: Drawer_006
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9008911348463714994
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6053392388244169426}
+  m_LocalRotation: {x: 1.7763568e-15, y: 2.5261885e-30, z: 1.4221177e-15, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0.00000036799906}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1344986243}
+  m_Father: {fileID: 3651168307779097463}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1095813943998941502
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6053392388244169426}
+  m_Mesh: {fileID: 836056764702770259, guid: 3e249f0b2bb906647a4a89bec50c5962, type: 3}
+--- !u!23 &6237301704269575168
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6053392388244169426}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 598294a24c1f3484680de6a6005f0b25, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &9118360307185404614
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6053392388244169426}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.46169016, y: 0.470424, z: 0.29713959}
+  m_Center: {x: -0.00006145239, y: -0.049953114, z: -0.2698774}
+--- !u!114 &9118360307185404613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6053392388244169426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 123bd9211c5e5eb43a8c54151cbf6298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 0
+  isClosed: 1
+  isTwoWay: 0
+  autoOpen: 0
+  autoClose: 0
+  autoCloseDelay: {x: 5, y: 5}
+  disableManualActivation: 0
+  colliderLengthOpenScale: 1
+  offsetCollider: 0
+  contentsMount: {fileID: 1344986243}
+  localFoewardAxis: 1
+  requiredStates: []
+  requiredItems: []
+  openedHintText: 'Trolley Door: Press ''Use'' to close'
+  closedHintText: 'Trolley Door: Press ''Use'' to open'
+  cantActivateText: 'Trolley Door: It''s Locked'
+  doors:
+  - transf: {fileID: 9008911348463714994}
+    rotation: {x: 0, y: 0, z: 0}
+    movement: {x: 0, y: 0.3, z: 0}
+    closedRotation: {x: 0, y: 0, z: 0, w: 0}
+    openedRotation: {x: 0, y: 0, z: 0, w: 0}
+    openedPosition: {x: 0, y: 0, z: 0}
+    closedPosition: {x: 0, y: 0, z: 0}
+  doorSounds: {fileID: 11400000, guid: 0cb4d497f30fde0488d9893385938310, type: 2}
+  audioPunchInPunchOutDatabase: {fileID: 11400000, guid: b9df95f37c97c304592278e55f1d7ceb, type: 2}
