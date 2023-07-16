@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Custom Animation Curve")]
+[CreateAssetMenu(fileName = "New String List")]
 public class StringList : ScriptableObject
 {
     [SerializeField] private List<string> stringList = new List<string>();

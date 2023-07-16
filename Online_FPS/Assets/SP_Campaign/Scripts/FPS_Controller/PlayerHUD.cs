@@ -10,14 +10,30 @@ public enum ScreenFadeType { FadeIn, FadeOut }
 public class PlayerHUD : MonoBehaviour
 {
     //Inspector-Assigned
-    [SerializeField] private GameObject crosshair = null;
-    [SerializeField] private TMP_Text healthText = null;
-    [SerializeField] private TMP_Text staminaText = null;
-    [SerializeField] private TMP_Text interactionText = null;
-    [SerializeField] private TMP_Text missionText = null;
-    [SerializeField] private Image screenFade = null;
+    [Header("UI Sliders")]
+    [SerializeField] private Slider healthSlider      = null;
+    [SerializeField] private Slider staminaSlider     = null;
+    [SerializeField] private Slider infectionSlider   = null;
+    [SerializeField] private Slider flashlightSlider  = null;
+    [SerializeField] private Slider nightVisionSlider = null;
+    
+    [Header("UI Texts")]
+    [SerializeField] private TMP_Text interactionText  = null;
+    [SerializeField] private TMP_Text notificationText = null;
+    [SerializeField] private TMP_Text transcriptText   = null;
+    [SerializeField] private GameObject crosshair      = null;
+    [SerializeField] private Image screenFade          = null;
 
-    [SerializeField] private float missionTextDisplayTime = 3.0f;
+    [Header("Shared Variables")]
+    [SerializeField] private SharedFloat health      = null;
+    [SerializeField] private SharedFloat stamina     = null;
+    [SerializeField] private SharedFloat infection   = null;
+    [SerializeField] private SharedFloat flashlight  = null;
+    [SerializeField] private SharedFloat nightVision = null;
+    [SerializeField] private SharedString interactionString = null;
+    [SerializeField] private SharedString transcriptString  = null;
+    [SerializeField] private SharedTimedStringQueue notificationQueue = null;
+
 
     //Private
     private float currentFadeLevel = 1.0f;
@@ -33,26 +49,16 @@ public class PlayerHUD : MonoBehaviour
             color.a = currentFadeLevel;
             screenFade.color = color;
         }
-        
-        //Hide
-        Invoke("HideMissionText", missionTextDisplayTime);
     }
 
-
-    public void SetInteractionText(string _text)
+    private void Update()
     {
-        if (interactionText != null)
+        RefreshSliders();
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(_text == null)
-            {
-                interactionText.SetText(string.Empty);
-                interactionText.gameObject.SetActive(false);
-            }
-            else
-            {
-                interactionText.SetText(_text);
-                interactionText.gameObject.SetActive(true);
-            }
+            Debug.Log($"DeltaTime: {Time.deltaTime}");
+            notificationQueue.Enqueue($"DeltaTime: {Time.deltaTime}");
         }
     }
 
@@ -108,30 +114,23 @@ public class PlayerHUD : MonoBehaviour
         screenFade.color = oldColor;
     }
 
-    //Refreshes the values of UI elements
-    public void RefreshUI(CharacterManager _chrManager)
+    private void RefreshSliders()
     {
-        if (_chrManager == null)
-            return;
-
-        healthText?.SetText("Health: " + ((int)_chrManager.Health).ToString());
-        staminaText?.SetText("Stamina: " + ((int)_chrManager.Stamina).ToString());
-    }
-    
-    public void ShowMissionText(string _text)
-    {
-        if(missionText != null)
-        {
-            missionText.text = _text;
-            missionText.gameObject.SetActive(true);    
-        }
-    }
-
-    private void HideMissionText()
-    {
-        if (missionText != null)
-        {
-            missionText.gameObject.SetActive(false);
-        }
+        if (healthSlider != null && health != null)
+            healthSlider.value = health.Value;
+        if (staminaSlider != null && stamina != null)
+            staminaSlider.value = stamina.Value;
+        if (infectionSlider != null && infection != null)
+            infectionSlider.value = infection.Value;
+        if (flashlightSlider != null && flashlight != null)
+            flashlightSlider.value = flashlight.Value;
+        if (nightVisionSlider != null && nightVision != null)
+            nightVisionSlider.value = nightVision.Value;
+        if (interactionText != null && interactionString != null)
+            interactionText.text = interactionString.Value;
+        if (transcriptText != null && transcriptString != null)
+            transcriptText.text = transcriptString.Value;
+        if (notificationText != null && notificationQueue != null)
+            notificationText.text = notificationQueue.CurrentDequeuedText;
     }
 }

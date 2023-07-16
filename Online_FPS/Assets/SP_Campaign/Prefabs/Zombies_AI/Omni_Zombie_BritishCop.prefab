@@ -60,7 +60,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7215955056292277999
 Transform:
   m_ObjectHideFlags: 0
@@ -187,7 +187,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 20
-  m_Center: {x: 0, y: 1.05, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &7215955056734437375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1556,7 +1556,7 @@ MonoBehaviour:
   currentWaypoint: -1
   stoppingDistance: 1
   fov: 120
-  sight: 0.5
+  sight: 1
   hearing: 1
   aggression: 0.5
   health: 100
@@ -1566,7 +1566,7 @@ MonoBehaviour:
   limpThreshold: 30
   crawlThreshold: 70
   intelligence: 1
-  satisfaction: 0
+  satisfaction: 0.5
   replenishRate: 2
   depletionRate: 0.1
   screamChance: 0

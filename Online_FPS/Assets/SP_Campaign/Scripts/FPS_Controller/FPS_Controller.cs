@@ -134,6 +134,10 @@ public class FPS_Controller : MonoBehaviour
     [SerializeField] private CurveControlledBob headBob = new CurveControlledBob();
     [SerializeField] private GameObject flashLight = null;
     [SerializeField] private bool flashlightOnAtStart = false;
+    
+    [Header("Shared Variables")]
+    [SerializeField] private SharedFloat stamina = null;
+
     //Takes care of mouse look
     [SerializeField] private UnityStandardAssets.Characters.FirstPerson.MouseLook mouseLook;
 
@@ -151,7 +155,6 @@ public class FPS_Controller : MonoBehaviour
     private float   controllerHeight    = 0.0f;
     private float   inAirTime           = 0.1f;
     private float   inAirCounter        = 0.0f;
-    private float   stamina             = MAX_STAMINA;
     private float dragMultiplier        = 1.0f;
     private float dragMultiplierLimit   = 1.0f;
     [SerializeField, Range(0.0f, 1.0f)] private float npcStickiness = 0.5f;
@@ -169,7 +172,6 @@ public class FPS_Controller : MonoBehaviour
     public float RunSpeed            { get { return runSpeed; } }
     public float DragMultiplierLimit { get { return dragMultiplierLimit; } set { dragMultiplierLimit = Mathf.Clamp01(value); } }
     public float DragMultiplier      { get { return dragMultiplier; } set { dragMultiplier = Mathf.Min(value, dragMultiplierLimit); } }
-    public float Stamina             { get { return stamina; } }
     public bool FreezeMovement       { get { return freezeMovement; } set { freezeMovement = value; } }
 
 
@@ -282,11 +284,11 @@ public class FPS_Controller : MonoBehaviour
         //Calculate Stamina
         if(movementStatus == PlayerMoveStatus.Running) //Deplete
         {
-            stamina = Mathf.Max(stamina - staminaDepletion * Time.deltaTime, 0.0f);
+            stamina.Value = Mathf.Max(stamina.Value - staminaDepletion * Time.deltaTime, 0.0f);
         }
         else //Recovery
         {
-            stamina = Mathf.Min(stamina + staminaRecovery * Time.deltaTime, MAX_STAMINA);
+            stamina.Value = Mathf.Min(stamina.Value + staminaRecovery * Time.deltaTime, MAX_STAMINA);
         }
 
         dragMultiplier = Mathf.Min(dragMultiplier + Time.deltaTime, dragMultiplierLimit);
@@ -302,7 +304,7 @@ public class FPS_Controller : MonoBehaviour
         isWalking = !Input.GetKey(KeyCode.LeftShift);
 
         //Set the desired speed to be either our walking speed or our running speed
-        float speed = isCrouching ? crouchSpeed : isWalking ? walkSpeed : Mathf.Lerp(walkSpeed, RunSpeed, stamina / MAX_STAMINA);
+        float speed = isCrouching ? crouchSpeed : isWalking ? walkSpeed : Mathf.Lerp(walkSpeed, RunSpeed, stamina.Value / MAX_STAMINA);
 
         //Normalize input if less than 1
         inputVector = new Vector2(horizontal, veritical);

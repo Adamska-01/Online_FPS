@@ -146,15 +146,16 @@ public class LockdownTrigger : MonoBehaviour
             return;
 
         if (other.CompareTag("Player"))
+        {
             inTrigger = true;   
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (downloadComplete)
-            return;
-
         if (other.CompareTag("Player"))
+        {
             inTrigger = false;
+        }
     }
 }

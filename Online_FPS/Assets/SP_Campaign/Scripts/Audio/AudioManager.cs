@@ -243,25 +243,6 @@ public class AudioManager : MonoBehaviour
         return 0;
     }
 
-    public void StopOneShotSound(ulong id)
-    {
-        if (activePool.TryGetValue(id, out AudioPoolItem activeSound))
-        {
-            //Stop fade corutine
-            StopCoroutine(activeSound.coroutine);
-
-            //Stop sound
-            activeSound.audioSrc.Stop();
-            activeSound.isPlaying = false;
-
-            activeSound.audioSrc.clip = null;
-            activeSound.gameObj.SetActive(false);
-
-            //Remove from pool
-            activePool.Remove(id);
-        }
-    }
-
     protected IEnumerator StopSoundDelayed(ulong _id, float _duration)
     {
         yield return new WaitForSeconds(_duration);
@@ -269,10 +250,11 @@ public class AudioManager : MonoBehaviour
         if (activePool.TryGetValue(_id, out AudioPoolItem activeSound))
         {
             //Stop sound
+            activeSound.coroutine = null;
             activeSound.audioSrc.Stop();
             activeSound.isPlaying = false;
-
             activeSound.audioSrc.clip = null;
+
             activeSound.gameObj.SetActive(false);
 
             //Remove from pool
@@ -284,6 +266,13 @@ public class AudioManager : MonoBehaviour
     {
         if (activePool.TryGetValue(_id, out AudioPoolItem activeSound))
         {
+            //Stop coroutine
+            if (activeSound.coroutine != null)
+            {
+                StopCoroutine(activeSound.coroutine);
+                activeSound.coroutine = null;
+            }
+
             //Stop sound
             activeSound.audioSrc.Stop();
             activeSound.isPlaying = false;
@@ -298,10 +287,16 @@ public class AudioManager : MonoBehaviour
 
     protected ulong ConfigurePoolObject(int _poolIndex, string _track, AudioClip _clip, Vector3 _pos, float _volume, float _spatialBlend, float _unImportance, float startTime)
     {
-        if (_poolIndex < 0 || _poolIndex > pool.Count)
+        if (_poolIndex < 0 || _poolIndex >= pool.Count)
             return 0;
 
         AudioPoolItem poolItem = pool[_poolIndex];
+
+        // Stop any previously playing coroutine
+        if (poolItem.coroutine != null)
+        {
+            StopCoroutine(poolItem.coroutine);
+        }
 
         //"Generate" new ID so we can stop it later if we want
         idGiver++;
@@ -316,14 +311,13 @@ public class AudioManager : MonoBehaviour
         source.outputAudioMixerGroup = tracks[_track].group;
         //Position source at requested position
         source.transform.position = _pos;
-        Debug.Log($"start time: {startTime}, Clip Length: {source.clip.length}");
         //Enable Gameobejct and record that it is now playing 
         poolItem.isPlaying      = true;
         poolItem.unImportance   = _unImportance;
         poolItem.ID             = idGiver;
         poolItem.gameObj.SetActive(true);
         //Play
-            source.Play();
+        source.Play();
 
         //Coroutine to stop sound and put it back to the pool
         poolItem.coroutine = StopSoundDelayed(idGiver, source.clip.length);
@@ -367,9 +361,6 @@ public class AudioManager : MonoBehaviour
 
     public void UnregisterLayeredAudioSource(AudioSource source)
     {
-        if (source == null)
-            return;
-
         //Check if there is a LayeredAudioSource with that source
         for (int i = 0; i < layeredAudio.Count; i++)
         {

@@ -13,7 +13,6 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private CameraBloodEffect cameraBloodEffect = null;
     [SerializeField] private Camera playerCamera = null;
     [SerializeField] private AISoundEmitter soundEmitter = null;
-    [SerializeField] private float health = MAX_HEALTH;
     [SerializeField] private float walkRadius = 0.0f;
     [SerializeField] private float runRadius = 7.0f;
     [SerializeField] private float landingRadius = 12.0f;
@@ -27,6 +26,11 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private float painSoundOffset = 0.35f;
     [SerializeField] private float tauntRadius = 10.0f;
 
+    [Header("Shared Variables")]
+    [SerializeField] private SharedFloat health    = null;
+    [SerializeField] private SharedFloat infection = null;
+    [SerializeField] private SharedString interactionText = null;
+    
     //Private
     private Collider col= null;
     private FPS_Controller fpsController = null;
@@ -38,8 +42,6 @@ public class CharacterManager : MonoBehaviour
     private float nextTauntTime = 0.0f;
 
     //Properties
-    public float Health  { get { return health; } }
-    public float Stamina { get { return fpsController != null ? fpsController.Stamina : 0.0f; } }
     public FPS_Controller FPSController { get { return fpsController; } }
 
 
@@ -89,7 +91,7 @@ public class CharacterManager : MonoBehaviour
         //Set sound emitter radius (take damage value into account as well)
         if (fpsController != null || soundEmitter != null)
         {
-            float newRadius = Mathf.Max(walkRadius, (MAX_HEALTH - health) / bloodRadiusScale);
+            float newRadius = Mathf.Max(walkRadius, (MAX_HEALTH - health.Value) / bloodRadiusScale);
             switch (fpsController.MovementStatus)
             {
                 case PlayerMoveStatus.Running:
@@ -102,18 +104,13 @@ public class CharacterManager : MonoBehaviour
 
             soundEmitter.SetRadius(newRadius);
 
-            fpsController.DragMultiplierLimit = Mathf.Max(health / MAX_HEALTH, 0.25f); //Set drag limit
+            fpsController.DragMultiplierLimit = Mathf.Max(health.Value / MAX_HEALTH, 0.25f); //Set drag limit
         }
 
         //Taunt 
         if (Input.GetMouseButtonDown(1))
         {
             DoTaunt();
-        }
-
-        if (playerHUD != null)
-        {
-            playerHUD.RefreshUI(this);
         }
     }
 
@@ -175,9 +172,9 @@ public class CharacterManager : MonoBehaviour
             //Display Text if we found an interactive item
             if (priorityObject != null)
             {
-                if (playerHUD != null)
+                if (interactionText != null)
                 {
-                    playerHUD.SetInteractionText(priorityObject.GetText());
+                    interactionText.Value = priorityObject.GetText();
                 }
 
                 //Use/Get Iteractable 
@@ -189,16 +186,16 @@ public class CharacterManager : MonoBehaviour
         }
         else //No Item found
         {
-            if (playerHUD != null)
+            if (interactionText != null)
             {
-                playerHUD.SetInteractionText(null);
+                interactionText.Value = null;
             }
         }
     }
 
     public void TakeDamage(float _dmg, bool _doDamage, bool _doPain)
     {
-        health = Mathf.Max(health - (_dmg * Time.deltaTime), 0.0f);
+        health.Value = Mathf.Max(health.Value - (_dmg * Time.deltaTime), 0.0f);
         
         //Set player drag 
         if(fpsController != null)
@@ -206,10 +203,10 @@ public class CharacterManager : MonoBehaviour
             fpsController.DragMultiplier = 0.0f;
         }
 
+        //Apply blood on screen (but 3 times less than what should be)
         if (cameraBloodEffect != null)
         {
-            //Apply blood on screen (but 3 times less than what should be)
-            cameraBloodEffect.MinBloodAmount = (1.0f - (health / MAX_HEALTH)) * 0.5f;
+            cameraBloodEffect.MinBloodAmount = (1.0f - (health.Value / MAX_HEALTH)) * 0.5f;
             cameraBloodEffect.BloodAmount = Mathf.Min(cameraBloodEffect.MinBloodAmount + 0.3f, 1.0f);
         }
 
@@ -243,7 +240,8 @@ public class CharacterManager : MonoBehaviour
             }
         }
         
-        if(health <= 0)
+        //Die
+        if(health.Value <= 0)
         {
             DoDeath();
         }
@@ -261,8 +259,8 @@ public class CharacterManager : MonoBehaviour
         if (playerHUD != null)
         {
             playerHUD.Fade(2.5f, ScreenFadeType.FadeOut);
-            playerHUD.ShowMissionText("Mission Failed");
-            playerHUD.RefreshUI(this);
+            //playerHUD.ShowMissionText("Mission Failed");
+            //playerHUD.RefreshUI(this);
         }
 
         //Back to main menu
@@ -298,7 +296,7 @@ public class CharacterManager : MonoBehaviour
         if(playerHUD != null)
         {
             playerHUD.Fade(4.0f, ScreenFadeType.FadeOut);
-            playerHUD.ShowMissionText("Mission Completed");
+            //playerHUD.ShowMissionText("Mission Completed");
         }
 
         Invoke("GameOver", 4.5f);
