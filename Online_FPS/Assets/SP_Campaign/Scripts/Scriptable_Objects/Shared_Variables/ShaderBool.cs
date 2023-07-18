@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Scriptable OBJ/Shared Variables/Shared Bool", fileName = "New Shared Bool")]
-public class SharedBool : ScriptableObject, ISerializationCallbackReceiver
+public class SharedBool : ScriptableObject, ISerializationCallbackReceiver, ISharedVariableCallbackReceiver
 {
+    public event Action OnVariableAssigned;
+
     //Inspector-Assigned
     [SerializeField] private bool value = false;
 
@@ -12,7 +15,7 @@ public class SharedBool : ScriptableObject, ISerializationCallbackReceiver
     private bool runtimeValue = false;
 
     //Setter
-    public bool Value { get { return runtimeValue; } set { runtimeValue = value; } }
+    public bool Value { get { return runtimeValue; } set { runtimeValue = value; OnVariableAssigned?.Invoke(); } }
 
 
     //-------------------------------------------------------------------

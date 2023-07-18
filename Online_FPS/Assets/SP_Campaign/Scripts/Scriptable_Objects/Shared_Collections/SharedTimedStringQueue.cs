@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,8 +11,10 @@ using UnityEngine;
 //              message using the 'text' property.
 // --------------------------------------------------------------------------------
 [CreateAssetMenu(menuName = "Scriptable OBJ/Shared Variables/Shared Timed String Queue", fileName = "New Shared Timed String Queue")]
-public class SharedTimedStringQueue : ScriptableObject
+public class SharedTimedStringQueue : ScriptableObject, ISharedVariableCallbackReceiver
 {
+    public event Action OnVariableAssigned;
+
     [SerializeField, TextArea(2, 7)] private string noteToDeveloper = "An automated timed message delivery queue.\n\nUsage:\n1) Queue.Enqueue( 'My Message');\n2) Debug.Log(Queue.text);\n3) A SO_CoroutineRunner Instance must exist in the current scene.";
 
     [SerializeField] protected float dequeueDelay = 3.5f;
@@ -23,6 +26,7 @@ public class SharedTimedStringQueue : ScriptableObject
     protected string currentText = null;
     //A string float queue
     private Queue<string> messageQueue = new Queue<string>();
+
 
     //Properties
     public string CurrentDequeuedText { get { return currentText; } }
@@ -63,6 +67,9 @@ public class SharedTimedStringQueue : ScriptableObject
                     //Set next message as current text
                     currentText = messageQueue.Dequeue();
 
+                    //Invoke event (PlayerHUD)
+                    OnVariableAssigned?.Invoke();
+
                     //Set times so nothing happes again until the deque delay elapses
                     nextDequeueTime = dequeueDelay;
                 }
@@ -75,6 +82,9 @@ public class SharedTimedStringQueue : ScriptableObject
         //the coroutine is about to end.
         currentText = null;
         coroutine = null;
+
+        //Invoke event (PlayerHUD)
+        OnVariableAssigned?.Invoke();
     }
 
     public int Count()

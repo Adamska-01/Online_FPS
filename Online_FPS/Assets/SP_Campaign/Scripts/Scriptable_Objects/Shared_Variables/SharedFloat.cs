@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 [CreateAssetMenu(menuName = "Scriptable OBJ/Shared Variables/Shared Float", fileName = "New Shared Float")]
-public class SharedFloat : ScriptableObject, ISerializationCallbackReceiver
+public class SharedFloat : ScriptableObject, ISerializationCallbackReceiver, ISharedVariableCallbackReceiver
 {
+    public event Action OnVariableAssigned;
+
     //Inspector-Assigned
     [SerializeField] private float value = 0.0f;
     
@@ -13,7 +16,7 @@ public class SharedFloat : ScriptableObject, ISerializationCallbackReceiver
     private float runtimeValue = 0.0f;
 
     //Setter
-    public float Value { get { return runtimeValue; } set { runtimeValue = value; } }
+    public float Value { get { return runtimeValue; } set { runtimeValue = value; OnVariableAssigned?.Invoke(); } }
 
 
     //-------------------------------------------------------------------

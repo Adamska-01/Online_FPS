@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 [CreateAssetMenu(menuName = "Scriptable OBJ/Shared Variables/Shared String", fileName = "New Shared String")]
-public class SharedString : ScriptableObject, ISerializationCallbackReceiver
+public class SharedString : ScriptableObject, ISerializationCallbackReceiver, ISharedVariableCallbackReceiver
 {
+    public event Action OnVariableAssigned;
+
     //Inspector-Assigned
     [SerializeField, TextArea(3, 10)] private string value = null;
 
@@ -13,7 +16,7 @@ public class SharedString : ScriptableObject, ISerializationCallbackReceiver
     private string runtimeValue = null;
 
     //Setter
-    public string Value { get { return runtimeValue; } set { runtimeValue = value; } }
+    public string Value { get { return runtimeValue; } set { runtimeValue = value; OnVariableAssigned?.Invoke(); } }
 
 
     //-------------------------------------------------------------------

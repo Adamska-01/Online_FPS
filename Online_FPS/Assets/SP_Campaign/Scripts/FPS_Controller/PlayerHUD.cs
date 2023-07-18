@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -34,7 +35,6 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private SharedString transcriptString  = null;
     [SerializeField] private SharedTimedStringQueue notificationQueue = null;
 
-
     //Private
     private float currentFadeLevel = 1.0f;
     IEnumerator coroutine = null;
@@ -49,18 +49,51 @@ public class PlayerHUD : MonoBehaviour
             color.a = currentFadeLevel;
             screenFade.color = color;
         }
+
+        //Make a first assignment (all future assignments are handled by the events)
+        if (healthSlider != null && health != null)                 healthSlider.value = health.Value; 
+        if (staminaSlider != null && stamina != null)               staminaSlider.value = stamina.Value;
+        if (infectionSlider != null && infection != null)           infectionSlider.value = infection.Value; 
+        if (flashlightSlider != null && flashlight != null)         flashlightSlider.value = flashlight.Value; 
+        if (nightVisionSlider != null && nightVision != null)       nightVisionSlider.value = nightVision.Value; 
+        if (interactionText != null && interactionString != null)   interactionText.text = interactionString.Value; 
+        if (transcriptText != null && transcriptString != null)     transcriptText.text = transcriptString.Value;
+        if (notificationText != null && notificationQueue != null)  notificationText.text = notificationQueue.CurrentDequeuedText;
+    }
+
+    private void OnEnable()
+    {
+        if (healthSlider != null && health != null)                health.OnVariableAssigned += () => { healthSlider.value = health.Value; };
+        if (staminaSlider != null && stamina != null)              stamina.OnVariableAssigned += () => { staminaSlider.value = stamina.Value; };
+        if (infectionSlider != null && infection != null)          infection.OnVariableAssigned += () => { infectionSlider.value = infection.Value; };
+        if (flashlightSlider != null && flashlight != null)        flashlight.OnVariableAssigned += () => { flashlightSlider.value = flashlight.Value; };
+        if (nightVisionSlider != null && nightVision != null)      nightVision.OnVariableAssigned += () => { nightVisionSlider.value = nightVision.Value; };
+        if (interactionText != null && interactionString != null)  interactionString.OnVariableAssigned += () => { interactionText.text = interactionString.Value; };
+        if (transcriptText != null && transcriptString != null)    transcriptString.OnVariableAssigned += () => { transcriptText.text = transcriptString.Value; };
+        if (notificationText != null && notificationQueue != null) notificationQueue.OnVariableAssigned += () => { notificationText.text = notificationQueue.CurrentDequeuedText; };
+    }
+
+    private void OnDisable()
+    {
+        if (healthSlider != null && health != null)                health.OnVariableAssigned -= () => { healthSlider.value = health.Value; };
+        if (staminaSlider != null && stamina != null)              stamina.OnVariableAssigned -= () => { staminaSlider.value = stamina.Value; };
+        if (infectionSlider != null && infection != null)          infection.OnVariableAssigned -= () => { infectionSlider.value = infection.Value; };
+        if (flashlightSlider != null && flashlight != null)        flashlight.OnVariableAssigned -= () => { flashlightSlider.value = flashlight.Value; };
+        if (nightVisionSlider != null && nightVision != null)      nightVision.OnVariableAssigned -= () => { nightVisionSlider.value = nightVision.Value; };
+        if (interactionText != null && interactionString != null)  interactionString.OnVariableAssigned -= () => { interactionText.text = interactionString.Value; };
+        if (transcriptText != null && transcriptString != null)    transcriptString.OnVariableAssigned -= () => { transcriptText.text = transcriptString.Value; };
+        if (notificationText != null && notificationQueue != null) notificationQueue.OnVariableAssigned -= () => { notificationText.text = notificationQueue.CurrentDequeuedText; };
     }
 
     private void Update()
     {
-        RefreshSliders();
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log($"DeltaTime: {Time.deltaTime}");
             notificationQueue.Enqueue($"DeltaTime: {Time.deltaTime}");
         }
     }
+
 
     public void Fade(float _fadeTime, ScreenFadeType _type)
     {
@@ -112,25 +145,5 @@ public class PlayerHUD : MonoBehaviour
 
         oldColor.a = currentFadeLevel = _targetFade;
         screenFade.color = oldColor;
-    }
-
-    private void RefreshSliders()
-    {
-        if (healthSlider != null && health != null)
-            healthSlider.value = health.Value;
-        if (staminaSlider != null && stamina != null)
-            staminaSlider.value = stamina.Value;
-        if (infectionSlider != null && infection != null)
-            infectionSlider.value = infection.Value;
-        if (flashlightSlider != null && flashlight != null)
-            flashlightSlider.value = flashlight.Value;
-        if (nightVisionSlider != null && nightVision != null)
-            nightVisionSlider.value = nightVision.Value;
-        if (interactionText != null && interactionString != null)
-            interactionText.text = interactionString.Value;
-        if (transcriptText != null && transcriptString != null)
-            transcriptText.text = transcriptString.Value;
-        if (notificationText != null && notificationQueue != null)
-            notificationText.text = notificationQueue.CurrentDequeuedText;
     }
 }
