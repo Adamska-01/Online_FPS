@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab964b788381b0940aec723e5de78f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryUI: {fileID: 0}
   backpackMountImage: {fileID: 4987321035479346403}
   backpackMountEmptyText: {fileID: 4987321035814174378}
 --- !u!1 &4987321035479346413

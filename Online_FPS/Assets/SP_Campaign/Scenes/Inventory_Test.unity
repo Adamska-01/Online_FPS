@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1511779073}
     m_Modifications:
+    - target: {fileID: 744912375, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
+      propertyPath: inventoryUI
+      value: 
+      objectReference: {fileID: 1852610487}
     - target: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
       propertyPath: m_Name
       value: 14
@@ -230,78 +234,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
   m_PrefabInstance: {fileID: 7613789}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7613792 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4987321035195425694, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
-  m_PrefabInstance: {fileID: 7613789}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7613791}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7613793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7613791}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnEnterBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 7613792}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnExitBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 7613792}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnClickBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 7613792}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &35032965
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,6 +402,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1511779073}
     m_Modifications:
+    - target: {fileID: 744912375, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
+      propertyPath: inventoryUI
+      value: 
+      objectReference: {fileID: 1852610487}
     - target: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
       propertyPath: m_Name
       value: 9
@@ -570,78 +506,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
   m_PrefabInstance: {fileID: 48793040}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &48793043 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4987321035195425694, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
-  m_PrefabInstance: {fileID: 48793040}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 48793042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &48793044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 48793042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnEnterBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 48793043}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnExitBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 48793043}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnClickBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 48793043}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &55691053
 GameObject:
   m_ObjectHideFlags: 0
@@ -1485,6 +1349,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1511779073}
     m_Modifications:
+    - target: {fileID: 744912375, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
+      propertyPath: inventoryUI
+      value: 
+      objectReference: {fileID: 1852610487}
     - target: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
       propertyPath: m_Name
       value: 11
@@ -1585,78 +1453,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
   m_PrefabInstance: {fileID: 157388327}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &157388330 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4987321035195425694, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
-  m_PrefabInstance: {fileID: 157388327}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 157388329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &157388331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 157388329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnEnterBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 157388330}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnExitBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 157388330}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnClickBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 157388330}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &172217535
 GameObject:
   m_ObjectHideFlags: 0
@@ -2730,6 +2526,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1511779073}
     m_Modifications:
+    - target: {fileID: 744912375, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
+      propertyPath: inventoryUI
+      value: 
+      objectReference: {fileID: 1852610487}
     - target: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
       propertyPath: m_Name
       value: 2
@@ -2830,78 +2630,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
   m_PrefabInstance: {fileID: 328835980}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &328835983 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4987321035195425694, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
-  m_PrefabInstance: {fileID: 328835980}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 328835982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &328835984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 328835982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnEnterBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 328835983}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnExitBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 328835983}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnClickBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 328835983}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &337171863
 GameObject:
   m_ObjectHideFlags: 0
@@ -3900,6 +3628,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1511779073}
     m_Modifications:
+    - target: {fileID: 744912375, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
+      propertyPath: inventoryUI
+      value: 
+      objectReference: {fileID: 1852610487}
     - target: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
       propertyPath: m_Name
       value: 3
@@ -4000,78 +3732,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
   m_PrefabInstance: {fileID: 485211053}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &485211056 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4987321035195425694, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
-  m_PrefabInstance: {fileID: 485211053}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 485211055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &485211057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 485211055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnEnterBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 485211056}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnExitBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 485211056}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnClickBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 485211056}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &489742021
 GameObject:
   m_ObjectHideFlags: 0
@@ -5343,6 +5003,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1511779073}
     m_Modifications:
+    - target: {fileID: 744912375, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
+      propertyPath: inventoryUI
+      value: 
+      objectReference: {fileID: 1852610487}
     - target: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
       propertyPath: m_Name
       value: 10
@@ -5443,78 +5107,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
   m_PrefabInstance: {fileID: 677266579}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &677266582 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4987321035195425694, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
-  m_PrefabInstance: {fileID: 677266579}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 677266581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &677266583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 677266581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnEnterBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 677266582}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnExitBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 677266582}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnClickBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 677266582}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &685538275
 GameObject:
   m_ObjectHideFlags: 0
@@ -5657,6 +5249,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1511779073}
     m_Modifications:
+    - target: {fileID: 744912375, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
+      propertyPath: inventoryUI
+      value: 
+      objectReference: {fileID: 1852610487}
     - target: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
       propertyPath: m_Name
       value: 7
@@ -5757,78 +5353,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
   m_PrefabInstance: {fileID: 686757144}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &686757147 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4987321035195425694, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
-  m_PrefabInstance: {fileID: 686757144}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 686757146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &686757148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 686757146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnEnterBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 686757147}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnExitBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 686757147}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnClickBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 686757147}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &744912371 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
@@ -5839,78 +5363,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4987321035195425695, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
   m_PrefabInstance: {fileID: 4987321034593949291}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &744912373 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4987321035195425694, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
-  m_PrefabInstance: {fileID: 4987321034593949291}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 744912371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &744912376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 744912371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnEnterBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 744912373}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnExitBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 744912373}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnClickBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 744912373}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1001 &763016742
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5918,6 +5370,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1511779073}
     m_Modifications:
+    - target: {fileID: 744912375, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
+      propertyPath: inventoryUI
+      value: 
+      objectReference: {fileID: 1852610487}
     - target: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
       propertyPath: m_Name
       value: 8
@@ -6018,78 +5474,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
   m_PrefabInstance: {fileID: 763016742}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &763016745 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4987321035195425694, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
-  m_PrefabInstance: {fileID: 763016742}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 763016744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &763016746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 763016744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnEnterBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 763016745}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnExitBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 763016745}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnClickBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 763016745}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &776743450
 GameObject:
   m_ObjectHideFlags: 0
@@ -6955,6 +6339,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1511779073}
     m_Modifications:
+    - target: {fileID: 744912375, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
+      propertyPath: inventoryUI
+      value: 
+      objectReference: {fileID: 1852610487}
     - target: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
       propertyPath: m_Name
       value: 5
@@ -7055,78 +6443,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
   m_PrefabInstance: {fileID: 877624262}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &877624265 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4987321035195425694, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
-  m_PrefabInstance: {fileID: 877624262}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 877624264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &877624266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 877624264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnEnterBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 877624265}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnExitBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 877624265}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnClickBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 877624265}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &902945046 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4372601627153120429, guid: d55bc439dade2de4590f0b258e63d303, type: 3}
@@ -9278,6 +8594,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1511779073}
     m_Modifications:
+    - target: {fileID: 744912375, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
+      propertyPath: inventoryUI
+      value: 
+      objectReference: {fileID: 1852610487}
     - target: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
       propertyPath: m_Name
       value: 12
@@ -9378,78 +8698,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
   m_PrefabInstance: {fileID: 1250731557}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1250731560 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4987321035195425694, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
-  m_PrefabInstance: {fileID: 1250731557}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1250731559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1250731561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1250731559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnEnterBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1250731560}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnExitBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1250731560}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnClickBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1250731560}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1001 &1283203311
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9457,6 +8705,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1511779073}
     m_Modifications:
+    - target: {fileID: 744912375, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
+      propertyPath: inventoryUI
+      value: 
+      objectReference: {fileID: 1852610487}
     - target: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
       propertyPath: m_Name
       value: 4
@@ -9557,78 +8809,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
   m_PrefabInstance: {fileID: 1283203311}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1283203314 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4987321035195425694, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
-  m_PrefabInstance: {fileID: 1283203311}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1283203313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1283203315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1283203313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnEnterBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1283203314}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnExitBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1283203314}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnClickBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1283203314}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &1313590052
 GameObject:
   m_ObjectHideFlags: 0
@@ -11501,6 +10681,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1511779073}
     m_Modifications:
+    - target: {fileID: 744912375, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
+      propertyPath: inventoryUI
+      value: 
+      objectReference: {fileID: 1852610487}
     - target: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
       propertyPath: m_Name
       value: 1
@@ -11601,78 +10785,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
   m_PrefabInstance: {fileID: 1556577138}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1556577141 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4987321035195425694, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
-  m_PrefabInstance: {fileID: 1556577138}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1556577140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1556577142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1556577140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnEnterBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1556577141}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnExitBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1556577141}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnClickBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1556577141}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &1569932631
 GameObject:
   m_ObjectHideFlags: 0
@@ -12806,6 +11918,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1511779073}
     m_Modifications:
+    - target: {fileID: 744912375, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
+      propertyPath: inventoryUI
+      value: 
+      objectReference: {fileID: 1852610487}
     - target: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
       propertyPath: m_Name
       value: 13
@@ -12906,78 +12022,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
   m_PrefabInstance: {fileID: 1817757824}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1817757827 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4987321035195425694, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
-  m_PrefabInstance: {fileID: 1817757824}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817757826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1817757828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817757826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnEnterBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1817757827}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnExitBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1817757827}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnClickBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1817757827}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &1842810932
 GameObject:
   m_ObjectHideFlags: 0
@@ -14090,6 +13134,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1511779073}
     m_Modifications:
+    - target: {fileID: 744912375, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
+      propertyPath: inventoryUI
+      value: 
+      objectReference: {fileID: 1852610487}
     - target: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
       propertyPath: m_Name
       value: 6
@@ -14190,78 +13238,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
   m_PrefabInstance: {fileID: 1926211146}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1926211149 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4987321035195425694, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
-  m_PrefabInstance: {fileID: 1926211146}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1926211148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1926211150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1926211148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnEnterBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1926211149}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnExitBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1926211149}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1852610487}
-          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
-          m_MethodName: OnClickBackpackMount
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1926211149}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &1954614162
 GameObject:
   m_ObjectHideFlags: 0
@@ -15701,6 +14677,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1511779073}
     m_Modifications:
+    - target: {fileID: 744912375, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
+      propertyPath: inventoryUI
+      value: 
+      objectReference: {fileID: 1852610487}
     - target: {fileID: 4987321035195425688, guid: 1b05225be8f7bbd499bd74061d42b0e8, type: 3}
       propertyPath: m_Name
       value: 0
