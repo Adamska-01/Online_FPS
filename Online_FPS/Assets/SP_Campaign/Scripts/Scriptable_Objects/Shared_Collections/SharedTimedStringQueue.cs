@@ -13,7 +13,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Scriptable OBJ/Shared Variables/Shared Timed String Queue", fileName = "New Shared Timed String Queue")]
 public class SharedTimedStringQueue : ScriptableObject, ISharedVariableCallbackReceiver
 {
-    public event Action OnVariableAssigned;
+    public event Action OnVariableValueChanged;
 
     [SerializeField, TextArea(2, 7)] private string noteToDeveloper = "An automated timed message delivery queue.\n\nUsage:\n1) Queue.Enqueue( 'My Message');\n2) Debug.Log(Queue.text);\n3) A SO_CoroutineRunner Instance must exist in the current scene.";
 
@@ -68,7 +68,7 @@ public class SharedTimedStringQueue : ScriptableObject, ISharedVariableCallbackR
                     currentText = messageQueue.Dequeue();
 
                     //Invoke event (PlayerHUD)
-                    OnVariableAssigned?.Invoke();
+                    OnVariableValueChanged?.Invoke();
 
                     //Set times so nothing happes again until the deque delay elapses
                     nextDequeueTime = dequeueDelay;
@@ -84,7 +84,7 @@ public class SharedTimedStringQueue : ScriptableObject, ISharedVariableCallbackR
         coroutine = null;
 
         //Invoke event (PlayerHUD)
-        OnVariableAssigned?.Invoke();
+        OnVariableValueChanged?.Invoke();
     }
 
     public int Count()

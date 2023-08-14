@@ -136,11 +136,11 @@ public class PlayerInventoryUI : MonoBehaviour
     private void OnDestroy()
     {
         //Unsubscribe events (status shared variable)
-        if (statusReferences.healthSlider != null && health != null)           health.OnVariableAssigned -= () => { statusReferences.healthSlider.value = health.Value; };
-        if (statusReferences.staminaSlider != null && stamina != null)         stamina.OnVariableAssigned -= () => { statusReferences.staminaSlider.value = stamina.Value; };
-        if (statusReferences.infectionSlider != null && infection != null)     infection.OnVariableAssigned -= () => { statusReferences.infectionSlider.value = infection.Value; };
-        if (statusReferences.flashlightSlider != null && flashlight != null)   flashlight.OnVariableAssigned -= () => { statusReferences.flashlightSlider.value = flashlight.Value; };
-        if (statusReferences.nightVisionSlider != null && nightVision != null) nightVision.OnVariableAssigned -= () => { statusReferences.nightVisionSlider.value = nightVision.Value; };
+        if (statusReferences.healthSlider != null && health != null)           health.OnVariableValueChanged -= () => { statusReferences.healthSlider.value = health.Value; };
+        if (statusReferences.staminaSlider != null && stamina != null)         stamina.OnVariableValueChanged -= () => { statusReferences.staminaSlider.value = stamina.Value; };
+        if (statusReferences.infectionSlider != null && infection != null)     infection.OnVariableValueChanged -= () => { statusReferences.infectionSlider.value = infection.Value; };
+        if (statusReferences.flashlightSlider != null && flashlight != null)   flashlight.OnVariableValueChanged -= () => { statusReferences.flashlightSlider.value = flashlight.Value; };
+        if (statusReferences.nightVisionSlider != null && nightVision != null) nightVision.OnVariableValueChanged -= () => { statusReferences.nightVisionSlider.value = nightVision.Value; };
     }
 
     protected void Invalidate()
@@ -306,11 +306,11 @@ public class PlayerInventoryUI : MonoBehaviour
         if (statusReferences.nightVisionSlider != null && nightVision != null) statusReferences.nightVisionSlider.value = nightVision.Value;
 
         //Subscribe events (status shared variable)
-        if (statusReferences.healthSlider != null && health != null)           health.OnVariableAssigned += () => { statusReferences.healthSlider.value = health.Value; };
-        if (statusReferences.staminaSlider != null && stamina != null)         stamina.OnVariableAssigned += () => { statusReferences.staminaSlider.value = stamina.Value; };
-        if (statusReferences.infectionSlider != null && infection != null)     infection.OnVariableAssigned += () => { statusReferences.infectionSlider.value = infection.Value; };
-        if (statusReferences.flashlightSlider != null && flashlight != null)   flashlight.OnVariableAssigned += () => { statusReferences.flashlightSlider.value = flashlight.Value; };
-        if (statusReferences.nightVisionSlider != null && nightVision != null) nightVision.OnVariableAssigned += () => { statusReferences.nightVisionSlider.value = nightVision.Value; };
+        if (statusReferences.healthSlider != null && health != null)           health.OnVariableValueChanged += () => { statusReferences.healthSlider.value = health.Value; };
+        if (statusReferences.staminaSlider != null && stamina != null)         stamina.OnVariableValueChanged += () => { statusReferences.staminaSlider.value = stamina.Value; };
+        if (statusReferences.infectionSlider != null && infection != null)     infection.OnVariableValueChanged += () => { statusReferences.infectionSlider.value = infection.Value; };
+        if (statusReferences.flashlightSlider != null && flashlight != null)   flashlight.OnVariableValueChanged += () => { statusReferences.flashlightSlider.value = flashlight.Value; };
+        if (statusReferences.nightVisionSlider != null && nightVision != null) nightVision.OnVariableValueChanged += () => { statusReferences.nightVisionSlider.value = nightVision.Value; };
     }
 
     public void SelectTabGroup(int panel)

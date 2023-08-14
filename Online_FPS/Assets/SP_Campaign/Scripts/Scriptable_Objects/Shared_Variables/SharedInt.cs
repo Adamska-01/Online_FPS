@@ -7,7 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Scriptable OBJ/Shared Variables/Shared Int", fileName = "New Shared Int")]
 public class SharedInt : ScriptableObject, ISerializationCallbackReceiver, ISharedVariableCallbackReceiver
 {
-    public event Action OnVariableAssigned;
+    public event Action OnVariableValueChanged;
 
     //Inspector-Assigned
     [SerializeField] private int value = 0;
@@ -16,7 +16,7 @@ public class SharedInt : ScriptableObject, ISerializationCallbackReceiver, IShar
     private int runtimeValue = 0;
 
     //Setter
-    public int Value { get { return runtimeValue; } set { runtimeValue = value; OnVariableAssigned?.Invoke(); } }
+    public int Value { get { return runtimeValue; } set { runtimeValue = value; OnVariableValueChanged?.Invoke(); } }
 
 
 

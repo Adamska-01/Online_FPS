@@ -7,7 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Scriptable OBJ/Shared Variables/Shared String", fileName = "New Shared String")]
 public class SharedString : ScriptableObject, ISerializationCallbackReceiver, ISharedVariableCallbackReceiver
 {
-    public event Action OnVariableAssigned;
+    public event Action OnVariableValueChanged;
 
     //Inspector-Assigned
     [SerializeField, TextArea(3, 10)] private string value = null;
@@ -16,7 +16,7 @@ public class SharedString : ScriptableObject, ISerializationCallbackReceiver, IS
     private string runtimeValue = null;
 
     //Setter
-    public string Value { get { return runtimeValue; } set { runtimeValue = value; OnVariableAssigned?.Invoke(); } }
+    public string Value { get { return runtimeValue; } set { runtimeValue = value; OnVariableValueChanged?.Invoke(); } }
 
 
     //-------------------------------------------------------------------

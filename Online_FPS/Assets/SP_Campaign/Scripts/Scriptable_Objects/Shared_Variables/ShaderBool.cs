@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Scriptable OBJ/Shared Variables/Shared Bool", fileName = "New Shared Bool")]
 public class SharedBool : ScriptableObject, ISerializationCallbackReceiver, ISharedVariableCallbackReceiver
 {
-    public event Action OnVariableAssigned;
+    public event Action OnVariableValueChanged;
 
     //Inspector-Assigned
     [SerializeField] private bool value = false;
@@ -15,7 +15,7 @@ public class SharedBool : ScriptableObject, ISerializationCallbackReceiver, ISha
     private bool runtimeValue = false;
 
     //Setter
-    public bool Value { get { return runtimeValue; } set { runtimeValue = value; OnVariableAssigned?.Invoke(); } }
+    public bool Value { get { return runtimeValue; } set { runtimeValue = value; OnVariableValueChanged?.Invoke(); } }
 
 
     //-------------------------------------------------------------------

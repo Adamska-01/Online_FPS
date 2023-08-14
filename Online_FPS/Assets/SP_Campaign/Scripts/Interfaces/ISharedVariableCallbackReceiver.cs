@@ -2,6 +2,6 @@ using System;
 
 public interface ISharedVariableCallbackReceiver
 {
-    public event Action OnVariableAssigned;
+    public event Action OnVariableValueChanged;
 }
 

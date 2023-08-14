@@ -63,26 +63,26 @@ public class PlayerHUD : MonoBehaviour
 
     private void OnEnable()
     {
-        if (healthSlider != null && health != null)                health.OnVariableAssigned += () => { healthSlider.value = health.Value; };
-        if (staminaSlider != null && stamina != null)              stamina.OnVariableAssigned += () => { staminaSlider.value = stamina.Value; };
-        if (infectionSlider != null && infection != null)          infection.OnVariableAssigned += () => { infectionSlider.value = infection.Value; };
-        if (flashlightSlider != null && flashlight != null)        flashlight.OnVariableAssigned += () => { flashlightSlider.value = flashlight.Value; };
-        if (nightVisionSlider != null && nightVision != null)      nightVision.OnVariableAssigned += () => { nightVisionSlider.value = nightVision.Value; };
-        if (interactionText != null && interactionString != null)  interactionString.OnVariableAssigned += () => { interactionText.text = interactionString.Value; };
-        if (transcriptText != null && transcriptString != null)    transcriptString.OnVariableAssigned += () => { transcriptText.text = transcriptString.Value; };
-        if (notificationText != null && notificationQueue != null) notificationQueue.OnVariableAssigned += () => { notificationText.text = notificationQueue.CurrentDequeuedText; };
+        if (healthSlider != null && health != null)                health.OnVariableValueChanged += () => { healthSlider.value = health.Value; };
+        if (staminaSlider != null && stamina != null)              stamina.OnVariableValueChanged += () => { staminaSlider.value = stamina.Value; };
+        if (infectionSlider != null && infection != null)          infection.OnVariableValueChanged += () => { infectionSlider.value = infection.Value; };
+        if (flashlightSlider != null && flashlight != null)        flashlight.OnVariableValueChanged += () => { flashlightSlider.value = flashlight.Value; };
+        if (nightVisionSlider != null && nightVision != null)      nightVision.OnVariableValueChanged += () => { nightVisionSlider.value = nightVision.Value; };
+        if (interactionText != null && interactionString != null)  interactionString.OnVariableValueChanged += () => { interactionText.text = interactionString.Value; };
+        if (transcriptText != null && transcriptString != null)    transcriptString.OnVariableValueChanged += () => { transcriptText.text = transcriptString.Value; };
+        if (notificationText != null && notificationQueue != null) notificationQueue.OnVariableValueChanged += () => { notificationText.text = notificationQueue.CurrentDequeuedText; };
     }
 
     private void OnDisable()
     {
-        if (healthSlider != null && health != null)                health.OnVariableAssigned -= () => { healthSlider.value = health.Value; };
-        if (staminaSlider != null && stamina != null)              stamina.OnVariableAssigned -= () => { staminaSlider.value = stamina.Value; };
-        if (infectionSlider != null && infection != null)          infection.OnVariableAssigned -= () => { infectionSlider.value = infection.Value; };
-        if (flashlightSlider != null && flashlight != null)        flashlight.OnVariableAssigned -= () => { flashlightSlider.value = flashlight.Value; };
-        if (nightVisionSlider != null && nightVision != null)      nightVision.OnVariableAssigned -= () => { nightVisionSlider.value = nightVision.Value; };
-        if (interactionText != null && interactionString != null)  interactionString.OnVariableAssigned -= () => { interactionText.text = interactionString.Value; };
-        if (transcriptText != null && transcriptString != null)    transcriptString.OnVariableAssigned -= () => { transcriptText.text = transcriptString.Value; };
-        if (notificationText != null && notificationQueue != null) notificationQueue.OnVariableAssigned -= () => { notificationText.text = notificationQueue.CurrentDequeuedText; };
+        if (healthSlider != null && health != null)                health.OnVariableValueChanged -= () => { healthSlider.value = health.Value; };
+        if (staminaSlider != null && stamina != null)              stamina.OnVariableValueChanged -= () => { staminaSlider.value = stamina.Value; };
+        if (infectionSlider != null && infection != null)          infection.OnVariableValueChanged -= () => { infectionSlider.value = infection.Value; };
+        if (flashlightSlider != null && flashlight != null)        flashlight.OnVariableValueChanged -= () => { flashlightSlider.value = flashlight.Value; };
+        if (nightVisionSlider != null && nightVision != null)      nightVision.OnVariableValueChanged -= () => { nightVisionSlider.value = nightVision.Value; };
+        if (interactionText != null && interactionString != null)  interactionString.OnVariableValueChanged -= () => { interactionText.text = interactionString.Value; };
+        if (transcriptText != null && transcriptString != null)    transcriptString.OnVariableValueChanged -= () => { transcriptText.text = transcriptString.Value; };
+        if (notificationText != null && notificationQueue != null) notificationQueue.OnVariableValueChanged -= () => { notificationText.text = notificationQueue.CurrentDequeuedText; };
     }
 
     private void Update()
