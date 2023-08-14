@@ -1,0 +1,195 @@
+fileFormatVersion: 2
+guid: 7475b8fe4ef73734b9c84e42b3f36662
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Box
+    100002: Lid
+    100004: Object002
+    100006: Object003
+    100008: Shell003
+    100010: Shell006
+    100012: Shell007
+    100014: Shell008
+    100016: Shell009
+    100018: Shell010
+    100020: Shell011
+    100022: Shell012
+    100024: Shell013
+    100026: Shell014
+    100028: Shell015
+    100030: Shell016
+    100032: Shell017
+    100034: Shell018
+    100036: Shell019
+    100038: //RootNode
+    100040: Sleeve
+    400000: Box
+    400002: Lid
+    400004: Object002
+    400006: Object003
+    400008: Shell003
+    400010: Shell006
+    400012: Shell007
+    400014: Shell008
+    400016: Shell009
+    400018: Shell010
+    400020: Shell011
+    400022: Shell012
+    400024: Shell013
+    400026: Shell014
+    400028: Shell015
+    400030: Shell016
+    400032: Shell017
+    400034: Shell018
+    400036: Shell019
+    400038: //RootNode
+    400040: Sleeve
+    2100000: 01 - Default
+    2300000: Box
+    2300002: Lid
+    2300004: Object002
+    2300006: Object003
+    2300008: Shell003
+    2300010: Shell006
+    2300012: Shell007
+    2300014: Shell008
+    2300016: Shell009
+    2300018: Shell010
+    2300020: Shell011
+    2300022: Shell012
+    2300024: Shell013
+    2300026: Shell014
+    2300028: Shell015
+    2300030: Shell016
+    2300032: Shell017
+    2300034: Shell018
+    2300036: Shell019
+    2300038: Sleeve
+    3300000: Box
+    3300002: Lid
+    3300004: Object002
+    3300006: Object003
+    3300008: Shell003
+    3300010: Shell006
+    3300012: Shell007
+    3300014: Shell008
+    3300016: Shell009
+    3300018: Shell010
+    3300020: Shell011
+    3300022: Shell012
+    3300024: Shell013
+    3300026: Shell014
+    3300028: Shell015
+    3300030: Shell016
+    3300032: Shell017
+    3300034: Shell018
+    3300036: Shell019
+    3300038: Sleeve
+    4300000: Sleeve
+    4300002: Box
+    4300004: Object002
+    4300006: Object003
+    4300008: Lid
+    4300010: Shell003
+    4300012: Shell006
+    4300014: Shell007
+    4300016: Shell008
+    4300018: Shell009
+    4300020: Shell010
+    4300022: Shell011
+    4300024: Shell012
+    4300026: Shell013
+    4300028: Shell014
+    4300030: Shell015
+    4300032: Shell016
+    4300034: Shell017
+    4300036: Shell018
+    4300038: Shell019
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 01 - Default
+    second: {fileID: 2100000, guid: 617256f5e7ac8b447827448161247c16, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
