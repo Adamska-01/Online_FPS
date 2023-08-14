@@ -11,7 +11,7 @@ using UnityEngine;
 //              message using the 'text' property.
 // --------------------------------------------------------------------------------
 [CreateAssetMenu(menuName = "Scriptable OBJ/Shared Variables/Shared Timed String Queue", fileName = "New Shared Timed String Queue")]
-public class SharedTimedStringQueue : ScriptableObject, ISharedVariableCallbackReceiver
+public class SharedTimedStringQueue : ScriptableObject, ISerializationCallbackReceiver, ISharedVariableCallbackReceiver
 {
     public event Action OnVariableValueChanged;
 
@@ -91,4 +91,19 @@ public class SharedTimedStringQueue : ScriptableObject, ISharedVariableCallbackR
     {
         return messageQueue.Count;
     }
+
+
+    //-------------------------------------------------------------------
+    //-------------------------- Serialization --------------------------
+    //-------------------------------------------------------------------
+    public void OnAfterDeserialize()
+    {
+        //When pressing play, the scene is 'destroyed' (serialized) in the C++ layer
+        //and then 'Rebuilt' (desirialized). At that point this function is called,
+        //allowing to set the internal value to the value serialized in the inspector
+        messageQueue.Clear();
+        currentText = null;
+    }
+    public void OnBeforeSerialize() { } //Not needed
+
 }
