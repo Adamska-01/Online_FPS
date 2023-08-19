@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeef5d7690aeaf04f8cf716bff21cf5c, type: 3}
+  m_Name: Wooden_Melee
+  m_EditorClassIdentifier: 
+  audioGroup: Player
+  volume: 0.55
+  spatialBlend: 1
+  priority: 256
+  audioClipBanks:
+  - clips:
+    - {fileID: 8300000, guid: 3a20cb2d5047c994bb486758a8366bc0, type: 3}
+  - clips:
+    - {fileID: 8300000, guid: 64a8f20b22b827f4ea80e01a1175ea93, type: 3}
+    - {fileID: 8300000, guid: e96e8bf1ab7eb3844ada27c48cad7dad, type: 3}
+    - {fileID: 8300000, guid: 32b690f8839c6124496ebbabce41254e, type: 3}

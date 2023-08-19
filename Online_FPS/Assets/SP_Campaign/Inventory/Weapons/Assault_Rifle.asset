@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5caa87a1a05498544aa35614c41f3b6b, type: 3}
+  m_Name: Assault_Rifle
+  m_EditorClassIdentifier: 
+  singleton: 0
+  pickupText: Press 'Use' to Pickup
+  inventoryName: Assault Rifle
+  inventoryImage: {fileID: 21300000, guid: 29f58fdbd9db74e44a356058c5f24579, type: 3}
+  inventoryAction: 2
+  inventoryActionText: 
+  replacementItem: {fileID: 0}
+  collectableItem: {fileID: 0}
+  invDescription: "Based on the Special Forces M4A1 SOPMOD, this lethally accurate
+    assault rifle is capable of fully automatic fire.\r\n\r\nIt has a decent medium
+    to long range capability and is supplied with ammunition via cartridges containing
+    up to 30 rounds each.\r"
+  category: 5
+  audio: {fileID: 11400000, guid: 7ef180421ee83ea4ba8d1c261d4b6ff1, type: 2}
+  weaponType: 2
+  weaponFeedType: 2
+  ammo: {fileID: 11400000, guid: 88c615d11a9588247873eb3d54bd9bab, type: 2}
+  ammoCapacity: 0
+  reloadType: 2
+  range: 200
+  accuracy: 1
+  autoFire: 1
+  dualMode: 1
+  rayRadius: 0
+  headDamage: 100
+  bodyDamage: 40
+  damageAttenuation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.0000153
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.653619
+      outSlope: -0.653619
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.052879035
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  force: 0
+  forceAttenuation:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  weaponAnim: -1

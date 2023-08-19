@@ -115,7 +115,7 @@ public class CurveControlledBob
 public class FPS_Controller : MonoBehaviour
 {
     //Constants
-    private const float MAX_STAMINA = 100.0f;
+    public const float MAX_STAMINA = 100.0f;
 
     [Header("Sound Settings")]
     [SerializeField] private AudioCollection footsteps = null;

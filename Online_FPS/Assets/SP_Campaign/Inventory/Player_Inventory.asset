@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daf984c428b49fd4f9b83eea552c506a, type: 3}
+  m_Name: Player_Inventory
+  m_EditorClassIdentifier: 
+  weaponMounts:
+  - weapon: {fileID: 11400000, guid: 620652e810e29ae41a7035b52590ea19, type: 2}
+    condition: 60.9
+    inGunRounds: 4
+  - weapon: {fileID: 11400000, guid: 37ac0c44aa4196648a50297b32f86564, type: 2}
+    condition: 87.1
+    inGunRounds: 23
+  ammoMounts:
+  - ammo: {fileID: 11400000, guid: 88c615d11a9588247873eb3d54bd9bab, type: 2}
+    rounds: 15
+  - ammo: {fileID: 11400000, guid: caadf9aba6028a54ea71c37f4800dae4, type: 2}
+    rounds: 8
+  - ammo: {fileID: 11400000, guid: a6e85a8c4d42d4247aad6029c286b71a, type: 2}
+    rounds: 4
+  - ammo: {fileID: 0}
+    rounds: 0
+  - ammo: {fileID: 0}
+    rounds: 0
+  - ammo: {fileID: 0}
+    rounds: 0
+  backpackMounts:
+  - item: {fileID: 11400000, guid: 05bf990f786357349a1adf2f11553cdd, type: 2}
+  - item: {fileID: 0}
+  - item: {fileID: 11400000, guid: 64aaf34cb08d45047aba9e81550799be, type: 2}
+  - item: {fileID: 11400000, guid: 8b37e97dbcf5e434cb375d3d6a842fb2, type: 2}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 11400000, guid: 8b37e97dbcf5e434cb375d3d6a842fb2, type: 2}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  notificationQueue: {fileID: 11400000, guid: a8505ed6f3cf65c44a9bfbb4b11ea557, type: 2}
+  playerPosition: {fileID: 11400000, guid: 166ed2ae81a555c4f98450f1b36c3c8a, type: 2}
+  playerDirection: {fileID: 11400000, guid: 82df65560a7dd6e459ee7e186b8b3ebc, type: 2}

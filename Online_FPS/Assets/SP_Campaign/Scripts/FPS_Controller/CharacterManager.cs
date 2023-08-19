@@ -6,7 +6,7 @@ using UnityEngine;
 public class CharacterManager : MonoBehaviour
 {
     //Constants
-    private const float MAX_HEALTH = 100.0f;
+    public const float MAX_HEALTH = 100.0f;
 
     //Inspector-Assigned
     [SerializeField] private CapsuleCollider meleeTrigger = null;

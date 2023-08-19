@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5caa87a1a05498544aa35614c41f3b6b, type: 3}
+  m_Name: Rusty_Pipe
+  m_EditorClassIdentifier: 
+  singleton: 0
+  pickupText: Press 'Use' to Pickup
+  inventoryName: 'Rusty Pipe '
+  inventoryImage: {fileID: 21300000, guid: 764b38caf8033614f854ffb627cf9560, type: 3}
+  inventoryAction: 0
+  inventoryActionText: 
+  replacementItem: {fileID: 0}
+  collectableItem: {fileID: 0}
+  invDescription: "This rusty off-cut of pipe is barely a weapon at all. This crude
+    and blunt bludgeoning apparatus will not serve you well in a multi-raggie attack
+    but it can get you out of a tight fix in a one-on-one situation.\r"
+  category: 5
+  audio: {fileID: 11400000, guid: 5f5be9ac6258df04da51bbfe29e6fa51, type: 2}
+  weaponType: 1
+  weaponFeedType: 1
+  ammo: {fileID: 0}
+  ammoCapacity: 0
+  reloadType: 0
+  range: 3
+  accuracy: 0.1
+  autoFire: 0
+  dualMode: 0
+  rayRadius: 0
+  headDamage: 35
+  bodyDamage: 20
+  damageAttenuation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  force: 0
+  forceAttenuation:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  weaponAnim: -1

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88451a379abb84541a16dde88eb93d7d, type: 3}
+  m_Name: Anti_Infection_Pills
+  m_EditorClassIdentifier: 
+  singleton: 0
+  pickupText: Press 'Use' to Pickup
+  inventoryName: Anti-Infection Capsules
+  inventoryImage: {fileID: 21300000, guid: 19b3eb471bc949140ba77bc13a3407c8, type: 3}
+  inventoryAction: 1
+  inventoryActionText: 
+  replacementItem: {fileID: 0}
+  collectableItem: {fileID: 0}
+  invDescription: 'Temporarily reduces the symptoms of infection by RAGE Namites
+    by introducing a pure Namite harvested from Patient Zero.
+
+
+    You should seek
+    proper medical advice from representitives of the C.R.R as soon as possible.'
+  category: 2
+  audio: {fileID: 11400000, guid: 13029dccf73f15445a0c53ba887a5138, type: 2}
+  reductionAmount: 50
+  recipient: {fileID: 11400000, guid: 93d3e27a87ce9b2478aead8f90392ec6, type: 2}
