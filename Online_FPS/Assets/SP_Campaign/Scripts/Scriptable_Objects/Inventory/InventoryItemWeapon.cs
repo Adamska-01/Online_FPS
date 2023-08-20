@@ -87,8 +87,10 @@ public class InventoryItemWeapon : InventoryItem
         {
             switch (reloadType)
             {
-                case InventoryWeaponReloadType.None: return 0;
-                case InventoryWeaponReloadType.Partial: return ammoCapacity;
+                case InventoryWeaponReloadType.None: 
+                    return 0;
+                case InventoryWeaponReloadType.Partial: 
+                    return ammoCapacity;
                 case InventoryWeaponReloadType.NonPartial:
                     if (ammo == null)
                     {

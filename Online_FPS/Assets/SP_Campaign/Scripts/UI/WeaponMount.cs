@@ -19,7 +19,7 @@ public class WeaponMount : MonoBehaviour
     //Properties
     public string WeaponName { get { return weaponMountName.text; } set { weaponMountName.SetText(value); } }
     public Slider ConditionSlider { get { return weaponMountSlider; } }
-    public Sprite WeaponImage { private get { return weaponMountImage.sprite; } set { weaponMountImage.sprite = value; } }
+    public Sprite WeaponImage { get { return weaponMountImage.sprite; } set { weaponMountImage.sprite = value; } }
     public GameObject AmmoInfoMount { get { return weaponMountAmmoInfo; } }
     public string RoundsText { get { return weaponMountRounds.text; } set { weaponMountRounds.SetText(value); } }
     public string RealoadTypeText { get { return weaponMountReloadType.text; } set { weaponMountReloadType.SetText(value); } }

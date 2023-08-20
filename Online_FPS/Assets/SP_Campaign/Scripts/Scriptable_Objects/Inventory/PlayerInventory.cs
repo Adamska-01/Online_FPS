@@ -50,6 +50,32 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
         return backpacks[mountIndex];
     }
 
+    public override bool UseBackpackItem(int _mountIndex, bool _playAudio = true)
+    {
+        Debug.Log("Backpack item used");
+        return true;
+    }
+
+    public override bool ReloadWeaponItem(int _mountIndex, bool _playAudio = true)
+    {
+        Debug.Log("Weapon reloaded");
+        return true;
+    }
+
+    public override void DropBackpackItem(int _mountIndex, bool _playAudio = true)
+    {
+        Debug.Log("Backpack item dropped");
+    }
+
+    public override void DropWeaponItem(int _mountIndex, bool _playAudio = true)
+    {
+        Debug.Log("Weapon item dropped");
+    }
+
+    public override void DropAmmoItem(int _mountIndex, bool _playAudio = true)
+    {
+        Debug.Log("Ammo item dropped");
+    }
 
 
     //-------------------------------------------------------------------
@@ -92,4 +118,5 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
         }
     }
     public void OnBeforeSerialize() { } //Not needed
+
 }

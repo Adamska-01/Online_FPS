@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player_Inventory
   m_EditorClassIdentifier: 
   weaponMounts:
-  - weapon: {fileID: 11400000, guid: 620652e810e29ae41a7035b52590ea19, type: 2}
+  - weapon: {fileID: 11400000, guid: 8dd1165eaa7198a489a20c4234034b11, type: 2}
     condition: 60.9
     inGunRounds: 4
   - weapon: {fileID: 11400000, guid: 37ac0c44aa4196648a50297b32f86564, type: 2}

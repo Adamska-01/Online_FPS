@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using ExitGames.Client.Photon.StructWrapping;
 
 public enum InventoryPanelType { None, Backpack, AmmoBelt, Weapons, PDA }
 
@@ -51,7 +51,7 @@ public struct InventoryUI_DescriptionLayout
     public Image image;
     public TMP_Text title;
     public ScrollRect scrollView;
-    public TMP_Text Content;
+    public TMP_Text Description;
 }
 
 [System.Serializable]
@@ -69,12 +69,15 @@ public struct InventoryUI_ActionButtons
 // --------------------------------------------------------------------------------
 public class PlayerInventoryUI : MonoBehaviour
 {
+    [Header("Inventory")]
+    [SerializeField] protected Inventory inventory = null;
+
     //Inspector-Assigned
     [Header("Equipment Mount References")]
     [SerializeField] protected List<GameObject> backpackMounts = new List<GameObject>();
     protected List<BackpackMount> backpackMountDetails = new List<BackpackMount>();
     [SerializeField] protected List<GameObject> weaponMounts = new List<GameObject>();
-    protected List<WeaponMount> WeaponMountDetails = new List<WeaponMount>();
+    protected List<WeaponMount> weaponMountDetails = new List<WeaponMount>();
     [SerializeField] protected List<GameObject> ammoMounts = new List<GameObject>();
     protected List<AmmoMount> ammoMountDetails = new List<AmmoMount>();
 
@@ -108,6 +111,10 @@ public class PlayerInventoryUI : MonoBehaviour
     [SerializeField] private Color backpackMountHover = Color.cyan;
     [SerializeField] private Color ammoMountHover = Color.gray;
     [SerializeField] private Color weaponMountHover = Color.red;
+
+    
+    //Properties
+    public Inventory PlayerInventory { get; set; }
 
 
     //Internals
@@ -145,7 +152,7 @@ public class PlayerInventoryUI : MonoBehaviour
 
     protected void Invalidate()
     {
-        if(!isInitialized) //Make sure it has been initialized
+        if (!isInitialized) //Make sure it has been initialized
         {
             Initialize();
         }
@@ -163,13 +170,13 @@ public class PlayerInventoryUI : MonoBehaviour
         actionButton2.buttonObject?.SetActive(false);
 
         //Clear the weapon mounts
-        for (int i = 0; i < WeaponMountDetails.Count; i++)
+        for (int i = 0; i < weaponMountDetails.Count; i++)
         {
-            WeaponMountDetails[i].WeaponImage = null;
-            WeaponMountDetails[i].WeaponName = "";
-            WeaponMountDetails[i].ConditionSlider.enabled = false;
+            weaponMountDetails[i].WeaponImage = null;
+            weaponMountDetails[i].WeaponName = "";
+            weaponMountDetails[i].ConditionSlider.enabled = false;
 
-            //weaponMounts[i].SetActive(false);
+            weaponMounts[i].SetActive(false);
             weaponMounts[i].transform.GetComponent<Image>().fillCenter = false;
         }
 
@@ -179,15 +186,15 @@ public class PlayerInventoryUI : MonoBehaviour
             //Clear sprite and deactivate mount 
             backpackMountDetails[i].BackpackItemImage.sprite = null;
             backpackMountDetails[i].BackpackItemImage.gameObject.SetActive(false);
-            
+
             //Enable the text for this slot that says "Empty"
             backpackMountDetails[i].EmptyText.gameObject.SetActive(true);
 
             //Make all the mounts look unselected
-            if(backpackMounts[i] != null)
+            if (backpackMounts[i] != null)
             {
                 Image img = backpackMounts[i].GetComponent<Image>();
-                if(img != null)
+                if (img != null)
                 {
                     img.fillCenter = false;
                     img.color = backpackMountOriginalColor;
@@ -199,7 +206,7 @@ public class PlayerInventoryUI : MonoBehaviour
         for (int i = 0; i < ammoMountDetails.Count; i++)
         {
             //Clear sprite and deactivate mount 
-            if(ammoMounts[i] != null)
+            if (ammoMounts[i] != null)
             {
                 ammoMountDetails[i].AmmoImage.sprite = null;
                 ammoMountDetails[i].AmmoImage.gameObject.SetActive(false);
@@ -219,9 +226,122 @@ public class PlayerInventoryUI : MonoBehaviour
         }
 
         //Other PDA things
-        if(pdaReferences.autoplayOnPickup)
+        if (pdaReferences.autoplayOnPickup)
         {
             pdaReferences.autoplayOnPickup.isOn = audioPlayOnPickup;
+        }
+
+        //Paint the UI using the inventory 
+        if (inventory != null)
+        {
+            for (int i = 0; i < weaponMountDetails.Count; i++)
+            {
+                //Do we have a weapon mount here?
+                if (weaponMountDetails[i] != null)
+                {
+                    InventoryWeaponMountInfo weaponMountInfo = inventory.GetWeapon(i);
+                    InventoryItemWeapon weapon = null;
+                    if (weaponMountInfo != null)
+                    {
+                        weapon = weaponMountInfo.weapon;
+                    }
+
+                    //No weapon here so skip this mount
+                    if (weapon == null)
+                    {
+                        continue;
+                    }
+
+                    //Set the sprite and name of the weapon
+                    weaponMountDetails[i].WeaponImage = weapon.InventoryImage;
+                    weaponMountDetails[i].WeaponName = weapon.InventoryName;
+                    //Hide/Desplay Ammo info (no need if it's a melee weapon)
+                    if (weapon.WeaponFeedType == InventoryWeaponFeedType.Melee)
+                    {
+                        weaponMountDetails[i].AmmoInfoMount?.SetActive(false);
+                    }
+                    else
+                    {
+                        weaponMountDetails[i].AmmoInfoMount?.SetActive(true);
+
+                        //Display reload type
+                        weaponMountDetails[i].RealoadTypeText = weapon.ReloadType.ToString();
+                        weaponMountDetails[i].RoundsText = weaponMountInfo.inGunRounds + " / " + weapon.AmmoCapacity.ToString();
+                    }
+                    //Update condition slider 
+                    if (weaponMountDetails[i].ConditionSlider != null)
+                    {
+                        weaponMountDetails[i].ConditionSlider.enabled = true;
+                        weaponMountDetails[i].ConditionSlider.value = weaponMountInfo.condition;
+                    }
+
+                    weaponMounts[i].SetActive(true); //Safe check
+                }
+            }
+
+            //Configure the ammo slots
+            for (int i = 0; i < ammoMountDetails.Count; i++)
+            {
+                //Do we have an ammo mount here?
+                if (ammoMountDetails[i] != null)
+                {
+                    InventoryAmmoMountInfo ammoMountInfo = inventory.GetAmmo(i);
+                    InventoryItemAmmo ammo = null;
+                    if (ammoMountInfo != null)
+                    {
+                        ammo = ammoMountInfo.ammo;
+                    }
+
+                    //No weapon here so skip this mount
+                    if (ammo == null)
+                    {
+                        continue;
+                    }
+
+                    //Set the sprite and the rounds of the ammo mount
+                    ammoMountDetails[i].AmmoImage?.gameObject.SetActive(true);
+                    ammoMountDetails[i].AmmoImage.sprite = ammo.InventoryImage;
+
+                    ammoMountDetails[i].RoundText?.gameObject.SetActive(true);
+                    ammoMountDetails[i].RoundText?.SetText(ammoMountInfo.rounds.ToString());
+
+                    //Disable 'Empty' Text
+                    ammoMountDetails[i].EmptyText?.gameObject.SetActive(false);
+
+                    ammoMounts[i].SetActive(true); //Safe check
+                }
+            }
+
+            //Iterate over the UI backpack mounts and set all to empty and unselected
+            for (int i = 0; i < backpackMountDetails.Count; i++)
+            {
+                //Do we have a backpack mount here?
+                if (backpackMountDetails[i] != null)
+                {
+                    InventoryBackpackMountInfo backpackMountInfo = inventory.GetBackpack(i);
+                    InventoryItem backpackItem = null;
+                    if (backpackMountInfo != null)
+                    {
+                        backpackItem = backpackMountInfo.item;
+                    }
+
+                    //No weapon here so skip this mount
+                    if (backpackItem == null)
+                    {
+                        continue;
+                    }
+
+                    //Set the sprite of backpack mount
+                    backpackMountDetails[i].BackpackItemImage?.gameObject.SetActive(true);
+                    backpackMountDetails[i].BackpackItemImage.sprite = backpackItem.InventoryImage;
+
+                    //Disable 'Empty' Text
+                    backpackMountDetails[i].EmptyText?.gameObject.SetActive(false);
+
+                    backpackMounts[i].SetActive(true); //Safe check
+                }
+
+            }
         }
     }
 
@@ -287,12 +407,12 @@ public class PlayerInventoryUI : MonoBehaviour
         //Cache all weapon mount detail scripts
         for (int i = 0; i < weaponMounts.Count; i++)
         {
-            WeaponMountDetails.Add(null);
+            weaponMountDetails.Add(null);
 
             //Assing weapon mount details
             if (weaponMounts[i] != null)
             {
-                WeaponMountDetails[i] = weaponMounts[i].GetComponent<WeaponMount>();
+                weaponMountDetails[i] = weaponMounts[i].GetComponent<WeaponMount>();
             }
         }
 
@@ -331,30 +451,75 @@ public class PlayerInventoryUI : MonoBehaviour
         }
     }
 
-    protected void DisplayWeaponDescription()
+    protected void DisplayWeaponDescription(InventoryItem _item)
     {
+        if (_item == null) //Hide description if no item is specified
+        {
+            HideDescription();
+            return;
+        }
+
         //Disable Non-Weapon Layout 
         generalDescriptionLayout.layoutContainer?.SetActive(false);
-        
         //Enable Weapons Layout
         weaponDescriptionLayout.layoutContainer?.SetActive(true);
 
-        //Enable action buttons
-        actionButton1.buttonObject?.SetActive(true);
+        //Set sprite, title and description
+        if(weaponDescriptionLayout.image != null)
+        {
+            weaponDescriptionLayout.image.sprite = _item.InventoryImage;
+        }
+        weaponDescriptionLayout.title?.SetText(_item.InventoryName);
+        weaponDescriptionLayout.Description?.SetText(_item.InventoryDescription);
+
+
+        //Enable/Disable action buttons
+        actionButton1.buttonObject?.SetActive(_item.InventoryAction != InventoryAction.None);
+        actionButton1.buttonText?.SetText(_item.InventoryActionText);
+
         actionButton2.buttonObject?.SetActive(true);
+        actionButton2.buttonText?.SetText("Drop");
+
+        //Reset the scroll to the top
+        if(weaponDescriptionLayout.scrollView != null)
+        {
+            weaponDescriptionLayout.scrollView.verticalNormalizedPosition = 1.0f;
+        }
     }
 
-    protected void DisplayGeneralDescription()
+    protected void DisplayGeneralDescription(InventoryItem _item)
     {
+        if (_item == null) //Hide description if no item is specified
+        {
+            HideDescription();
+            return;
+        }
+
         //Disable Non-Weapon Layout 
         generalDescriptionLayout.layoutContainer?.SetActive(true);
-
         //Enable Weapons Layout
         weaponDescriptionLayout.layoutContainer?.SetActive(false);
 
-        //Enable action buttons
-        actionButton1.buttonObject?.SetActive(true);
+        //Set sprite, title and description
+        if (generalDescriptionLayout.image != null)
+        {
+            generalDescriptionLayout.image.sprite = _item.InventoryImage;
+        }
+        generalDescriptionLayout.title?.SetText(_item.InventoryName);
+        generalDescriptionLayout.Description?.SetText(_item.InventoryDescription);
+
+        //Enable/Disable action buttons
+        actionButton1.buttonObject?.SetActive(_item.InventoryAction != InventoryAction.None);
+        actionButton1.buttonText?.SetText(_item.InventoryActionText);
+
         actionButton2.buttonObject?.SetActive(true);
+        actionButton2.buttonText?.SetText("Drop");
+
+        //Reset the scroll to the top
+        if (generalDescriptionLayout.scrollView != null)
+        {
+            generalDescriptionLayout.scrollView.verticalNormalizedPosition = 1.0f;
+        }
     }
 
     protected void HideDescription()
@@ -384,6 +549,11 @@ public class PlayerInventoryUI : MonoBehaviour
         //Valid Index? 
         if(mount >= 0 && mount < backpackMounts.Count)
         {
+            //Get the mount object using the index
+            InventoryBackpackMountInfo itemMount = inventory.GetBackpack(mount);
+            if(itemMount == null || itemMount.item == null)
+                return;
+
             //Set the color of the frame of this slot to the hover color (if not currently selected)
             if(selectedPanelType != InventoryPanelType.Backpack || selectedMount != mount)
             {
@@ -396,7 +566,7 @@ public class PlayerInventoryUI : MonoBehaviour
                 return;
 
             //Update description window 
-            DisplayGeneralDescription();
+            DisplayGeneralDescription(itemMount.item);
         }
     }
 
@@ -428,6 +598,11 @@ public class PlayerInventoryUI : MonoBehaviour
         //Valid Index? 
         if (mount >= 0 && mount < backpackMounts.Count)
         {
+            //Get the mount object using the index
+            InventoryBackpackMountInfo itemMount = inventory.GetBackpack(mount);
+            if (itemMount == null || itemMount.item == null)
+                return;
+
             //We are clicking on the selected item, so unselect
             if (mount == selectedMount && selectedPanelType == InventoryPanelType.Backpack)
             {
@@ -436,7 +611,7 @@ public class PlayerInventoryUI : MonoBehaviour
                 _image.color = backpackMountHover;
                 _image.fillCenter = false;
 
-                DisplayGeneralDescription(); //Display info
+                DisplayGeneralDescription(itemMount.item); //Display info
             }
             else //We are selecting 
             {
@@ -448,7 +623,7 @@ public class PlayerInventoryUI : MonoBehaviour
                 _image.color = backpackMountOriginalColor;
                 _image.fillCenter = true;
 
-                DisplayGeneralDescription(); //Display info
+                DisplayGeneralDescription(itemMount.item); //Display info
             }
         }
     }
@@ -467,6 +642,11 @@ public class PlayerInventoryUI : MonoBehaviour
         //Valid Index? 
         if (mount >= 0 && mount < ammoMounts.Count)
         {
+            //Get the mount object using the index
+            InventoryAmmoMountInfo itemMount = inventory.GetAmmo(mount);
+            if (itemMount == null || itemMount.ammo == null)
+                return;
+
             //Set the color of the frame of this slot to the hover color (if not currently selected)
             if (selectedPanelType != InventoryPanelType.AmmoBelt || selectedMount != mount)
             {
@@ -479,7 +659,7 @@ public class PlayerInventoryUI : MonoBehaviour
                 return;
 
             //Update description window 
-            DisplayGeneralDescription();
+            DisplayGeneralDescription(itemMount.ammo);
         }
     }
 
@@ -511,6 +691,11 @@ public class PlayerInventoryUI : MonoBehaviour
         //Valid Index? 
         if (mount >= 0 && mount < ammoMounts.Count)
         {
+            //Get the mount object using the index
+            InventoryAmmoMountInfo itemMount = inventory.GetAmmo(mount);
+            if (itemMount == null || itemMount.ammo == null)
+                return;
+            
             //We are clicking on the selected item, so unselect
             if (mount == selectedMount && selectedPanelType == InventoryPanelType.AmmoBelt)
             {
@@ -519,7 +704,7 @@ public class PlayerInventoryUI : MonoBehaviour
                 _image.color = ammoMountHover;
                 _image.fillCenter = false;
 
-                DisplayGeneralDescription(); //Display info
+                DisplayGeneralDescription(itemMount.ammo); //Display info
             }
             else //We are selecting 
             {
@@ -531,7 +716,7 @@ public class PlayerInventoryUI : MonoBehaviour
                 _image.color = ammoMountOriginalColor;
                 _image.fillCenter = true;
 
-                DisplayGeneralDescription(); //Display info
+                DisplayGeneralDescription(itemMount.ammo); //Display info
             }
         }
     }
@@ -550,6 +735,11 @@ public class PlayerInventoryUI : MonoBehaviour
         //Valid Index? 
         if (mount >= 0 && mount < weaponMounts.Count)
         {
+            //Get the mount object using the index
+            InventoryWeaponMountInfo itemMount = inventory.GetWeapon(mount);
+            if (itemMount == null || itemMount.weapon == null)
+                return;
+
             //Set the color of the frame of this slot to the hover color (if not currently selected)
             if (selectedPanelType != InventoryPanelType.Weapons  || selectedMount != mount)
             {
@@ -562,7 +752,7 @@ public class PlayerInventoryUI : MonoBehaviour
                 return;
 
             //Update description window 
-            DisplayWeaponDescription();
+            DisplayWeaponDescription(itemMount.weapon);
         }
     }
 
@@ -594,6 +784,11 @@ public class PlayerInventoryUI : MonoBehaviour
         //Valid Index? 
         if (mount >= 0 && mount < weaponMounts.Count)
         {
+            //Get the mount object using the index
+            InventoryWeaponMountInfo itemMount = inventory.GetWeapon(mount);
+            if (itemMount == null || itemMount.weapon == null)
+                return;
+
             //We are clicking on the selected item, so unselect
             if (mount == selectedMount && selectedPanelType == InventoryPanelType.Weapons)
             {
@@ -602,7 +797,7 @@ public class PlayerInventoryUI : MonoBehaviour
                 _image.color = weaponMountHover;
                 _image.fillCenter = false;
 
-                DisplayWeaponDescription(); //Display info
+                DisplayWeaponDescription(itemMount.weapon); //Display info
             }
             else //We are selecting 
             {
@@ -614,7 +809,7 @@ public class PlayerInventoryUI : MonoBehaviour
                 _image.color = weaponMountOriginalColor;
                 _image.fillCenter = true;
 
-                DisplayWeaponDescription(); //Display info
+                DisplayWeaponDescription(itemMount.weapon); //Display info
             }
         }
     }
@@ -647,5 +842,44 @@ public class PlayerInventoryUI : MonoBehaviour
         {
             SelectTabGroup(_index);
         }
+    }
+
+    public void OnActionButton1Pressed()
+    {
+        if (inventory == null)
+            return;
+
+        switch (selectedPanelType)
+        {
+            case InventoryPanelType.Backpack:
+                inventory.UseBackpackItem(selectedMount);
+                break;
+            case InventoryPanelType.Weapons:
+                inventory.ReloadWeaponItem(selectedMount);
+                break;
+        }
+
+        Invalidate(); //Repaint invenotory
+    }
+
+    public void OnActionButton2Pressed()
+    {
+        if (inventory == null)
+            return;
+
+        switch (selectedPanelType)
+        {
+            case InventoryPanelType.Backpack:
+                inventory.DropBackpackItem(selectedMount);
+                break;
+            case InventoryPanelType.Weapons:
+                inventory.DropWeaponItem(selectedMount);
+                break;
+            case InventoryPanelType.AmmoBelt:
+                inventory.DropAmmoItem(selectedMount);
+                break;
+        }
+
+        Invalidate(); //Repaint invenotory
     }
 }

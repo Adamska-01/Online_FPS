@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 704171a58a0b5414699319a15c74719a, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 5/10
+  m_text: 0 / 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 60946a5b1d69a2c4bad9c3f6a6e6209a, type: 2}
   m_sharedMaterial: {fileID: -5877488383748759648, guid: 60946a5b1d69a2c4bad9c3f6a6e6209a, type: 2}
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 4372601626215512063}
   - component: {fileID: 4372601626215512056}
   m_Layer: 5
-  m_Name: Condition
+  m_Name: Condition_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -241,12 +241,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4372601627578642762}
-  m_RootOrder: 4
+  m_Father: {fileID: 4372601626798244368}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -61.250008, y: -17.440012}
+  m_AnchoredPosition: {x: -60.9, y: -35.162064}
   m_SizeDelta: {x: 122.5, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4372601626215512063
@@ -414,7 +414,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Partial
+  m_text: 'Type
 
 '
   m_isRightToLeft: 0
@@ -546,19 +546,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4372601626615237969}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4372601627988467552}
   - {fileID: 4372601626537957716}
-  m_Father: {fileID: 4372601627578642762}
-  m_RootOrder: 5
+  m_Father: {fileID: 4372601626798244368}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.093, y: -31.99}
+  m_AnchoredPosition: {x: -2.093, y: -49.711994}
   m_SizeDelta: {x: 240.815, y: 26.577}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4372601626615237975
@@ -606,7 +606,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
   m_Value: 0.5
   m_OnValueChanged:
@@ -642,6 +642,8 @@ RectTransform:
   m_Children:
   - {fileID: 4372601627709871699}
   - {fileID: 4372601627578642762}
+  - {fileID: 4372601626215512057}
+  - {fileID: 4372601626615237968}
   m_Father: {fileID: 4372601627153120428}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -895,7 +897,7 @@ GameObject:
   - component: {fileID: 4372601627417525799}
   - component: {fileID: 4372601627417525792}
   m_Layer: 5
-  m_Name: Single_Handed_Mount_Text
+  m_Name: Weapon_Type_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -949,7 +951,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Single Handed
+  m_text: Weapon Type
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 60946a5b1d69a2c4bad9c3f6a6e6209a, type: 2}
   m_sharedMaterial: {fileID: -5877488383748759648, guid: 60946a5b1d69a2c4bad9c3f6a6e6209a, type: 2}
@@ -1338,8 +1340,6 @@ RectTransform:
   - {fileID: 4372601626017256973}
   - {fileID: 4372601627434972319}
   - {fileID: 4372601626434398712}
-  - {fileID: 4372601626215512057}
-  - {fileID: 4372601626615237968}
   m_Father: {fileID: 4372601626798244368}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1414,7 +1414,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Fire Axe
+  m_text: Weapon Name
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3edf11bde7b5700429e374dc132d483c, type: 2}
   m_sharedMaterial: {fileID: -3523059910133529191, guid: 3edf11bde7b5700429e374dc132d483c, type: 2}
