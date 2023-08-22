@@ -19,9 +19,9 @@ MonoBehaviour:
   inventoryAction: 0
   inventoryActionText: 
   replacementItem: {fileID: 0}
-  collectableItem: {fileID: 0}
+  collectableItem: {fileID: 7765966074803302038, guid: 9696d895f25f888448132e9a7c34fb80, type: 3}
   invDescription: Each box can contains up to 25 high power cartridges for a Shotgun.
     Cartridges can be loaded into the gun six rounds at a time.
   category: 1
   audio: {fileID: 11400000, guid: 2604d83fe9d1f3d47b61dede916140e9, type: 2}
-  capacity: 0
+  capacity: 20

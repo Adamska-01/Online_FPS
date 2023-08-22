@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,6 +41,7 @@ public abstract class Inventory : ScriptableObject
     public abstract InventoryWeaponMountInfo GetWeapon(int mountIndex);
     public abstract InventoryAmmoMountInfo GetAmmo(int mountIndex);
     public abstract InventoryBackpackMountInfo GetBackpack(int mountIndex);
+    public abstract bool AddItem(CollectableItem collectableItem);
     public abstract bool UseBackpackItem(int _mountIndex, bool _playAudio = true);
     public abstract bool ReloadWeaponItem(int _mountIndex, bool _playAudio = true);
     public abstract void DropBackpackItem(int _mountIndex, bool _playAudio = true);

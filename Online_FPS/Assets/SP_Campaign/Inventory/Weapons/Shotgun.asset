@@ -19,7 +19,7 @@ MonoBehaviour:
   inventoryAction: 2
   inventoryActionText: 
   replacementItem: {fileID: 0}
-  collectableItem: {fileID: 0}
+  collectableItem: {fileID: -1688555370613262779, guid: f6a1877e12373b94d9edb33a4030a232, type: 3}
   invDescription: "What the Shotgun lacks in range and accuracy it more than makes
     up for in pure destructive power. This makes it ideal for close range combat.\r\n\r\nCan
     chamber six cartridges simultaneously allowing for mutliple kills before requiring

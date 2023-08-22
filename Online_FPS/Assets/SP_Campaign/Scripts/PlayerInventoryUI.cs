@@ -114,7 +114,7 @@ public class PlayerInventoryUI : MonoBehaviour
 
     
     //Properties
-    public Inventory PlayerInventory { get; set; }
+    public Inventory PlayerInventory { get { return inventory; }  set { inventory = value; } }
 
 
     //Internals

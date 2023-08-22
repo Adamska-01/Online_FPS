@@ -19,7 +19,7 @@ MonoBehaviour:
   inventoryAction: 2
   inventoryActionText: 
   replacementItem: {fileID: 0}
-  collectableItem: {fileID: 0}
+  collectableItem: {fileID: 3112783109737068190, guid: f887da36a820c064d962cbd438e964a7, type: 3}
   invDescription: "The Berreta 9mm semi-automatic pistol is the official sidearm
     of the U.S Military and was first introduced in 1985. \r\n\r\nIt has an effective
     range of 50 meters and is fed by a single detachable magazine capable of carrying

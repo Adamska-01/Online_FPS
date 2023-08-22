@@ -19,8 +19,8 @@ MonoBehaviour:
   inventoryAction: 0
   inventoryActionText: 
   replacementItem: {fileID: 0}
-  collectableItem: {fileID: 0}
+  collectableItem: {fileID: 8885042275792952757, guid: 37c151674456e3b45acd59f2f9b7d978, type: 3}
   invDescription: This pistol cartridge/magazine has a maximum capacity of 15 rounds.
   category: 1
   audio: {fileID: 11400000, guid: 2604d83fe9d1f3d47b61dede916140e9, type: 2}
-  capacity: 8
+  capacity: 15

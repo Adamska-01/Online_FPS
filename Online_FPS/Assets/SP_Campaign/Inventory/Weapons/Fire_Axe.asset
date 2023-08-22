@@ -19,7 +19,7 @@ MonoBehaviour:
   inventoryAction: 0
   inventoryActionText: 
   replacementItem: {fileID: 0}
-  collectableItem: {fileID: 0}
+  collectableItem: {fileID: 1385866821017414223, guid: 199cb8f5ac9f9014985dbdb0b20a52aa, type: 3}
   invDescription: "It may not look pretty but an Axe to the head is a tried and tested
     way of putting a Raggie down to good.\r\n\r\nVery lethal when correct contact
     is made with the Raggie skull but suffers from accuracy problems due to only

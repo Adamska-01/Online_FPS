@@ -19,7 +19,7 @@ MonoBehaviour:
   inventoryAction: 1
   inventoryActionText: 
   replacementItem: {fileID: 11400000, guid: 05bf990f786357349a1adf2f11553cdd, type: 2}
-  collectableItem: {fileID: 0}
+  collectableItem: {fileID: 1288214113762010997, guid: b052b268562f5c04ba5edd740791ebd6, type: 3}
   invDescription: 'This hearty meal provides a 50% stamina boost.
 
 

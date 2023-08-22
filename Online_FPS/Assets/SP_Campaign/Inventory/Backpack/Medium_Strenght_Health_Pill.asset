@@ -19,7 +19,7 @@ MonoBehaviour:
   inventoryAction: 1
   inventoryActionText: 
   replacementItem: {fileID: 0}
-  collectableItem: {fileID: 0}
+  collectableItem: {fileID: 808402489271851290, guid: 55c7031497491d54daf877c79c491b65, type: 3}
   invDescription: 'Restores up to 25% of your basic health or restores you to full
     health if your current health is greater than 75%.
 

@@ -19,7 +19,7 @@ MonoBehaviour:
   inventoryAction: 0
   inventoryActionText: 
   replacementItem: {fileID: 0}
-  collectableItem: {fileID: 0}
+  collectableItem: {fileID: 5697253060342158182, guid: 1638101da890c814abad491d67cffe59, type: 3}
   invDescription: This detachable rifle cartridge/magazine has a maximum capacity
     of 30 rounds.
   category: 1

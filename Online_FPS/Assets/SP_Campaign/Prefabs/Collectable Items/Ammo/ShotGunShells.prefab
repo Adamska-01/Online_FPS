@@ -674,7 +674,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4124124003221684}
   - component: {fileID: 5876425905582796735}
-  m_Layer: 0
+  - component: {fileID: 6004273027690817910}
+  - component: {fileID: 7765966074803302038}
+  m_Layer: 13
   m_Name: ShotGunShells
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -729,6 +731,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.10956672, y: 0.07977414, z: 0.27376226}
   m_Center: {x: 0.035968468, y: -0.015645921, z: 0.005346909}
+--- !u!54 &6004273027690817910
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468907392170782}
+  serializedVersion: 2
+  m_Mass: 5
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &7765966074803302038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468907392170782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa2f1e33179a754a83ae27a37c08b98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 128
+  inventory: {fileID: 11400000, guid: 2bdc2a4cf959a5445afce201f213fbc8, type: 2}
+  inventoryItem: {fileID: 11400000, guid: caadf9aba6028a54ea71c37f4800dae4, type: 2}
+  rounds: 20
 --- !u!1 &1496588865718784
 GameObject:
   m_ObjectHideFlags: 0

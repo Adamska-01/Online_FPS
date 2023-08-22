@@ -19,7 +19,7 @@ MonoBehaviour:
   inventoryAction: 0
   inventoryActionText: 
   replacementItem: {fileID: 0}
-  collectableItem: {fileID: 0}
+  collectableItem: {fileID: 8647838096414811196, guid: d835131982f3f824e9edf803ea6f98b3, type: 3}
   invDescription: "This professional level Baseball Bat packs a greater punch than
     a standard wooden bat making it a powerful push-back weapon which can - on occasion
     - take out a Raggie skull with a single blow. \r"

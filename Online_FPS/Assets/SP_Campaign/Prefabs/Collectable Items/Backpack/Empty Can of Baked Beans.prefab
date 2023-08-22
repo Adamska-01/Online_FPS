@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 1178989541712859043}
   - component: {fileID: 1188758189460325195}
   - component: {fileID: 1517748863679271968}
-  m_Layer: 0
+  - component: {fileID: 7366443181625175483}
+  - component: {fileID: 8931715463452591215}
+  m_Layer: 13
   m_Name: Empty Can of Baked Beans
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1166168753010896669}
   m_LocalRotation: {x: -0.6532815, y: -0.2705981, z: -0.2705981, w: 0.6532815}
-  m_LocalPosition: {x: 14.184575, y: -0.541712, z: 16.074326}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 15, y: 15, z: 15}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -41,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1166168753010896669}
-  m_Mesh: {fileID: 4300474, guid: ccf949bfb5183994aa392eb2d8ecf02d, type: 3}
+  m_Mesh: {fileID: 2284922021554541851, guid: a6461dbbb49bb1d48be2def7b4d2e699, type: 3}
 --- !u!23 &1188758189460325195
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -63,7 +65,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 9979f8743d960c24790d92ed144ebc7d, type: 2}
-  - {fileID: 2100000, guid: 598294a24c1f3484680de6a6005f0b25, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,3 +99,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.0054996787, y: 0.011689042, z: 0.017197361}
   m_Center: {x: -0.0003489246, y: -5.0020754e-10, z: 0.0085985875}
+--- !u!54 &7366443181625175483
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166168753010896669}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &8931715463452591215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166168753010896669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 878c3b92d6157bd49919a573f599548a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 128
+  inventory: {fileID: 11400000, guid: 2bdc2a4cf959a5445afce201f213fbc8, type: 2}
+  inventoryItem: {fileID: 11400000, guid: 05bf990f786357349a1adf2f11553cdd, type: 2}

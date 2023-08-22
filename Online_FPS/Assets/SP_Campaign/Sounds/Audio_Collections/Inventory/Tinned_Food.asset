@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioGroup: Player
   volume: 0.55
-  spatialBlend: 1
+  spatialBlend: 0
   priority: 256
   audioClipBanks:
   - clips:

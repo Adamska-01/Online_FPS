@@ -19,7 +19,7 @@ MonoBehaviour:
   inventoryAction: 1
   inventoryActionText: 
   replacementItem: {fileID: 0}
-  collectableItem: {fileID: 0}
+  collectableItem: {fileID: 4726806448132400231, guid: dea624f7319697f41ba8e79bb196c7b6, type: 3}
   invDescription: 'Temporarily reduces the symptoms of infection by RAGE Namites
     by introducing a pure Namite harvested from Patient Zero.
 

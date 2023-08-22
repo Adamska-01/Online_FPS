@@ -19,7 +19,7 @@ MonoBehaviour:
   inventoryAction: 0
   inventoryActionText: 
   replacementItem: {fileID: 0}
-  collectableItem: {fileID: 0}
+  collectableItem: {fileID: 2875615359503507595, guid: 13b72367c27ee8542b9c58121836c2a2, type: 3}
   invDescription: "This construction strength Crowbar can pass through skull bone
     like a wire through cheese.\r\n\r\nIt is a lethal close range melee weapon but
     as with all crowbars, lacks a little in precision. If you get a good clean head

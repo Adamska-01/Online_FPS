@@ -13361,26 +13361,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2633946819393677481, guid: 0ad1e810a95a52e4798affe6e1674471, type: 3}
-      propertyPath: stamina
-      value: 
-      objectReference: {fileID: 11400000, guid: 81e6c66fcba3cd143bdbb5c4b0011d49, type: 2}
-    - target: {fileID: 2633946819393677483, guid: 0ad1e810a95a52e4798affe6e1674471, type: 3}
-      propertyPath: health
-      value: 
-      objectReference: {fileID: 11400000, guid: b9b44ee454a29e94ea1424ec5194a086, type: 2}
-    - target: {fileID: 2633946819393677483, guid: 0ad1e810a95a52e4798affe6e1674471, type: 3}
-      propertyPath: infection
-      value: 
-      objectReference: {fileID: 11400000, guid: 93d3e27a87ce9b2478aead8f90392ec6, type: 2}
     - target: {fileID: 2633946819393677483, guid: 0ad1e810a95a52e4798affe6e1674471, type: 3}
       propertyPath: playerHUD
       value: 
       objectReference: {fileID: 1202504161}
-    - target: {fileID: 2633946819393677483, guid: 0ad1e810a95a52e4798affe6e1674471, type: 3}
-      propertyPath: interactionText
-      value: 
-      objectReference: {fileID: 11400000, guid: 5dac2dd1d7708de438ddef72064e27e1, type: 2}
     - target: {fileID: 2633946819393677494, guid: 0ad1e810a95a52e4798affe6e1674471, type: 3}
       propertyPath: m_Name
       value: FPS_Controller_Rig

@@ -35,11 +35,11 @@ MonoBehaviour:
   backpackMounts:
   - item: {fileID: 11400000, guid: 05bf990f786357349a1adf2f11553cdd, type: 2}
   - item: {fileID: 0}
+  - item: {fileID: 11400000, guid: e473942d3efe43f4186883608b302661, type: 2}
+  - item: {fileID: 11400000, guid: 8b37e97dbcf5e434cb375d3d6a842fb2, type: 2}
+  - item: {fileID: 11400000, guid: 587c8bc0b9cc6e946ae0e75a75e7d6f9, type: 2}
+  - item: {fileID: 0}
   - item: {fileID: 11400000, guid: 64aaf34cb08d45047aba9e81550799be, type: 2}
-  - item: {fileID: 11400000, guid: 8b37e97dbcf5e434cb375d3d6a842fb2, type: 2}
-  - item: {fileID: 0}
-  - item: {fileID: 0}
-  - item: {fileID: 11400000, guid: 8b37e97dbcf5e434cb375d3d6a842fb2, type: 2}
   - item: {fileID: 0}
   - item: {fileID: 0}
   - item: {fileID: 0}

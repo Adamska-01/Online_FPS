@@ -15,16 +15,6 @@ public abstract class InteractiveItem : MonoBehaviour
     protected Collider col = null;
 
 
-    //Methods
-    public virtual string GetText()
-    {
-        return null;
-    }
-    public virtual void Activate(CharacterManager _chrManager) 
-    {
-    }
-
-
     protected virtual void Start()
     {
         gameSceneManager = GameSceneManager.Instance;
@@ -34,5 +24,15 @@ public abstract class InteractiveItem : MonoBehaviour
         {
             gameSceneManager.RegisterInteractiveItem(col.GetInstanceID(), this);
         }
+    }
+    
+    
+    //(To implement in children)
+    public virtual string GetText()
+    {
+        return null;
+    }
+    public virtual void Activate(CharacterManager _chrManager) 
+    {
     }
 }

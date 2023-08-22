@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 33177963388796480}
   - component: {fileID: 23512326373758386}
   - component: {fileID: 1933806072073739676}
-  m_Layer: 0
+  - component: {fileID: 2922481707313945386}
+  - component: {fileID: 2875615359503507595}
+  m_Layer: 13
   m_Name: Crowbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,3 +99,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.029823914, y: 0.117072456, z: 0.005748681}
   m_Center: {x: -0.0039661974, y: -0.000264626, z: -0.00000010954682}
+--- !u!54 &2922481707313945386
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523666757804698}
+  serializedVersion: 2
+  m_Mass: 10
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &2875615359503507595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523666757804698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d20706798f7e30a4b95e23fa5d57d388, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 128
+  inventory: {fileID: 11400000, guid: 2bdc2a4cf959a5445afce201f213fbc8, type: 2}
+  inventoryItem: {fileID: 11400000, guid: 1b652cb65821f0842a8ff9bfbbf3ec00, type: 2}
+  condition: 100
+  rounds: 0

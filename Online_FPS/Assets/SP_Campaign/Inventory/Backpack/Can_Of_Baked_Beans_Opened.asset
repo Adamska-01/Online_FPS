@@ -19,7 +19,7 @@ MonoBehaviour:
   inventoryAction: 0
   inventoryActionText: 
   replacementItem: {fileID: 0}
-  collectableItem: {fileID: 0}
+  collectableItem: {fileID: 8931715463452591215, guid: 8dc88e2e07781ac43a5728647668dc7b, type: 3}
   invDescription: An empty can that used to contain food.
   category: 2
   audio: {fileID: 11400000, guid: a8cd3c52823ee5b4f838237b5b3c48c6, type: 2}

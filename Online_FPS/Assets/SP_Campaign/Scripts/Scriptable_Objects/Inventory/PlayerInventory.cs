@@ -27,32 +27,57 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
     protected List<InventoryBackpackMountInfo> backpacks = new List<InventoryBackpackMountInfo>();
 
 
-    public override InventoryWeaponMountInfo GetWeapon(int mountIndex)
+
+    public override InventoryWeaponMountInfo GetWeapon(int _mountIndex)
     {
         //Only 2 weapons allowed 
-        if (mountIndex < 0 || mountIndex > 1 || mountIndex >= weapons.Count)
+        if (_mountIndex < 0 || _mountIndex > 1 || _mountIndex >= weapons.Count)
             return null;
 
-        return weapons[mountIndex];
+        return weapons[_mountIndex];
     }
-    public override InventoryAmmoMountInfo GetAmmo(int mountIndex)
+
+    public override InventoryAmmoMountInfo GetAmmo(int _mountIndex)
     {
-        if (mountIndex < 0 || mountIndex >= ammos.Count)
+        if (_mountIndex < 0 || _mountIndex >= ammos.Count)
             return null;
 
-        return ammos[mountIndex];
+        return ammos[_mountIndex];
     }
-    public override InventoryBackpackMountInfo GetBackpack(int mountIndex)
+
+    public override InventoryBackpackMountInfo GetBackpack(int _mountIndex)
     {
-        if (mountIndex < 0 || mountIndex >= backpacks.Count)
+        if (_mountIndex < 0 || _mountIndex >= backpacks.Count)
             return null;
 
-        return backpacks[mountIndex];
+        return backpacks[_mountIndex];
+    }
+   
+    public override bool AddItem(CollectableItem collectableItem)
+    {
+        return true;
     }
 
     public override bool UseBackpackItem(int _mountIndex, bool _playAudio = true)
     {
-        Debug.Log("Backpack item used");
+        if (_mountIndex < 0 || _mountIndex >= backpacks.Count)
+            return false;
+
+        //Get backpack mount from index
+        InventoryBackpackMountInfo backpackMountInfo = backpacks[_mountIndex];
+        if (backpackMountInfo == null || backpackMountInfo.item == null)
+            return false;
+
+        //Get the item object from the mount
+        InventoryItem backpackItem = backpackMountInfo.item;
+
+        //Get the player position for playing audio (it is 2D audio at the moment, but you never know what comes next..)
+        Vector3 pos = playerPosition != null ? playerPosition.Value : Vector3.zero;
+
+        //Consume item and replace it if it returns a replacement item (eg. use can of beans and return an empty can of bean)
+        InventoryItem replacementItem = backpackItem.Use(pos, _playAudio);
+        backpacks[_mountIndex].item = replacementItem;
+
         return true;
     }
 
@@ -64,20 +89,84 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
 
     public override void DropBackpackItem(int _mountIndex, bool _playAudio = true)
     {
-        Debug.Log("Backpack item dropped");
+        if (_mountIndex < 0 || _mountIndex >= backpacks.Count)
+            return;
+
+        //Get backpack mount from index
+        InventoryBackpackMountInfo backpackMountInfo = backpacks[_mountIndex];
+        if (backpackMountInfo == null || backpackMountInfo.item == null)
+            return;
+
+        //Calculate spawn position (in front of the player)
+        Vector3 pos = playerPosition != null ? playerPosition.Value : Vector3.zero; 
+        pos += playerDirection != null ? playerDirection.Value : Vector3.zero;
+       
+        //Drop
+        backpackMountInfo.item.Drop(pos, _playAudio);   
+
+        //Nullify the slot so it is empty
+        backpacks[_mountIndex].item = null;
     }
 
     public override void DropWeaponItem(int _mountIndex, bool _playAudio = true)
     {
-        Debug.Log("Weapon item dropped");
-    }
+        if (_mountIndex < 0 || _mountIndex >= weapons.Count)
+            return;
 
+        //Get backpack mount from index
+        InventoryWeaponMountInfo weaponMountInfo = weapons[_mountIndex];
+        if (weaponMountInfo == null || weaponMountInfo.weapon == null)
+            return;
+
+        InventoryItemWeapon weapon = weapons[_mountIndex].weapon;
+
+        //Calculate spawn position (in front of the player)
+        Vector3 pos = playerPosition != null ? playerPosition.Value : Vector3.zero;
+        pos += playerDirection != null ? playerDirection.Value : Vector3.zero;
+
+        //Drop
+        CollectableWeapon sceneWeapon = weapon.Drop(pos, _playAudio) as CollectableWeapon;
+        //Copy over the weapon instance data
+        if (sceneWeapon != null)
+        {
+            sceneWeapon.Condition = weaponMountInfo.condition;
+            sceneWeapon.Rounds = weaponMountInfo.inGunRounds;
+        }
+
+        //Nullify the slot so it is empty
+        weapons[_mountIndex].weapon = null;
+        weapons[_mountIndex].condition = 100.0f;
+        weapons[_mountIndex].inGunRounds = 0;
+    }
+    
     public override void DropAmmoItem(int _mountIndex, bool _playAudio = true)
     {
-        Debug.Log("Ammo item dropped");
+        if (_mountIndex < 0 || _mountIndex >= ammos.Count)
+            return;
+
+        //Get backpack mount from index
+        InventoryAmmoMountInfo ammoMountInfo = ammos[_mountIndex];
+        if (ammoMountInfo == null || ammoMountInfo.ammo == null)
+            return;
+
+        //Calculate spawn position (in front of the player)
+        Vector3 pos = playerPosition != null ? playerPosition.Value : Vector3.zero;
+        pos += playerDirection != null ? playerDirection.Value : Vector3.zero;
+
+        //Drop
+        CollectableAmmo sceneAmmo = ammoMountInfo.ammo.Drop(pos, _playAudio) as CollectableAmmo;
+        //Copy over the ammo instance data
+        if(sceneAmmo != null)
+        {
+            sceneAmmo.Rounds = ammoMountInfo.rounds;
+        }
+
+        //Nullify the slot so it is empty
+        ammos[_mountIndex].ammo = null;
+        ammos[_mountIndex].rounds = 0;
     }
 
-
+    
     //-------------------------------------------------------------------
     //-------------------------- Serialization --------------------------
     //-------------------------------------------------------------------
@@ -118,5 +207,4 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
         }
     }
     public void OnBeforeSerialize() { } //Not needed
-
 }

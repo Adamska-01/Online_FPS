@@ -421,7 +421,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2633946819393677494}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000015199182}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -21.94, y: 1.005, z: 48.35}
   m_LocalScale: {x: 1, y: 1, z: 0.99999994}
   m_ConstrainProportionsScale: 0
@@ -483,7 +483,6 @@ MonoBehaviour:
   cameraBloodEffect: {fileID: 2633946818704069687}
   playerCamera: {fileID: 2633946818704069685}
   soundEmitter: {fileID: 2633946820111181205}
-  health: 100
   walkRadius: 0
   runRadius: 5
   landingRadius: 8
@@ -495,6 +494,9 @@ MonoBehaviour:
   nextPainSoundTime: 0
   painSoundOffset: 0
   tauntRadius: 10
+  health: {fileID: 11400000, guid: b9b44ee454a29e94ea1424ec5194a086, type: 2}
+  infection: {fileID: 11400000, guid: 93d3e27a87ce9b2478aead8f90392ec6, type: 2}
+  interactionText: {fileID: 11400000, guid: 5dac2dd1d7708de438ddef72064e27e1, type: 2}
 --- !u!114 &2633946819393677481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,11 +573,14 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     horizontalMultiplayer: 0.01
-    verticalMultiplayer: 0.02
+    verticalMultiplayer: 0.05
     verticalhorizontalSpeedRatio: 2
     baseInterval: 1
   flashLight: {fileID: 2633946818959603915}
   flashlightOnAtStart: 0
+  stamina: {fileID: 11400000, guid: 81e6c66fcba3cd143bdbb5c4b0011d49, type: 2}
+  broadcastPosition: {fileID: 11400000, guid: 166ed2ae81a555c4f98450f1b36c3c8a, type: 2}
+  broadcastDirection: {fileID: 11400000, guid: 82df65560a7dd6e459ee7e186b8b3ebc, type: 2}
   mouseLook:
     XSensitivity: 2
     YSensitivity: 2

@@ -137,6 +137,9 @@ public class FPS_Controller : MonoBehaviour
     
     [Header("Shared Variables")]
     [SerializeField] private SharedFloat stamina = null;
+    [Header("Shared Variables - Broadcasters")]
+    [SerializeField] private SharedVector3 broadcastPosition = null;
+    [SerializeField] private SharedVector3 broadcastDirection = null;
 
     //Takes care of mouse look
     [SerializeField] private UnityStandardAssets.Characters.FirstPerson.MouseLook mouseLook;
@@ -360,6 +363,10 @@ public class FPS_Controller : MonoBehaviour
         {
             cam.transform.localPosition = localSpaceCameraPos;
         }
+
+        //Update broadcasters
+        broadcastPosition.Value = transform.position;
+        broadcastDirection.Value = transform.forward;
     }
 
     private void PlayFootStepSound()
