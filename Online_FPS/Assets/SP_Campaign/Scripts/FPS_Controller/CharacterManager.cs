@@ -18,13 +18,18 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private float landingRadius = 12.0f;
     [SerializeField] private float bloodRadiusScale = 6.0f;
     [SerializeField] private PlayerHUD playerHUD = null;
-    //Pain/Damage Audio
+    
+    [Header("Pain/Damage Audio & Settings")]
     [SerializeField] private AudioCollection damageSounds = null;
     [SerializeField] private AudioCollection painSounds = null;
     [SerializeField] private AudioCollection tauntSounds = null;
     [SerializeField] private float nextPainSoundTime = 0.0f;
     [SerializeField] private float painSoundOffset = 0.35f;
     [SerializeField] private float tauntRadius = 10.0f;
+   
+    [Header("Inventory")]
+    [SerializeField] private GameObject inventoryUI = null;
+    [SerializeField] private Inventory inventory = null;
 
     [Header("Shared Variables")]
     [SerializeField] private SharedFloat health    = null;
@@ -75,11 +80,29 @@ public class CharacterManager : MonoBehaviour
         {
             playerHUD.Fade(2.0f, ScreenFadeType.FadeIn);
         }
-    }
 
+        //Disable Inventory UI at start up
+        inventoryUI.SetActive(false);
+    }
 
     private void Update()
     {
+        //Inventory Key Toggle 
+        if(Input.GetButtonDown("Inventory") && inventoryUI != null) 
+        {
+            //Toggle Inventory UI
+            inventoryUI.SetActive(!inventoryUI.activeSelf);       
+            if(playerHUD != null)
+            {
+                //Toggle HUD
+                playerHUD.gameObject.SetActive(!inventoryUI.activeSelf);
+
+                //Toggle Cursor visibility.lockstate
+                Cursor.visible = inventoryUI.activeSelf;
+                Cursor.lockState = inventoryUI.activeSelf ? CursorLockMode.None : CursorLockMode.Locked;
+            }
+        }
+
         ProcessInteractableItems();
 
         //Push (Attack)

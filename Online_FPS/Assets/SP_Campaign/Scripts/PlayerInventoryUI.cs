@@ -132,12 +132,26 @@ public class PlayerInventoryUI : MonoBehaviour
 
     private void OnEnable()
     {
-        Invalidate();
+        //Clear buffered input
+        Input.ResetInputAxes();
+
+        Time.timeScale = 0.0f;
+
+        //Pause any currently playing sounds
+        AudioListener.pause = true;
+
+        Invalidate(); //Redraw UI
     }
 
     private void OnDisable()
     {
-        
+        Time.timeScale = 1.0f;
+
+        //Unpause any currently playing sounds
+        AudioListener.pause = false;
+
+        //Clear buffered input
+        Input.ResetInputAxes();
     }
 
     private void OnDestroy()

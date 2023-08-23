@@ -97,7 +97,9 @@ public class InventoryItem : ScriptableObject
                                                        _position,
                                                        audio.Volume,
                                                        audio.SpatialBlend,
-                                                       audio.Priority);
+                                                       audio.Priority,
+                                                       0.0f,
+                                                       true);
             }
         }
 
@@ -124,7 +126,9 @@ public class InventoryItem : ScriptableObject
                                                        _position,
                                                        audio.Volume,
                                                        audio.SpatialBlend,
-                                                       audio.Priority);
+                                                       audio.Priority,
+                                                       0.0f,
+                                                       true);
             }
         }
 

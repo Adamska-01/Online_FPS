@@ -211,7 +211,7 @@ public class AudioManager : MonoBehaviour
         PlayOneShotSound(_track, _clip, _pos, _volume, _spatialBlend, _priority);
     }
 
-    public ulong PlayOneShotSound(string _track, AudioClip _clip, Vector3 _pos, float _volume, float _spatialBlend, float _priority = 128, float startTime = 0.0f)
+    public ulong PlayOneShotSound(string _track, AudioClip _clip, Vector3 _pos, float _volume, float _spatialBlend, float _priority = 128, float startTime = 0.0f, bool _ignoreListenerPause = false)
     {
         if (!tracks.ContainsKey(_track) || _clip == null || _volume.Equals(0.0f))
             return 0;
@@ -227,7 +227,7 @@ public class AudioManager : MonoBehaviour
             AudioPoolItem poolItem = pool[i];
             if (!poolItem.isPlaying) //Return pool item if available
             {
-                return ConfigurePoolObject(i, _track, _clip, _pos, _volume, _spatialBlend, unImportance, startTime);
+                return ConfigurePoolObject(i, _track, _clip, _pos, _volume, _spatialBlend, unImportance, startTime, _ignoreListenerPause);
             }
             else if(poolItem.unImportance > leastImportantValue) //Record least important sound
             {
@@ -238,7 +238,7 @@ public class AudioManager : MonoBehaviour
 
         //Check if the sound can be played (if the importance is less than the recorded importance from the pool)
         if(leastImportantValue > unImportance)
-            return ConfigurePoolObject(leastImportantIndex, _track, _clip, _pos, _volume, _spatialBlend, unImportance, startTime);
+            return ConfigurePoolObject(leastImportantIndex, _track, _clip, _pos, _volume, _spatialBlend, unImportance, startTime, _ignoreListenerPause);
 
         return 0;
     }
@@ -285,7 +285,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    protected ulong ConfigurePoolObject(int _poolIndex, string _track, AudioClip _clip, Vector3 _pos, float _volume, float _spatialBlend, float _unImportance, float startTime)
+    protected ulong ConfigurePoolObject(int _poolIndex, string _track, AudioClip _clip, Vector3 _pos, float _volume, float _spatialBlend, float _unImportance, float startTime, bool _ignoreListenerPause)
     {
         if (_poolIndex < 0 || _poolIndex >= pool.Count)
             return 0;
@@ -302,11 +302,12 @@ public class AudioManager : MonoBehaviour
         idGiver++;
 
         //Configure the audio source's clip properties
-        AudioSource source  = poolItem.audioSrc;
-        source.clip         = _clip;
-        source.volume       = _volume;
-        source.spatialBlend = _spatialBlend;
-        source.time         = Mathf.Min(startTime, source.clip.length - 0.01f);
+        AudioSource source         = poolItem.audioSrc;
+        source.clip                = _clip;
+        source.volume              = _volume;
+        source.spatialBlend        = _spatialBlend;
+        source.ignoreListenerPause = _ignoreListenerPause;
+        source.time                = Mathf.Min(startTime, source.clip.length - 0.01f);
         //Assign to requested audio group
         source.outputAudioMixerGroup = tracks[_track].group;
         //Position source at requested position
