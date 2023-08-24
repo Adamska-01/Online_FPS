@@ -85,6 +85,28 @@ public class CharacterManager : MonoBehaviour
         inventoryUI.SetActive(false);
     }
 
+    private void OnEnable()
+    {
+        //Register Inventory Listeners
+        if(inventory != null)
+        {
+            inventory.OnWeaponChange.AddListener(OnSwitchWeapon);
+            inventory.OnWeaponDropped.AddListener(OnDrophWeapon);
+        }
+    }
+
+    
+
+    private void OnDisable()
+    {
+        //Unregister Inventory Listeners
+        if (inventory != null)
+        {
+            inventory.OnWeaponChange.AddListener(OnSwitchWeapon);
+            inventory.OnWeaponDropped.AddListener(OnDrophWeapon);
+        }
+    }
+
     private void Update()
     {
         //Inventory Key Toggle 
@@ -288,6 +310,25 @@ public class CharacterManager : MonoBehaviour
 
         //Back to main menu
         Invoke("GameOver", 3.2f);
+    }
+
+    private void OnSwitchWeapon(InventoryWeaponMountInfo _weaponMount)
+    {
+        if(inventory != null)
+        {
+            //Calculate mount index
+            int mountIndex = (_weaponMount.weapon.WeaponType == InventoryWeaponType.SingleHanded) ? 0 : 1;
+            
+            //If there is any weapon on that index, drop it
+            inventory.DropWeaponItem(mountIndex);
+
+            inventory.AssignWeapon(mountIndex, _weaponMount);
+        }
+    }
+    
+    private void OnDrophWeapon(InventoryItemWeapon arg0)
+    {
+        Debug.Log("Dropping Weapon");
     }
 
     public void DoDamage(int _hitDir = 0)

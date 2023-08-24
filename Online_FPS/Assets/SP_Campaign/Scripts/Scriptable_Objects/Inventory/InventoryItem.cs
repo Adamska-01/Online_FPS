@@ -113,7 +113,7 @@ public class InventoryItem : ScriptableObject
         return null;
     }
 
-    public virtual InventoryItem Use(Vector3 _position, bool _playAudio = true, Inventory _inventory = null)
+    public virtual InventoryItem Use(Vector3 _position, bool _playAudio = true, Inventory _inventory = null) //You may want to use the inventory obj for specific items (eg. repair kit for weapons -> find compatible weapon in the invenotory)
     {
         if (audio != null && AudioManager.Instance != null && _playAudio)
         {

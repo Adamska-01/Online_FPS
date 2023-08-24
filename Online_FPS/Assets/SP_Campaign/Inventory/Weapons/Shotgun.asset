@@ -28,9 +28,9 @@ MonoBehaviour:
   audio: {fileID: 11400000, guid: 13c509199c7d21b4a942300b25132852, type: 2}
   weaponType: 1
   weaponFeedType: 2
-  ammo: {fileID: 11400000, guid: 88c615d11a9588247873eb3d54bd9bab, type: 2}
+  ammo: {fileID: 11400000, guid: caadf9aba6028a54ea71c37f4800dae4, type: 2}
   ammoCapacity: 6
-  reloadType: 2
+  reloadType: 1
   range: 20
   accuracy: 0.2
   autoFire: 0

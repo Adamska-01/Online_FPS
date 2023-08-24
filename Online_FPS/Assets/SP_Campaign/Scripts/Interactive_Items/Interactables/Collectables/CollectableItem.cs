@@ -49,7 +49,7 @@ public class CollectableItem : InteractiveItem
         {
             if(inventory.AddItem(this))
             {
-                Destroy(this);
+                Destroy(gameObject);
             }
         }
     }

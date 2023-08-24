@@ -12,17 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf984c428b49fd4f9b83eea552c506a, type: 3}
   m_Name: Player_Inventory
   m_EditorClassIdentifier: 
+  OnWeaponDropped:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWeaponChange:
+    m_PersistentCalls:
+      m_Calls: []
   weaponMounts:
-  - weapon: {fileID: 11400000, guid: 8dd1165eaa7198a489a20c4234034b11, type: 2}
-    condition: 60.9
-    inGunRounds: 4
-  - weapon: {fileID: 11400000, guid: 37ac0c44aa4196648a50297b32f86564, type: 2}
+  - weapon: {fileID: 11400000, guid: 1b652cb65821f0842a8ff9bfbbf3ec00, type: 2}
     condition: 87.1
     inGunRounds: 23
+  - weapon: {fileID: 11400000, guid: ce48261ef6954404ea40951170265dcb, type: 2}
+    condition: 60.9
+    inGunRounds: 4
   ammoMounts:
-  - ammo: {fileID: 11400000, guid: 88c615d11a9588247873eb3d54bd9bab, type: 2}
+  - ammo: {fileID: 0}
     rounds: 15
-  - ammo: {fileID: 11400000, guid: caadf9aba6028a54ea71c37f4800dae4, type: 2}
+  - ammo: {fileID: 0}
     rounds: 8
   - ammo: {fileID: 11400000, guid: a6e85a8c4d42d4247aad6029c286b71a, type: 2}
     rounds: 4
