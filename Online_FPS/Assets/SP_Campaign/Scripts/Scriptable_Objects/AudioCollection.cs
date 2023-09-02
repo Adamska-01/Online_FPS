@@ -28,20 +28,8 @@ public class AudioCollection : ScriptableObject
     public float SpatialBlend   { get { return spatialBlend; } }
     public int Priority         { get { return priority; } }
     public int BankCount        { get { return audioClipBanks.Count; } }
-    public AudioClip RandomClip //Easily access the first bank (usefull if there's only 1 bank)
-    {
-        get{
-            if (audioClipBanks == null || audioClipBanks.Count == 0)
-                return null;
-            if (audioClipBanks[0].clips.Count == 0)
-                return null;
+    public AudioClip RandomClip { get { return this[0]; } } //Easily access the first bank (usefull if there's only 1 bank)
 
-            List<AudioClip> clipList = audioClipBanks[0].clips;
-            AudioClip clip = clipList[Random.Range(0, clipList.Count)];
-
-            return clip;
-        }
-    }
 
     //Indexer to allow the use of '[]' notation on 'AudioCollection' and returns a random clip from 'audioClipBanks'
     public AudioClip this[int i]

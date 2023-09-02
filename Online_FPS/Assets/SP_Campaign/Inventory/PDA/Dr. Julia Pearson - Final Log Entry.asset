@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0255413a93bd1a5429271b948b41b59b, type: 3}
+  m_Name: Dr. Julia Pearson - Final Log Entry
+  m_EditorClassIdentifier: 
+  singleton: 1
+  pickupText: Press 'Use' to Pickup
+  inventoryName: Audio Log
+  inventoryImage: {fileID: 0}
+  inventoryAction: 0
+  inventoryActionText: 
+  replacementItem: {fileID: 0}
+  collectableItem: {fileID: 0}
+  invDescription: 
+  category: 4
+  audio: {fileID: 11400000, guid: 7b311a44b0defd2428f2b73993395074, type: 2}
+  person: Dr. Julia Pearson
+  subject: My Final Log Entry
+  image: {fileID: 2800000, guid: 357e4340678723e4094e011124f0f30c, type: 3}
+  stateKeys:
+  - time: 40
+    key: ACCESSCODE
+    value: TRUE
+    UIMessage: ACCESS CODE LEARNED
+  captions:
+  - time: 1
+    text: "This is Dr Julia Pearson for the Center of Rage Research. I fear this
+      will be my final log entry.\r"
+  - time: 7.5
+    text: I'm showing early signs of infection and it's unlikely the extraction team
+      will reach me in time.
+  - time: 13
+    text: All of my research notes are stored on my computer in my office on the
+      upper floor of the hospital. It is vital that you get this information back
+      to HQ!
+  - time: 22
+    text: I had to turn the power off to the building as the electrical activity
+      was drawing the attention of the infected so you are going to need to restore
+      power to the building before you can access my computer.
+  - time: 31
+    text: This can be done from the keypad in the power control room in the hospital
+      basement. The access code is 23021971
+  - time: 42
+    text: 'Be warned, this field position has been compromised. '
+  - time: 46
+    text: A section of roof gave way on the upper floor a few days ago leading to
+      constant incursions from the infected.
+  - time: 52
+    text: Turning the power on again will definitely draw them in.
+  - time: 56
+    text: 'I am the only one left here now. All those that were stationed here with
+      me decided to exit through the sewer system after the roof gave way. I hope
+      they find  somewhere safe to await rescue. '
+  - time: 66
+    text: I stayed behind in the hope I could brief you on my research personally...that
+      isn't going to happen now.
+  - time: 72
+    text: Dr Julia Pearson signing off for the final time.

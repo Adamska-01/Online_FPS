@@ -54,6 +54,8 @@ MonoBehaviour:
   - item: {fileID: 0}
   - item: {fileID: 0}
   - item: {fileID: 0}
+  autoPlayOnPickup: 1
+  audioRecordings: []
   notificationQueue: {fileID: 11400000, guid: a8505ed6f3cf65c44a9bfbb4b11ea557, type: 2}
   playerPosition: {fileID: 11400000, guid: 166ed2ae81a555c4f98450f1b36c3c8a, type: 2}
   playerDirection: {fileID: 11400000, guid: 82df65560a7dd6e459ee7e186b8b3ebc, type: 2}

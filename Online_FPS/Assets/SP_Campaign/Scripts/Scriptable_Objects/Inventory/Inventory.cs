@@ -38,34 +38,45 @@ public class InventoryBackpackMountInfo : InventoryMountInfo
 public abstract class Inventory : ScriptableObject
 {
     //Weapon Events
-    public UnityEvent<InventoryItemWeapon> OnWeaponDropped = new UnityEvent<InventoryItemWeapon>();   
-    public UnityEvent<InventoryWeaponMountInfo> OnWeaponChange = new UnityEvent<InventoryWeaponMountInfo>();
+    public UnityEvent<InventoryItemWeapon>      OnWeaponDropped = new UnityEvent<InventoryItemWeapon>();   
+    public UnityEvent<InventoryWeaponMountInfo> OnWeaponChange  = new UnityEvent<InventoryWeaponMountInfo>();
 
 
-    public abstract InventoryWeaponMountInfo GetWeapon(int mountIndex);
-    public abstract InventoryAmmoMountInfo GetAmmo(int mountIndex);
-    public abstract InventoryBackpackMountInfo GetBackpack(int mountIndex);
+    //Standard API
+    public abstract InventoryWeaponMountInfo    GetWeapon(int _mountIndex);
+    public abstract InventoryAmmoMountInfo      GetAmmo(int _mountIndex);
+    public abstract InventoryBackpackMountInfo  GetBackpack(int _mountIndex);
 
-    public abstract bool AddItem(CollectableItem _collectableItem, bool _playAudio = true);
-    public abstract void AssignWeapon(int _mountIndex, InventoryWeaponMountInfo _mountInfo);
-    public abstract bool UseBackpackItem(int _mountIndex, bool _playAudio = true);
-    public abstract bool ReloadWeaponItem(int _mountIndex, bool _playAudio = true);
+    //Audio properties/Functions
+    public abstract bool                        AutoPlayOnPickup { get; set; }
+    public abstract InventoryItemAudio          GetAudioRecording(int _recordingIndex);
+    public abstract int                         GetActiveAudioRecording();
+    public abstract int                         GetAudioRecordingCount();
+    public abstract int                         PlayAudioRecordingCount();
+    public abstract bool                        PlayAudioRecording(int _recordingIndex);
+    public abstract void                        StopAudioRecording();
 
-    public abstract void DropBackpackItem(int _mountIndex, bool _playAudio = true);
-    public abstract void DropWeaponItem(int _mountIndex, bool _playAudio = true);
-    public abstract void DropAmmoItem(int _mountIndex, bool _playAudio = true);
 
-    public abstract int GetAvailableAmmo(InventoryItemAmmo _ammo, bool _includeWeapon = false); //Get all available rounds of a specific ammo type
-    public abstract bool IsReloadAvailable(int _weaponMountIndex);
-    public abstract InventoryMountInfo Search(InventoryItem _matchItem); 
-    public abstract int Remove(InventoryItem _matchItem); //Return the number of items removed
-    public abstract bool RemoveWeapon(int _mountIndex);
-    public abstract bool RemoveBackpack(int _mountIndex);
-    public abstract bool RemoveAmmo(int _mountIndex);
+    public abstract bool                        AddItem(CollectableItem _collectableItem, bool _playAudio = true);
+    public abstract void                        AssignWeapon(int _mountIndex, InventoryWeaponMountInfo _mountInfo);
+    public abstract bool                        UseBackpackItem(int _mountIndex, bool _playAudio = true);
+    public abstract bool                        ReloadWeaponItem(int _mountIndex, bool _playAudio = true);
+
+    public abstract void                        DropBackpackItem(int _mountIndex, bool _playAudio = true);
+    public abstract void                        DropWeaponItem(int _mountIndex, bool _playAudio = true);
+    public abstract void                        DropAmmoItem(int _mountIndex, bool _playAudio = true);
+
+    public abstract int                         GetAvailableAmmo(InventoryItemAmmo _ammo, bool _includeWeapon = false); //Get all available rounds of a specific ammo type
+    public abstract bool                        IsReloadAvailable(int _weaponMountIndex);
+    public abstract InventoryMountInfo          Search(InventoryItem _matchItem); 
+    public abstract int                         Remove(InventoryItem _matchItem); //Return the number of items removed
+    public abstract bool                        RemoveWeapon(int _mountIndex);
+    public abstract bool                        RemoveBackpack(int _mountIndex);
+    public abstract bool                        RemoveAmmo(int _mountIndex);
 
     // Low Level Mount Array access
-    public abstract List<InventoryWeaponMountInfo> GetAllWeapons();
-    public abstract List<InventoryAmmoMountInfo> GetAllAmmo();
+    public abstract List<InventoryWeaponMountInfo>   GetAllWeapons();
+    public abstract List<InventoryAmmoMountInfo>     GetAllAmmo();
     public abstract List<InventoryBackpackMountInfo> GetAllBackpack();
 
 }

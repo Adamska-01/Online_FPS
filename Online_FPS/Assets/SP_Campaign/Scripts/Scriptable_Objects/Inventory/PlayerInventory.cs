@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 
@@ -14,6 +16,10 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
     [SerializeField] protected List<InventoryAmmoMountInfo> ammoMounts = new List<InventoryAmmoMountInfo>();
     [SerializeField] protected List<InventoryBackpackMountInfo> backpackMounts = new List<InventoryBackpackMountInfo>();
 
+    [Header("Audio Recordings")]
+    [SerializeField] protected bool autoPlayOnPickup = true;
+    [SerializeField] protected List<InventoryItemAudio> audioRecordings = new List<InventoryItemAudio>();
+
     [Header("Shared Variables")]
     [SerializeField] protected SharedTimedStringQueue notificationQueue = null;
 
@@ -22,11 +28,18 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
     [SerializeField] protected SharedVector3 playerDirection = null;
 
 
+    //Public Properties
+    public override bool AutoPlayOnPickup { get => autoPlayOnPickup; set => autoPlayOnPickup = value; }
+
+
     //Internals
     protected List<InventoryWeaponMountInfo> weapons = new List<InventoryWeaponMountInfo>();
     protected List<InventoryAmmoMountInfo> ammos = new List<InventoryAmmoMountInfo>();
     protected List<InventoryBackpackMountInfo> backpacks = new List<InventoryBackpackMountInfo>();
-
+    protected List<InventoryItemAudio> recordings = new List<InventoryItemAudio>();
+    
+    //Index of a recording currently being played
+    protected int activeAudioRecordingIndex = -1;
 
 
     public override InventoryWeaponMountInfo GetWeapon(int _mountIndex)
@@ -54,6 +67,66 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
         return backpacks[_mountIndex];
     }
 
+    public override InventoryItemAudio GetAudioRecording(int _recordingIndex)
+    {
+        if (_recordingIndex < 0 || _recordingIndex >= recordings.Count)
+            return null;
+
+        return recordings[_recordingIndex];
+    }
+
+    public override int GetActiveAudioRecording()
+    {
+        return activeAudioRecordingIndex;
+    }
+
+    public override int GetAudioRecordingCount()
+    {
+        return recordings.Count;
+    }
+
+    public override int PlayAudioRecordingCount()
+    {
+        throw new NotImplementedException();
+    }
+
+    public override bool PlayAudioRecording(int _recordingIndex)
+    {
+        if (_recordingIndex < 0 || _recordingIndex >= recordings.Count)
+            return false;
+
+        InventoryAudioPlayer audioPlayer = InventoryAudioPlayer.Instance;
+        if(audioPlayer != null)
+        {
+            audioPlayer.OnEndAudio.RemoveListener(StopAudioListener); //Remove first if an audio is being played (sanity check)
+            audioPlayer.OnEndAudio.AddListener(StopAudioListener);
+
+            //Play and set current index
+            audioPlayer.PlayAudio(recordings[_recordingIndex]);
+            activeAudioRecordingIndex = _recordingIndex;
+        }
+
+        return true;
+    }
+    void StopAudioListener()
+    {
+        InventoryAudioPlayer audioPlayer = InventoryAudioPlayer.Instance;
+        if (audioPlayer != null)
+        {
+            audioPlayer.OnEndAudio.RemoveListener(StopAudioListener);
+        }
+
+        activeAudioRecordingIndex = -1;
+    }
+    public override void StopAudioRecording()
+    {
+        InventoryAudioPlayer audioPlayer = InventoryAudioPlayer.Instance;
+        if (audioPlayer != null)
+        {
+            audioPlayer.StopAudio();
+        }
+    }
+
     public override bool AddItem(CollectableItem _collectableItem, bool _playAudio = true)
     {
         if (_collectableItem == null || _collectableItem.LinkedInventoryItem == null)
@@ -72,7 +145,7 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
             case InventoryItemType.Knowledge:
                 break;
             case InventoryItemType.Recording:
-                //return AddRecordingItem(invItem, _collectableItem, _playAudio);
+                return AddRecordingItem(invItem as InventoryItemAudio, _collectableItem as CollectableAudio, _playAudio);
                 break;
             case InventoryItemType.Weapon:
                 return AddWeaponItem(invItem as InventoryItemWeapon, _collectableItem as CollectableWeapon, _playAudio);
@@ -610,7 +683,33 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
         return true; //Fail
     }
 
+    private bool AddRecordingItem(InventoryItemAudio _invItem, CollectableAudio _collectableItem, bool _playAudio)
+    {
+        if(_invItem != null)
+        {
+            //Play the pick up sound 
+            _invItem.Pickup(_collectableItem.transform.position, _playAudio);
 
+            //Add audio recording to the list 
+            recordings.Add(_invItem);
+
+            //Play on pick if configured to do so (last picked one)
+            if(autoPlayOnPickup)
+            {
+                PlayAudioRecording(recordings.Count - 1);
+            }
+
+            if(notificationQueue != null)
+            {
+                notificationQueue.Enqueue("Audio Recording Added");
+            }
+
+            //Data successfully retrieved
+            return true;
+        }
+        
+        return false;
+    }
 
     //-------------------------------------------------------------------
     //-------------------------- Serialization --------------------------
@@ -620,6 +719,7 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
         weapons.Clear();
         ammos.Clear();
         backpacks.Clear();
+        recordings.Clear();
 
         //Create deep copies of the lists
         foreach (InventoryWeaponMountInfo info in weaponMounts)
@@ -650,6 +750,13 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
 
             backpacks.Add(clone);
         }
+        foreach (InventoryItemAudio recording in audioRecordings)
+        {
+            recordings.Add(recording);
+        }
+
+        //Reset audio recording selection
+        activeAudioRecordingIndex = -1;
     }
     public void OnBeforeSerialize() { } //Not needed
 }

@@ -62,6 +62,7 @@ public class InventoryItem : ScriptableObject
     public string  InventoryDescription    { get { return invDescription; } }
     public virtual string  PickupText      { get { return pickupText; } }
     public InventoryItemType Category      { get { return category; } }
+    public AudioCollection AudioCol        { get { return audio; } }
     public InventoryAction InventoryAction { get { return inventoryAction; } }
     public string  InventoryActionText     { get { return string.IsNullOrEmpty(inventoryActionText) ? inventoryAction.ToString() : inventoryActionText; } }
 
