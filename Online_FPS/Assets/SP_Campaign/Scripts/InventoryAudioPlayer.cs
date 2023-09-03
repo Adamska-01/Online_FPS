@@ -90,7 +90,7 @@ public class InventoryAudioPlayer : MonoBehaviour
         audioSource.Play();
 
         //Fire Begin Event
-        OnBeginAudio.Invoke(_audioItem);
+        OnBeginAudio?.Invoke(_audioItem);
 
         //Start/Update coroutine
         coroutine = UpdateAudio(_audioItem);
@@ -119,7 +119,7 @@ public class InventoryAudioPlayer : MonoBehaviour
         }
 
         //Raise end event
-        OnEndAudio.Invoke();
+        OnEndAudio?.Invoke();
     }
 
     private IEnumerator UpdateAudio(InventoryItemAudio _audioItem)
@@ -136,7 +136,7 @@ public class InventoryAudioPlayer : MonoBehaviour
             while(audioSource.isPlaying)
             {
                 //Invoke Update Event with normalized time (0-1 range)
-                OnUpdateAudio.Invoke(audioSource.time / audioSource.clip.length);
+                OnUpdateAudio?.Invoke(audioSource.time / audioSource.clip.length);
 
                 //Process any state keys 
                 if (stateKeys != null && ApplicationManager.Instance)

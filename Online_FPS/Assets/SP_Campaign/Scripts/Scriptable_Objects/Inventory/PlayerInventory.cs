@@ -138,18 +138,14 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
         {
             case InventoryItemType.Ammunition:
                 return AddAmmoItem(invItem as InventoryItemAmmo, _collectableItem as CollectableAmmo, _playAudio);
-                break;
             case InventoryItemType.Consumable:
                 return AddBackpackItem(invItem, _collectableItem, _playAudio);
-                break;
             case InventoryItemType.Knowledge:
                 break;
             case InventoryItemType.Recording:
                 return AddRecordingItem(invItem as InventoryItemAudio, _collectableItem as CollectableAudio, _playAudio);
-                break;
             case InventoryItemType.Weapon:
                 return AddWeaponItem(invItem as InventoryItemWeapon, _collectableItem as CollectableWeapon, _playAudio);
-                break;
         }
 
         return false;

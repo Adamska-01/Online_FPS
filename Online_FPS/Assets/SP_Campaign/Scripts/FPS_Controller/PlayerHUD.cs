@@ -22,7 +22,6 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private TMP_Text interactionText  = null;
     [SerializeField] private TMP_Text notificationText = null;
     [SerializeField] private TMP_Text transcriptText   = null;
-    [SerializeField] private GameObject crosshair      = null;
     [SerializeField] private Image screenFade          = null;
 
     [Header("Shared Variables")]
@@ -35,10 +34,31 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private SharedString transcriptString  = null;
     [SerializeField] private SharedTimedStringQueue notificationQueue = null;
 
-    //Private
+    //Internal
     private float currentFadeLevel = 1.0f;
-    IEnumerator coroutine = null;
+    private IEnumerator coroutine = null;
+    private Action OnHealthUpdate;
+    private Action OnStaminaUpdate;
+    private Action OnInfectionUpdate;
+    private Action OnFlashlightUpdate;
+    private Action OnNightvisionUpdate;
+    private Action OnInteractionTextUpdate;
+    private Action OnTranscriptTextUpdate;
+    private Action OnNotificationQueueUpdate;
 
+
+    private void Awake()
+    {
+        //Cache lamda event listeners
+        OnHealthUpdate = () => { healthSlider.value = health.Value; };
+        OnStaminaUpdate = () => { staminaSlider.value = stamina.Value; };
+        OnInfectionUpdate = () => { infectionSlider.value = infection.Value; };
+        OnFlashlightUpdate = () => { flashlightSlider.value = flashlight.Value; };
+        OnNightvisionUpdate = () => { nightVisionSlider.value = nightVision.Value; };
+        OnInteractionTextUpdate = () => { interactionText.text = interactionString.Value; };
+        OnTranscriptTextUpdate = () => { transcriptText.text = transcriptString.Value; };
+        OnNotificationQueueUpdate = () => { notificationText.text = notificationQueue.CurrentDequeuedText; };
+    }
 
     void Start()
     {
@@ -51,38 +71,38 @@ public class PlayerHUD : MonoBehaviour
         }
 
         //Make a first assignment (all future assignments are handled by the events)
-        if (healthSlider != null && health != null)                 healthSlider.value = health.Value; 
-        if (staminaSlider != null && stamina != null)               staminaSlider.value = stamina.Value;
-        if (infectionSlider != null && infection != null)           infectionSlider.value = infection.Value; 
-        if (flashlightSlider != null && flashlight != null)         flashlightSlider.value = flashlight.Value; 
-        if (nightVisionSlider != null && nightVision != null)       nightVisionSlider.value = nightVision.Value; 
-        if (interactionText != null && interactionString != null)   interactionText.text = interactionString.Value; 
-        if (transcriptText != null && transcriptString != null)     transcriptText.text = transcriptString.Value;
-        if (notificationText != null && notificationQueue != null)  notificationText.text = notificationQueue.CurrentDequeuedText;
+        if (healthSlider != null && health != null)                 OnHealthUpdate?.Invoke(); 
+        if (staminaSlider != null && stamina != null)               OnStaminaUpdate?.Invoke();
+        if (infectionSlider != null && infection != null)           OnInfectionUpdate?.Invoke(); 
+        if (flashlightSlider != null && flashlight != null)         OnFlashlightUpdate?.Invoke(); 
+        if (nightVisionSlider != null && nightVision != null)       OnNightvisionUpdate?.Invoke(); 
+        if (interactionText != null && interactionString != null)   OnInteractionTextUpdate?.Invoke(); 
+        if (transcriptText != null && transcriptString != null)     OnTranscriptTextUpdate?.Invoke();
+        if (notificationText != null && notificationQueue != null)  OnNotificationQueueUpdate?.Invoke();
     }
 
     private void OnEnable()
     {
-        if (healthSlider != null && health != null)                health.OnVariableValueChanged += () => { healthSlider.value = health.Value; };
-        if (staminaSlider != null && stamina != null)              stamina.OnVariableValueChanged += () => { staminaSlider.value = stamina.Value; };
-        if (infectionSlider != null && infection != null)          infection.OnVariableValueChanged += () => { infectionSlider.value = infection.Value; };
-        if (flashlightSlider != null && flashlight != null)        flashlight.OnVariableValueChanged += () => { flashlightSlider.value = flashlight.Value; };
-        if (nightVisionSlider != null && nightVision != null)      nightVision.OnVariableValueChanged += () => { nightVisionSlider.value = nightVision.Value; };
-        if (interactionText != null && interactionString != null)  interactionString.OnVariableValueChanged += () => { interactionText.text = interactionString.Value; };
-        if (transcriptText != null && transcriptString != null)    transcriptString.OnVariableValueChanged += () => { transcriptText.text = transcriptString.Value; };
-        if (notificationText != null && notificationQueue != null) notificationQueue.OnVariableValueChanged += () => { notificationText.text = notificationQueue.CurrentDequeuedText; };
+        if (healthSlider != null && health != null)                health.OnVariableValueChanged += OnHealthUpdate;
+        if (staminaSlider != null && stamina != null)              stamina.OnVariableValueChanged += OnStaminaUpdate;
+        if (infectionSlider != null && infection != null)          infection.OnVariableValueChanged += OnInfectionUpdate;
+        if (flashlightSlider != null && flashlight != null)        flashlight.OnVariableValueChanged += OnFlashlightUpdate;
+        if (nightVisionSlider != null && nightVision != null)      nightVision.OnVariableValueChanged += OnNightvisionUpdate;
+        if (interactionText != null && interactionString != null)  interactionString.OnVariableValueChanged += OnInteractionTextUpdate;
+        if (transcriptText != null && transcriptString != null)    transcriptString.OnVariableValueChanged += OnTranscriptTextUpdate;
+        if (notificationText != null && notificationQueue != null) notificationQueue.OnVariableValueChanged += OnNotificationQueueUpdate;
     }
 
     private void OnDisable()
     {
-        if (healthSlider != null && health != null)                health.OnVariableValueChanged -= () => { healthSlider.value = health.Value; };
-        if (staminaSlider != null && stamina != null)              stamina.OnVariableValueChanged -= () => { staminaSlider.value = stamina.Value; };
-        if (infectionSlider != null && infection != null)          infection.OnVariableValueChanged -= () => { infectionSlider.value = infection.Value; };
-        if (flashlightSlider != null && flashlight != null)        flashlight.OnVariableValueChanged -= () => { flashlightSlider.value = flashlight.Value; };
-        if (nightVisionSlider != null && nightVision != null)      nightVision.OnVariableValueChanged -= () => { nightVisionSlider.value = nightVision.Value; };
-        if (interactionText != null && interactionString != null)  interactionString.OnVariableValueChanged -= () => { interactionText.text = interactionString.Value; };
-        if (transcriptText != null && transcriptString != null)    transcriptString.OnVariableValueChanged -= () => { transcriptText.text = transcriptString.Value; };
-        if (notificationText != null && notificationQueue != null) notificationQueue.OnVariableValueChanged -= () => { notificationText.text = notificationQueue.CurrentDequeuedText; };
+        if (healthSlider != null && health != null)                health.OnVariableValueChanged -= OnHealthUpdate;
+        if (staminaSlider != null && stamina != null)              stamina.OnVariableValueChanged -= OnStaminaUpdate;
+        if (infectionSlider != null && infection != null)          infection.OnVariableValueChanged -= OnInfectionUpdate;
+        if (flashlightSlider != null && flashlight != null)        flashlight.OnVariableValueChanged -= OnFlashlightUpdate;
+        if (nightVisionSlider != null && nightVision != null)      nightVision.OnVariableValueChanged -= OnNightvisionUpdate;
+        if (interactionText != null && interactionString != null)  interactionString.OnVariableValueChanged -= OnInteractionTextUpdate;
+        if (transcriptText != null && transcriptString != null)    transcriptString.OnVariableValueChanged -= OnTranscriptTextUpdate;
+        if (notificationText != null && notificationQueue != null) notificationQueue.OnVariableValueChanged -= OnNotificationQueueUpdate;
     }
 
     private void Update()

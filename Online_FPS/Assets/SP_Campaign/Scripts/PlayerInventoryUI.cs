@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using ExitGames.Client.Photon.StructWrapping;
+using System;
 
 public enum InventoryPanelType { None, Backpack, AmmoBelt, Weapons, PDA }
 
@@ -129,6 +129,12 @@ public class PlayerInventoryUI : MonoBehaviour
     protected int activeTab = 0;
     protected bool audioPlayOnPickup = true;
 
+    private Action OnHealthUpdate;
+    private Action OnStaminaUpdate;
+    private Action OnInfectionUpdate;
+    private Action OnFlashlightUpdate;
+    private Action OnNightvisionUpdate;
+
 
     private void OnEnable()
     {
@@ -157,11 +163,11 @@ public class PlayerInventoryUI : MonoBehaviour
     private void OnDestroy()
     {
         //Unsubscribe events (status shared variable)
-        if (statusReferences.healthSlider != null && health != null)           health.OnVariableValueChanged -= () => { statusReferences.healthSlider.value = health.Value; };
-        if (statusReferences.staminaSlider != null && stamina != null)         stamina.OnVariableValueChanged -= () => { statusReferences.staminaSlider.value = stamina.Value; };
-        if (statusReferences.infectionSlider != null && infection != null)     infection.OnVariableValueChanged -= () => { statusReferences.infectionSlider.value = infection.Value; };
-        if (statusReferences.flashlightSlider != null && flashlight != null)   flashlight.OnVariableValueChanged -= () => { statusReferences.flashlightSlider.value = flashlight.Value; };
-        if (statusReferences.nightVisionSlider != null && nightVision != null) nightVision.OnVariableValueChanged -= () => { statusReferences.nightVisionSlider.value = nightVision.Value; };
+        if (statusReferences.healthSlider != null && health != null)           health.OnVariableValueChanged -= OnHealthUpdate;
+        if (statusReferences.staminaSlider != null && stamina != null)         stamina.OnVariableValueChanged -= OnStaminaUpdate;
+        if (statusReferences.infectionSlider != null && infection != null)     infection.OnVariableValueChanged -= OnInfectionUpdate;
+        if (statusReferences.flashlightSlider != null && flashlight != null)   flashlight.OnVariableValueChanged -= OnFlashlightUpdate;
+        if (statusReferences.nightVisionSlider != null && nightVision != null) nightVision.OnVariableValueChanged -= OnNightvisionUpdate;
     }
 
     protected void Invalidate()
@@ -432,19 +438,26 @@ public class PlayerInventoryUI : MonoBehaviour
 
         SelectTabGroup(activeTab);
 
+        //Cache lamda event listeners
+        OnHealthUpdate = () => { statusReferences.healthSlider.value = health.Value; };
+        OnStaminaUpdate = () => { statusReferences.staminaSlider.value = stamina.Value; };
+        OnInfectionUpdate = () => { statusReferences.infectionSlider.value = infection.Value; };
+        OnFlashlightUpdate = () => { statusReferences.flashlightSlider.value = flashlight.Value; };
+        OnNightvisionUpdate = () => { statusReferences.nightVisionSlider.value = nightVision.Value; };
+
         //Make a first assignment of all the status sliders (all future assignments are handled by the events)
-        if (statusReferences.healthSlider != null && health != null)           statusReferences.healthSlider.value = health.Value;
-        if (statusReferences.staminaSlider != null && stamina != null)         statusReferences.staminaSlider.value = stamina.Value;
-        if (statusReferences.infectionSlider != null && infection != null)     statusReferences.infectionSlider.value = infection.Value;
-        if (statusReferences.flashlightSlider != null && flashlight != null)   statusReferences.flashlightSlider.value = flashlight.Value;
-        if (statusReferences.nightVisionSlider != null && nightVision != null) statusReferences.nightVisionSlider.value = nightVision.Value;
+        if (statusReferences.healthSlider != null && health != null)           OnHealthUpdate?.Invoke();
+        if (statusReferences.staminaSlider != null && stamina != null)         OnStaminaUpdate?.Invoke();
+        if (statusReferences.infectionSlider != null && infection != null)     OnInfectionUpdate?.Invoke();
+        if (statusReferences.flashlightSlider != null && flashlight != null)   OnFlashlightUpdate?.Invoke();
+        if (statusReferences.nightVisionSlider != null && nightVision != null) OnNightvisionUpdate?.Invoke();
 
         //Subscribe events (status shared variable)
-        if (statusReferences.healthSlider != null && health != null)           health.OnVariableValueChanged += () => { statusReferences.healthSlider.value = health.Value; };
-        if (statusReferences.staminaSlider != null && stamina != null)         stamina.OnVariableValueChanged += () => { statusReferences.staminaSlider.value = stamina.Value; };
-        if (statusReferences.infectionSlider != null && infection != null)     infection.OnVariableValueChanged += () => { statusReferences.infectionSlider.value = infection.Value; };
-        if (statusReferences.flashlightSlider != null && flashlight != null)   flashlight.OnVariableValueChanged += () => { statusReferences.flashlightSlider.value = flashlight.Value; };
-        if (statusReferences.nightVisionSlider != null && nightVision != null) nightVision.OnVariableValueChanged += () => { statusReferences.nightVisionSlider.value = nightVision.Value; };
+        if (statusReferences.healthSlider != null && health != null)           health.OnVariableValueChanged += OnHealthUpdate;
+        if (statusReferences.staminaSlider != null && stamina != null)         stamina.OnVariableValueChanged += OnStaminaUpdate;
+        if (statusReferences.infectionSlider != null && infection != null)     infection.OnVariableValueChanged += OnInfectionUpdate;
+        if (statusReferences.flashlightSlider != null && flashlight != null)   flashlight.OnVariableValueChanged += OnFlashlightUpdate;
+        if (statusReferences.nightVisionSlider != null && nightVision != null) nightVision.OnVariableValueChanged += OnNightvisionUpdate;
     }
 
     public void SelectTabGroup(int panel)
