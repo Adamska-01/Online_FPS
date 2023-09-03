@@ -28,9 +28,9 @@ MonoBehaviour:
   image: {fileID: 2800000, guid: 357e4340678723e4094e011124f0f30c, type: 3}
   stateKeys:
   - time: 40
-    key: ACCESSCODE
+    key: DOOR_UNLOCKED
     value: TRUE
-    UIMessage: ACCESS CODE LEARNED
+    UIMessage: Access Code Learned
   captions:
   - time: 1
     text: "This is Dr Julia Pearson for the Center of Rage Research. I fear this

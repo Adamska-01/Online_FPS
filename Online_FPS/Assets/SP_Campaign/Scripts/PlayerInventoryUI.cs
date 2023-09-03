@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using UnityEngine.Android;
 
 public enum InventoryPanelType { None, Backpack, AmmoBelt, Weapons, PDA }
 
@@ -19,6 +20,8 @@ public struct InventoryUI_PDARefences
     public Slider timelineSlider;
     public Toggle autoplayOnPickup;
     public GameObject logEntryPrefab;
+    public TMP_Text transcriptText;
+    public TMP_Text notificationText;
 }
 
 [System.Serializable]
@@ -32,16 +35,20 @@ public struct InventoryUIStatus
 }
 
 [System.Serializable]
-public struct InventoryUI_TabGroupItem
+public class InventoryUI_TabGroupItem
 {
     public TMP_Text tabText;
     public GameObject layoutContainer;
 }
 
 [System.Serializable]
-public struct InventoryUI_TabGroup
+public class InventoryUI_TabGroup
 {
     public List<InventoryUI_TabGroupItem> items;
+    public int activeItem;
+    public Color HoverColor;
+    public Color InactiveColor;
+    public Color NormalColor;
 }
 
 [System.Serializable]
@@ -84,11 +91,14 @@ public class PlayerInventoryUI : MonoBehaviour
     [Header("PDA References")]
     [SerializeField] protected InventoryUI_PDARefences pdaReferences;
     
+    [Header("Backpack Scroll Rect")]
+    [SerializeField] protected ScrollRect backpackScrollRect = null;
+
     [Header("UI Meter References")]
     [SerializeField] protected InventoryUIStatus statusReferences;
     
-    [Header("Backpack / PDA Tab Group")]
-    [SerializeField] protected InventoryUI_TabGroup tabGroup;
+    [Header("Tab Groups")]
+    [SerializeField] protected List<InventoryUI_TabGroup> tabGroups = new List<InventoryUI_TabGroup>();
     
     [Header("Description Layouts")]
     [SerializeField] protected InventoryUI_DescriptionLayout generalDescriptionLayout;
@@ -99,15 +109,15 @@ public class PlayerInventoryUI : MonoBehaviour
     [SerializeField] protected InventoryUI_ActionButtons actionButton2;
     
     [Header("Shared Variables")]
-    [SerializeField] private SharedFloat health;
-    [SerializeField] private SharedFloat infection;
-    [SerializeField] private SharedFloat stamina;
-    [SerializeField] private SharedFloat flashlight;
-    [SerializeField] private SharedFloat nightVision;
+    [SerializeField] private SharedFloat health = null;
+    [SerializeField] private SharedFloat infection = null;
+    [SerializeField] private SharedFloat stamina = null;
+    [SerializeField] private SharedFloat flashlight = null;
+    [SerializeField] private SharedFloat nightVision = null;
+    [SerializeField] private SharedString transcriptText = null;
+    [SerializeField] private SharedTimedStringQueue notificationQueue = null;
 
     [Header("Item Selection Colors")]
-    [SerializeField] private Color tabTextHover = Color.cyan;
-    [SerializeField] private Color tabTextInactive = Color.gray;
     [SerializeField] private Color backpackMountHover = Color.cyan;
     [SerializeField] private Color ammoMountHover = Color.gray;
     [SerializeField] private Color weaponMountHover = Color.red;
@@ -121,14 +131,9 @@ public class PlayerInventoryUI : MonoBehaviour
     protected Color backpackMountOriginalColor;
     protected Color weaponMountOriginalColor;
     protected Color ammoMountOriginalColor;
-    protected Color tabTextOriginalColor;
-
     protected InventoryPanelType selectedPanelType = InventoryPanelType.None;
     protected int selectedMount = -1;
     protected bool isInitialized = false;
-    protected int activeTab = 0;
-    protected bool audioPlayOnPickup = true;
-
     private Action OnHealthUpdate;
     private Action OnStaminaUpdate;
     private Action OnInfectionUpdate;
@@ -246,14 +251,15 @@ public class PlayerInventoryUI : MonoBehaviour
         }
 
         //Other PDA things
-        if (pdaReferences.autoplayOnPickup)
+        if (pdaReferences.autoplayOnPickup && inventory != null)
         {
-            pdaReferences.autoplayOnPickup.isOn = audioPlayOnPickup;
+            pdaReferences.autoplayOnPickup.isOn = inventory.AutoPlayOnPickup;
         }
 
         //Paint the UI using the inventory 
         if (inventory != null)
         {
+            //Configure weapon mounts
             for (int i = 0; i < weaponMountDetails.Count; i++)
             {
                 //Do we have a weapon mount here?
@@ -299,7 +305,7 @@ public class PlayerInventoryUI : MonoBehaviour
                 }
             }
 
-            //Configure the ammo slots
+            //Configure ammo mounts
             for (int i = 0; i < ammoMountDetails.Count; i++)
             {
                 //Do we have an ammo mount here?
@@ -332,7 +338,7 @@ public class PlayerInventoryUI : MonoBehaviour
                 }
             }
 
-            //Iterate over the UI backpack mounts and set all to empty and unselected
+            //Configure backpack mounts by setting them all to empty and unselected
             for (int i = 0; i < backpackMountDetails.Count; i++)
             {
                 //Do we have a backpack mount here?
@@ -361,6 +367,71 @@ public class PlayerInventoryUI : MonoBehaviour
                     backpackMounts[i].SetActive(true); //Safe check
                 }
 
+            }
+
+            if (pdaReferences.logEntries)
+            {
+                int audioCount = inventory.GetAudioRecordingCount();
+                int displayCount = pdaReferences.logEntries.childCount;
+                for (int i = 0; i < audioCount; i++)
+                {
+                    InventoryItemAudio audioItem = inventory.GetAudioRecording(i);
+
+                    //Check if we need to create a new entry or not
+                    if (i >= displayCount)
+                    {
+                        GameObject go = Instantiate(pdaReferences.logEntryPrefab);
+                        if (go != null)
+                        {
+
+                            PlayerInventoryUI_PDAEntry pdaEntry = go.GetComponent<PlayerInventoryUI_PDAEntry>();
+                            if (pdaEntry != null)
+                            {
+                                //Set entry's parent and order 
+                                pdaEntry.transform.SetParent(pdaReferences.logEntries, false);
+                                pdaEntry.transform.SetSiblingIndex(i); //Set order
+
+                                //Set entry's corresponding data
+                                pdaEntry.SetData(audioItem, i);
+                            }
+                        }
+                    }
+                    else //"Repurpose" existing entry 
+                    {
+                        PlayerInventoryUI_PDAEntry pdaEntry = pdaReferences.logEntries.GetChild(i).GetComponent<PlayerInventoryUI_PDAEntry>();
+                        if (pdaEntry != null)
+                        {
+                            pdaEntry.SetData(audioItem, i);
+
+                        }
+                    }
+                }
+
+                //If displayCount is greater than audioCount, destroy the rest of the unnecessary entries
+                for (int i = audioCount; i < displayCount; i++)
+                {
+                    Destroy(pdaReferences.logEntries.GetChild(i).gameObject);
+                }
+            }
+        }
+    }
+
+    public void RefreshPDAEntries()
+    {
+        if (inventory == null)
+            return;
+
+        //Refresh
+        for (int i = 0; i < pdaReferences.logEntries.childCount; i++)
+        {
+            //Get PDA Entry UI
+            PlayerInventoryUI_PDAEntry pdaEntry = pdaReferences.logEntries.GetChild(i).GetComponent<PlayerInventoryUI_PDAEntry>();
+            InventoryItemAudio audioItem = inventory.GetAudioRecording(i);
+
+            //Set pda data
+            if(pdaEntry != null && audioItem != null) 
+            {
+                pdaEntry.SetData(audioItem, i);
             }
         }
     }
@@ -397,9 +468,30 @@ public class PlayerInventoryUI : MonoBehaviour
                 ammoMountOriginalColor = tmp.color;
             }
         }
-        if (tabGroup.items.Count > 0 && tabGroup.items[0].tabText != null) //Tab Group Text
+        //Cache all normal colors of all tab groups
+        for (int i = 0; i < tabGroups.Count; i++)
         {
-            tabTextOriginalColor = tabGroup.items[0].tabText.color;
+            InventoryUI_TabGroup tabGroup = tabGroups[i];
+
+            if (tabGroup.items.Count > 0 && tabGroup.items[0].tabText != null) //Tab Group Text
+            {
+                tabGroup.NormalColor = tabGroup.items[0].tabText.color;
+            }
+        }
+
+        //Set corresponding index to each tab (to select/deselect tab using the SelectTabGroup function)
+        for (int i = 0; i < tabGroups.Count; i++)
+        {
+            var tabs = tabGroups[i].items;
+            for (int j = 0; j < tabs.Count; j++)
+            {
+                TabEntity tab = tabs[j].tabText.GetComponentInParent<TabEntity>();
+                if(tab != null)
+                {
+                    tab.GroupIndex = i;
+                    tab.TabIndex = j;
+                }
+            }
         }
 
         //Cache all backpack mount detail scripts
@@ -436,7 +528,10 @@ public class PlayerInventoryUI : MonoBehaviour
             }
         }
 
-        SelectTabGroup(activeTab);
+        SelectTabGroup(0, 0);
+        SelectTabGroup(1, 0);
+
+        StartCoroutine(ResetScrollViews());
 
         //Cache lamda event listeners
         OnHealthUpdate = () => { statusReferences.healthSlider.value = health.Value; };
@@ -460,20 +555,44 @@ public class PlayerInventoryUI : MonoBehaviour
         if (statusReferences.nightVisionSlider != null && nightVision != null) nightVision.OnVariableValueChanged += OnNightvisionUpdate;
     }
 
-    public void SelectTabGroup(int panel)
+    protected IEnumerator ResetScrollViews()
     {
-        activeTab = panel;
+        yield return null;
+
+        if(backpackScrollRect != null)
+        {
+            backpackScrollRect.verticalNormalizedPosition = 1.0f;
+        }
+        if (generalDescriptionLayout.scrollView != null)
+        {
+            generalDescriptionLayout.scrollView.verticalNormalizedPosition = 1.0f;
+        }
+        if (weaponDescriptionLayout.scrollView != null)
+        {
+            weaponDescriptionLayout.scrollView.verticalNormalizedPosition = 1.0f;
+        }
+    }
+
+    public void SelectTabGroup(int _tabGroupIndex, int _panel)
+    {
+        if (_tabGroupIndex < 0 || _tabGroupIndex >= tabGroups.Count)
+            return;
+
+        //Fetch group we wish to process
+        InventoryUI_TabGroup tabGroup = tabGroups[_tabGroupIndex];
+       
+        tabGroup.activeItem = _panel; //Cache active panel
 
         //For every tab
         for (int i = 0; i < tabGroup.items.Count; i++)
         {
-            //Enable/Disable selected tab
-            tabGroup.items[i].layoutContainer?.SetActive(i == activeTab);
+            //Enable selected tab
+            tabGroup.items[i].layoutContainer?.SetActive(i == tabGroup.activeItem);
                 
             //Set Selected/Deselected color
             if (tabGroup.items[i].tabText != null) 
             {
-                tabGroup.items[i].tabText.color = (i == activeTab) ? tabTextOriginalColor : tabTextInactive;
+                tabGroup.items[i].tabText.color = (i == tabGroup.activeItem) ? tabGroup.NormalColor : tabGroup.InactiveColor;
             }
         }
     }
@@ -841,33 +960,48 @@ public class PlayerInventoryUI : MonoBehaviour
         }
     }
 
-    public void OnEnterTab(int _index)
+    public void OnEnterTab(int _groupIndex, int _tabIndex)
     {
-        if(_index >= 0 || _index < tabGroup.items.Count)
+        if (_groupIndex == -1 || _tabIndex == -1)
+            return;
+
+        InventoryUI_TabGroup tabGroup = tabGroups[_groupIndex];
+
+        if(_tabIndex >= 0 && _tabIndex < tabGroup.items.Count)
         {
-            if(tabGroup.items[_index].tabText != null)
+            if(tabGroup.items[_tabIndex].tabText != null)
             {
-                tabGroup.items[_index].tabText.color = (activeTab != _index) ? tabTextHover : tabTextOriginalColor;
+                tabGroup.items[_tabIndex].tabText.color = (tabGroup.activeItem != _tabIndex) ? tabGroup.HoverColor : tabGroup.NormalColor;
             }
         }
     }
 
-    public void OnExitTab(int _index)
+    public void OnExitTab(int _groupIndex, int _tabIndex)
     {
-        if (_index >= 0 || _index < tabGroup.items.Count)
+        if (_groupIndex == -1 || _tabIndex == -1)
+            return;
+
+        InventoryUI_TabGroup tabGroup = tabGroups[_groupIndex];
+        
+        if (_tabIndex >= 0 && _tabIndex < tabGroup.items.Count)
         {
-            if (tabGroup.items[_index].tabText != null)
+            if (tabGroup.items[_tabIndex].tabText != null)
             {
-                tabGroup.items[_index].tabText.color = (activeTab == _index) ? tabTextOriginalColor : tabTextInactive;
+                tabGroup.items[_tabIndex].tabText.color = (tabGroup.activeItem == _tabIndex) ? tabGroup.NormalColor : tabGroup.InactiveColor;
             }
         }
     }
 
-    public void OnClickTab(int _index)
+    public void OnClickTab(int _groupIndex, int _tabIndex)
     {
-        if (_index >= 0 || _index < tabGroup.items.Count)
+        if (_groupIndex == -1 || _tabIndex == -1)
+            return;
+
+        InventoryUI_TabGroup tabGroup = tabGroups[_groupIndex];
+        
+        if (_tabIndex >= 0 && _tabIndex < tabGroup.items.Count)
         {
-            SelectTabGroup(_index);
+            SelectTabGroup(_groupIndex, _tabIndex);
         }
     }
 
@@ -908,5 +1042,65 @@ public class PlayerInventoryUI : MonoBehaviour
         }
 
         Invalidate(); //Repaint invenotory
+    }
+
+    public void OnAutoplayOnPickup()
+    {
+        if (pdaReferences.autoplayOnPickup != null && inventory != null)
+        {
+            inventory.AutoPlayOnPickup = pdaReferences.autoplayOnPickup.isOn;
+        }
+    }
+
+    public void OnBeginAudio(InventoryItemAudio _audioItem)
+    {
+        if (_audioItem == null)
+            return;
+
+        //Set UI elements for the audio item, image, author, subject etc...
+        if(pdaReferences.pdaImage != null)
+        {
+            pdaReferences.pdaImage.texture = _audioItem.Image;
+            pdaReferences.pdaImage.color = Color.white;
+        }
+        pdaReferences.pdaAuthor?.SetText(_audioItem.Person);
+        pdaReferences.pdaSubject?.SetText(_audioItem.Subject);
+    }
+
+    public void OnUpdateAudio(float _time)
+    {
+        if (pdaReferences.timelineSlider != null)
+        {
+            pdaReferences.timelineSlider.value = _time;
+        }
+    }
+
+    public void OnEndAudio()
+    {
+        //Set Timeline UI slider back to 0
+        if (pdaReferences.timelineSlider != null)
+        {
+            pdaReferences.timelineSlider.value = 0.0f;
+        }
+
+        //Clear PDA Panel's image author and subject
+        if (pdaReferences.pdaImage != null)
+        {
+            pdaReferences.pdaImage.texture = null;
+            pdaReferences.pdaImage.color = Color.black;
+        }
+
+        //Clear texts (subject and author)
+        pdaReferences.pdaAuthor?.SetText(string.Empty);
+        pdaReferences.pdaSubject?.SetText(string.Empty);
+
+        StartCoroutine(LateOnEndAudio());
+    }
+
+    public IEnumerator LateOnEndAudio()
+    {
+        yield return null;
+
+        RefreshPDAEntries();
     }
 }

@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0.00018310547, y: 0}
+  m_AnchoredPosition: {x: 0.00021362305, y: 0}
   m_SizeDelta: {x: 0.0005188, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5955185003916225991
@@ -656,7 +656,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 304.9, y: -371}
+  m_AnchoredPosition: {x: 304.9, y: -448}
   m_SizeDelta: {x: 587.761, y: 78}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9058703884111812673
@@ -791,7 +791,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 64.92499, y: -0.000061035156}
+  m_AnchoredPosition: {x: 64.92499, y: 0.000015258789}
   m_SizeDelta: {x: -202.45001, y: -137}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1183476793193505947
@@ -906,7 +906,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3292495376708869538
 RectTransform:
   m_ObjectHideFlags: 0
@@ -928,7 +928,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -32.299988, y: 0.00024414062}
+  m_AnchoredPosition: {x: -32.299988, y: 0}
   m_SizeDelta: {x: 500, y: 162}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &2741802401075899780
@@ -1341,9 +1341,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
-  m_WholeNumbers: 1
-  m_Value: 29
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2361,7 +2361,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.000061035156, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2813,11 +2813,11 @@ RectTransform:
   m_Father: {fileID: 6826553904682190749}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 304.9, y: -554.22}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -197}
   m_SizeDelta: {x: 587.761, y: 288.44}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &9178948978547277734
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2883,8 +2883,8 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
-  m_HorizontalAlignment: 1
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2913,7 +2913,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -405.34766, y: 0, z: -470.10742, w: 155.90297}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3538,13 +3538,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 526c20f859e2938418ca373fd4fd38f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crosshair: {fileID: 8104244525836402724}
-  healthText: {fileID: 0}
-  staminaText: {fileID: 0}
-  interactionText: {fileID: 0}
-  missionText: {fileID: 0}
+  healthSlider: {fileID: 6015890954031667832}
+  staminaSlider: {fileID: 1671532103079077979}
+  infectionSlider: {fileID: 2554419504051982981}
+  flashlightSlider: {fileID: 7124540067378043263}
+  nightVisionSlider: {fileID: 5206324074946929568}
+  interactionText: {fileID: 7017683399190688951}
+  notificationText: {fileID: 6717677596691911463}
+  transcriptText: {fileID: 2775150403933261929}
+  pdaOverlay: {fileID: 2664900269680413853}
+  pdaPerson: {fileID: 1658922166998035635}
+  pdaSubject: {fileID: 4705248007134694784}
+  pdaAudioTimeline: {fileID: 4127243583195457622}
   screenFade: {fileID: 8104244526757081169}
-  missionTextDisplayTime: 3
+  crosshair: {fileID: 8104244525836402724}
+  health: {fileID: 11400000, guid: b9b44ee454a29e94ea1424ec5194a086, type: 2}
+  stamina: {fileID: 11400000, guid: 81e6c66fcba3cd143bdbb5c4b0011d49, type: 2}
+  infection: {fileID: 11400000, guid: 93d3e27a87ce9b2478aead8f90392ec6, type: 2}
+  flashlight: {fileID: 11400000, guid: f6bb970a7c8155c4882931f4ff9b9127, type: 2}
+  nightVision: {fileID: 11400000, guid: 964b5ff7f2133f74cb710c758e4287ff, type: 2}
+  interactionString: {fileID: 11400000, guid: 5dac2dd1d7708de438ddef72064e27e1, type: 2}
+  transcriptString: {fileID: 11400000, guid: a241e559c78f63e4b83c7fda22982870, type: 2}
+  notificationQueue: {fileID: 11400000, guid: a8505ed6f3cf65c44a9bfbb4b11ea557, type: 2}
 --- !u!1 &8104244526757081174
 GameObject:
   m_ObjectHideFlags: 0

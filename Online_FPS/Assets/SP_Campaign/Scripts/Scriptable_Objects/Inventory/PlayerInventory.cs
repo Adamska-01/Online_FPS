@@ -29,7 +29,7 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
 
 
     //Public Properties
-    public override bool AutoPlayOnPickup { get => autoPlayOnPickup; set => autoPlayOnPickup = value; }
+    public override bool AutoPlayOnPickup { get => autoPlayOnPickupInternal; set => autoPlayOnPickupInternal = value; }
 
 
     //Internals
@@ -37,6 +37,7 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
     protected List<InventoryAmmoMountInfo> ammos = new List<InventoryAmmoMountInfo>();
     protected List<InventoryBackpackMountInfo> backpacks = new List<InventoryBackpackMountInfo>();
     protected List<InventoryItemAudio> recordings = new List<InventoryItemAudio>();
+    protected bool autoPlayOnPickupInternal = true;
     
     //Index of a recording currently being played
     protected int activeAudioRecordingIndex = -1;
@@ -108,6 +109,7 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
 
         return true;
     }
+
     void StopAudioListener()
     {
         InventoryAudioPlayer audioPlayer = InventoryAudioPlayer.Instance;
@@ -118,6 +120,7 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
 
         activeAudioRecordingIndex = -1;
     }
+
     public override void StopAudioRecording()
     {
         InventoryAudioPlayer audioPlayer = InventoryAudioPlayer.Instance;
@@ -690,7 +693,7 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
             recordings.Add(_invItem);
 
             //Play on pick if configured to do so (last picked one)
-            if(autoPlayOnPickup)
+            if(autoPlayOnPickupInternal)
             {
                 PlayAudioRecording(recordings.Count - 1);
             }
@@ -751,6 +754,8 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
             recordings.Add(recording);
         }
 
+        autoPlayOnPickupInternal = autoPlayOnPickup;
+        
         //Reset audio recording selection
         activeAudioRecordingIndex = -1;
     }
