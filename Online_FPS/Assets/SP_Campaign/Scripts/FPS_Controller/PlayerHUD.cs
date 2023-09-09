@@ -67,17 +67,6 @@ public class PlayerHUD : MonoBehaviour
         OnInteractionTextUpdate = () => { interactionText.text = interactionString.Value; };
         OnTranscriptTextUpdate = () => { transcriptText.text = transcriptString.Value; };
         OnNotificationQueueUpdate = () => { notificationText.text = notificationQueue.CurrentDequeuedText; };
-    }
-
-    void Start()
-    {
-        //Set Fade image alpha
-        if (screenFade != null)
-        {
-            Color color = screenFade.color;
-            color.a = currentFadeLevel;
-            screenFade.color = color;
-        }
 
         //Make a first assignment (all future assignments are handled by the events)
         if (healthSlider != null && health != null) OnHealthUpdate?.Invoke();
@@ -90,8 +79,17 @@ public class PlayerHUD : MonoBehaviour
         if (notificationText != null && notificationQueue != null) OnNotificationQueueUpdate?.Invoke();
     }
 
-    private void OnEnable()
+    void Start()
     {
+        //Set Fade image alpha
+        if (screenFade != null)
+        {
+            Color color = screenFade.color;
+            color.a = currentFadeLevel;
+            screenFade.color = color;
+        }
+
+        //Subscribe listener
         if (healthSlider != null && health != null) health.OnVariableValueChanged += OnHealthUpdate;
         if (staminaSlider != null && stamina != null) stamina.OnVariableValueChanged += OnStaminaUpdate;
         if (infectionSlider != null && infection != null) infection.OnVariableValueChanged += OnInfectionUpdate;
@@ -101,9 +99,10 @@ public class PlayerHUD : MonoBehaviour
         if (transcriptText != null && transcriptString != null) transcriptString.OnVariableValueChanged += OnTranscriptTextUpdate;
         if (notificationText != null && notificationQueue != null) notificationQueue.OnVariableValueChanged += OnNotificationQueueUpdate;
     }
-
-    private void OnDisable()
+    
+    private void OnDestroy()
     {
+        //Unsubscribe listener
         if (healthSlider != null && health != null) health.OnVariableValueChanged -= OnHealthUpdate;
         if (staminaSlider != null && stamina != null) stamina.OnVariableValueChanged -= OnStaminaUpdate;
         if (infectionSlider != null && infection != null) infection.OnVariableValueChanged -= OnInfectionUpdate;
