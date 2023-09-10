@@ -1,0 +1,347 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FPS_Arms_Flashlight_Mask
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Arms_Rig
+    m_Weight: 0
+  - m_Path: Arms_Rig/root
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/camera
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/Flashlight_root
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/MCH-shoulder_rh_ns_ch.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/MCH-shoulder_rh_ns_ch.L/DEF-upper_arm.01.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/MCH-shoulder_rh_ns_ch.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/MCH-shoulder_rh_ns_ch.R/DEF-upper_arm.01.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/MeleeWeapon_root
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/DEF-shoulder.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/DEF-upper_arm.02.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/DEF-forearm.02.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/MCH-forearm.01.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/MCH-forearm.01.L/MCH-forearm_smth.01.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/MCH-forearm.01.L/MCH-forearm_smth.01.L/DEF-forearm.01.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/DEF-hand.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.01.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.01.L/DEF-f_index.01.L.01
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.01.L/DEF-palm.01.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.01.L/DEF-thumb.01.L.01
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.01.L/ORG-f_index.01.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.01.L/ORG-f_index.01.L/DEF-f_index.01.L.02
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.01.L/ORG-f_index.01.L/ORG-f_index.02.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.01.L/ORG-f_index.01.L/ORG-f_index.02.L/DEF-f_index.02.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.01.L/ORG-f_index.01.L/ORG-f_index.02.L/ORG-f_index.03.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.01.L/ORG-f_index.01.L/ORG-f_index.02.L/ORG-f_index.03.L/DEF-f_index.03.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.01.L/ORG-thumb.01.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.01.L/ORG-thumb.01.L/DEF-thumb.01.L.02
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.01.L/ORG-thumb.01.L/ORG-thumb.02.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.01.L/ORG-thumb.01.L/ORG-thumb.02.L/DEF-thumb.02.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.01.L/ORG-thumb.01.L/ORG-thumb.02.L/ORG-thumb.03.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.01.L/ORG-thumb.01.L/ORG-thumb.02.L/ORG-thumb.03.L/DEF-thumb.03.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.02.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.02.L/DEF-f_middle.01.L.01
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.02.L/DEF-palm.02.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.02.L/ORG-f_middle.01.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.02.L/ORG-f_middle.01.L/DEF-f_middle.01.L.02
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.02.L/ORG-f_middle.01.L/ORG-f_middle.02.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.02.L/ORG-f_middle.01.L/ORG-f_middle.02.L/DEF-f_middle.02.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.02.L/ORG-f_middle.01.L/ORG-f_middle.02.L/ORG-f_middle.03.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.02.L/ORG-f_middle.01.L/ORG-f_middle.02.L/ORG-f_middle.03.L/DEF-f_middle.03.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.03.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.03.L/DEF-f_ring.01.L.01
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.03.L/DEF-palm.03.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.03.L/ORG-f_ring.01.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.03.L/ORG-f_ring.01.L/DEF-f_ring.01.L.02
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.03.L/ORG-f_ring.01.L/ORG-f_ring.02.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.03.L/ORG-f_ring.01.L/ORG-f_ring.02.L/DEF-f_ring.02.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.03.L/ORG-f_ring.01.L/ORG-f_ring.02.L/ORG-f_ring.03.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.03.L/ORG-f_ring.01.L/ORG-f_ring.02.L/ORG-f_ring.03.L/DEF-f_ring.03.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.04.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.04.L/DEF-f_pinky.01.L.01
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.04.L/DEF-palm.04.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.04.L/ORG-f_pinky.01.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.04.L/ORG-f_pinky.01.L/DEF-f_pinky.01.L.02
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.04.L/ORG-f_pinky.01.L/ORG-f_pinky.02.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.04.L/ORG-f_pinky.01.L/ORG-f_pinky.02.L/DEF-f_pinky.02.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.04.L/ORG-f_pinky.01.L/ORG-f_pinky.02.L/ORG-f_pinky.03.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.L/ORG-upper_arm.L/ORG-forearm.L/ORG-hand.L/ORG-palm.04.L/ORG-f_pinky.01.L/ORG-f_pinky.02.L/ORG-f_pinky.03.L/DEF-f_pinky.03.L
+    m_Weight: 1
+  - m_Path: Arms_Rig/root/ORG-shoulder.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/DEF-shoulder.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/DEF-upper_arm.02.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/DEF-forearm.02.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/MCH-forearm.01.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/MCH-forearm.01.R/MCH-forearm_smth.01.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/MCH-forearm.01.R/MCH-forearm_smth.01.R/DEF-forearm.01.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/DEF-hand.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.01.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.01.R/DEF-f_index.01.R.01
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.01.R/DEF-palm.01.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.01.R/DEF-thumb.01.R.01
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.01.R/ORG-f_index.01.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.01.R/ORG-f_index.01.R/DEF-f_index.01.R.02
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.01.R/ORG-f_index.01.R/ORG-f_index.02.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.01.R/ORG-f_index.01.R/ORG-f_index.02.R/DEF-f_index.02.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.01.R/ORG-f_index.01.R/ORG-f_index.02.R/ORG-f_index.03.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.01.R/ORG-f_index.01.R/ORG-f_index.02.R/ORG-f_index.03.R/DEF-f_index.03.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.01.R/ORG-thumb.01.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.01.R/ORG-thumb.01.R/DEF-thumb.01.R.02
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.01.R/ORG-thumb.01.R/ORG-thumb.02.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.01.R/ORG-thumb.01.R/ORG-thumb.02.R/DEF-thumb.02.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.01.R/ORG-thumb.01.R/ORG-thumb.02.R/ORG-thumb.03.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.01.R/ORG-thumb.01.R/ORG-thumb.02.R/ORG-thumb.03.R/DEF-thumb.03.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.02.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.02.R/DEF-f_middle.01.R.01
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.02.R/DEF-palm.02.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.02.R/ORG-f_middle.01.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.02.R/ORG-f_middle.01.R/DEF-f_middle.01.R.02
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.02.R/ORG-f_middle.01.R/ORG-f_middle.02.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.02.R/ORG-f_middle.01.R/ORG-f_middle.02.R/DEF-f_middle.02.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.02.R/ORG-f_middle.01.R/ORG-f_middle.02.R/ORG-f_middle.03.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.02.R/ORG-f_middle.01.R/ORG-f_middle.02.R/ORG-f_middle.03.R/DEF-f_middle.03.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.03.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.03.R/DEF-f_ring.01.R.01
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.03.R/DEF-palm.03.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.03.R/ORG-f_ring.01.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.03.R/ORG-f_ring.01.R/DEF-f_ring.01.R.02
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.03.R/ORG-f_ring.01.R/ORG-f_ring.02.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.03.R/ORG-f_ring.01.R/ORG-f_ring.02.R/DEF-f_ring.02.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.03.R/ORG-f_ring.01.R/ORG-f_ring.02.R/ORG-f_ring.03.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.03.R/ORG-f_ring.01.R/ORG-f_ring.02.R/ORG-f_ring.03.R/DEF-f_ring.03.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.04.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.04.R/DEF-f_pinky.01.R.01
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.04.R/DEF-palm.04.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.04.R/ORG-f_pinky.01.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.04.R/ORG-f_pinky.01.R/DEF-f_pinky.01.R.02
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.04.R/ORG-f_pinky.01.R/ORG-f_pinky.02.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.04.R/ORG-f_pinky.01.R/ORG-f_pinky.02.R/DEF-f_pinky.02.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.04.R/ORG-f_pinky.01.R/ORG-f_pinky.02.R/ORG-f_pinky.03.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/ORG-palm.04.R/ORG-f_pinky.01.R/ORG-f_pinky.02.R/ORG-f_pinky.03.R/DEF-f_pinky.03.R
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/Pistol_mag
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/Pistol_mag/Pistol_shell
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/Pistol_root
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/Pistol_root/Pistol_hammer
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/Pistol_root/Pistol_slide
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/Pistol_root/Pistol_Trigger 1
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/Rifle_mag
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/Rifle_mag/Rifle_shell
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/Rifle_root
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/Rifle_root/charging_handle
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/Rifle_root/Rifle_port_cover
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/Rifle_root/Rifle_trigger
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/Shotgun_root
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/Shotgun_root/Shotgun_ForeEnd 1
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/Shotgun_root/Shotgun_LoadingPort 1
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/Shotgun_root/Shotgun_Shell 1
+    m_Weight: 0
+  - m_Path: Arms_Rig/root/Shotgun_root/Shotgun_Trigger 1
+    m_Weight: 0
+  - m_Path: Flashlight
+    m_Weight: 0
+  - m_Path: MeleeWeapons_Empty
+    m_Weight: 0
+  - m_Path: MeleeWeapons_Empty/Axe
+    m_Weight: 0
+  - m_Path: MeleeWeapons_Empty/Bat
+    m_Weight: 0
+  - m_Path: MeleeWeapons_Empty/Crowbar
+    m_Weight: 0
+  - m_Path: MeleeWeapons_Empty/Machete
+    m_Weight: 0
+  - m_Path: MeleeWeapons_Empty/Pipe
+    m_Weight: 0
+  - m_Path: Pistol_Empty
+    m_Weight: 0
+  - m_Path: Pistol_Empty/Pistol_Frame
+    m_Weight: 0
+  - m_Path: Pistol_Empty/Pistol_Hammer
+    m_Weight: 0
+  - m_Path: Pistol_Empty/Pistol_Magazine
+    m_Weight: 0
+  - m_Path: Pistol_Empty/Pistol_Safety
+    m_Weight: 0
+  - m_Path: Pistol_Empty/Pistol_Shell
+    m_Weight: 0
+  - m_Path: Pistol_Empty/Pistol_Slide
+    m_Weight: 0
+  - m_Path: Pistol_Empty/Pistol_Trigger
+    m_Weight: 0
+  - m_Path: Rifle_Empty
+    m_Weight: 0
+  - m_Path: Rifle_Empty/Rifle_Aim
+    m_Weight: 0
+  - m_Path: Rifle_Empty/Rifle_Back
+    m_Weight: 0
+  - m_Path: Rifle_Empty/Rifle_ChargingHandle
+    m_Weight: 0
+  - m_Path: Rifle_Empty/Rifle_Flash
+    m_Weight: 0
+  - m_Path: Rifle_Empty/Rifle_Frame
+    m_Weight: 0
+  - m_Path: Rifle_Empty/Rifle_Magazine
+    m_Weight: 0
+  - m_Path: Rifle_Empty/Rifle_PortCover
+    m_Weight: 0
+  - m_Path: Rifle_Empty/Rifle_Shell
+    m_Weight: 0
+  - m_Path: Rifle_Empty/Rifle_Shell2
+    m_Weight: 0
+  - m_Path: Rifle_Empty/Rifle_Trigger
+    m_Weight: 0
+  - m_Path: Shotgun_Empty
+    m_Weight: 0
+  - m_Path: Shotgun_Empty/Shotgun_ForeEnd
+    m_Weight: 0
+  - m_Path: Shotgun_Empty/Shotgun_Frame
+    m_Weight: 0
+  - m_Path: Shotgun_Empty/Shotgun_LoadingPort
+    m_Weight: 0
+  - m_Path: Shotgun_Empty/Shotgun_Shell
+    m_Weight: 0
+  - m_Path: Shotgun_Empty/Shotgun_Trigger
+    m_Weight: 0
+  - m_Path: Soldier_arms
+    m_Weight: 0

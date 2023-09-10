@@ -64,6 +64,9 @@ public class InventoryItemWeapon : InventoryItem
     [Tooltip("FPS Arms Animator Sub-State Machine index to use when performing animations for this weapon.")]
     [SerializeField] protected int weaponAnim = -1;
 
+    [Tooltip("FPS Arms Animator Sub-State Machine attack animation index range.\n\nA Value of 3 would be used if the sub-state has 3 attack variants.")]
+    [SerializeField] protected int attackAnimCount = 1;
+
 
      // Public Properties
     public InventoryWeaponType WeaponType           { get { return weaponType; } }

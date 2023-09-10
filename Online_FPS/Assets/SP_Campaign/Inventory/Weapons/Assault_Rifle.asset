@@ -69,4 +69,5 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  weaponAnim: -1
+  weaponAnim: 4
+  attackAnimCount: 1
