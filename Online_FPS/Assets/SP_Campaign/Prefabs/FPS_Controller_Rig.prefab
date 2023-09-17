@@ -861,13 +861,25 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
       propertyPath: m_Layer
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 100010, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
       propertyPath: m_Layer
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100132, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
       propertyPath: m_Layer
@@ -885,6 +897,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 100138, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 100154, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
       propertyPath: m_Layer
       value: 14
@@ -897,13 +913,17 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 100248, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 100250, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
       propertyPath: m_Layer
       value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 100250, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100252, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
       propertyPath: m_Layer
