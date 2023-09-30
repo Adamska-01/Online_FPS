@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeef5d7690aeaf04f8cf716bff21cf5c, type: 3}
+  m_Name: Rifle
+  m_EditorClassIdentifier: 
+  audioGroup: Player
+  volume: 0.4
+  spatialBlend: 0.5
+  priority: 256
+  audioClipBanks:
+  - clips:
+    - {fileID: 8300000, guid: da251d6fac5ec6645a6948189b2bbe37, type: 3}
+  - clips:
+    - {fileID: 8300000, guid: 00b65e20d95bfa749b7db9bcfd238a5a, type: 3}
+  - clips:
+    - {fileID: 8300000, guid: 55b080c30b5d4644983352083dec6abc, type: 3}
+  - clips:
+    - {fileID: 8300000, guid: 001271651c1f44147b0e8b811c7f6d8b, type: 3}
