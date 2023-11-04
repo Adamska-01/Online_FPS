@@ -555,7 +555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meleeTrigger: {fileID: 2633946818584126980}
   cameraBloodEffect: {fileID: 1036326833}
-  playerCamera: {fileID: 2633946818704069685}
+  sceneCam: {fileID: 2633946818704069685}
   soundEmitter: {fileID: 2633946820111181205}
   walkRadius: 0
   runRadius: 5
@@ -570,6 +570,75 @@ MonoBehaviour:
   tauntRadius: 10
   inventoryUI: {fileID: 0}
   inventory: {fileID: 11400000, guid: 2bdc2a4cf959a5445afce201f213fbc8, type: 2}
+  defaultWeapon: {fileID: 11400000, guid: ee835328d09f2b844af77b1d36ad1d1c, type: 2}
+  primaryFlashlight:
+    lightObj: {fileID: 1321445063}
+    lightMesh: {fileID: 2633946818490521425}
+  flashlightOnStart: 0
+  armsAnimator: {fileID: 2633946818499880213}
+  armsObjects:
+  - identifier: {fileID: 11400000, guid: 8dd1165eaa7198a489a20c4234034b11, type: 2}
+    sceneObjects:
+    - {fileID: 2633946818490521297}
+    light:
+      lightObj: {fileID: 0}
+      lightMesh: {fileID: 0}
+    callback: {fileID: 0}
+  - identifier: {fileID: 11400000, guid: 1b652cb65821f0842a8ff9bfbbf3ec00, type: 2}
+    sceneObjects:
+    - {fileID: 2633946818490521311}
+    light:
+      lightObj: {fileID: 0}
+      lightMesh: {fileID: 0}
+    callback: {fileID: 0}
+  - identifier: {fileID: 11400000, guid: 772617e19f582d24e99185a7e315ecb1, type: 2}
+    sceneObjects:
+    - {fileID: 2633946818490521303}
+    light:
+      lightObj: {fileID: 0}
+      lightMesh: {fileID: 0}
+    callback: {fileID: 0}
+  - identifier: {fileID: 11400000, guid: e45daca13458b5442b31c509e17dcdd3, type: 2}
+    sceneObjects:
+    - {fileID: 2633946818490521439}
+    light:
+      lightObj: {fileID: 0}
+      lightMesh: {fileID: 0}
+    callback: {fileID: 0}
+  - identifier: {fileID: 11400000, guid: 18d0848814a93ad4e84ed2d8369616d7, type: 2}
+    sceneObjects:
+    - {fileID: 2633946818490521581}
+    light:
+      lightObj: {fileID: 0}
+      lightMesh: {fileID: 0}
+    callback: {fileID: 0}
+  - identifier: {fileID: 11400000, guid: 37ac0c44aa4196648a50297b32f86564, type: 2}
+    sceneObjects:
+    - {fileID: 2633946818490521545}
+    - {fileID: 2633946818490521535}
+    light:
+      lightObj: {fileID: 0}
+      lightMesh: {fileID: 0}
+    callback: {fileID: 0}
+  - identifier: {fileID: 11400000, guid: 620652e810e29ae41a7035b52590ea19, type: 2}
+    sceneObjects:
+    - {fileID: 2633946818490521583}
+    - {fileID: 2633946818490521555}
+    light:
+      lightObj: {fileID: 0}
+      lightMesh: {fileID: 0}
+    callback: {fileID: 0}
+  - identifier: {fileID: 11400000, guid: ce48261ef6954404ea40951170265dcb, type: 2}
+    sceneObjects:
+    - {fileID: 2633946818490521517}
+    - {fileID: 2633946818490521489}
+    light:
+      lightObj: {fileID: 0}
+      lightMesh: {fileID: 0}
+    callback: {fileID: 0}
+  weaponRayLayerMask:
+    serializedVersion: 2
+    m_Bits: 12289
   health: {fileID: 11400000, guid: b9b44ee454a29e94ea1424ec5194a086, type: 2}
   infection: {fileID: 11400000, guid: 93d3e27a87ce9b2478aead8f90392ec6, type: 2}
   interactionText: {fileID: 11400000, guid: 5dac2dd1d7708de438ddef72064e27e1, type: 2}
@@ -591,7 +660,7 @@ MonoBehaviour:
   runSpeed: 4.5
   jumpSpeed: 7.5
   crouchSpeed: 1
-  staminaDepletion: 4
+  staminaDepletion: 5
   staminaRecovery: 10
   stickToGroundForce: 5
   gravityMultiplier: 2.5
@@ -652,8 +721,6 @@ MonoBehaviour:
     verticalMultiplayer: 0.05
     verticalhorizontalSpeedRatio: 2
     baseInterval: 1
-  flashLight: {fileID: 0}
-  flashlightOnAtStart: 0
   stamina: {fileID: 11400000, guid: 81e6c66fcba3cd143bdbb5c4b0011d49, type: 2}
   broadcastPosition: {fileID: 11400000, guid: 166ed2ae81a555c4f98450f1b36c3c8a, type: 2}
   broadcastDirection: {fileID: 11400000, guid: 82df65560a7dd6e459ee7e186b8b3ebc, type: 2}
@@ -862,7 +929,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100284, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100286, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
       propertyPath: m_Layer
@@ -1117,6 +1184,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400136, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
   m_PrefabInstance: {fileID: 2633946818490421365}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2633946818490521297 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100004, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
+  m_PrefabInstance: {fileID: 2633946818490421365}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2633946818490521299 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100006, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
@@ -1245,3 +1317,63 @@ MonoBehaviour:
   distortion: 0.21
   fadeSpeed: 0.05
   autoFade: 1
+--- !u!1 &2633946818490521303 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100002, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
+  m_PrefabInstance: {fileID: 2633946818490421365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2633946818490521311 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100010, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
+  m_PrefabInstance: {fileID: 2633946818490421365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2633946818490521425 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100132, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
+  m_PrefabInstance: {fileID: 2633946818490421365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2633946818490521439 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100138, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
+  m_PrefabInstance: {fileID: 2633946818490421365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2633946818490521489 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100324, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
+  m_PrefabInstance: {fileID: 2633946818490421365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2633946818490521517 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100312, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
+  m_PrefabInstance: {fileID: 2633946818490421365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2633946818490521535 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100298, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
+  m_PrefabInstance: {fileID: 2633946818490421365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2633946818490521545 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100284, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
+  m_PrefabInstance: {fileID: 2633946818490421365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2633946818490521555 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100262, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
+  m_PrefabInstance: {fileID: 2633946818490421365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2633946818490521581 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100248, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
+  m_PrefabInstance: {fileID: 2633946818490421365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2633946818490521583 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100250, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
+  m_PrefabInstance: {fileID: 2633946818490421365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2633946818499880213 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
+  m_PrefabInstance: {fileID: 2633946818490421365}
+  m_PrefabAsset: {fileID: 0}

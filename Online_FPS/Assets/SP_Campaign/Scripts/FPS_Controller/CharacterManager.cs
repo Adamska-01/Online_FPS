@@ -1,17 +1,22 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
+
+/// <summary>
+/// Manages the player character. This is the conduit to the Arms Animator, the Inventory 
+/// System, and the Weapons System as well as many other things such as managing the player 
+/// damage.
+/// </summary>
 public class CharacterManager : MonoBehaviour
 {
     //Constants
     public const float MAX_HEALTH = 100.0f;
-
+    
     //Inspector-Assigned
     [SerializeField] private CapsuleCollider meleeTrigger = null;
     [SerializeField] private CameraBloodEffect cameraBloodEffect = null;
-    [SerializeField] private Camera playerCamera = null;
+    [SerializeField] private Camera sceneCam = null;
     [SerializeField] private AISoundEmitter soundEmitter = null;
     [SerializeField] private float walkRadius = 0.0f;
     [SerializeField] private float runRadius = 7.0f;
@@ -30,6 +35,14 @@ public class CharacterManager : MonoBehaviour
     [Header("Inventory")]
     [SerializeField] private GameObject inventoryUI = null;
     [SerializeField] private Inventory inventory = null;
+    [SerializeField] private InventoryItemWeapon defaultWeapon = null;
+    [SerializeField] private Flashlight primaryFlashlight = new Flashlight();
+    [SerializeField] private bool flashlightOnStart = false;
+
+    [Header("Arms System")]
+    [SerializeField] private Animator armsAnimator = null;
+    [SerializeField] private List<ArmsObject> armsObjects = new List<ArmsObject>();
+    [SerializeField] private LayerMask weaponRayLayerMask = new LayerMask();
 
     [Header("Shared Variables")]
     [SerializeField] private SharedFloat health    = null;
@@ -43,8 +56,28 @@ public class CharacterManager : MonoBehaviour
     private GameSceneManager gameSceneManger = null;
     private int AI_BodyPartLayer = -1;
     private int interactiveMask = 0;
-    private float nextAttackTime = 0.0f;
     private float nextTauntTime = 0.0f;
+
+    //Arms & Weapons 
+    private Flashlight secondaryFlashlight = null;
+    private Dictionary<ScriptableObject, ArmsObject> armsObjectsDictionary = new Dictionary<ScriptableObject, ArmsObject>();
+
+    // Animation Hashes
+    private int weaponAnimHash          = Animator.StringToHash("Weapon Anim");         // The current sub-state machine to play for the selected weapon
+    private int weaponArmedHash         = Animator.StringToHash("Weapon Armed");        // Is the current weapon armed
+    private int flashlightHash          = Animator.StringToHash("Flashlight");          // Is flashlight on
+    private int speedHash               = Animator.StringToHash("Speed");               // Speed setting of character (Idle, Walking or running)
+    private int attackAnimHash          = Animator.StringToHash("Attack Anim");         // Used by machines that have several random attack states
+    private int attackTriggerHash       = Animator.StringToHash("Attack");              // Used to trigger a transition into an attack state
+    private int canSwitchWeaponsHash    = Animator.StringToHash("Can Switch Weapons");  // Can we switch to a different weapon at the moment
+    private int dualHandedWeaponHash    = Animator.StringToHash("Dual Handed Weapon");  // Is the current weapon two handed
+    private int dualModeActive          = Animator.StringToHash("Dual Mode Active");    // Does the current weapon have a dual firing mode that is active
+    private int reloadHash              = Animator.StringToHash("Reload");              // Do we require a reload
+    private int reloadRepeatHash        = Animator.StringToHash("Reload Repeat");       // How many times should the reload animation loop (used for partial reload types)
+    private int staminaHash             = Animator.StringToHash("Stamina");             // Stamina of the player
+    private int autoFireHash            = Animator.StringToHash("Auto Fire");           // Does the weapon support auto fire
+    private int playerSpeedOverrideHash = Animator.StringToHash("Player Speed Override"); // Allows animation to override max speed of player
+    private int clearWeaponHash         = Animator.StringToHash("Clear Weapon");          // Hash of Clear Weapon Trigger in animator
 
     //Properties
     public FPS_Controller FPSController { get { return fpsController; } }
@@ -62,7 +95,7 @@ public class CharacterManager : MonoBehaviour
         if(gameSceneManger != null)
         {
             Player_Info info = new Player_Info();
-            info.camera = playerCamera;
+            info.camera = sceneCam;
             info.characterManager = this;
             info.collider = col;
             info.meleeTrigger = meleeTrigger;
@@ -83,6 +116,59 @@ public class CharacterManager : MonoBehaviour
 
         //Disable Inventory UI at start up
         inventoryUI.SetActive(false);
+
+        ArmsBaseSMB[] stateMachineBehaviours = armsAnimator.GetBehaviours<ArmsBaseSMB>();
+        Dictionary<ScriptableObject, List<ArmsBaseSMB>> stateMachineBehavioursByID = new Dictionary<ScriptableObject, List<ArmsBaseSMB>>();
+        foreach (ArmsBaseSMB item in stateMachineBehaviours)
+        {
+            // Store this manager to each behaviour
+            item.characterMgr = this;
+
+            // Store a reference  each behaviour
+            if(item.identifier != null)
+            {
+                if(stateMachineBehavioursByID.TryGetValue(item.identifier, out List<ArmsBaseSMB> behaviourList))
+                {
+                    behaviourList.Add(item);
+                }
+                else
+                {
+                    List<ArmsBaseSMB> newBehaviourList = new List<ArmsBaseSMB>();
+                    newBehaviourList.Add(item);
+                    stateMachineBehavioursByID.Add(item.identifier, newBehaviourList);
+                }
+            }
+        }
+
+        // Copy over the fps weapon prefabs in the scene (attached to our
+        // arms) stored in a list into a dictionary for quick runtime access
+        for (int i = 0; i < armsObjects.Count; i++)
+        {
+            ArmsObject armsObject = armsObjects[i];
+            if (armsObject != null && armsObject.identifier) 
+            {
+                // Store the gameobject list in the dictionary by ID
+                armsObjectsDictionary[armsObject.identifier] = armsObject;
+
+                // See if this weapon has an AnimatorStateCallback so that the animator can call it
+                if (armsObject.callback != null && stateMachineBehavioursByID.TryGetValue(armsObject.identifier, out List<ArmsBaseSMB> behaviourList))
+                {
+                    foreach (ArmsBaseSMB item in behaviourList)
+                    {
+                        if (item != null)
+                        {
+                            item.callbackHandler = armsObject.callback;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Start off with the primary flashlight and mesh disabled
+        primaryFlashlight.ActivateLight(false);
+        primaryFlashlight.ActivateMesh(false);
+        // Set the starting state of the flashlight
+        ActivateFlashlight(flashlightOnStart);
     }
 
     private void OnEnable()
@@ -126,13 +212,7 @@ public class CharacterManager : MonoBehaviour
         }
 
         ProcessInteractableItems();
-
-        //Push (Attack)
-        if (Input.GetMouseButtonDown(0) && Time.time > nextAttackTime)
-        {
-            DoDamage();
-        }
-        
+                
         //Set sound emitter radius (take damage value into account as well)
         if (fpsController != null || soundEmitter != null)
         {
@@ -152,10 +232,46 @@ public class CharacterManager : MonoBehaviour
             fpsController.DragMultiplierLimit = Mathf.Max(health.Value / MAX_HEALTH, 0.25f); //Set drag limit
         }
 
-        //Taunt 
-        if (Input.GetMouseButtonDown(1))
+        // Process flashlight input when inventory is not active
+        if((inventoryUI != null && !inventoryUI.activeSelf) || inventoryUI == null)
         {
-            DoTaunt();
+            if(armsAnimator != null)
+            {
+                if(Input.GetButtonDown("Flashlight"))
+                {
+                    ActivateFlashlight(!armsAnimator.GetBool(flashlightHash));
+                }
+            }
+        }
+    }
+
+    public void ActivateFlashlight(bool _activate)
+    {
+        // Trigger flashlight animation
+        armsAnimator?.SetBool(flashlightHash, _activate);
+
+        // Enable/Disable the secondary flashlight without going through the animator.
+        // This will always be null if we don't currently have a weapon with a flashlight on it.
+        secondaryFlashlight?.ActivateLight(_activate);
+    }
+
+    public void ActivateFlashlightMesh_AnimatorCallback(bool _enableMesh, FlashlightType _type)
+    {
+        if(_type == FlashlightType.Primary)
+        {
+            primaryFlashlight.ActivateMesh(_enableMesh);
+        }
+    }
+
+    public void ActivateFlashlightLight_AnimatorCallback(bool _enableLight, FlashlightType _type)
+    {
+        if (_type == FlashlightType.Primary)
+        {
+            primaryFlashlight.ActivateLight(_enableLight);
+        }
+        else if(secondaryFlashlight != null)
+        {
+            secondaryFlashlight.ActivateLight(_enableLight);
         }
     }
 
@@ -190,9 +306,9 @@ public class CharacterManager : MonoBehaviour
         RaycastHit[] hits;
 
         //Cast Ray
-        ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0.0f));
+        ray = sceneCam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0.0f));
         //Calculate ray length based on where the player is looking (becomes longer if looking down, shortest is when looking forward)
-        float rayLength = Mathf.Lerp(1.0f, 1.8f, Mathf.Abs(Vector3.Dot(playerCamera.transform.forward, Vector3.up)));
+        float rayLength = Mathf.Lerp(1.0f, 1.8f, Mathf.Abs(Vector3.Dot(sceneCam.transform.forward, Vector3.up)));
 
         //Collect hits
         hits = Physics.RaycastAll(ray, rayLength, interactiveMask);
@@ -314,45 +430,20 @@ public class CharacterManager : MonoBehaviour
 
     private void OnSwitchWeapon(InventoryWeaponMountInfo _weaponMount)
     {
-        if(inventory != null)
-        {
-            //Calculate mount index
-            int mountIndex = (_weaponMount.weapon.WeaponType == InventoryWeaponType.SingleHanded) ? 0 : 1;
-            
-            //If there is any weapon on that index, drop it
-            inventory.DropWeaponItem(mountIndex);
 
-            inventory.AssignWeapon(mountIndex, _weaponMount);
-        }
     }
     
     private void OnDrophWeapon(InventoryItemWeapon arg0)
     {
-        Debug.Log("Dropping Weapon");
+
     }
 
     public void DoDamage(int _hitDir = 0)
     {
-        if (playerCamera == null || gameSceneManger == null)
+        if (sceneCam == null || gameSceneManger == null)
             return;
 
-        Ray ray;
-        RaycastHit hit;
-        bool isSomethingHit = false;
 
-        //Perform raycast from the crosshair (screen center)
-        ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-        isSomethingHit = Physics.Raycast(ray, out hit, 1.0f, 1 << AI_BodyPartLayer);
-
-        if(isSomethingHit)
-        {
-            AIStateMachine stateMachine = gameSceneManger.GetAIStateMachine(hit.rigidbody.GetInstanceID());
-            if(stateMachine != null)
-            {
-                stateMachine.TakeDamage(hit.point, ray.direction * 1.0f, 1, hit.rigidbody, this, 0);
-                nextAttackTime = Time.time + 0.5f;
-            }
-        }
     }
 
     public void CompleteLevel()
