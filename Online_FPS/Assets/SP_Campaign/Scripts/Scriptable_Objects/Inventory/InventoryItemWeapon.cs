@@ -27,9 +27,9 @@ public class InventoryItemWeapon : InventoryItem
     [Tooltip("Max Range in meters of this weapon.")]
     [SerializeField] protected float range = 0.0f;
         
-    [Tooltip("Accuracy of weapon.")]
-    [Range(0.0f, 1.0f)]
-    [SerializeField] protected float accuracy = 1.0f;
+    [Tooltip("Weapon Sound Radius.")]
+    [Range(0, 20)]
+    [SerializeField] protected int soundRadius = 1;
 
     [Tooltip("Should this weapon auto-fire when FIRE button is being held in a pressed state.")]
     [SerializeField] protected bool autoFire = false;
@@ -37,6 +37,9 @@ public class InventoryItemWeapon : InventoryItem
     [Tooltip("Does this weapon have a dual firing more (like a sniper mode)")]
     [SerializeField] protected bool dualMode = false;
 
+    [Tooltip("How much the condition of the weapon depletes with each use.")]
+    [Range(0.0f, 100.0f)]
+    [SerializeField] protected float conditionDepletion = 1.0f;
 
     [Header("Damage Properties")]
     [Tooltip("Thinkness of Raycast used for raycasting potential damage. \n\n" +
@@ -74,7 +77,8 @@ public class InventoryItemWeapon : InventoryItem
     public InventoryItemAmmo Ammo                   { get { return ammo; } }
     public InventoryWeaponReloadType ReloadType     { get { return reloadType; } }
     public float Range                              { get { return range; } }
-    public float Accuracy                           { get { return accuracy; } }
+    public float SoundRadius                        { get { return soundRadius; } }
+    public float ConditionDepletion                 { get { return conditionDepletion; } }
     public bool AutoFire                            { get { return autoFire; } }
     public bool DualMode                            { get { return dualMode; } }
     public int HeadDamage                           { get { return headDamage; } }
@@ -82,10 +86,9 @@ public class InventoryItemWeapon : InventoryItem
     public float RayRadius                          { get { return rayRadius; } }
     public float Force                              { get { return force; } }
     public int WeaponAnim                           { get { return weaponAnim; } }
-
-    public int AmmoCapacity
+    public int AttackAnimCount                      { get { return attackAnimCount; } }
+    public int AmmoCapacity // Returns the correct max capcity of the weapon based on ReloadType and Ammo.
     {
-        // Returns the correct max capcity of the weapon based on ReloadType and Ammo.
         get
         {
             switch (reloadType)

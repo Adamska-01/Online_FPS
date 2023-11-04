@@ -1094,7 +1094,11 @@ public class PlayerInventoryUI : MonoBehaviour
         pdaReferences.pdaAuthor?.SetText(string.Empty);
         pdaReferences.pdaSubject?.SetText(string.Empty);
 
-        StartCoroutine(LateOnEndAudio());
+        // Defer PDA Entry list refresh until next frame (only if active)
+        if (gameObject.activeInHierarchy)
+        {
+            StartCoroutine(LateOnEndAudio());
+        }
     }
 
     public IEnumerator LateOnEndAudio()

@@ -5,6 +5,13 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
+public enum AmmoAmountRequestType
+{
+    AllAmmo,
+    NoWeaponAmmo,
+    WeaponAmmoOnly
+}
+
 [System.Serializable]
 public abstract class InventoryMountInfo
 { }
@@ -66,7 +73,8 @@ public abstract class Inventory : ScriptableObject
     public abstract void                        DropWeaponItem(int _mountIndex, bool _playAudio = true);
     public abstract void                        DropAmmoItem(int _mountIndex, bool _playAudio = true);
 
-    public abstract int                         GetAvailableAmmo(InventoryItemAmmo _ammo, bool _includeWeapon = false); //Get all available rounds of a specific ammo type
+    public abstract int                         GetAvailableAmmo(InventoryItemAmmo _ammo, AmmoAmountRequestType _requestType = AmmoAmountRequestType.NoWeaponAmmo); // Get all available rounds of a specific ammo type
+    public abstract int                         DecreaseAmmoInWeapon(int _mountIndex, int _amount = 1);
     public abstract bool                        IsReloadAvailable(int _weaponMountIndex);
     public abstract InventoryMountInfo          Search(InventoryItem _matchItem); 
     public abstract int                         Remove(InventoryItem _matchItem); //Return the number of items removed

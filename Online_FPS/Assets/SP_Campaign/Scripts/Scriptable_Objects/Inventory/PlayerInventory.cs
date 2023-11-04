@@ -394,36 +394,64 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
         ammos[_mountIndex].rounds = 0;
     }
 
-    public override int GetAvailableAmmo(InventoryItemAmmo _ammo, bool _includeWeapon = false)
+    public override int GetAvailableAmmo(InventoryItemAmmo _ammo, AmmoAmountRequestType _requestType = AmmoAmountRequestType.NoWeaponAmmo)
     {
         if (_ammo != null)
             return 0;
 
-        //Do the sum
         int roundCount = 0;
-        for (int i = 0; i < ammos.Count; i++)
-        {
-            InventoryAmmoMountInfo ammoMountInfo = ammos[i];
-            if (ammoMountInfo.ammo != _ammo)
-                continue;
 
-            roundCount += ammoMountInfo.rounds;
-        }
-
-        //Also include ammo in the weapon mount if requested
-        if (_includeWeapon)
+        // Do the ammo belt sum (if requested)
+        if(_requestType != AmmoAmountRequestType.WeaponAmmoOnly)
         {
-            for (int i = 0; i < weapons.Count; i++)
+            for (int i = 0; i < ammos.Count; i++)
             {
-                InventoryWeaponMountInfo weaponMountInfo = weapons[i];
-                if (weaponMountInfo == null || weaponMountInfo.weapon.Ammo != _ammo)
+                InventoryAmmoMountInfo ammoMountInfo = ammos[i];
+                if (ammoMountInfo.ammo != _ammo)
                     continue;
 
-                roundCount += weaponMountInfo.inGunRounds;
+                roundCount += ammoMountInfo.rounds;
             }
         }
 
+        //Also include ammo in the weapon mount (if requested)
+        switch (_requestType)
+        {
+            case AmmoAmountRequestType.AllAmmo:
+            case AmmoAmountRequestType.WeaponAmmoOnly:
+                for (int i = 0; i < weapons.Count; i++)
+                {
+                    InventoryWeaponMountInfo weaponMountInfo = weapons[i];
+                    if (weaponMountInfo == null || weaponMountInfo.weapon.Ammo != _ammo)
+                        continue;
+
+                    roundCount += weaponMountInfo.inGunRounds;
+                }
+                break;
+        }
+
         return roundCount;
+    }
+
+    public override int DecreaseAmmoInWeapon(int _mountIndex, int _amount = 1)
+    {
+        if (_mountIndex < 0 || _mountIndex >= weapons.Count || weapons[_mountIndex] == null)
+            return -1;
+
+        // if there is no weapon at the mount then do nothing and return 0
+        InventoryWeaponMountInfo wmi = weapons[_mountIndex];
+        if (wmi.weapon == null)
+            return 0;
+
+        // If it's an ammunition fed weapon then let's check the ammo
+        if (wmi.weapon.WeaponFeedType == InventoryWeaponFeedType.Ammunition)
+        {
+            wmi.inGunRounds = Math.Max(wmi.inGunRounds - _amount, 0);
+
+            return wmi.inGunRounds;
+        }
+
+        return 0; // A weapon that doesn't take ammo (eg. melee) so return 0 as the ammo count
     }
 
     public override bool IsReloadAvailable(int _weaponMountIndex)
@@ -667,10 +695,7 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
 
     protected bool AddWeaponItem(InventoryItemWeapon _inventoryItem, CollectableWeapon _collectableItem, bool _playAudio)
     {
-        //Get the correct weapon mount (single/dual handed)
-        int mountIndex = (_inventoryItem.WeaponType == InventoryWeaponType.SingleHanded) ? 0 : 1;
-
-        //Create a temporary mount to describe the weapon
+        //Create a temporary mount to describe the weapon we wish to change to
         InventoryWeaponMountInfo weaponMountTemp = new InventoryWeaponMountInfo();
         weaponMountTemp.weapon = _inventoryItem;
         weaponMountTemp.condition = _collectableItem.Condition;
@@ -679,7 +704,7 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
         //Notify listeners that a weapon has been changed
         OnWeaponChange?.Invoke(weaponMountTemp);
 
-        return true; //Fail
+        return true;
     }
 
     private bool AddRecordingItem(InventoryItemAudio _invItem, CollectableAudio _collectableItem, bool _playAudio)
