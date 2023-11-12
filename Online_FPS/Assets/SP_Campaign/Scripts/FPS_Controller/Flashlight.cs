@@ -41,7 +41,10 @@ public class Flashlight
     /// <param name="_enableLight">A boolean flag to enable or disable the light source.</param>
     public void ActivateLight(bool _enableLight)
     {
-        lightObj?.SetActive(_enableLight);
+        if(lightObj != null)
+        {
+            lightObj.SetActive(_enableLight);
+        }
     }
 
     /// <summary>
@@ -50,6 +53,9 @@ public class Flashlight
     /// <param name="_enableMesh">A boolean flag to enable or disable the mesh or visual component.</param>
     public void ActivateMesh(bool _enableMesh)
     {
-        lightMesh?.SetActive(_enableMesh);
+        if (lightMesh != null)
+        {
+            lightMesh.SetActive(_enableMesh);
+        }
     }
 }

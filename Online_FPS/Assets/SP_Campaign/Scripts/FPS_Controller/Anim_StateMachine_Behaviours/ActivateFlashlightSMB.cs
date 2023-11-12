@@ -33,7 +33,6 @@ public class ActivateFlashlightSMB : ArmsBaseSMB
         float commandValue = animator.GetFloat(commandStreamHash);
         if(commandValue > 0.75f)
         {
-            Debug.Log("Activating Flashlight");
             characterMgr.ActivateFlashlightLight_AnimatorCallback(activate, flashlightType);
             done = true;
         }

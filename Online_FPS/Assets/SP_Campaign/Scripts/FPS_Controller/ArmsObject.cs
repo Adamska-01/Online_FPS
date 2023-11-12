@@ -10,4 +10,14 @@ public class ArmsObject
     public List<GameObject> sceneObjects = new List<GameObject>();
     public Flashlight light = new Flashlight();
     public AnimatorStateCallback callback = null;
+
+
+    // Helper functions
+    public void SetAllSceneObjectsActiveState(bool isActive)
+    {
+        foreach (GameObject obj in sceneObjects) 
+        { 
+            obj.SetActive(isActive);
+        }
+    }
 }

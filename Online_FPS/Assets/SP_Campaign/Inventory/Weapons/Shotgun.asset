@@ -26,15 +26,16 @@ MonoBehaviour:
     a reload.\r"
   category: 5
   audio: {fileID: 11400000, guid: 13c509199c7d21b4a942300b25132852, type: 2}
-  weaponType: 1
+  weaponType: 2
   weaponFeedType: 2
   ammo: {fileID: 11400000, guid: caadf9aba6028a54ea71c37f4800dae4, type: 2}
   ammoCapacity: 6
   reloadType: 1
   range: 20
-  accuracy: 0.2
+  soundRadius: 1
   autoFire: 0
   dualMode: 1
+  conditionDepletion: 1
   rayRadius: 1.2
   headDamage: 130
   bodyDamage: 45
@@ -97,3 +98,4 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   weaponAnim: 3
+  attackAnimCount: 1

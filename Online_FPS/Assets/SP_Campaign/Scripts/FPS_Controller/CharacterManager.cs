@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
@@ -60,6 +62,15 @@ public class CharacterManager : MonoBehaviour
 
     //Arms & Weapons 
     private Flashlight secondaryFlashlight = null;
+    private InventoryItemWeapon currentWeapon = null;
+    private InventoryItemWeapon nextWeapon = null;
+    private InventoryWeaponMountInfo nextWeaponMountInfo = null;
+    private bool canSwitchWeapons = false;
+    private IEnumerator switchWeaponCoroutine = null;
+    private int availableAmmo = 0;
+    private float initialFOV = 60.0f;
+
+
     private Dictionary<ScriptableObject, ArmsObject> armsObjectsDictionary = new Dictionary<ScriptableObject, ArmsObject>();
 
     // Animation Hashes
@@ -70,6 +81,7 @@ public class CharacterManager : MonoBehaviour
     private int attackAnimHash          = Animator.StringToHash("Attack Anim");         // Used by machines that have several random attack states
     private int attackTriggerHash       = Animator.StringToHash("Attack");              // Used to trigger a transition into an attack state
     private int canSwitchWeaponsHash    = Animator.StringToHash("Can Switch Weapons");  // Can we switch to a different weapon at the moment
+    private int switchingWeaponHash     = Animator.StringToHash("Switching Weapon");  // Can we switch to a different weapon at the moment
     private int dualHandedWeaponHash    = Animator.StringToHash("Dual Handed Weapon");  // Is the current weapon two handed
     private int dualModeActive          = Animator.StringToHash("Dual Mode Active");    // Does the current weapon have a dual firing mode that is active
     private int reloadHash              = Animator.StringToHash("Reload");              // Do we require a reload
@@ -133,8 +145,7 @@ public class CharacterManager : MonoBehaviour
                 }
                 else
                 {
-                    List<ArmsBaseSMB> newBehaviourList = new List<ArmsBaseSMB>();
-                    newBehaviourList.Add(item);
+                    List<ArmsBaseSMB> newBehaviourList = new List<ArmsBaseSMB>() { item };
                     stateMachineBehavioursByID.Add(item.identifier, newBehaviourList);
                 }
             }
@@ -145,10 +156,10 @@ public class CharacterManager : MonoBehaviour
         for (int i = 0; i < armsObjects.Count; i++)
         {
             ArmsObject armsObject = armsObjects[i];
-            if (armsObject != null && armsObject.identifier) 
+            if (armsObject != null && armsObject.identifier != null) 
             {
                 // Store the gameobject list in the dictionary by ID
-                armsObjectsDictionary[armsObject.identifier] = armsObject;
+                armsObjectsDictionary.Add(armsObject.identifier, armsObject);
 
                 // See if this weapon has an AnimatorStateCallback so that the animator can call it
                 if (armsObject.callback != null && stateMachineBehavioursByID.TryGetValue(armsObject.identifier, out List<ArmsBaseSMB> behaviourList))
@@ -211,7 +222,13 @@ public class CharacterManager : MonoBehaviour
             }
         }
 
-        ProcessInteractableItems();
+        // Grab the current state of the animator and set the 'canSwitchWeapon' bool
+        if(armsAnimator != null)
+        {
+            canSwitchWeapons = (armsAnimator.GetFloat(canSwitchWeaponsHash) > 0.75f) ? true : false;
+        }
+
+        ProcessInteractableItems(); // (Interactable Raycast)
                 
         //Set sound emitter radius (take damage value into account as well)
         if (fpsController != null || soundEmitter != null)
@@ -259,7 +276,7 @@ public class CharacterManager : MonoBehaviour
     {
         if(_type == FlashlightType.Primary)
         {
-            primaryFlashlight.ActivateMesh(_enableMesh);
+            primaryFlashlight?.ActivateMesh(_enableMesh);
         }
     }
 
@@ -267,12 +284,73 @@ public class CharacterManager : MonoBehaviour
     {
         if (_type == FlashlightType.Primary)
         {
-            primaryFlashlight.ActivateLight(_enableLight);
+            primaryFlashlight?.ActivateLight(_enableLight);
         }
         else if(secondaryFlashlight != null)
         {
             secondaryFlashlight.ActivateLight(_enableLight);
         }
+    }
+
+    public void EnableWeapon_AnimatorCallback()
+    {
+        // Assign next weapon to the correct mount
+        if (nextWeapon != null) 
+        {
+            if (nextWeapon != currentWeapon && nextWeaponMountInfo != null && inventory)
+            {
+                inventory.AssignWeapon((nextWeapon.WeaponType == InventoryWeaponType.SingleHanded) ? 0 : 1, nextWeaponMountInfo);
+            }
+
+            // Get the weapon we switched to and set it on (active)
+            if (armsObjectsDictionary.TryGetValue(nextWeapon, out ArmsObject armsObj))
+            {
+                armsObj.SetAllSceneObjectsActiveState(true);
+
+                // Also assign weapon's secondary flashlight (if available on the gun)
+                secondaryFlashlight = armsObj.light;
+            }
+
+            // This is our new current weapon
+            currentWeapon = nextWeapon;
+
+            // Also get available ammo for that weapon
+            if(inventory != null)
+            {
+                availableAmmo = inventory.GetAvailableAmmo(currentWeapon.Ammo, AmmoAmountRequestType.NoWeaponAmmo);
+            }
+        }
+
+        // Switching weapon process complete
+        armsAnimator?.SetBool(switchingWeaponHash, false);
+
+        // Weapon has been switched so there is no weapon waiting any longer
+        nextWeaponMountInfo = null;
+        nextWeapon = null;
+    }
+
+    public void DisableWeapon_AnimatorCallback()
+    {
+        if(currentWeapon != null) // There is no weapon to deactivate
+        {
+            // Get current weapon and switch it off
+            if(armsObjectsDictionary.TryGetValue(currentWeapon, out ArmsObject armsObj))
+            {
+                armsObj.SetAllSceneObjectsActiveState(false);
+            }
+        }
+
+        // Drop the current weapon (if the weapon switch is instigated by the inventory system)
+        if(nextWeapon != null && nextWeaponMountInfo != null && nextWeaponMountInfo.weapon != null)
+        {
+            inventory?.DropWeaponItem((nextWeaponMountInfo.weapon.WeaponType == InventoryWeaponType.TwoHanded) ? 1 :  0);
+        }
+
+        // Since we dropped, we currently have no weapon
+        currentWeapon = null;
+
+        // Clear secondary flashlight
+        secondaryFlashlight = null;
     }
 
     private void DoTaunt()
@@ -430,13 +508,92 @@ public class CharacterManager : MonoBehaviour
 
     private void OnSwitchWeapon(InventoryWeaponMountInfo _weaponMount)
     {
+        if(canSwitchWeapons && _weaponMount != null && _weaponMount.weapon && switchWeaponCoroutine == null)
+        {
+            switchWeaponCoroutine = SwitchWeaponInternal(_weaponMount.weapon, _weaponMount);
+            StartCoroutine(switchWeaponCoroutine);
+        }
+    }
 
+    // Player-Instigated weapon switch
+    public void SwitchMount(InventoryItemWeapon _nextWeapon)
+    {
+        if (canSwitchWeapons && switchWeaponCoroutine == null)
+        {
+            switchWeaponCoroutine = SwitchWeaponInternal(_nextWeapon, null);
+            StartCoroutine(switchWeaponCoroutine);
+        }
+    }
+
+    private void OnDrophWeapon(InventoryItemWeapon _weapon)
+    {
+        // We only want to process this event when the UI is active. This is out way of responding to
+        // a DropWeapon event within the UI so that our Arms and Weapons hierarchy stays synced.
+        if ((inventoryUI && !inventoryUI.activeSelf) || !inventoryUI) 
+            return;
+
+        // Is the weapon we are dropping the current weapon we are using
+        // because if so we need to remove if from our arms
+        if (currentWeapon == _weapon && currentWeapon != null)
+        {
+            // Deactivate the corresponding arms object
+            if (armsObjectsDictionary.TryGetValue(currentWeapon, out ArmsObject armsObject))
+            {
+                armsObject.SetAllSceneObjectsActiveState(false);
+            }
+
+            // We have processed this mouse action so clear it
+            Input.ResetInputAxes();
+
+            // Force the animator to an immediate disarmed state
+            armsAnimator?.SetTrigger(clearWeaponHash);
+            armsAnimator?.SetBool(weaponArmedHash, false);
+            armsAnimator?.SetInteger(weaponAnimHash, 0);
+
+            currentWeapon = null;
+        }
     }
     
-    private void OnDrophWeapon(InventoryItemWeapon arg0)
+    private IEnumerator SwitchWeaponInternal(InventoryItemWeapon _nextWeapon, InventoryWeaponMountInfo _weaponMount)
     {
+        if(armsAnimator == null) // We need an animator to switch weapons 
+        {
+            switchWeaponCoroutine = null;
+            yield break;
+        }
 
+        // Cancel the reload (if there is a pending reload) 
+        armsAnimator.SetBool(reloadHash, false);
+
+        // Disarm current weapon 
+        armsAnimator.SetBool(weaponArmedHash, false);
+
+        // The weapon we wish to transition next
+        nextWeapon = _nextWeapon;
+
+        // Pick up info - If null then the weapon is assumed already be mount and will not be added in the inventory
+        nextWeaponMountInfo = _weaponMount;
+
+        if(_nextWeapon != null)
+        {
+            // Let animator know we are transitioning to a single/dual handed weapon
+            // In case of single handed weapon, we allow to bring up the flash light in the left hand. 
+            armsAnimator.SetBool(dualHandedWeaponHash, _nextWeapon.WeaponType == InventoryWeaponType.TwoHanded);
+            armsAnimator.SetBool(switchingWeaponHash, true);
+
+            // Force a wait state so the animator can pick up on a switch between two weapons of the same type
+            yield return new WaitForSecondsRealtime(0.2f);
+
+            // Arm next weapon
+            armsAnimator.SetBool(weaponArmedHash, true);
+            armsAnimator.SetInteger(weaponAnimHash, _nextWeapon.WeaponAnim);
+        }
+
+        // Free this coroutine
+        switchWeaponCoroutine = null;
     }
+
+
 
     public void DoDamage(int _hitDir = 0)
     {

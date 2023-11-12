@@ -19,12 +19,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   weaponMounts:
-  - weapon: {fileID: 11400000, guid: 1b652cb65821f0842a8ff9bfbbf3ec00, type: 2}
-    condition: 87.1
-    inGunRounds: 23
-  - weapon: {fileID: 11400000, guid: ce48261ef6954404ea40951170265dcb, type: 2}
-    condition: 60.9
-    inGunRounds: 4
+  - weapon: {fileID: 0}
+    condition: 0
+    inGunRounds: 0
+  - weapon: {fileID: 0}
+    condition: 0
+    inGunRounds: 0
   ammoMounts:
   - ammo: {fileID: 0}
     rounds: 15
