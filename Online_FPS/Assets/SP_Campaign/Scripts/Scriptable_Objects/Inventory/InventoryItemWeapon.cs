@@ -70,6 +70,10 @@ public class InventoryItemWeapon : InventoryItem
     [Tooltip("FPS Arms Animator Sub-State Machine attack animation index range.\n\nA Value of 3 would be used if the sub-state has 3 attack variants.")]
     [SerializeField] protected int attackAnimCount = 1;
 
+    [Header("Camera Settings")]
+    [Tooltip("Dual Mode FOV")]
+    [SerializeField] protected float dualModeFOV = 45.0f;
+
 
      // Public Properties
     public InventoryWeaponType WeaponType           { get { return weaponType; } }
@@ -87,6 +91,7 @@ public class InventoryItemWeapon : InventoryItem
     public float Force                              { get { return force; } }
     public int WeaponAnim                           { get { return weaponAnim; } }
     public int AttackAnimCount                      { get { return attackAnimCount; } }
+    public float DualModeFOV                        { get { return dualModeFOV; } }
     public int AmmoCapacity // Returns the correct max capcity of the weapon based on ReloadType and Ammo.
     {
         get

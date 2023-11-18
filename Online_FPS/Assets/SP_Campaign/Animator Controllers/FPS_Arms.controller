@@ -347,9 +347,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 1
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.7000036
+  m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -1704,9 +1704,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 1
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.7000009
+  m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -2666,6 +2666,23 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-2950651453248697393
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebf752a15a192054a9de55e323226d07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: {fileID: 0}
+  characterMgr: {fileID: 0}
+  callbackHandler: {fileID: 0}
+  activate: 0
+  flashlightType: 1
 --- !u!1101 &-2828932667804226142
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2918,7 +2935,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.7000036
+  m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -3123,9 +3140,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 1
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.7000001
+  m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -3778,6 +3795,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: Weapon Armed
     m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: Left Hand Occupied
+    m_EventTreshold: 0.25
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8253403127139291827}
   m_Solo: 0
@@ -4110,6 +4130,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
+  - m_Name: Dual Mode FOV Weight
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   - m_Name: Command Stream
     m_Type: 1
     m_DefaultFloat: 0
@@ -4213,9 +4239,6 @@ AnimatorStateMachine:
   - first: {fileID: -69375007901628852}
     second:
     - {fileID: 3274386992464036972}
-  - first: {fileID: 1067357245194752882}
-    second:
-    - {fileID: 4059805177600403183}
   - first: {fileID: 2318172714879695140}
     second:
     - {fileID: -8639176668432829975}
@@ -4225,6 +4248,9 @@ AnimatorStateMachine:
   - first: {fileID: 8666804576473892280}
     second:
     - {fileID: 6692676084917744312}
+  - first: {fileID: 1067357245194752882}
+    second:
+    - {fileID: 4059805177600403183}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
@@ -6762,7 +6788,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.9623116
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -6890,6 +6916,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: Switching Weapon
     m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: Left Hand Occupied
+    m_EventTreshold: 0.25
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8253403127139291827}
   m_Solo: 0
@@ -7074,6 +7103,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioCollection: {fileID: 11400000, guid: b7f20dc045cfbbd469798a873c815a96, type: 2}
   bank: 2
+--- !u!114 &5998313052744269111
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebf752a15a192054a9de55e323226d07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: {fileID: 0}
+  characterMgr: {fileID: 0}
+  callbackHandler: {fileID: 0}
+  activate: 1
+  flashlightType: 1
 --- !u!1102 &6059066479427535257
 AnimatorState:
   serializedVersion: 6
@@ -7441,6 +7487,7 @@ AnimatorState:
   - {fileID: 3623999247574724511}
   m_StateMachineBehaviours:
   - {fileID: 7357081359087792192}
+  - {fileID: 5998313052744269111}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -8059,6 +8106,7 @@ AnimatorState:
   - {fileID: -1816274942505014332}
   m_StateMachineBehaviours:
   - {fileID: -6269951893109347086}
+  - {fileID: -2950651453248697393}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -8596,9 +8644,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 1
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.5
+  m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0

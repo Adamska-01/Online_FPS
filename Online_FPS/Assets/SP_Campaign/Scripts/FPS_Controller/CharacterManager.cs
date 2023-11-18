@@ -48,6 +48,7 @@ public class CharacterManager : MonoBehaviour
 
     [Header("Shared Variables")]
     [SerializeField] private SharedFloat health    = null;
+    [SerializeField] private SharedFloat stamina = null;
     [SerializeField] private SharedFloat infection = null;
     [SerializeField] private SharedString interactionText = null;
     
@@ -81,9 +82,10 @@ public class CharacterManager : MonoBehaviour
     private int attackAnimHash          = Animator.StringToHash("Attack Anim");         // Used by machines that have several random attack states
     private int attackTriggerHash       = Animator.StringToHash("Attack");              // Used to trigger a transition into an attack state
     private int canSwitchWeaponsHash    = Animator.StringToHash("Can Switch Weapons");  // Can we switch to a different weapon at the moment
-    private int switchingWeaponHash     = Animator.StringToHash("Switching Weapon");  // Can we switch to a different weapon at the moment
+    private int switchingWeaponHash     = Animator.StringToHash("Switching Weapon");    // Can we switch to a different weapon at the moment
     private int dualHandedWeaponHash    = Animator.StringToHash("Dual Handed Weapon");  // Is the current weapon two handed
-    private int dualModeActive          = Animator.StringToHash("Dual Mode Active");    // Does the current weapon have a dual firing mode that is active
+    private int dualModeActiveHash      = Animator.StringToHash("Dual Mode Active");    // Does the current weapon have a dual firing mode that is active
+    private int dualModeFOVHash         = Animator.StringToHash("Dual Mode FOV Weight");// Animation curve driven. used to set the FOV
     private int reloadHash              = Animator.StringToHash("Reload");              // Do we require a reload
     private int reloadRepeatHash        = Animator.StringToHash("Reload Repeat");       // How many times should the reload animation loop (used for partial reload types)
     private int staminaHash             = Animator.StringToHash("Stamina");             // Stamina of the player
@@ -103,8 +105,13 @@ public class CharacterManager : MonoBehaviour
         gameSceneManger = GameSceneManager.Instance;
         AI_BodyPartLayer = LayerMask.NameToLayer("AI_BodyPart");
         interactiveMask = 1 << LayerMask.NameToLayer("Interactive");
+        
+        if(sceneCam != null)
+        {
+            initialFOV = sceneCam.fieldOfView;
+        }
 
-        if(gameSceneManger != null)
+        if (gameSceneManger != null)
         {
             Player_Info info = new Player_Info();
             info.camera = sceneCam;
@@ -222,31 +229,77 @@ public class CharacterManager : MonoBehaviour
             }
         }
 
-        // Grab the current state of the animator and set the 'canSwitchWeapon' bool
         if(armsAnimator != null)
         {
+            // Grab the current state of the animator and set the 'canSwitchWeapon' bool
             canSwitchWeapons = (armsAnimator.GetFloat(canSwitchWeaponsHash) > 0.75f) ? true : false;
+
+            // Set player speed override from the animator in the controller
+            if(fpsController != null)
+            {
+                fpsController.SpeedOverride = armsAnimator.GetFloat(playerSpeedOverrideHash);
+            }
+
+            // Set FOV based (fetched by the animator parameter)
+            float zoomFOVWeight = armsAnimator.GetFloat(dualModeFOVHash);
+            if(sceneCam != null && !zoomFOVWeight.Equals(0.0f) && currentWeapon != null && currentWeapon.DualMode)
+            {
+                sceneCam.fieldOfView = Mathf.Lerp(initialFOV, currentWeapon.DualModeFOV, zoomFOVWeight);
+            }
+            else
+            {
+                sceneCam.fieldOfView = initialFOV;
+            }
+
+            // Set stamina in the animator
+            float normalizedStamina = 1.0f;
+            if(stamina != null && fpsController != null)
+            {
+                normalizedStamina = (stamina.Value / 100.0f) * fpsController.DragMultiplier;
+            }
+            armsAnimator.SetFloat(staminaHash, Mathf.Min(normalizedStamina + 0.1f, 1.0f));
         }
 
         ProcessInteractableItems(); // (Interactable Raycast)
                 
-        //Set sound emitter radius (take damage value into account as well)
-        if (fpsController != null || soundEmitter != null)
+        if(fpsController != null)
         {
-            float newRadius = Mathf.Max(walkRadius, (MAX_HEALTH - health.Value) / bloodRadiusScale);
-            switch (fpsController.MovementStatus)
+            // Set animator to current speed
+            if(armsAnimator)
             {
-                case PlayerMoveStatus.Running:
-                    newRadius = Mathf.Max(newRadius, runRadius);
-                    break;
-                case PlayerMoveStatus.Landing:
-                    newRadius = Mathf.Max(newRadius, landingRadius);
-                    break;
+                switch (fpsController.MovementStatus)
+                {
+                    case PlayerMoveStatus.Walking:
+                        armsAnimator.SetInteger(speedHash, 1);
+                        break;
+                    case PlayerMoveStatus.Running:
+                    case PlayerMoveStatus.Landing:
+                        armsAnimator.SetInteger(speedHash, 2);
+                        break;
+                    default:
+                        armsAnimator.SetInteger(speedHash, 0);
+                        break;
+                }
             }
 
-            soundEmitter.SetRadius(newRadius);
+            //Set sound emitter radius (take damage value into account as well)
+            if (soundEmitter != null)
+            {
+                float newRadius = Mathf.Max(walkRadius, (MAX_HEALTH - health.Value) / bloodRadiusScale);
+                switch (fpsController.MovementStatus)
+                {
+                    case PlayerMoveStatus.Running:
+                        newRadius = Mathf.Max(newRadius, runRadius);
+                        break;
+                    case PlayerMoveStatus.Landing:
+                        newRadius = Mathf.Max(newRadius, landingRadius);
+                        break;
+                }
 
-            fpsController.DragMultiplierLimit = Mathf.Max(health.Value / MAX_HEALTH, 0.25f); //Set drag limit
+                soundEmitter.SetRadius(newRadius);
+
+                fpsController.DragMultiplierLimit = Mathf.Max(health.Value / MAX_HEALTH, 0.25f); //Set drag limit
+            }
         }
 
         // Process flashlight input when inventory is not active
@@ -257,6 +310,63 @@ public class CharacterManager : MonoBehaviour
                 if(Input.GetButtonDown("Flashlight"))
                 {
                     ActivateFlashlight(!armsAnimator.GetBool(flashlightHash));
+                }
+
+                // Process Mount/Weapon switching 
+                int mountIndex = -1;
+                if(canSwitchWeapons)
+                {
+                    if(Input.GetButtonDown("Single Handed Mount"))
+                    {
+                        mountIndex = 0;
+                    }
+                    else if (Input.GetButtonDown("Dual Handed Mount"))
+                    {
+                        mountIndex = 1;
+                    }
+                }
+
+                if(mountIndex != -1)
+                {
+                    InventoryWeaponMountInfo weaponMountInfo = null;
+                    if(inventory)
+                    {
+                        weaponMountInfo = inventory.GetWeapon(mountIndex);
+                    }
+
+                    // Only process this keypress if we have something at the mount 
+                    if(weaponMountInfo != null && weaponMountInfo.weapon != null)
+                    {
+                        // Just toggle its armed state if the weapon we have is the one current one 
+                        if(currentWeapon == weaponMountInfo.weapon)
+                        {
+                            //Get current armed status
+                            bool weaponArmed = armsAnimator.GetBool(weaponArmedHash);
+                            weaponArmed = !weaponArmed;
+
+                            if(weaponArmed)
+                            {
+                                nextWeapon = weaponMountInfo.weapon;
+                            }
+                            else
+                            {
+                                nextWeapon = null;
+                            }
+
+                            // Instruct animator to arm/disarm weapon 
+                            armsAnimator.SetBool(weaponArmedHash, weaponArmed);
+                        }
+                        else // Switch to the other weapon
+                        {
+                            SwitchMount(weaponMountInfo.weapon);
+                        }
+                    }
+                }
+
+                // ADS -> Used by any weapon that support it
+                if (Input.GetButtonDown("Fire2") && currentWeapon != null && currentWeapon.DualMode)
+                {
+                    armsAnimator.SetBool(dualModeActiveHash, !armsAnimator.GetBool(dualModeActiveHash));
                 }
             }
         }
