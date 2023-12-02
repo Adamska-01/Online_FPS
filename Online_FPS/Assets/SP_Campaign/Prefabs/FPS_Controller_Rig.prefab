@@ -838,7 +838,7 @@ MonoBehaviour:
     light:
       lightObj: {fileID: 0}
       lightMesh: {fileID: 0}
-    callback: {fileID: 0}
+    callback: {fileID: 2038427064}
   weaponRayLayerMask:
     serializedVersion: 2
     m_Bits: 12289
@@ -1549,6 +1549,24 @@ GameObject:
 --- !u!1 &2633946818490521489 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100324, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
+  m_PrefabInstance: {fileID: 2633946818490421365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2038427064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2633946818490521489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7296600705f152c448494f9878b9e3b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotgunShell: {fileID: 2633946818490521491}
+--- !u!1 &2633946818490521491 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100326, guid: fa891b6b81bd69241bd98833077c3ed2, type: 3}
   m_PrefabInstance: {fileID: 2633946818490421365}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2633946818490521517 stripped

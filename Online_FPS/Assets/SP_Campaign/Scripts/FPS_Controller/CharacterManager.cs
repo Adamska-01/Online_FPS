@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
@@ -368,6 +369,32 @@ public class CharacterManager : MonoBehaviour
                 {
                     armsAnimator.SetBool(dualModeActiveHash, !armsAnimator.GetBool(dualModeActiveHash));
                 }
+
+                if(Input.GetButtonDown("Reload") && currentWeapon != null && currentWeapon.WeaponFeedType == InventoryWeaponFeedType.Ammunition && availableAmmo > 0)
+                {
+                    mountIndex = currentWeapon.WeaponType == InventoryWeaponType.TwoHanded ? 1 : 0;
+
+                    InventoryWeaponMountInfo currWMI = inventory.GetWeapon(mountIndex);
+
+                    if(currWMI != null && currWMI.inGunRounds < currentWeapon.AmmoCapacity) 
+                    {
+                        // Only reload if we are changing to a more plentiful clip
+                        if(inventory.IsReloadAvailable(mountIndex))
+                        {
+                            // How many times do we need to reload? (if partial)
+                            if (currentWeapon.ReloadType == InventoryWeaponReloadType.Partial)
+                            { 
+                                armsAnimator.SetInteger(reloadRepeatHash, Mathf.Min(availableAmmo, currentWeapon.AmmoCapacity - currWMI.inGunRounds));
+                            }
+                            else
+                            {
+                                armsAnimator.SetInteger(reloadRepeatHash, 0);
+                            }
+
+                            armsAnimator.SetBool(reloadHash, true); // Reload
+                        }
+                    }
+                }
             }
         }
     }
@@ -463,6 +490,17 @@ public class CharacterManager : MonoBehaviour
         secondaryFlashlight = null;
     }
 
+    public void ReloadWeapon_AnimatorCallback(InventoryWeaponType _type)
+    {
+        if (inventory == null || currentWeapon == null || currentWeapon.WeaponType == InventoryWeaponType.None)
+            return;
+
+        // Reload (Inventory-Wise)
+        inventory.ReloadWeaponItem(currentWeapon.WeaponType == InventoryWeaponType.SingleHanded ? 0 : 1, false);
+
+        availableAmmo = inventory.GetAvailableAmmo(currentWeapon.Ammo, AmmoAmountRequestType.NoWeaponAmmo);
+    }
+
     private void DoTaunt()
     {
         if (tauntSounds == null || Time.time < nextTauntTime)
@@ -527,9 +565,18 @@ public class CharacterManager : MonoBehaviour
                 }
 
                 //Use/Get Iteractable 
-                if (Input.GetButtonDown("Use"))
+                if(!(priorityObject.GetType() == typeof(CollectableWeapon) && !canSwitchWeapons))
                 {
-                    priorityObject.Activate(this);
+                    if (Input.GetButtonDown("Use"))
+                    {
+                        priorityObject.Activate(this);
+
+                        // Should set up an event ("OnPickUpAmmo") and subscribe to it, but ehi, give me a break
+                        if (currentWeapon != null)
+                        {
+                            availableAmmo = inventory.GetAvailableAmmo(currentWeapon.Ammo, AmmoAmountRequestType.NoWeaponAmmo);
+                        }
+                    }
                 }
             }
         }

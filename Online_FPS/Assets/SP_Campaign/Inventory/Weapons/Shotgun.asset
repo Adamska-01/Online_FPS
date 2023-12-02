@@ -99,3 +99,4 @@ MonoBehaviour:
     m_RotationOrder: 4
   weaponAnim: 3
   attackAnimCount: 1
+  dualModeFOV: 50

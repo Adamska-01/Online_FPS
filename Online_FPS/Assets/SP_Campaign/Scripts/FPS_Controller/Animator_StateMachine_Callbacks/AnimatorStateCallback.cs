@@ -6,7 +6,7 @@ using UnityEngine;
 /// empty default implementation so you only have to implement the one(s) you need in 
 /// derived classes
 /// </summary>
-public class AnimatorStateCallback : StateMachineBehaviour
+public class AnimatorStateCallback : MonoBehaviour
 {
     public virtual void OnAction(string _context, CharacterManager _chrMgr = null) 
     { }

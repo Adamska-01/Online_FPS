@@ -396,7 +396,7 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
 
     public override int GetAvailableAmmo(InventoryItemAmmo _ammo, AmmoAmountRequestType _requestType = AmmoAmountRequestType.NoWeaponAmmo)
     {
-        if (_ammo != null)
+        if (_ammo == null)
             return 0;
 
         int roundCount = 0;

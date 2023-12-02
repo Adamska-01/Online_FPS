@@ -32,9 +32,10 @@ MonoBehaviour:
   ammoCapacity: 0
   reloadType: 2
   range: 50
-  accuracy: 0.6
+  soundRadius: 1
   autoFire: 0
   dualMode: 1
+  conditionDepletion: 1
   rayRadius: 0
   headDamage: 80
   bodyDamage: 25
@@ -70,3 +71,5 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   weaponAnim: 2
+  attackAnimCount: 1
+  dualModeFOV: 50
