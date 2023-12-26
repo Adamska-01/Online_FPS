@@ -23,6 +23,9 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private TMP_Text notificationText = null;
     [SerializeField] private TMP_Text transcriptText = null;
 
+    [Header("UI Images")]
+    [SerializeField] private Image crosshair = null;
+
     [Header("PDA References")]
     [SerializeField] private GameObject pdaOverlay = null;
     [SerializeField] private TMP_Text pdaPerson = null;
@@ -30,8 +33,9 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private Slider pdaAudioTimeline = null;
 
     [Header("Additional")]
+    [SerializeField] private float crosshairAlphaScale = 1.0f;
     [SerializeField] private Image screenFade = null;
-    [SerializeField] private GameObject crosshair = null;
+    [SerializeField] private Sprite defaultCrosshair = null;
 
     [Header("Shared Variables")]
     [SerializeField] private SharedFloat health = null;
@@ -39,9 +43,12 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private SharedFloat infection = null;
     [SerializeField] private SharedFloat flashlight = null;
     [SerializeField] private SharedFloat nightVision = null;
+    [SerializeField] private SharedFloat crosshairAlpha = null;
     [SerializeField] private SharedString interactionString = null;
     [SerializeField] private SharedString transcriptString = null;
     [SerializeField] private SharedTimedStringQueue notificationQueue = null;
+    [SerializeField] private SharedVector3 crosshairPosition = null;
+    [SerializeField] private SharedSprite crosshairSprite = null;
 
     //Internal
     private float currentFadeLevel = 1.0f;
@@ -54,6 +61,9 @@ public class PlayerHUD : MonoBehaviour
     private Action OnInteractionTextUpdate;
     private Action OnTranscriptTextUpdate;
     private Action OnNotificationQueueUpdate;
+    private Action OnCrosshairPositionUpdate;
+    private Action OnCrosshairSpriteUpdate;
+    private Action OnCrosshairAlphaUpdate;
 
 
     private void Awake()
@@ -67,6 +77,9 @@ public class PlayerHUD : MonoBehaviour
         OnInteractionTextUpdate = () => { interactionText.text = interactionString.Value; };
         OnTranscriptTextUpdate = () => { transcriptText.text = transcriptString.Value; };
         OnNotificationQueueUpdate = () => { notificationText.text = notificationQueue.CurrentDequeuedText; };
+        OnCrosshairPositionUpdate = () => { crosshair.transform.position = crosshairPosition.Value; };
+        OnCrosshairSpriteUpdate = () => { crosshair.sprite = crosshairSprite.Value == null ? defaultCrosshair : crosshairSprite.Value; };
+        OnCrosshairAlphaUpdate = () => { crosshair.color = new Color(crosshair.color.r, crosshair.color.g, crosshair.color.b, crosshairAlpha.Value * crosshairAlphaScale); };
 
         //Make a first assignment (all future assignments are handled by the events)
         if (healthSlider != null && health != null) OnHealthUpdate?.Invoke();
@@ -74,9 +87,12 @@ public class PlayerHUD : MonoBehaviour
         if (infectionSlider != null && infection != null) OnInfectionUpdate?.Invoke();
         if (flashlightSlider != null && flashlight != null) OnFlashlightUpdate?.Invoke();
         if (nightVisionSlider != null && nightVision != null) OnNightvisionUpdate?.Invoke();
+        if (crosshair != null && crosshairAlpha != null) OnCrosshairAlphaUpdate?.Invoke();
         if (interactionText != null && interactionString != null) OnInteractionTextUpdate?.Invoke();
         if (transcriptText != null && transcriptString != null) OnTranscriptTextUpdate?.Invoke();
         if (notificationText != null && notificationQueue != null) OnNotificationQueueUpdate?.Invoke();
+        if (crosshair != null && crosshairPosition != null) OnCrosshairPositionUpdate?.Invoke();
+        if (crosshair != null && crosshairSprite != null) OnCrosshairSpriteUpdate?.Invoke();
     }
 
     void Start()
@@ -95,9 +111,12 @@ public class PlayerHUD : MonoBehaviour
         if (infectionSlider != null && infection != null) infection.OnVariableValueChanged += OnInfectionUpdate;
         if (flashlightSlider != null && flashlight != null) flashlight.OnVariableValueChanged += OnFlashlightUpdate;
         if (nightVisionSlider != null && nightVision != null) nightVision.OnVariableValueChanged += OnNightvisionUpdate;
+        if (crosshair != null && crosshairAlpha != null) crosshairAlpha.OnVariableValueChanged += OnCrosshairAlphaUpdate;
         if (interactionText != null && interactionString != null) interactionString.OnVariableValueChanged += OnInteractionTextUpdate;
         if (transcriptText != null && transcriptString != null) transcriptString.OnVariableValueChanged += OnTranscriptTextUpdate;
         if (notificationText != null && notificationQueue != null) notificationQueue.OnVariableValueChanged += OnNotificationQueueUpdate;
+        if (crosshair != null && crosshairPosition != null) crosshairPosition.OnVariableValueChanged += OnCrosshairPositionUpdate;
+        if (crosshair != null && crosshairSprite != null) crosshairSprite.OnVariableValueChanged += OnCrosshairSpriteUpdate;
     }
     
     private void OnDestroy()
@@ -108,9 +127,12 @@ public class PlayerHUD : MonoBehaviour
         if (infectionSlider != null && infection != null) infection.OnVariableValueChanged -= OnInfectionUpdate;
         if (flashlightSlider != null && flashlight != null) flashlight.OnVariableValueChanged -= OnFlashlightUpdate;
         if (nightVisionSlider != null && nightVision != null) nightVision.OnVariableValueChanged -= OnNightvisionUpdate;
+        if (crosshair != null && crosshairAlpha != null) crosshairAlpha.OnVariableValueChanged -= OnCrosshairAlphaUpdate;
         if (interactionText != null && interactionString != null) interactionString.OnVariableValueChanged -= OnInteractionTextUpdate;
         if (transcriptText != null && transcriptString != null) transcriptString.OnVariableValueChanged -= OnTranscriptTextUpdate;
         if (notificationText != null && notificationQueue != null) notificationQueue.OnVariableValueChanged -= OnNotificationQueueUpdate;
+        if (crosshair != null && crosshairPosition != null) crosshairPosition.OnVariableValueChanged -= OnCrosshairPositionUpdate;
+        if (crosshair != null && crosshairSprite != null) crosshairSprite.OnVariableValueChanged -= OnCrosshairSpriteUpdate;
     }
 
 

@@ -74,6 +74,9 @@ public class InventoryItemWeapon : InventoryItem
     [Tooltip("Dual Mode FOV")]
     [SerializeField] protected float dualModeFOV = 45.0f;
 
+    [Tooltip("Image used for weapon crosshair")]
+    [SerializeField] protected Sprite crosshair = null;
+
 
      // Public Properties
     public InventoryWeaponType WeaponType           { get { return weaponType; } }
@@ -92,12 +95,13 @@ public class InventoryItemWeapon : InventoryItem
     public int WeaponAnim                           { get { return weaponAnim; } }
     public int AttackAnimCount                      { get { return attackAnimCount; } }
     public float DualModeFOV                        { get { return dualModeFOV; } }
+    public Sprite Crosshair                         { get { return crosshair; } }
     public int AmmoCapacity // Returns the correct max capcity of the weapon based on ReloadType and Ammo.
     {
         get
         {
             switch (reloadType)
-            {
+            {   
                 case InventoryWeaponReloadType.None: 
                     return 0;
                 case InventoryWeaponReloadType.Partial: 

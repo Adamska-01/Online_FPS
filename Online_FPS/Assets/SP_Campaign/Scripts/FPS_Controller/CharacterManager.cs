@@ -51,8 +51,12 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private SharedFloat health    = null;
     [SerializeField] private SharedFloat stamina = null;
     [SerializeField] private SharedFloat infection = null;
+    [SerializeField] private SharedFloat crosshairAlpha = null;
     [SerializeField] private SharedString interactionText = null;
+    [SerializeField] private SharedVector3 crosshairPosition = null;
+    [SerializeField] private SharedSprite crosshairSprite = null;
     
+
     //Private
     private Collider col= null;
     private FPS_Controller fpsController = null;
@@ -93,6 +97,7 @@ public class CharacterManager : MonoBehaviour
     private int autoFireHash            = Animator.StringToHash("Auto Fire");           // Does the weapon support auto fire
     private int playerSpeedOverrideHash = Animator.StringToHash("Player Speed Override"); // Allows animation to override max speed of player
     private int clearWeaponHash         = Animator.StringToHash("Clear Weapon");          // Hash of Clear Weapon Trigger in animator
+    private int crosshairAlphaHash      = Animator.StringToHash("Crosshair Alpha");          // Transparency of the crosshair
 
     //Properties
     public FPS_Controller FPSController { get { return fpsController; } }
@@ -241,6 +246,11 @@ public class CharacterManager : MonoBehaviour
                 fpsController.SpeedOverride = armsAnimator.GetFloat(playerSpeedOverrideHash);
             }
 
+            if (crosshairAlpha != null)
+            {
+                crosshairAlpha.Value = armsAnimator.GetFloat(crosshairAlphaHash);
+            }
+
             // Set FOV based (fetched by the animator parameter)
             float zoomFOVWeight = armsAnimator.GetFloat(dualModeFOVHash);
             if(sceneCam != null && !zoomFOVWeight.Equals(0.0f) && currentWeapon != null && currentWeapon.DualMode)
@@ -306,6 +316,36 @@ public class CharacterManager : MonoBehaviour
         // Process flashlight input when inventory is not active
         if((inventoryUI != null && !inventoryUI.activeSelf) || inventoryUI == null)
         {
+            // Set crosshair position 
+            if(crosshairPosition != null && sceneCam != null) 
+            {
+                crosshairPosition.Value = sceneCam.ViewportToScreenPoint(new Vector3(0.5f, 0.5f, 0.0f));
+
+                if(currentWeapon != null)
+                {
+                    ArmsObject armsObject = armsObjectsDictionary[currentWeapon];
+                    if(armsObject != null)
+                    {
+                        if(currentWeapon.DualMode)
+                        {
+                            if(armsObject.crosshairPositionDualMode && armsObject.crosshairPosition)
+                            {
+                                crosshairPosition.Value = Vector3.Lerp(sceneCam.WorldToScreenPoint(armsObject.crosshairPosition.position),
+                                                                       sceneCam.WorldToScreenPoint(armsObject.crosshairPositionDualMode.position),
+                                                                       armsAnimator.GetFloat(dualModeFOVHash));
+                            }
+                            else
+                            {
+                                if(armsObject.crosshairPosition != null)
+                                {
+                                    crosshairPosition.Value = sceneCam.WorldToScreenPoint(armsObject.crosshairPosition.position);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             if(armsAnimator != null)
             {
                 if(Input.GetButtonDown("Flashlight"))
@@ -451,6 +491,12 @@ public class CharacterManager : MonoBehaviour
             // This is our new current weapon
             currentWeapon = nextWeapon;
 
+            // Assign weapon-specific crosshair sprite  
+            if(crosshairSprite != null)
+            {
+                crosshairSprite.Value = currentWeapon.Crosshair;
+            }
+
             // Also get available ammo for that weapon
             if(inventory != null)
             {
@@ -485,6 +531,12 @@ public class CharacterManager : MonoBehaviour
 
         // Since we dropped, we currently have no weapon
         currentWeapon = null;
+
+        // Clear weapon-specific crosshair sprite  
+        if (crosshairSprite != null)
+        {
+            crosshairSprite.Value = null;
+        }
 
         // Clear secondary flashlight
         secondaryFlashlight = null;

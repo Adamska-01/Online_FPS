@@ -10,6 +10,8 @@ public class ArmsObject
     public List<GameObject> sceneObjects = new List<GameObject>();
     public Flashlight light = new Flashlight();
     public AnimatorStateCallback callback = null;
+    public Transform crosshairPosition = null;
+    public Transform crosshairPositionDualMode = null;
 
 
     // Helper functions
