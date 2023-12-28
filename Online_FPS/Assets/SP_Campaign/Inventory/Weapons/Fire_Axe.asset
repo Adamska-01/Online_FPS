@@ -75,6 +75,6 @@ MonoBehaviour:
   dualModeFOV: 45
   crosshair: {fileID: 0}
   shakeType: 0
-  shakeDuration: 0.4
+  shakeDuration: 0.3
   shakeMagnitude: 0.05
   shakeDamping: 1

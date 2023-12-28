@@ -28,7 +28,7 @@ MonoBehaviour:
   ammo: {fileID: 0}
   ammoCapacity: 0
   reloadType: 0
-  range: 3.71
+  range: 0.75
   soundRadius: 1
   autoFire: 0
   dualMode: 0
