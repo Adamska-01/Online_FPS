@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using Unity.PlasticSCM.Editor.WebApi;
 using Unity.VisualScripting;
@@ -56,6 +57,7 @@ public class CharacterManager : MonoBehaviour
 	[SerializeField] private SharedString interactionText = null;
 	[SerializeField] private SharedVector3 crosshairPosition = null;
 	[SerializeField] private SharedSprite crosshairSprite = null;
+	[SerializeField] private VectorShaker cameraShaker = null;
 	
 
 	//Private
@@ -865,12 +867,120 @@ public class CharacterManager : MonoBehaviour
 			if(armsObject != null)
 			{
 				WeaponAnimatorStateCallback weaponArmsCallback = armsObject.callback as WeaponAnimatorStateCallback;
-                if (weaponArmsCallback != null)
-                {
+				if (weaponArmsCallback != null)
+				{
 					weaponArmsCallback.DoMuzzleFlash();
-                }
-            }
+				}
+			}
 		}
+
+		// Set the rest
+		InventoryItemWeapon weapon = currentWeapon == null ? defaultWeapon : currentWeapon;
+		if(weapon != null)
+		{
+			soundEmitter.SetRadius(weapon.SoundRadius);
+
+            InventoryWeaponMountInfo wmi = null;
+
+			if (weapon != defaultWeapon && inventory != null && weapon.WeaponType != InventoryWeaponType.None)
+			{
+				// Weapon condition
+				wmi = inventory.GetWeapon(weapon.WeaponType == InventoryWeaponType.SingleHanded ? 0 : 1);
+				if (wmi != null)
+				{
+					wmi.condition = Mathf.Max(0.0f, wmi.condition - weapon.ConditionDepletion);
+				}
+			}
+
+			// Camera shake
+			if (cameraShaker != null && weapon.ShakeType == InventoryItemWeaponShakeType.OnFire)
+			{
+				cameraShaker.ShakeVector(weapon.ShakeDuration, weapon.ShakeMagnitude, weapon.ShakeDamping);
+			}
+
+			// Raycast
+			if (sceneCam == null || gameSceneManger == null)
+				return;
+
+			Ray ray;
+			RaycastHit hit = new RaycastHit();
+			RaycastHit[] hits;
+			bool isSomethingHit = false;
+
+			ray = sceneCam.ScreenPointToRay(crosshairPosition.Value);
+
+			if (weapon.RayRadius > 0.0f) // eg. shotgun, rpg, etc..
+			{
+				// Move the origin back a bit as the sphere cast only works from half sphere onward
+				ray.origin = ray.origin - transform.forward * weapon.RayRadius;
+
+				hits = Physics.SphereCastAll(ray, weapon.RayRadius, weapon.Range, weaponRayLayerMask.value, QueryTriggerInteraction.Ignore);
+
+				foreach (var potentialHit in hits)
+				{
+					if (potentialHit.transform.gameObject.layer == LayerMask.NameToLayer("AI_BodyPart"))
+					{
+						Ray sightTestRay = ray;
+						ray.origin += transform.forward * weapon.RayRadius; // <Move forward again for the normal raycast
+
+						sightTestRay.direction = potentialHit.point - sightTestRay.origin;
+
+                        if (Physics.Raycast(sightTestRay, out hit, 1000, weaponRayLayerMask.value, QueryTriggerInteraction.Ignore))
+						{
+							if (potentialHit.transform == hit.transform)
+							{
+								if (hit.rigidbody != null)
+								{
+                                    AIStateMachine stateMachine = gameSceneManger.GetAIStateMachine(hit.rigidbody.GetInstanceID());
+                                    if (stateMachine != null)
+                                    {
+                                        float damage = weapon.GetAttentuatedDamage(hit.rigidbody.tag, hit.distance) * (wmi == null ? 1 : wmi.condition / 100.0f);
+
+                                        stateMachine.TakeDamage(hit.point,
+                                                                ray.direction * weapon.GetAttentuatedForce(hit.distance),
+                                                                (int)damage,
+                                                                hit.rigidbody,
+                                                                this,
+                                                                _hitDir);
+
+                                        isSomethingHit = true;
+                                    }
+                                }
+							}
+						}
+                    }
+                }
+			}
+			else
+            {
+                if (Physics.Raycast(ray, out hit, weapon.Range, weaponRayLayerMask.value, QueryTriggerInteraction.Ignore))
+				{
+                UnityEngine.Debug.Log("Fist hit");	
+					if (hit.rigidbody != null)
+					{
+						AIStateMachine stateMachine = gameSceneManger.GetAIStateMachine(hit.rigidbody.GetInstanceID());
+						if (stateMachine != null)
+						{
+							float damage = weapon.GetAttentuatedDamage(hit.rigidbody.tag, hit.distance) * (wmi == null ? 1 : wmi.condition / 100.0f);
+
+							stateMachine.TakeDamage(hit.point,
+													ray.direction * weapon.GetAttentuatedForce(hit.distance),
+													(int)damage,
+													hit.rigidbody,
+													this,
+													_hitDir);
+
+							isSomethingHit = true;
+						}
+					}
+				}
+			}
+
+			if(isSomethingHit && cameraShaker != null && weapon.ShakeType == InventoryItemWeaponShakeType.OnHit)
+			{
+                cameraShaker.ShakeVector(weapon.ShakeDuration, weapon.ShakeMagnitude, weapon.ShakeDamping);
+            }
+        }
 	}
 
 	public void CompleteLevel()

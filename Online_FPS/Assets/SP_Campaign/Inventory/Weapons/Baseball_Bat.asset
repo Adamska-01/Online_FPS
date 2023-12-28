@@ -31,9 +31,10 @@ MonoBehaviour:
   ammoCapacity: 0
   reloadType: 0
   range: 3
-  accuracy: 0.75
+  soundRadius: 1
   autoFire: 0
   dualMode: 0
+  conditionDepletion: 1
   rayRadius: 0
   headDamage: 20
   bodyDamage: 12
@@ -70,3 +71,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   weaponAnim: 1
   attackAnimCount: 3
+  dualModeFOV: 45
+  crosshair: {fileID: 0}
+  shakeType: 0
+  shakeDuration: 0.4
+  shakeMagnitude: 0.05
+  shakeDamping: 1

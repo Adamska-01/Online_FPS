@@ -12,7 +12,7 @@ public abstract class AIState : MonoBehaviour
     public virtual void OnExitState() { }
     public virtual void OnAnimatorUpdated()
     {
-        if (stateMachine.UseRootPosition)
+        if (stateMachine.UseRootPosition && Time.deltaTime > 0.0f)
         {
             stateMachine.NavAgent.velocity = stateMachine.Anim.deltaPosition / Time.deltaTime;
         }

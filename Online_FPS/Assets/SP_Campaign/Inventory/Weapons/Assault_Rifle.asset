@@ -74,3 +74,7 @@ MonoBehaviour:
   attackAnimCount: 1
   dualModeFOV: 45
   crosshair: {fileID: 21300006, guid: 1bd85ab4b5ca0a948949a374fb1a0a9a, type: 3}
+  shakeType: 0
+  shakeDuration: 0.2
+  shakeMagnitude: 0.02
+  shakeDamping: 1

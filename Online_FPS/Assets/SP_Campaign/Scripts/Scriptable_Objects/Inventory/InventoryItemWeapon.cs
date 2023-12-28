@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+public enum InventoryItemWeaponShakeType
+{
+    OnFire,
+    OnHit
+}
+
+
 [CreateAssetMenu(menuName = "Scriptable OBJ/Inventory System/Items/Weapon", fileName = "New Weapon Item")]
 public class InventoryItemWeapon : InventoryItem
 {
@@ -41,6 +48,7 @@ public class InventoryItemWeapon : InventoryItem
     [Range(0.0f, 100.0f)]
     [SerializeField] protected float conditionDepletion = 1.0f;
 
+
     [Header("Damage Properties")]
     [Tooltip("Thinkness of Raycast used for raycasting potential damage. \n\n" +
              "If zero, a standard raycast is used.\nIf non-zero, a SphereCast is used with the desired radius.\n\n" +
@@ -78,14 +86,32 @@ public class InventoryItemWeapon : InventoryItem
     [SerializeField] protected Sprite crosshair = null;
 
 
-     // Public Properties
+    [Header("Camera Effects")]
+    [Tooltip("Whether the camera shake happens at the point of fire or only when the weapon ray hits")]
+    [SerializeField] protected InventoryItemWeaponShakeType shakeType = InventoryItemWeaponShakeType.OnFire;
+
+    [Tooltip("Duration of the shake effect of this weapon")]
+    [SerializeField] protected float shakeDuration = 0.0f;
+
+    [Tooltip("Magnitude of the shake effect of this weapon")]
+    [SerializeField] protected float shakeMagnitude = 0.0f;
+
+    [Tooltip("Damping of the shake effect of this weapon")]
+    [SerializeField] protected float shakeDamping = 1.0f;
+
+
+    // Public Properties
     public InventoryWeaponType WeaponType           { get { return weaponType; } }
     public InventoryWeaponFeedType WeaponFeedType   { get { return weaponFeedType; } }
     public InventoryItemAmmo Ammo                   { get { return ammo; } }
     public InventoryWeaponReloadType ReloadType     { get { return reloadType; } }
+    public InventoryItemWeaponShakeType ShakeType   { get { return shakeType; } }
     public float Range                              { get { return range; } }
     public float SoundRadius                        { get { return soundRadius; } }
     public float ConditionDepletion                 { get { return conditionDepletion; } }
+    public float ShakeDuration                      { get { return shakeDuration; } }
+    public float ShakeMagnitude                     { get { return shakeMagnitude; } }
+    public float ShakeDamping                       { get { return shakeDamping; } }
     public bool AutoFire                            { get { return autoFire; } }
     public bool DualMode                            { get { return dualMode; } }
     public int HeadDamage                           { get { return headDamage; } }

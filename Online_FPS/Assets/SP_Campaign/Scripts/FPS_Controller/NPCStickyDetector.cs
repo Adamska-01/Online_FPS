@@ -31,7 +31,6 @@ public class NPCStickyDetector : MonoBehaviour
         {
             fpsController.DoStickiness();
 
-            Debug.Log("player");
             //Set visual threat on NPC (zombie)
             machine.visualThreat.Set(AITargetType.Visual_Player, fpsController.CHRController, fpsController.transform.position, Vector3.Distance(machine.transform.position, fpsController.transform.position));
             machine.SetStateOverride(AIStateType.Attack); //Attack player (avoid zombie going in alerted state)

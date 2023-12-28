@@ -63,7 +63,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  force: 100
+  force: 20
   forceAttenuation:
     serializedVersion: 2
     m_Curve:
@@ -101,3 +101,7 @@ MonoBehaviour:
   attackAnimCount: 1
   dualModeFOV: 50
   crosshair: {fileID: 21300004, guid: 1bd85ab4b5ca0a948949a374fb1a0a9a, type: 3}
+  shakeType: 0
+  shakeDuration: 0.2
+  shakeMagnitude: 0.1
+  shakeDamping: 0.02

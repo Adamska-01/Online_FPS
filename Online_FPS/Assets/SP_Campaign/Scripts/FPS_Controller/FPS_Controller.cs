@@ -36,6 +36,8 @@ public class FPS_Controller : MonoBehaviour
     
     [Header("Shared Variables")]
     [SerializeField] private SharedFloat stamina = null;
+    [SerializeField] private SharedVector3 cameraShakerOffset = null;
+
     [Header("Shared Variables - Broadcasters")]
     [SerializeField] private SharedVector3 broadcastPosition = null;
     [SerializeField] private SharedVector3 broadcastDirection = null;
@@ -250,14 +252,15 @@ public class FPS_Controller : MonoBehaviour
         characterController.Move(moveDirection * Time.fixedDeltaTime);
         
         //Head bob
+        Vector3 camShakeOffset = cameraShakerOffset == null ? Vector3.zero : cameraShakerOffset.Value;
         Vector3 speedXZ = new Vector3(characterController.velocity.x, 0.0f, characterController.velocity.z);
         if(speedXZ.magnitude > 0.01f)
         {
-            cam.transform.localPosition = localSpaceCameraPos + headBob.GetVectorOffset(speedXZ.magnitude * ((isCrouching || isWalking) ? 1.0f : runStepLengthen));
+            cam.transform.localPosition = localSpaceCameraPos + headBob.GetVectorOffset(speedXZ.magnitude * ((isCrouching || isWalking) ? 1.0f : runStepLengthen)) + camShakeOffset;
         }
         else //Not moving 
         {
-            cam.transform.localPosition = localSpaceCameraPos;
+            cam.transform.localPosition = localSpaceCameraPos + camShakeOffset;
         }
 
         //Update broadcasters
