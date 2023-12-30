@@ -1,10 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using Unity.PlasticSCM.Editor.WebApi;
-using Unity.VisualScripting;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 
@@ -32,10 +27,8 @@ public class CharacterManager : MonoBehaviour
 	[Header("Pain/Damage Audio & Settings")]
 	[SerializeField] private AudioCollection damageSounds = null;
 	[SerializeField] private AudioCollection painSounds = null;
-	[SerializeField] private AudioCollection tauntSounds = null;
 	[SerializeField] private float nextPainSoundTime = 0.0f;
 	[SerializeField] private float painSoundOffset = 0.35f;
-	[SerializeField] private float tauntRadius = 10.0f;
    
 	[Header("Inventory")]
 	[SerializeField] private GameObject inventoryUI = null;
@@ -60,14 +53,11 @@ public class CharacterManager : MonoBehaviour
 	[SerializeField] private VectorShaker cameraShaker = null;
 	
 
-	//Private
+	// Internal
 	private Collider col= null;
 	private FPS_Controller fpsController = null;
-	private CharacterController characterController = null;
 	private GameSceneManager gameSceneManger = null;
-	private int AI_BodyPartLayer = -1;
 	private int interactiveMask = 0;
-	private float nextTauntTime = 0.0f;
 
 	//Arms & Weapons 
 	private Flashlight secondaryFlashlight = null;
@@ -78,7 +68,6 @@ public class CharacterManager : MonoBehaviour
 	private IEnumerator switchWeaponCoroutine = null;
 	private int availableAmmo = 0;
 	private float initialFOV = 60.0f;
-
 
 	private Dictionary<ScriptableObject, ArmsObject> armsObjectsDictionary = new Dictionary<ScriptableObject, ArmsObject>();
 
@@ -102,6 +91,7 @@ public class CharacterManager : MonoBehaviour
 	private int clearWeaponHash         = Animator.StringToHash("Clear Weapon");          // Hash of Clear Weapon Trigger in animator
 	private int crosshairAlphaHash      = Animator.StringToHash("Crosshair Alpha");          // Transparency of the crosshair
 
+
 	//Properties
 	public FPS_Controller FPSController { get { return fpsController; } }
 
@@ -110,9 +100,7 @@ public class CharacterManager : MonoBehaviour
 	{
 		col = GetComponent<Collider>();
 		fpsController = GetComponent<FPS_Controller>();
-		characterController = GetComponent<CharacterController>();
 		gameSceneManger = GameSceneManager.Instance;
-		AI_BodyPartLayer = LayerMask.NameToLayer("AI_BodyPart");
 		interactiveMask = 1 << LayerMask.NameToLayer("Interactive");
 		
 		if(sceneCam != null)
@@ -597,29 +585,6 @@ public class CharacterManager : MonoBehaviour
 		inventory.ReloadWeaponItem(currentWeapon.WeaponType == InventoryWeaponType.SingleHanded ? 0 : 1, false);
 
 		availableAmmo = inventory.GetAvailableAmmo(currentWeapon.Ammo, AmmoAmountRequestType.NoWeaponAmmo);
-	}
-
-	private void DoTaunt()
-	{
-		if (tauntSounds == null || Time.time < nextTauntTime)
-			return;
-
-		//Play tount sound
-		AudioClip tauntClip = tauntSounds[0];
-		AudioManager.Instance.PlayOneShotSound(tauntSounds.AudioGroup,
-											   tauntClip,
-											   transform.position,
-											   tauntSounds.Volume,
-											   tauntSounds.SpatialBlend,
-											   tauntSounds.Priority);
-
-		//Set sound emitter radius
-		if(soundEmitter != null)
-		{
-			soundEmitter.SetRadius(tauntRadius);
-		}
-
-		nextTauntTime = Time.time + tauntClip.length;
 	}
 
 	private void ProcessInteractableItems()
