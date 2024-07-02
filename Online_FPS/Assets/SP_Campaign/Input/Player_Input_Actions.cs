@@ -24,7 +24,7 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
     ""name"": ""Player_Input_Actions"",
     ""maps"": [
         {
-            ""name"": ""Player_Actions"",
+            ""name"": ""Gameplay"",
             ""id"": ""a893b6fa-ed69-4c0f-b336-d75846057ecf"",
             ""actions"": [
                 {
@@ -130,6 +130,15 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
                     ""name"": ""Reload"",
                     ""type"": ""Button"",
                     ""id"": ""e0dc9208-3cc9-4360-8ee4-467a921540b0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inventory_Toggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""bd9d93c5-c6e2-4165-afc0-f1c6cc57fb64"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -400,6 +409,17 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
                     ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e7faa371-250b-41be-b391-5bc4f84b7f3e"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory_Toggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -408,9 +428,9 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
             ""id"": ""224e99c1-44c1-4b18-8229-5a9c4e2283b6"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""Inventory_Toggle"",
                     ""type"": ""Button"",
-                    ""id"": ""dde3bb5b-de90-4076-97fb-b3923f028326"",
+                    ""id"": ""d76982e1-ca9e-468b-9340-632d51480df8"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -420,12 +440,12 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""138906c6-c37b-48eb-a49b-dd6c2bfe6a4d"",
-                    ""path"": """",
+                    ""id"": ""3a74f62a-67ba-48c6-a202-db76547afafa"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""Inventory_Toggle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -434,23 +454,24 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
     ],
     ""controlSchemes"": []
 }");
-        // Player_Actions
-        m_Player_Actions = asset.FindActionMap("Player_Actions", throwIfNotFound: true);
-        m_Player_Actions_Move = m_Player_Actions.FindAction("Move", throwIfNotFound: true);
-        m_Player_Actions_Run = m_Player_Actions.FindAction("Run", throwIfNotFound: true);
-        m_Player_Actions_Jump = m_Player_Actions.FindAction("Jump", throwIfNotFound: true);
-        m_Player_Actions_Crouch = m_Player_Actions.FindAction("Crouch", throwIfNotFound: true);
-        m_Player_Actions_Crouch_Hold = m_Player_Actions.FindAction("Crouch_Hold", throwIfNotFound: true);
-        m_Player_Actions_Look = m_Player_Actions.FindAction("Look", throwIfNotFound: true);
-        m_Player_Actions_Fire = m_Player_Actions.FindAction("Fire", throwIfNotFound: true);
-        m_Player_Actions_ADS = m_Player_Actions.FindAction("ADS", throwIfNotFound: true);
-        m_Player_Actions_Weapon1 = m_Player_Actions.FindAction("Weapon1", throwIfNotFound: true);
-        m_Player_Actions_Weapon2 = m_Player_Actions.FindAction("Weapon2", throwIfNotFound: true);
-        m_Player_Actions_Next_Weapon = m_Player_Actions.FindAction("Next_Weapon", throwIfNotFound: true);
-        m_Player_Actions_Reload = m_Player_Actions.FindAction("Reload", throwIfNotFound: true);
+        // Gameplay
+        m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
+        m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
+        m_Gameplay_Run = m_Gameplay.FindAction("Run", throwIfNotFound: true);
+        m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
+        m_Gameplay_Crouch = m_Gameplay.FindAction("Crouch", throwIfNotFound: true);
+        m_Gameplay_Crouch_Hold = m_Gameplay.FindAction("Crouch_Hold", throwIfNotFound: true);
+        m_Gameplay_Look = m_Gameplay.FindAction("Look", throwIfNotFound: true);
+        m_Gameplay_Fire = m_Gameplay.FindAction("Fire", throwIfNotFound: true);
+        m_Gameplay_ADS = m_Gameplay.FindAction("ADS", throwIfNotFound: true);
+        m_Gameplay_Weapon1 = m_Gameplay.FindAction("Weapon1", throwIfNotFound: true);
+        m_Gameplay_Weapon2 = m_Gameplay.FindAction("Weapon2", throwIfNotFound: true);
+        m_Gameplay_Next_Weapon = m_Gameplay.FindAction("Next_Weapon", throwIfNotFound: true);
+        m_Gameplay_Reload = m_Gameplay.FindAction("Reload", throwIfNotFound: true);
+        m_Gameplay_Inventory_Toggle = m_Gameplay.FindAction("Inventory_Toggle", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
+        m_UI_Inventory_Toggle = m_UI.FindAction("Inventory_Toggle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -507,84 +528,89 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Player_Actions
-    private readonly InputActionMap m_Player_Actions;
-    private IPlayer_ActionsActions m_Player_ActionsActionsCallbackInterface;
-    private readonly InputAction m_Player_Actions_Move;
-    private readonly InputAction m_Player_Actions_Run;
-    private readonly InputAction m_Player_Actions_Jump;
-    private readonly InputAction m_Player_Actions_Crouch;
-    private readonly InputAction m_Player_Actions_Crouch_Hold;
-    private readonly InputAction m_Player_Actions_Look;
-    private readonly InputAction m_Player_Actions_Fire;
-    private readonly InputAction m_Player_Actions_ADS;
-    private readonly InputAction m_Player_Actions_Weapon1;
-    private readonly InputAction m_Player_Actions_Weapon2;
-    private readonly InputAction m_Player_Actions_Next_Weapon;
-    private readonly InputAction m_Player_Actions_Reload;
-    public struct Player_ActionsActions
+    // Gameplay
+    private readonly InputActionMap m_Gameplay;
+    private IGameplayActions m_GameplayActionsCallbackInterface;
+    private readonly InputAction m_Gameplay_Move;
+    private readonly InputAction m_Gameplay_Run;
+    private readonly InputAction m_Gameplay_Jump;
+    private readonly InputAction m_Gameplay_Crouch;
+    private readonly InputAction m_Gameplay_Crouch_Hold;
+    private readonly InputAction m_Gameplay_Look;
+    private readonly InputAction m_Gameplay_Fire;
+    private readonly InputAction m_Gameplay_ADS;
+    private readonly InputAction m_Gameplay_Weapon1;
+    private readonly InputAction m_Gameplay_Weapon2;
+    private readonly InputAction m_Gameplay_Next_Weapon;
+    private readonly InputAction m_Gameplay_Reload;
+    private readonly InputAction m_Gameplay_Inventory_Toggle;
+    public struct GameplayActions
     {
         private @Player_Input_Actions m_Wrapper;
-        public Player_ActionsActions(@Player_Input_Actions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Player_Actions_Move;
-        public InputAction @Run => m_Wrapper.m_Player_Actions_Run;
-        public InputAction @Jump => m_Wrapper.m_Player_Actions_Jump;
-        public InputAction @Crouch => m_Wrapper.m_Player_Actions_Crouch;
-        public InputAction @Crouch_Hold => m_Wrapper.m_Player_Actions_Crouch_Hold;
-        public InputAction @Look => m_Wrapper.m_Player_Actions_Look;
-        public InputAction @Fire => m_Wrapper.m_Player_Actions_Fire;
-        public InputAction @ADS => m_Wrapper.m_Player_Actions_ADS;
-        public InputAction @Weapon1 => m_Wrapper.m_Player_Actions_Weapon1;
-        public InputAction @Weapon2 => m_Wrapper.m_Player_Actions_Weapon2;
-        public InputAction @Next_Weapon => m_Wrapper.m_Player_Actions_Next_Weapon;
-        public InputAction @Reload => m_Wrapper.m_Player_Actions_Reload;
-        public InputActionMap Get() { return m_Wrapper.m_Player_Actions; }
+        public GameplayActions(@Player_Input_Actions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Gameplay_Move;
+        public InputAction @Run => m_Wrapper.m_Gameplay_Run;
+        public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
+        public InputAction @Crouch => m_Wrapper.m_Gameplay_Crouch;
+        public InputAction @Crouch_Hold => m_Wrapper.m_Gameplay_Crouch_Hold;
+        public InputAction @Look => m_Wrapper.m_Gameplay_Look;
+        public InputAction @Fire => m_Wrapper.m_Gameplay_Fire;
+        public InputAction @ADS => m_Wrapper.m_Gameplay_ADS;
+        public InputAction @Weapon1 => m_Wrapper.m_Gameplay_Weapon1;
+        public InputAction @Weapon2 => m_Wrapper.m_Gameplay_Weapon2;
+        public InputAction @Next_Weapon => m_Wrapper.m_Gameplay_Next_Weapon;
+        public InputAction @Reload => m_Wrapper.m_Gameplay_Reload;
+        public InputAction @Inventory_Toggle => m_Wrapper.m_Gameplay_Inventory_Toggle;
+        public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(Player_ActionsActions set) { return set.Get(); }
-        public void SetCallbacks(IPlayer_ActionsActions instance)
+        public static implicit operator InputActionMap(GameplayActions set) { return set.Get(); }
+        public void SetCallbacks(IGameplayActions instance)
         {
-            if (m_Wrapper.m_Player_ActionsActionsCallbackInterface != null)
+            if (m_Wrapper.m_GameplayActionsCallbackInterface != null)
             {
-                @Move.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnMove;
-                @Run.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnRun;
-                @Run.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnRun;
-                @Run.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnRun;
-                @Jump.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnJump;
-                @Crouch.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnCrouch;
-                @Crouch.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnCrouch;
-                @Crouch.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnCrouch;
-                @Crouch_Hold.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnCrouch_Hold;
-                @Crouch_Hold.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnCrouch_Hold;
-                @Crouch_Hold.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnCrouch_Hold;
-                @Look.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnLook;
-                @Look.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnLook;
-                @Look.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnLook;
-                @Fire.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnFire;
-                @Fire.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnFire;
-                @Fire.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnFire;
-                @ADS.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnADS;
-                @ADS.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnADS;
-                @ADS.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnADS;
-                @Weapon1.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnWeapon1;
-                @Weapon1.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnWeapon1;
-                @Weapon1.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnWeapon1;
-                @Weapon2.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnWeapon2;
-                @Weapon2.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnWeapon2;
-                @Weapon2.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnWeapon2;
-                @Next_Weapon.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnNext_Weapon;
-                @Next_Weapon.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnNext_Weapon;
-                @Next_Weapon.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnNext_Weapon;
-                @Reload.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnReload;
-                @Reload.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnReload;
-                @Reload.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnReload;
+                @Move.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
+                @Run.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRun;
+                @Run.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRun;
+                @Run.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRun;
+                @Jump.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
+                @Crouch.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCrouch;
+                @Crouch.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCrouch;
+                @Crouch.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCrouch;
+                @Crouch_Hold.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCrouch_Hold;
+                @Crouch_Hold.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCrouch_Hold;
+                @Crouch_Hold.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCrouch_Hold;
+                @Look.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLook;
+                @Look.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLook;
+                @Look.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLook;
+                @Fire.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire;
+                @Fire.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire;
+                @Fire.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire;
+                @ADS.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnADS;
+                @ADS.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnADS;
+                @ADS.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnADS;
+                @Weapon1.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnWeapon1;
+                @Weapon1.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnWeapon1;
+                @Weapon1.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnWeapon1;
+                @Weapon2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnWeapon2;
+                @Weapon2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnWeapon2;
+                @Weapon2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnWeapon2;
+                @Next_Weapon.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnNext_Weapon;
+                @Next_Weapon.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnNext_Weapon;
+                @Next_Weapon.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnNext_Weapon;
+                @Reload.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnReload;
+                @Inventory_Toggle.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventory_Toggle;
+                @Inventory_Toggle.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventory_Toggle;
+                @Inventory_Toggle.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventory_Toggle;
             }
-            m_Wrapper.m_Player_ActionsActionsCallbackInterface = instance;
+            m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Move.started += instance.OnMove;
@@ -623,20 +649,23 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
                 @Reload.started += instance.OnReload;
                 @Reload.performed += instance.OnReload;
                 @Reload.canceled += instance.OnReload;
+                @Inventory_Toggle.started += instance.OnInventory_Toggle;
+                @Inventory_Toggle.performed += instance.OnInventory_Toggle;
+                @Inventory_Toggle.canceled += instance.OnInventory_Toggle;
             }
         }
     }
-    public Player_ActionsActions @Player_Actions => new Player_ActionsActions(this);
+    public GameplayActions @Gameplay => new GameplayActions(this);
 
     // UI
     private readonly InputActionMap m_UI;
     private IUIActions m_UIActionsCallbackInterface;
-    private readonly InputAction m_UI_Newaction;
+    private readonly InputAction m_UI_Inventory_Toggle;
     public struct UIActions
     {
         private @Player_Input_Actions m_Wrapper;
         public UIActions(@Player_Input_Actions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_UI_Newaction;
+        public InputAction @Inventory_Toggle => m_Wrapper.m_UI_Inventory_Toggle;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -646,21 +675,21 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
         {
             if (m_Wrapper.m_UIActionsCallbackInterface != null)
             {
-                @Newaction.started -= m_Wrapper.m_UIActionsCallbackInterface.OnNewaction;
-                @Newaction.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnNewaction;
-                @Newaction.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnNewaction;
+                @Inventory_Toggle.started -= m_Wrapper.m_UIActionsCallbackInterface.OnInventory_Toggle;
+                @Inventory_Toggle.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnInventory_Toggle;
+                @Inventory_Toggle.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnInventory_Toggle;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Newaction.started += instance.OnNewaction;
-                @Newaction.performed += instance.OnNewaction;
-                @Newaction.canceled += instance.OnNewaction;
+                @Inventory_Toggle.started += instance.OnInventory_Toggle;
+                @Inventory_Toggle.performed += instance.OnInventory_Toggle;
+                @Inventory_Toggle.canceled += instance.OnInventory_Toggle;
             }
         }
     }
     public UIActions @UI => new UIActions(this);
-    public interface IPlayer_ActionsActions
+    public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
@@ -674,9 +703,10 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
         void OnWeapon2(InputAction.CallbackContext context);
         void OnNext_Weapon(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
+        void OnInventory_Toggle(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnInventory_Toggle(InputAction.CallbackContext context);
     }
 }

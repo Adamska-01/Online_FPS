@@ -2,7 +2,7 @@
     "name": "Player_Input_Actions",
     "maps": [
         {
-            "name": "Player_Actions",
+            "name": "Gameplay",
             "id": "a893b6fa-ed69-4c0f-b336-d75846057ecf",
             "actions": [
                 {
@@ -108,6 +108,15 @@
                     "name": "Reload",
                     "type": "Button",
                     "id": "e0dc9208-3cc9-4360-8ee4-467a921540b0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Inventory_Toggle",
+                    "type": "Button",
+                    "id": "bd9d93c5-c6e2-4165-afc0-f1c6cc57fb64",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -378,6 +387,17 @@
                     "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e7faa371-250b-41be-b391-5bc4f84b7f3e",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inventory_Toggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -386,9 +406,9 @@
             "id": "224e99c1-44c1-4b18-8229-5a9c4e2283b6",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Inventory_Toggle",
                     "type": "Button",
-                    "id": "dde3bb5b-de90-4076-97fb-b3923f028326",
+                    "id": "d76982e1-ca9e-468b-9340-632d51480df8",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -398,12 +418,12 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "138906c6-c37b-48eb-a49b-dd6c2bfe6a4d",
-                    "path": "",
+                    "id": "3a74f62a-67ba-48c6-a202-db76547afafa",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Inventory_Toggle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
