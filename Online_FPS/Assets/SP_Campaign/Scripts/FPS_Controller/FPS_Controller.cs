@@ -75,7 +75,6 @@ public class FPS_Controller : MonoBehaviour
 
 	//Public Properties 
 	public PlayerMoveStatus MovementStatus { get { return movementStatus; } }
-	public CharacterController CHRController { get { return characterController; } }
 	public float WalkSpeed           => walkSpeed;
 	public float RunSpeed			 => runSpeed;
 	public bool IsJumping			 => isJumping; 
@@ -88,11 +87,10 @@ public class FPS_Controller : MonoBehaviour
 
 	protected void Awake()
 	{
-		//Cache components references
+		cam = Camera.main;
+
 		characterController = GetComponent<CharacterController>();
 		controllerHeight = characterController.height;
-
-		cam = Camera.main;
     }
 
 	protected void Start()
