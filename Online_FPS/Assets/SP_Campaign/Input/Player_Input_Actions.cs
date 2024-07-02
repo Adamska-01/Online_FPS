@@ -24,7 +24,7 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
     ""name"": ""Player_Input_Actions"",
     ""maps"": [
         {
-            ""name"": ""Movement"",
+            ""name"": ""Player_Actions"",
             ""id"": ""a893b6fa-ed69-4c0f-b336-d75846057ecf"",
             ""actions"": [
                 {
@@ -80,6 +80,60 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""d8fa8240-4354-46a0-a46c-1e37b13800a5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ADS"",
+                    ""type"": ""Button"",
+                    ""id"": ""786353fe-eadb-4dcb-aa73-0026cbf462e0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Weapon1"",
+                    ""type"": ""Button"",
+                    ""id"": ""3074f378-dbe2-4c06-85af-ba100b85ff7c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Weapon2"",
+                    ""type"": ""Button"",
+                    ""id"": ""2a9c1552-7b69-43bf-9e7c-eec1e6de5639"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Next_Weapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""de4c5696-1554-4382-b4aa-f416af57f6fc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""e0dc9208-3cc9-4360-8ee4-467a921540b0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -151,23 +205,34 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
                 },
                 {
                     ""name"": """",
-                    ""id"": ""de84127d-4c55-448f-b6ba-08ed3f07c44f"",
-                    ""path"": ""<Keyboard>/c"",
+                    ""id"": ""0f8a1dff-a35e-42f3-89e7-a692e608d48f"",
+                    ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Crouch"",
+                    ""action"": ""Weapon2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b27be87e-b326-4f75-b750-154f1617cc67"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""id"": ""8b5d8062-7830-430d-b13c-3a8b526f42c1"",
+                    ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Crouch"",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""90861f10-a0cb-47df-8cfd-675a3aba60c4"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -190,6 +255,50 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""de84127d-4c55-448f-b6ba-08ed3f07c44f"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b27be87e-b326-4f75-b750-154f1617cc67"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""41ec1907-a90a-4412-9708-9b1bc45a67f2"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fd455870-7fc4-415b-b3aa-514b5a91b382"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -228,36 +337,80 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8b5d8062-7830-430d-b13c-3a8b526f42c1"",
-                    ""path"": ""<Keyboard>/leftShift"",
+                    ""id"": ""bcd65608-cfbe-4f4d-8416-1d9b8df65556"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Run"",
+                    ""action"": ""ADS"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""90861f10-a0cb-47df-8cfd-675a3aba60c4"",
-                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""id"": ""6518a6a4-ad83-42c2-a8fd-2c8b93375ae3"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Run"",
+                    ""action"": ""ADS"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""86a48035-ce52-4497-9f9f-056cd90c8ea4"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Next_Weapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""05ecafc2-3534-4ffc-b4ed-7662140dd4eb"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Weapon1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7513f9d3-5526-46a6-8ace-5570b57695a4"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b9b95ecf-214e-42f1-a01b-96de8683cac5"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
             ]
         },
         {
-            ""name"": ""Shooting"",
-            ""id"": ""99def2eb-49a0-41e8-98cf-09427166bbf7"",
+            ""name"": ""UI"",
+            ""id"": ""224e99c1-44c1-4b18-8229-5a9c4e2283b6"",
             ""actions"": [
                 {
                     ""name"": ""New action"",
                     ""type"": ""Button"",
-                    ""id"": ""63965616-3c70-4a42-86e7-a8759cd684df"",
+                    ""id"": ""dde3bb5b-de90-4076-97fb-b3923f028326"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -267,7 +420,7 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""c7088546-7a18-453b-9566-036a06fb45f6"",
+                    ""id"": ""138906c6-c37b-48eb-a49b-dd6c2bfe6a4d"",
                     ""path"": """",
                     ""interactions"": """",
                     ""processors"": """",
@@ -281,17 +434,23 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
     ],
     ""controlSchemes"": []
 }");
-        // Movement
-        m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
-        m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
-        m_Movement_Run = m_Movement.FindAction("Run", throwIfNotFound: true);
-        m_Movement_Jump = m_Movement.FindAction("Jump", throwIfNotFound: true);
-        m_Movement_Crouch = m_Movement.FindAction("Crouch", throwIfNotFound: true);
-        m_Movement_Crouch_Hold = m_Movement.FindAction("Crouch_Hold", throwIfNotFound: true);
-        m_Movement_Look = m_Movement.FindAction("Look", throwIfNotFound: true);
-        // Shooting
-        m_Shooting = asset.FindActionMap("Shooting", throwIfNotFound: true);
-        m_Shooting_Newaction = m_Shooting.FindAction("New action", throwIfNotFound: true);
+        // Player_Actions
+        m_Player_Actions = asset.FindActionMap("Player_Actions", throwIfNotFound: true);
+        m_Player_Actions_Move = m_Player_Actions.FindAction("Move", throwIfNotFound: true);
+        m_Player_Actions_Run = m_Player_Actions.FindAction("Run", throwIfNotFound: true);
+        m_Player_Actions_Jump = m_Player_Actions.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Actions_Crouch = m_Player_Actions.FindAction("Crouch", throwIfNotFound: true);
+        m_Player_Actions_Crouch_Hold = m_Player_Actions.FindAction("Crouch_Hold", throwIfNotFound: true);
+        m_Player_Actions_Look = m_Player_Actions.FindAction("Look", throwIfNotFound: true);
+        m_Player_Actions_Fire = m_Player_Actions.FindAction("Fire", throwIfNotFound: true);
+        m_Player_Actions_ADS = m_Player_Actions.FindAction("ADS", throwIfNotFound: true);
+        m_Player_Actions_Weapon1 = m_Player_Actions.FindAction("Weapon1", throwIfNotFound: true);
+        m_Player_Actions_Weapon2 = m_Player_Actions.FindAction("Weapon2", throwIfNotFound: true);
+        m_Player_Actions_Next_Weapon = m_Player_Actions.FindAction("Next_Weapon", throwIfNotFound: true);
+        m_Player_Actions_Reload = m_Player_Actions.FindAction("Reload", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -348,54 +507,84 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Movement
-    private readonly InputActionMap m_Movement;
-    private IMovementActions m_MovementActionsCallbackInterface;
-    private readonly InputAction m_Movement_Move;
-    private readonly InputAction m_Movement_Run;
-    private readonly InputAction m_Movement_Jump;
-    private readonly InputAction m_Movement_Crouch;
-    private readonly InputAction m_Movement_Crouch_Hold;
-    private readonly InputAction m_Movement_Look;
-    public struct MovementActions
+    // Player_Actions
+    private readonly InputActionMap m_Player_Actions;
+    private IPlayer_ActionsActions m_Player_ActionsActionsCallbackInterface;
+    private readonly InputAction m_Player_Actions_Move;
+    private readonly InputAction m_Player_Actions_Run;
+    private readonly InputAction m_Player_Actions_Jump;
+    private readonly InputAction m_Player_Actions_Crouch;
+    private readonly InputAction m_Player_Actions_Crouch_Hold;
+    private readonly InputAction m_Player_Actions_Look;
+    private readonly InputAction m_Player_Actions_Fire;
+    private readonly InputAction m_Player_Actions_ADS;
+    private readonly InputAction m_Player_Actions_Weapon1;
+    private readonly InputAction m_Player_Actions_Weapon2;
+    private readonly InputAction m_Player_Actions_Next_Weapon;
+    private readonly InputAction m_Player_Actions_Reload;
+    public struct Player_ActionsActions
     {
         private @Player_Input_Actions m_Wrapper;
-        public MovementActions(@Player_Input_Actions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Movement_Move;
-        public InputAction @Run => m_Wrapper.m_Movement_Run;
-        public InputAction @Jump => m_Wrapper.m_Movement_Jump;
-        public InputAction @Crouch => m_Wrapper.m_Movement_Crouch;
-        public InputAction @Crouch_Hold => m_Wrapper.m_Movement_Crouch_Hold;
-        public InputAction @Look => m_Wrapper.m_Movement_Look;
-        public InputActionMap Get() { return m_Wrapper.m_Movement; }
+        public Player_ActionsActions(@Player_Input_Actions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Player_Actions_Move;
+        public InputAction @Run => m_Wrapper.m_Player_Actions_Run;
+        public InputAction @Jump => m_Wrapper.m_Player_Actions_Jump;
+        public InputAction @Crouch => m_Wrapper.m_Player_Actions_Crouch;
+        public InputAction @Crouch_Hold => m_Wrapper.m_Player_Actions_Crouch_Hold;
+        public InputAction @Look => m_Wrapper.m_Player_Actions_Look;
+        public InputAction @Fire => m_Wrapper.m_Player_Actions_Fire;
+        public InputAction @ADS => m_Wrapper.m_Player_Actions_ADS;
+        public InputAction @Weapon1 => m_Wrapper.m_Player_Actions_Weapon1;
+        public InputAction @Weapon2 => m_Wrapper.m_Player_Actions_Weapon2;
+        public InputAction @Next_Weapon => m_Wrapper.m_Player_Actions_Next_Weapon;
+        public InputAction @Reload => m_Wrapper.m_Player_Actions_Reload;
+        public InputActionMap Get() { return m_Wrapper.m_Player_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(MovementActions set) { return set.Get(); }
-        public void SetCallbacks(IMovementActions instance)
+        public static implicit operator InputActionMap(Player_ActionsActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayer_ActionsActions instance)
         {
-            if (m_Wrapper.m_MovementActionsCallbackInterface != null)
+            if (m_Wrapper.m_Player_ActionsActionsCallbackInterface != null)
             {
-                @Move.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
-                @Run.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnRun;
-                @Run.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnRun;
-                @Run.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnRun;
-                @Jump.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnJump;
-                @Crouch.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnCrouch;
-                @Crouch.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnCrouch;
-                @Crouch.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnCrouch;
-                @Crouch_Hold.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnCrouch_Hold;
-                @Crouch_Hold.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnCrouch_Hold;
-                @Crouch_Hold.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnCrouch_Hold;
-                @Look.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnLook;
-                @Look.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnLook;
-                @Look.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnLook;
+                @Move.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnMove;
+                @Run.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnRun;
+                @Run.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnRun;
+                @Run.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnRun;
+                @Jump.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnJump;
+                @Crouch.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnCrouch;
+                @Crouch.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnCrouch;
+                @Crouch.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnCrouch;
+                @Crouch_Hold.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnCrouch_Hold;
+                @Crouch_Hold.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnCrouch_Hold;
+                @Crouch_Hold.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnCrouch_Hold;
+                @Look.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnLook;
+                @Look.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnLook;
+                @Look.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnLook;
+                @Fire.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnFire;
+                @Fire.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnFire;
+                @Fire.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnFire;
+                @ADS.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnADS;
+                @ADS.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnADS;
+                @ADS.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnADS;
+                @Weapon1.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnWeapon1;
+                @Weapon1.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnWeapon1;
+                @Weapon1.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnWeapon1;
+                @Weapon2.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnWeapon2;
+                @Weapon2.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnWeapon2;
+                @Weapon2.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnWeapon2;
+                @Next_Weapon.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnNext_Weapon;
+                @Next_Weapon.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnNext_Weapon;
+                @Next_Weapon.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnNext_Weapon;
+                @Reload.started -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_Player_ActionsActionsCallbackInterface.OnReload;
             }
-            m_Wrapper.m_MovementActionsCallbackInterface = instance;
+            m_Wrapper.m_Player_ActionsActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Move.started += instance.OnMove;
@@ -416,34 +605,52 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
+                @Fire.started += instance.OnFire;
+                @Fire.performed += instance.OnFire;
+                @Fire.canceled += instance.OnFire;
+                @ADS.started += instance.OnADS;
+                @ADS.performed += instance.OnADS;
+                @ADS.canceled += instance.OnADS;
+                @Weapon1.started += instance.OnWeapon1;
+                @Weapon1.performed += instance.OnWeapon1;
+                @Weapon1.canceled += instance.OnWeapon1;
+                @Weapon2.started += instance.OnWeapon2;
+                @Weapon2.performed += instance.OnWeapon2;
+                @Weapon2.canceled += instance.OnWeapon2;
+                @Next_Weapon.started += instance.OnNext_Weapon;
+                @Next_Weapon.performed += instance.OnNext_Weapon;
+                @Next_Weapon.canceled += instance.OnNext_Weapon;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
             }
         }
     }
-    public MovementActions @Movement => new MovementActions(this);
+    public Player_ActionsActions @Player_Actions => new Player_ActionsActions(this);
 
-    // Shooting
-    private readonly InputActionMap m_Shooting;
-    private IShootingActions m_ShootingActionsCallbackInterface;
-    private readonly InputAction m_Shooting_Newaction;
-    public struct ShootingActions
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_Newaction;
+    public struct UIActions
     {
         private @Player_Input_Actions m_Wrapper;
-        public ShootingActions(@Player_Input_Actions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_Shooting_Newaction;
-        public InputActionMap Get() { return m_Wrapper.m_Shooting; }
+        public UIActions(@Player_Input_Actions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_UI_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(ShootingActions set) { return set.Get(); }
-        public void SetCallbacks(IShootingActions instance)
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void SetCallbacks(IUIActions instance)
         {
-            if (m_Wrapper.m_ShootingActionsCallbackInterface != null)
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
             {
-                @Newaction.started -= m_Wrapper.m_ShootingActionsCallbackInterface.OnNewaction;
-                @Newaction.performed -= m_Wrapper.m_ShootingActionsCallbackInterface.OnNewaction;
-                @Newaction.canceled -= m_Wrapper.m_ShootingActionsCallbackInterface.OnNewaction;
+                @Newaction.started -= m_Wrapper.m_UIActionsCallbackInterface.OnNewaction;
+                @Newaction.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnNewaction;
+                @Newaction.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnNewaction;
             }
-            m_Wrapper.m_ShootingActionsCallbackInterface = instance;
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Newaction.started += instance.OnNewaction;
@@ -452,8 +659,8 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
             }
         }
     }
-    public ShootingActions @Shooting => new ShootingActions(this);
-    public interface IMovementActions
+    public UIActions @UI => new UIActions(this);
+    public interface IPlayer_ActionsActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
@@ -461,8 +668,14 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
         void OnCrouch(InputAction.CallbackContext context);
         void OnCrouch_Hold(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
+        void OnADS(InputAction.CallbackContext context);
+        void OnWeapon1(InputAction.CallbackContext context);
+        void OnWeapon2(InputAction.CallbackContext context);
+        void OnNext_Weapon(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
-    public interface IShootingActions
+    public interface IUIActions
     {
         void OnNewaction(InputAction.CallbackContext context);
     }

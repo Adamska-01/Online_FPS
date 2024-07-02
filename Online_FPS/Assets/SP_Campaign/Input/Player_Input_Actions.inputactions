@@ -2,7 +2,7 @@
     "name": "Player_Input_Actions",
     "maps": [
         {
-            "name": "Movement",
+            "name": "Player_Actions",
             "id": "a893b6fa-ed69-4c0f-b336-d75846057ecf",
             "actions": [
                 {
@@ -58,6 +58,60 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "d8fa8240-4354-46a0-a46c-1e37b13800a5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ADS",
+                    "type": "Button",
+                    "id": "786353fe-eadb-4dcb-aa73-0026cbf462e0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Weapon1",
+                    "type": "Button",
+                    "id": "3074f378-dbe2-4c06-85af-ba100b85ff7c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Weapon2",
+                    "type": "Button",
+                    "id": "2a9c1552-7b69-43bf-9e7c-eec1e6de5639",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Next_Weapon",
+                    "type": "Button",
+                    "id": "de4c5696-1554-4382-b4aa-f416af57f6fc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "e0dc9208-3cc9-4360-8ee4-467a921540b0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -129,23 +183,34 @@
                 },
                 {
                     "name": "",
-                    "id": "de84127d-4c55-448f-b6ba-08ed3f07c44f",
-                    "path": "<Keyboard>/c",
+                    "id": "0f8a1dff-a35e-42f3-89e7-a692e608d48f",
+                    "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Crouch",
+                    "action": "Weapon2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "b27be87e-b326-4f75-b750-154f1617cc67",
-                    "path": "<Gamepad>/buttonEast",
+                    "id": "8b5d8062-7830-430d-b13c-3a8b526f42c1",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Crouch",
+                    "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "90861f10-a0cb-47df-8cfd-675a3aba60c4",
+                    "path": "<Gamepad>/leftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Run",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -168,6 +233,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "de84127d-4c55-448f-b6ba-08ed3f07c44f",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b27be87e-b326-4f75-b750-154f1617cc67",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "41ec1907-a90a-4412-9708-9b1bc45a67f2",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fd455870-7fc4-415b-b3aa-514b5a91b382",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -206,36 +315,80 @@
                 },
                 {
                     "name": "",
-                    "id": "8b5d8062-7830-430d-b13c-3a8b526f42c1",
-                    "path": "<Keyboard>/leftShift",
+                    "id": "bcd65608-cfbe-4f4d-8416-1d9b8df65556",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Run",
+                    "action": "ADS",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "90861f10-a0cb-47df-8cfd-675a3aba60c4",
-                    "path": "<Gamepad>/leftStickPress",
+                    "id": "6518a6a4-ad83-42c2-a8fd-2c8b93375ae3",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Run",
+                    "action": "ADS",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "86a48035-ce52-4497-9f9f-056cd90c8ea4",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Next_Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "05ecafc2-3534-4ffc-b4ed-7662140dd4eb",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Weapon1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7513f9d3-5526-46a6-8ace-5570b57695a4",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b9b95ecf-214e-42f1-a01b-96de8683cac5",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
             ]
         },
         {
-            "name": "Shooting",
-            "id": "99def2eb-49a0-41e8-98cf-09427166bbf7",
+            "name": "UI",
+            "id": "224e99c1-44c1-4b18-8229-5a9c4e2283b6",
             "actions": [
                 {
                     "name": "New action",
                     "type": "Button",
-                    "id": "63965616-3c70-4a42-86e7-a8759cd684df",
+                    "id": "dde3bb5b-de90-4076-97fb-b3923f028326",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -245,7 +398,7 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "c7088546-7a18-453b-9566-036a06fb45f6",
+                    "id": "138906c6-c37b-48eb-a49b-dd6c2bfe6a4d",
                     "path": "",
                     "interactions": "",
                     "processors": "",
