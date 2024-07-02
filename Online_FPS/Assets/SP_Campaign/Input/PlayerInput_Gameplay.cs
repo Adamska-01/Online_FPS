@@ -3,21 +3,19 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class PlayerInput_PlayerActions : MonoBehaviour
+public class PlayerInput_Gameplay : MonoBehaviour
 {
 	[SerializeField]
 	private CharacterManager chrManager;
 	
-	
+	[SerializeField]
 	private FPS_Controller fpsController;
 
 
 	void Awake()
     {
 		Guard.AgainstNull(chrManager, nameof(chrManager));
-		Guard.AgainstNull(chrManager.FPSController, nameof(chrManager.FPSController));
-		
-		fpsController = chrManager.FPSController;
+		Guard.AgainstNull(fpsController, nameof(fpsController));
 	}
 
 	
