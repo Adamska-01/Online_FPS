@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows;
-using static RootMotion.FinalIK.Finger;
 
 
 public enum PlayerMoveStatus 
@@ -78,12 +76,12 @@ public class FPS_Controller : MonoBehaviour
 	//Public Properties 
 	public PlayerMoveStatus MovementStatus { get { return movementStatus; } }
 	public CharacterController CHRController { get { return characterController; } }
-	public float WalkSpeed           { get { return walkSpeed; } }
-	public float RunSpeed            { get { return runSpeed; } }
+	public float WalkSpeed           => walkSpeed;
+	public float RunSpeed			 => runSpeed;
+	public bool IsJumping			 => isJumping; 
 	public float DragMultiplierLimit { get { return dragMultiplierLimit; } set { dragMultiplierLimit = Mathf.Clamp01(value); } }
 	public float DragMultiplier      { get { return dragMultiplier; } set { dragMultiplier = Mathf.Min(value, dragMultiplierLimit); } }
 	public float SpeedOverride       { get { return speedOverride; } set { speedOverride = value; } }
-	public bool IsJumping            { get { return isJumping; } }
 	public bool FreezeMovement       { get { return freezeMovement; } set { freezeMovement = value; } }
 
 
@@ -273,15 +271,15 @@ public class FPS_Controller : MonoBehaviour
 	}
 
 	#region Player Input
-	public void Movement_PlayerInput(InputAction.CallbackContext context)
+	public void Move(Vector2 movementVector)
 	{
-		inputVector = context.ReadValue<Vector2>();
-        Debug.Log(inputVector + $" {isWalking}");
+		inputVector = movementVector;
+
         // Handle run input
         if (!isWalking)
 		{
 			float dot = Vector2.Dot(inputVector.normalized, Vector2.up);
-			Debug.Log(dot);
+
 			isWalking = !(dot >= 0.5f && dot <= 1.0f); // Only run forward
 		}
 
@@ -290,43 +288,34 @@ public class FPS_Controller : MonoBehaviour
 			inputVector.Normalize();
 	}
 
-	public void Run_PlayerInput(InputAction.CallbackContext context)
+	public void Run()
 	{
-		if (!context.performed)
-			return;
-
         float dot = Vector2.Dot(inputVector.normalized, Vector2.up);
         isWalking = !(dot >= 0.5f && dot <= 1.0f); // Only run forward
 	}
 
-	public void Jump_PlayerInput(InputAction.CallbackContext context)
+	public void Jump()
 	{
-		//Process jump
-		if (!jumpButtonPressed && !isCrouching && characterController.isGrounded && context.performed)
-		{
-			jumpButtonPressed = true;
-		}
+		jumpButtonPressed = !jumpButtonPressed && !isCrouching && characterController.isGrounded;
 	}
 
-	public void Crouch_PlayerInput(InputAction.CallbackContext context)
+	public void Crouch()
 	{
 		isCrouching = !isCrouching;
 
 		characterController.height = isCrouching == true ? controllerHeight / 2.0f : controllerHeight;
 	}
 
-	public void Crouch_Hold_PlayerInput(InputAction.CallbackContext context)
+	public void Crouch_Hold(float crouchValue)
 	{
-		float value = context.ReadValue<float>();
-
-		isCrouching = value > 0.0f ? true : false;
+		isCrouching = crouchValue > 0.0f ? true : false;
 
 		characterController.height = isCrouching == true ? controllerHeight / 2.0f : controllerHeight;
 	}
 
-	public void Look_PlayerInput(InputAction.CallbackContext context)
+	public void Look(Vector2 lookVector)
 	{
-		rotationVector = context.ReadValue<Vector2>();
+		rotationVector = lookVector;
     }
     #endregion
 

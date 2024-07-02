@@ -1,12 +1,15 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 
-public enum ScreenFadeType { FadeIn, FadeOut }
+public enum ScreenFadeType 
+{ 
+    FadeIn, 
+    FadeOut 
+}
 
 public class PlayerHUD : MonoBehaviour
 {
@@ -68,8 +71,8 @@ public class PlayerHUD : MonoBehaviour
 
     private void Awake()
     {
-        //Cache lamda event listeners
-        OnHealthUpdate = () => { healthSlider.value = health.Value; };
+		//Cache lamda event listeners
+		OnHealthUpdate = () => { healthSlider.value = health.Value; };
         OnStaminaUpdate = () => { staminaSlider.value = stamina.Value; };
         OnInfectionUpdate = () => { infectionSlider.value = infection.Value; };
         OnFlashlightUpdate = () => { flashlightSlider.value = flashlight.Value; };
@@ -97,8 +100,11 @@ public class PlayerHUD : MonoBehaviour
 
     void Start()
     {
-        //Set Fade image alpha
-        if (screenFade != null)
+		//Start fading in
+		Fade(2.0f, ScreenFadeType.FadeIn);
+
+		//Set Fade image alpha
+		if (screenFade != null)
         {
             Color color = screenFade.color;
             color.a = currentFadeLevel;

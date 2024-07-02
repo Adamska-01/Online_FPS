@@ -6,11 +6,11 @@ public class SwitchWeaponSMB : ArmsBaseSMB
 {
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        characterMgr?.DisableWeapon_AnimatorCallback();    
+        characterMgr?.WPNController?.DisableWeapon_AnimatorCallback();    
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        characterMgr?.EnableWeapon_AnimatorCallback();    
+        characterMgr?.WPNController?.EnableWeapon_AnimatorCallback();    
     }
 }

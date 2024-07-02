@@ -1,12 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System;
-using UnityEngine.Android;
 
-public enum InventoryPanelType { None, Backpack, AmmoBelt, Weapons, PDA }
+public enum InventoryPanelType 
+{ 
+    None, 
+    Backpack, 
+    AmmoBelt, 
+    Weapons, 
+    PDA 
+}
 
 
 #region Support_Structures 
@@ -122,18 +128,26 @@ public class PlayerInventoryUI : MonoBehaviour
     [SerializeField] private Color ammoMountHover = Color.gray;
     [SerializeField] private Color weaponMountHover = Color.red;
 
+    private Action onInventoryToggled;
+
     
     //Properties
     public Inventory PlayerInventory { get { return inventory; }  set { inventory = value; } }
+	public event Action OnInventoryToggled
+	{
+		add => onInventoryToggled += value; 
+		remove => onInventoryToggled -= value;
+	}
 
 
-    //Internals
-    protected Color backpackMountOriginalColor;
+	//Internals
+	protected Color backpackMountOriginalColor;
     protected Color weaponMountOriginalColor;
     protected Color ammoMountOriginalColor;
     protected InventoryPanelType selectedPanelType = InventoryPanelType.None;
     protected int selectedMount = -1;
     protected bool isInitialized = false;
+
     private Action OnHealthUpdate;
     private Action OnStaminaUpdate;
     private Action OnInfectionUpdate;
@@ -165,7 +179,15 @@ public class PlayerInventoryUI : MonoBehaviour
         Input.ResetInputAxes();
     }
 
-    private void OnDestroy()
+	private void Start()
+	{
+		//Disable Inventory UI at start up
+		gameObject.SetActive(false);
+
+		SetCursorVisibility();
+	}
+
+	private void OnDestroy()
     {
         //Unsubscribe events (status shared variable)
         if (statusReferences.healthSlider != null && health != null)           health.OnVariableValueChanged -= OnHealthUpdate;
@@ -1107,4 +1129,25 @@ public class PlayerInventoryUI : MonoBehaviour
 
         RefreshPDAEntries();
     }
+
+    public void SetCursorVisibility()
+    {
+		Cursor.visible = gameObject.activeSelf;
+		Cursor.lockState = gameObject.activeSelf ? CursorLockMode.None : CursorLockMode.Locked;
+	}
+
+	#region UI_Input
+	public bool ToggleInventory()
+    {
+        var toggleValue = !gameObject.activeSelf;
+
+		gameObject.SetActive(toggleValue);
+
+        onInventoryToggled?.Invoke();
+
+        SetCursorVisibility();
+
+		return toggleValue;
+	}
+	#endregion
 }

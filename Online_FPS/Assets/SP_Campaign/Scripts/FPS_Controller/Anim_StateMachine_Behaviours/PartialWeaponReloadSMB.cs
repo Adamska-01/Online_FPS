@@ -20,7 +20,7 @@ public class PartialWeaponReloadSMB : ArmsBaseSMB
 
         if (characterMgr != null && reloadRepeat == 0)
         {
-            characterMgr.ReloadWeapon_AnimatorCallback(weaponType);
+            characterMgr.WPNController?.ReloadWeapon_AnimatorCallback(weaponType);
             animator.SetBool(reloadHash, false);
         }
     }
