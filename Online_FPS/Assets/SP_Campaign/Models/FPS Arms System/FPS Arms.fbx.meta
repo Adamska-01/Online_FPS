@@ -5497,6 +5497,31 @@ ModelImporter:
           preInfinity: 3
           postInfinity: 3
           rotationOrder: 4
+      - name: Crosshair Alpha
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 3
+            time: -0.0041676834
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          preInfinity: 3
+          postInfinity: 3
+          rotationOrder: 4
       events: []
       transformMask: []
       maskType: 3
@@ -5542,6 +5567,31 @@ ModelImporter:
           - serializedVersion: 3
             time: 1
             value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          preInfinity: 3
+          postInfinity: 3
+          rotationOrder: 4
+      - name: Crosshair Alpha
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
             inSlope: 0
             outSlope: 0
             tangentMode: 0
@@ -5654,6 +5704,31 @@ ModelImporter:
             outWeight: 0
           preInfinity: 2
           postInfinity: 2
+          rotationOrder: 4
+      - name: Crosshair Alpha
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          preInfinity: 3
+          postInfinity: 3
           rotationOrder: 4
       events: []
       transformMask: []
