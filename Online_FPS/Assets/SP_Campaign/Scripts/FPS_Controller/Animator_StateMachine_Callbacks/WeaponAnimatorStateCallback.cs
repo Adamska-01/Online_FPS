@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 
@@ -55,8 +52,12 @@ public class WeaponAnimatorStateCallback : AnimatorStateCallback
 	}
 
 
-	public void DoMuzzleFlash()
+	public override void OnAction(string _context, CharacterManager _chrMgr = null)
 	{
+		// This is funny, change design...
+		if (_context != "Do_Muzzle")
+			return;
+
 		if (muzzleFlashesPerShot < 1)
 			return;
 
@@ -70,8 +71,8 @@ public class WeaponAnimatorStateCallback : AnimatorStateCallback
 		}
 	}
 
-    protected void EnableMuzzleFlash()
-    {
+	protected void EnableMuzzleFlash()
+	{
 		if(muzzleFlashFrames.Count > 0 && muzzleFlashFrames[currentMuzzleFlashIndex] != null)
 		{
 			MuzzleFlashDescriptor frame = muzzleFlashFrames[currentMuzzleFlashIndex];
@@ -93,10 +94,10 @@ public class WeaponAnimatorStateCallback : AnimatorStateCallback
 			currentMuzzleFlashIndex++;
 			currentMuzzleFlashIndex = currentMuzzleFlashIndex >= muzzleFlashFrames.Count ? 0 : currentMuzzleFlashIndex;
 		}
-    }
+	}
 
-    protected IEnumerator EnableMuzzleFlashSequence()
-    {
+	protected IEnumerator EnableMuzzleFlashSequence()
+	{
 		int counter = 0;
 		float timer = float.MaxValue;
 
@@ -114,8 +115,8 @@ public class WeaponAnimatorStateCallback : AnimatorStateCallback
 		}
 	}
 
-    protected IEnumerator DisableMuzzleFlash(int _flashIndex)
-    {
+	protected IEnumerator DisableMuzzleFlash(int _flashIndex)
+	{
 		yield return new WaitForSeconds(muzzleFlashTime);
 
 		muzzleFlashFrames[_flashIndex].muzzleFlash.SetActive(false);
@@ -126,5 +127,5 @@ public class WeaponAnimatorStateCallback : AnimatorStateCallback
 		{
 			muzzleFlashLight.gameObject.SetActive(false);
 		}
-    }
+	}
 }
