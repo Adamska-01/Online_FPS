@@ -1,17 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
+using FPS.Utility;
 using UnityEngine;
+
 
 public class NPCStickyDetector : MonoBehaviour
 {
     private CapsuleCollider col;
+
     private FPS_Controller fpsController;
+
+	private CharacterController chrController;
 
 
     private void Awake()
     {
         col = GetComponent<CapsuleCollider>();
         fpsController = GetComponentInParent<FPS_Controller>();
+		chrController = GetComponentInParent<CharacterController>();
+
+        Guard.AgainstNull(col, nameof(col));
+        Guard.AgainstNull(fpsController, nameof(fpsController));
+        Guard.AgainstNull(chrController, nameof(chrController));
     }
 
     void Start()
@@ -19,8 +27,8 @@ public class NPCStickyDetector : MonoBehaviour
         if (col == null)
             return;
 
-        col.radius = fpsController.CHRController.radius;
-        col.height = fpsController.CHRController.height;
+        col.radius = chrController.radius;
+        col.height = chrController.height;
     }
 
 
@@ -32,7 +40,7 @@ public class NPCStickyDetector : MonoBehaviour
             fpsController.DoStickiness();
 
             //Set visual threat on NPC (zombie)
-            machine.visualThreat.Set(AITargetType.Visual_Player, fpsController.CHRController, fpsController.transform.position, Vector3.Distance(machine.transform.position, fpsController.transform.position));
+            machine.visualThreat.Set(AITargetType.Visual_Player, chrController, fpsController.transform.position, Vector3.Distance(machine.transform.position, fpsController.transform.position));
             machine.SetStateOverride(AIStateType.Attack); //Attack player (avoid zombie going in alerted state)
         }
     }

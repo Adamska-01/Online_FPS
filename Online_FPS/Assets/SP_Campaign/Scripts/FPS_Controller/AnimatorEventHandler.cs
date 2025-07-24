@@ -20,6 +20,6 @@ public class AnimatorEventHandler : MonoBehaviour
 
     public void FireWeaponEvent(int direction)
     {
-        characterManager?.DoDamage(direction);
+        characterManager?.WPNController?.ShootAndDoDamage(direction);
     }
 }

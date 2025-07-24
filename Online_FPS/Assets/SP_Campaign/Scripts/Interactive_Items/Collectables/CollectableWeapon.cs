@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using WebSocketSharp;
-using static UnityEditor.Experimental.GraphView.Port;
 
 
 public class CollectableWeapon : CollectableItem

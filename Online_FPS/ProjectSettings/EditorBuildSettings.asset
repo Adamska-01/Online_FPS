@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Online_FPS/Scenes/Online_FPS/Menu.unity
     guid: 1a4f1e222237d904598401098dd4ce39
+  - enabled: 1
+    path: Assets/SP_Campaign/Scenes/FPS_Controller_Refactor.unity
+    guid: 95862bc327f846341bf551d3f62ec4ec
   - enabled: 0
     path: Assets/Online_FPS/Scenes/Online_FPS/SinglePlayer.unity
     guid: 027f5cc008e2f1c4890f37dc49486b55
@@ -17,13 +20,14 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Online_FPS/Scenes/Online_FPS/Deathmatch map/Deathmatch map.unity
     guid: 14c9e36890028be46989b2b10f1ed01c
-  - enabled: 1
+  - enabled: 0
     path: Assets/SP_Campaign/Scenes/Bootstrapper.unity
     guid: 28244f63c5078e147b402750f176c362
-  - enabled: 1
+  - enabled: 0
     path: Assets/SP_Campaign/Scenes/SP_MainMenu.unity
     guid: 50a1aaea126094d42a00d58680556f20
-  - enabled: 1
+  - enabled: 0
     path: Assets/SP_Campaign/Scenes/SP_Game.unity
     guid: 3142e3781500e6741b254c934319585f
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 1f36458c1db8d9e4da309a22e693bfaf, type: 2}

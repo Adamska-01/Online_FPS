@@ -1531,10 +1531,8 @@ MonoBehaviour:
   playerHUD: {fileID: 0}
   damageSounds: {fileID: 11400000, guid: 5a2239618b0895a47ac4e2e77691cde1, type: 2}
   painSounds: {fileID: 11400000, guid: 17d6b0809d2566d41b6cfd31466a9cb6, type: 2}
-  tauntSounds: {fileID: 11400000, guid: e1869614fd8402c48887e4c76a1c8243, type: 2}
   nextPainSoundTime: 0
   painSoundOffset: 0
-  tauntRadius: 10
   inventoryUI: {fileID: 0}
   inventory: {fileID: 11400000, guid: 2bdc2a4cf959a5445afce201f213fbc8, type: 2}
   defaultWeapon: {fileID: 11400000, guid: ee835328d09f2b844af77b1d36ad1d1c, type: 2}
@@ -1714,8 +1712,8 @@ MonoBehaviour:
   broadcastPosition: {fileID: 11400000, guid: 166ed2ae81a555c4f98450f1b36c3c8a, type: 2}
   broadcastDirection: {fileID: 11400000, guid: 82df65560a7dd6e459ee7e186b8b3ebc, type: 2}
   mouseLook:
-    XSensitivity: 2
-    YSensitivity: 2
+    XSensitivity: 1
+    YSensitivity: 1
     clampVerticalRotation: 1
     MinimumX: -90
     MaximumX: 90
