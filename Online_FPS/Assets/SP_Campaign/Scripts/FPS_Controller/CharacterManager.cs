@@ -862,16 +862,6 @@ public class CharacterManager : MonoBehaviour
 			{
 				armsAnimator?.SetBool(autoFireHash, false);
 			}
-
-			ArmsObject armsObject = armsObjectsDictionary[currentWeapon];
-			if(armsObject != null)
-			{
-				WeaponAnimatorStateCallback weaponArmsCallback = armsObject.callback as WeaponAnimatorStateCallback;
-				if (weaponArmsCallback != null)
-				{
-					weaponArmsCallback.DoMuzzleFlash();
-				}
-			}
 		}
 
 		// Set the rest
