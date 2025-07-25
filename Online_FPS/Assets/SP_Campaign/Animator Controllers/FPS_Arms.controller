@@ -271,6 +271,21 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-8559979290205987063
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0cd20dd9019d3e498b12dedd5bafff4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: {fileID: 11400000, guid: 620652e810e29ae41a7035b52590ea19, type: 2}
+  characterMgr: {fileID: 0}
+  callbackHandlers: []
 --- !u!1101 &-8518062874203889761
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -369,7 +384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifier: {fileID: 11400000, guid: ce48261ef6954404ea40951170265dcb, type: 2}
   characterMgr: {fileID: 0}
-  callbackHandler: {fileID: 0}
+  callbackHandlers: []
 --- !u!1101 &-8278967424102815527
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -631,7 +646,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifier: {fileID: 11400000, guid: 37ac0c44aa4196648a50297b32f86564, type: 2}
   characterMgr: {fileID: 0}
-  callbackHandler: {fileID: 0}
+  callbackHandlers: []
 --- !u!1101 &-7515703637477714702
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -702,7 +717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifier: {fileID: 0}
   characterMgr: {fileID: 0}
-  callbackHandler: {fileID: 0}
+  callbackHandlers: []
   activate: 1
   flashlightType: 0
 --- !u!1101 &-7318355951081027482
@@ -1476,7 +1491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifier: {fileID: 0}
   characterMgr: {fileID: 0}
-  callbackHandler: {fileID: 0}
+  callbackHandlers: []
   weaponType: 2
 --- !u!1102 &-5170262209068875312
 AnimatorState:
@@ -1773,7 +1788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifier: {fileID: 11400000, guid: ce48261ef6954404ea40951170265dcb, type: 2}
   characterMgr: {fileID: 0}
-  callbackHandler: {fileID: 0}
+  callbackHandlers: []
   weaponType: 2
 --- !u!1101 &-4689480696859820342
 AnimatorStateTransition:
@@ -1994,7 +2009,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifier: {fileID: 0}
   characterMgr: {fileID: 0}
-  callbackHandler: {fileID: 0}
+  callbackHandlers: []
 --- !u!1101 &-4284474534693486849
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2397,7 +2412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifier: {fileID: 11400000, guid: ce48261ef6954404ea40951170265dcb, type: 2}
   characterMgr: {fileID: 0}
-  callbackHandler: {fileID: 0}
+  callbackHandlers: []
 --- !u!1101 &-3607961059925676278
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2459,7 +2474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifier: {fileID: 0}
   characterMgr: {fileID: 0}
-  callbackHandler: {fileID: 0}
+  callbackHandlers: []
   weaponType: 1
 --- !u!1101 &-3507713658421764480
 AnimatorStateTransition:
@@ -2775,7 +2790,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifier: {fileID: 0}
   characterMgr: {fileID: 0}
-  callbackHandler: {fileID: 0}
+  callbackHandlers: []
   activate: 0
   flashlightType: 1
 --- !u!1101 &-2828932667804226142
@@ -3462,6 +3477,7 @@ AnimatorState:
   - {fileID: 2653101500299117649}
   m_StateMachineBehaviours:
   - {fileID: 1020393388969399090}
+  - {fileID: -8559979290205987063}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -4342,9 +4358,6 @@ AnimatorStateMachine:
   - first: {fileID: -69375007901628852}
     second:
     - {fileID: 3274386992464036972}
-  - first: {fileID: 1067357245194752882}
-    second:
-    - {fileID: 4059805177600403183}
   - first: {fileID: 2318172714879695140}
     second:
     - {fileID: -8639176668432829975}
@@ -4354,6 +4367,9 @@ AnimatorStateMachine:
   - first: {fileID: 8666804576473892280}
     second:
     - {fileID: 6692676084917744312}
+  - first: {fileID: 1067357245194752882}
+    second:
+    - {fileID: 4059805177600403183}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
@@ -4853,6 +4869,21 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &963081534544209909
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0cd20dd9019d3e498b12dedd5bafff4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: {fileID: 11400000, guid: 620652e810e29ae41a7035b52590ea19, type: 2}
+  characterMgr: {fileID: 0}
+  callbackHandlers: []
 --- !u!114 &970168357708448080
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4867,7 +4898,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifier: {fileID: 11400000, guid: 37ac0c44aa4196648a50297b32f86564, type: 2}
   characterMgr: {fileID: 0}
-  callbackHandler: {fileID: 0}
+  callbackHandlers: []
 --- !u!1101 &1005939803209378711
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -5721,7 +5752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifier: {fileID: 0}
   characterMgr: {fileID: 0}
-  callbackHandler: {fileID: 0}
+  callbackHandlers: []
   activate: 0
   flashlightType: 0
 --- !u!1101 &2653101500299117649
@@ -6014,7 +6045,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifier: {fileID: 11400000, guid: ce48261ef6954404ea40951170265dcb, type: 2}
   characterMgr: {fileID: 0}
-  callbackHandler: {fileID: 0}
+  callbackHandlers: []
   weaponType: 2
 --- !u!1101 &3400581913129940538
 AnimatorStateTransition:
@@ -7187,6 +7218,7 @@ AnimatorState:
   - {fileID: 6938041883219002015}
   m_StateMachineBehaviours:
   - {fileID: 941941924966920655}
+  - {fileID: 963081534544209909}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -7254,7 +7286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifier: {fileID: 0}
   characterMgr: {fileID: 0}
-  callbackHandler: {fileID: 0}
+  callbackHandlers: []
   activate: 1
   flashlightType: 1
 --- !u!1102 &6059066479427535257
@@ -7835,7 +7867,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifier: {fileID: 11400000, guid: 37ac0c44aa4196648a50297b32f86564, type: 2}
   characterMgr: {fileID: 0}
-  callbackHandler: {fileID: 0}
+  callbackHandlers: []
 --- !u!1102 &7216806125959255849
 AnimatorState:
   serializedVersion: 6
@@ -8026,7 +8058,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifier: {fileID: 11400000, guid: 37ac0c44aa4196648a50297b32f86564, type: 2}
   characterMgr: {fileID: 0}
-  callbackHandler: {fileID: 0}
+  callbackHandlers: []
 --- !u!1101 &7465703083473192528
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
