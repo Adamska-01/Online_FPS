@@ -22,29 +22,29 @@ public class VectorShaker : ScriptableObject
 		if (_duration < 0.001f || _magnitude.Equals(0.0f))
 			return;
 
-		if (shakeVector != null && SO_CoroutineRunner.Instance != null)
+		if (shakeVector == null || SO_CoroutineRunner.Instance == null)
+			return;
+
+		if(coroutine != null)
 		{
-			if(coroutine != null)
-			{
-				SO_CoroutineRunner.Instance.StopCoroutine(coroutine);
-			}
-
-			coroutine = Shake(_duration, _magnitude, _damping);
-
-			SO_CoroutineRunner.Instance.StartCoroutine(coroutine);
+			SO_CoroutineRunner.Instance.StopCoroutine(coroutine);
 		}
+
+		coroutine = Shake(_duration, _magnitude, _damping);
+
+		SO_CoroutineRunner.Instance.StartCoroutine(coroutine);
 	}
 
 	protected IEnumerator Shake(float _duration, float _magnitude, float _damping = 1.0f)
 	{
-		float time = 0.0f;
+		var time = 0.0f;
 
 		while (time <= _duration)
 		{
-			float x = Random.Range(-1.0f, 1.0f) * _magnitude;
-			float y = Random.Range(-1.0f, 1.0f) * _magnitude;
+			var x = Random.Range(-1.0f, 1.0f) * _magnitude;
+			var y = Random.Range(-1.0f, 1.0f) * _magnitude;
 
-			Vector3 unSmoothedVector = new Vector3(x, y, 0.0f);
+			var unSmoothedVector = new Vector3(x, y, 0.0f);
 
 			if(shakeVector != null)
 			{
