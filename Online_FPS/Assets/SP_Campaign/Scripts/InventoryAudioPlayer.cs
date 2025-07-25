@@ -1,6 +1,5 @@
-using System;
+using FPS.Utility;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,215 +11,212 @@ using UnityEngine.Events;
 // --------------------------------------------------------------------------
 public class InventoryAudioPlayer : MonoBehaviour
 {
-    //Singleton Members
-    protected static InventoryAudioPlayer instance = null;
-    public static InventoryAudioPlayer Instance { get { return instance; } }
+	//Singleton Members
+	protected static InventoryAudioPlayer instance = null;
+	public static InventoryAudioPlayer Instance { get { return instance; } }
 
 
-    //Inspector-Assigned
-    [Header("Shared Variables")]
-    [SerializeField] protected SharedVector3 playerPos = null;
-    [SerializeField] protected SharedTimedStringQueue notificationQueue = null;
-    [SerializeField] protected SharedString transcriptText = null;
+	//Inspector-Assigned
+	[Header("Shared Variables")]
+	[SerializeField] protected SharedVector3 playerPos = null;
+	[SerializeField] protected SharedTimedStringQueue notificationQueue = null;
+	[SerializeField] protected SharedString transcriptText = null;
 
-    [Header("Audio Configurations")]
-    [SerializeField] protected AudioCollection stateNotificationSounds = null;
+	[Header("Audio Configurations")]
+	[SerializeField] protected AudioCollection stateNotificationSounds = null;
 
-    [Header("Event Listeners")]
-    public UnityEvent<InventoryItemAudio> OnBeginAudio = new UnityEvent<InventoryItemAudio>();
-    public UnityEvent<float> OnUpdateAudio = new UnityEvent<float>();
-    public UnityEvent OnEndAudio = new UnityEvent();
-
-
-    //Internals 
-    protected AudioSource audioSource = null;
-    private IEnumerator coroutine = null;
+	[Header("Event Listeners")]
+	public UnityEvent<InventoryItemAudio> OnBeginAudio = new UnityEvent<InventoryItemAudio>();
+	public UnityEvent<float> OnUpdateAudio = new UnityEvent<float>();
+	public UnityEvent OnEndAudio = new UnityEvent();
 
 
-    private void Awake()
-    {
-        //Store singleton ref
-        instance = this;
-
-        //Store Audio Source Component
-        audioSource = GetComponent<AudioSource>();
-
-        //Configure audio source to play even when time is paused
-        if(audioSource != null )
-        {
-            audioSource.ignoreListenerPause = true;
-        }
-    }
+	//Internals 
+	protected AudioSource audioSource = null;
+	private IEnumerator coroutine = null;
 
 
-    public void PlayAudio(InventoryItemAudio _audioItem)
-    {
-        //Stop current audio
-        if (coroutine != null)
-        {
-            StopCoroutine(coroutine);
-            coroutine = null;
-        }
+	private void Awake()
+	{
+		//Store singleton ref
+		instance = this;
 
-        //Stop playing any sound that the audio source is already playing
-        if (audioSource != null && audioSource.isPlaying)
-        {
-            audioSource.Stop();
-        }
+		//Store Audio Source Component
+		audioSource = GetComponent<AudioSource>();
 
-        //Failure - stop immediately 
-        if (_audioItem == null || audioSource == null || _audioItem.AudioCol == null)
-        {
-            StopAudio();
-            return;
-        }
+		Guard.AgainstNullAssignment(audioSource, nameof(audioSource));
 
-        AudioClip clip = _audioItem.AudioCol[2];
-        if(clip == null) 
-        {
-            StopAudio();
-            return;
-        }
+		//Configure audio source to play even when time is paused
+		audioSource.ignoreListenerPause = true;
+	}
 
-        //Configure Audio Source
-        audioSource.clip = clip;
-        audioSource.volume = _audioItem.AudioCol.Volume; 
-        audioSource.spatialBlend = _audioItem.AudioCol.SpatialBlend; 
-        audioSource.priority = _audioItem.AudioCol.Priority; 
-        audioSource.Play();
 
-        //Fire Begin Event
-        OnBeginAudio?.Invoke(_audioItem);
+	public void PlayAudio(InventoryItemAudio _audioItem)
+	{
+		//Stop current audio
+		if (coroutine != null)
+		{
+			StopCoroutine(coroutine);
+			coroutine = null;
+		}
 
-        //Start/Update coroutine
-        coroutine = UpdateAudio(_audioItem);
-        StartCoroutine(coroutine);
-    }
+		//Stop playing any sound that the audio source is already playing
+		if (audioSource != null && audioSource.isPlaying)
+		{
+			audioSource.Stop();
+		}
 
-    public void StopAudio()
-    {
-        //Reset audio source 
-        if (audioSource != null)
-        {
-            audioSource.clip = null;
-        }
+		//Failure - stop immediately 
+		if (_audioItem == null || audioSource == null || _audioItem.AudioCol == null)
+		{
+			StopAudio();
+			return;
+		}
 
-        //Stop coroutine if still running 
-        if (coroutine != null)
-        {
-            StopCoroutine(coroutine);
-            coroutine = null;
-        }
+		AudioClip clip = _audioItem.AudioCol[2];
+		if(clip == null) 
+		{
+			StopAudio();
+			return;
+		}
 
-        //Clear transcript text
-        if (transcriptText != null)
-        {
-            transcriptText.Value = null;
-        }
+		//Configure Audio Source
+		audioSource.clip = clip;
+		audioSource.volume = _audioItem.AudioCol.Volume; 
+		audioSource.spatialBlend = _audioItem.AudioCol.SpatialBlend; 
+		audioSource.priority = _audioItem.AudioCol.Priority; 
+		audioSource.Play();
 
-        //Raise end event
-        OnEndAudio?.Invoke();
-    }
+		//Fire Begin Event
+		OnBeginAudio?.Invoke(_audioItem);
 
-    private IEnumerator UpdateAudio(InventoryItemAudio _audioItem)
-    {
-        if(_audioItem != null && audioSource != null)
-        {
-            //Keep track of audio timeline
-            int previousStateKeyIndex = 0;
-            int previousCaptionKeyIndex = 0;
+		//Start/Update coroutine
+		coroutine = UpdateAudio(_audioItem);
+		StartCoroutine(coroutine);
+	}
 
-            List<TimedStateKey> stateKeys = _audioItem.StateKeys;
-            List<TimedCaptionKey> captionKeys = _audioItem.CaptionKeys;
+	public void StopAudio()
+	{
+		//Reset audio source 
+		audioSource.clip = null;
 
-            while(audioSource.isPlaying)
-            {
-                //Invoke Update Event with normalized time (0-1 range)
-                OnUpdateAudio?.Invoke(audioSource.time / audioSource.clip.length);
+		//Stop coroutine if still running 
+		if (coroutine != null)
+		{
+			StopCoroutine(coroutine);
+			coroutine = null;
+		}
 
-                //Process any state keys 
-                if (stateKeys != null && ApplicationManager.Instance)
-                {
-                    //Loop from the previous key we found that we have not yet executed
-                    for (int i = previousStateKeyIndex; i < stateKeys.Count; i++)
-                    {
-                        TimedStateKey keyFrame = stateKeys[i];
-                        if (keyFrame != null)
-                        {
-                            //If we haven't reached this key yet then store this
-                            //as our previous key and abort so we can test from this
-                            //key next time
-                            if (keyFrame.time > audioSource.time)
-                            {
-                                previousStateKeyIndex = i;
-                                break;
-                            }
+		//Clear transcript text
+		if (transcriptText != null)
+		{
+			transcriptText.Value = null;
+		}
 
-                            //Set the state described by the keyframe
-                            if (ApplicationManager.Instance.SetGameState(keyFrame.key, keyFrame.value))
-                            {
-                                //Add Key Message to Shared Notification Queue
-                                if (notificationQueue != null)
-                                {
-                                    notificationQueue.Enqueue(keyFrame.UIMessage);
-                                }
+		//Raise end event
+		OnEndAudio?.Invoke();
+	}
 
-                                //Play notification Sound
-                                if (AudioManager.Instance && stateNotificationSounds)
-                                {
-                                    AudioClip clip = stateNotificationSounds.RandomClip;
-                                    if (clip != null)
-                                    {
-                                        AudioManager.Instance.PlayOneShotSound(stateNotificationSounds.AudioGroup,
-                                                                               clip,
-                                                                               playerPos ? playerPos.Value : Vector3.zero,
-                                                                               stateNotificationSounds.Volume,
-                                                                               stateNotificationSounds.SpatialBlend,
-                                                                               stateNotificationSounds.Priority,
-                                                                               0.0f,
-                                                                               true);
-                                    }
-                                }
-                            }
+	private IEnumerator UpdateAudio(InventoryItemAudio _audioItem)
+	{
+		if (_audioItem == null || audioSource == null)
+		{
+			// Stop and raise end event
+			StopAudio();
 
-                            previousStateKeyIndex++;
-                        }
-                    }
-                }
+			yield break;
+		}
 
-                //Process any state keys 
-                if (captionKeys != null)
-                {
-                    //Loop from the previous key we found that we have not yet executed
-                    for (int i = previousCaptionKeyIndex; i < captionKeys.Count; i++)
-                    {
-                        TimedCaptionKey keyFrame = captionKeys[i];
-                        if (keyFrame != null)
-                        {
-                            //If we haven't reached this key yet then store this
-                            //as our previous key and abort so we can test from this
-                            //key next time
-                            if (keyFrame.time > audioSource.time)
-                            {
-                                previousCaptionKeyIndex = i;
-                                break;
-                            }
+		//Keep track of audio timeline
+		var previousStateKeyIndex = 0;
+		var previousCaptionKeyIndex = 0;
 
-                            // Set the global shared transcript variable to the caption text
-                            if (transcriptText)
-                            {
-                                transcriptText.Value = keyFrame.text;
-                            }
+		var stateKeys = _audioItem.StateKeys;
+		var captionKeys = _audioItem.CaptionKeys;
 
-                            previousCaptionKeyIndex++;
-                        }
-                    }
-                }
+		while(audioSource.isPlaying)
+		{
+			//Invoke Update Event with normalized time (0-1 range)
+			OnUpdateAudio?.Invoke(audioSource.time / audioSource.clip.length);
 
-                yield return null;
-            }
-        }
+			//Process any state keys 
+			if (stateKeys != null && ApplicationManager.Instance)
+			{
+				//Loop from the previous key we found that we have not yet executed
+				for (var i = previousStateKeyIndex; i < stateKeys.Count; i++)
+				{
+					var keyFrame = stateKeys[i];
 
-        StopAudio(); //Stop and Rais ending event
-    }
+					if (keyFrame == null)
+						continue;
+
+					//If we haven't reached this key yet then store this
+					//as our previous key and abort so we can test from this
+					//key next time
+					if (keyFrame.time > audioSource.time)
+					{
+						previousStateKeyIndex = i;
+						break;
+					}
+
+					//Set the state described by the keyframe
+					if (ApplicationManager.Instance.SetGameState(keyFrame.key, keyFrame.value))
+					{
+						//Add Key Message to Shared Notification Queue
+						if (notificationQueue != null)
+						{
+							notificationQueue.Enqueue(keyFrame.UIMessage);
+						}
+
+						//Play notification Sound
+						if (AudioManager.Instance && stateNotificationSounds)
+						{
+							AudioManager.Instance.PlayOneShotSound(stateNotificationSounds.AudioGroup,
+																	stateNotificationSounds.RandomClip,
+																	playerPos ? playerPos.Value : Vector3.zero,
+																	stateNotificationSounds.Volume,
+																	stateNotificationSounds.SpatialBlend,
+																	stateNotificationSounds.Priority,
+																	0.0f,
+																	true);
+						}
+					}
+
+					previousStateKeyIndex++;
+				}
+			}
+
+			//Process any state keys 
+			if (captionKeys != null)
+			{
+				//Loop from the previous key we found that we have not yet executed
+				for (var i = previousCaptionKeyIndex; i < captionKeys.Count; i++)
+				{
+					var keyFrame = captionKeys[i];
+
+					if (keyFrame == null)
+						continue;
+
+					//If we haven't reached this key yet then store this
+					//as our previous key and abort so we can test from this
+					//key next time
+					if (keyFrame.time > audioSource.time)
+					{
+						previousCaptionKeyIndex = i;
+						break;
+					}
+
+					// Set the global shared transcript variable to the caption text
+					if (transcriptText)
+					{
+						transcriptText.Value = keyFrame.text;
+					}
+
+					previousCaptionKeyIndex++;
+				}
+			}
+
+			yield return null;
+		}
+	}
 }
