@@ -33,7 +33,7 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
-    //Inspector-Assigned
+    // TODO: Remove from here (Just instantiate it)
     [SerializeField] private ParticleSystem bloodParticles = null;
      
     //Private
