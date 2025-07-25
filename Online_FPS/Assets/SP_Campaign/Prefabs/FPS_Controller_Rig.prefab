@@ -1539,7 +1539,7 @@ MonoBehaviour:
   primaryFlashlight:
     lightObj: {fileID: 1321445063}
     lightMesh: {fileID: 2633946818490521425}
-  flashlightOnStart: 1
+  flashlightOnStart: 0
   armsAnimator: {fileID: 2633946818499880213}
   armsObjects:
   - identifier: {fileID: 11400000, guid: 8dd1165eaa7198a489a20c4234034b11, type: 2}
