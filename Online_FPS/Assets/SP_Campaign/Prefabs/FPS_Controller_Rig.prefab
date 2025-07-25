@@ -1548,7 +1548,7 @@ MonoBehaviour:
     light:
       lightObj: {fileID: 0}
       lightMesh: {fileID: 0}
-    callback: {fileID: 0}
+    callbacks: []
     crosshairPosition: {fileID: 0}
     crosshairPositionDualMode: {fileID: 0}
   - identifier: {fileID: 11400000, guid: 1b652cb65821f0842a8ff9bfbbf3ec00, type: 2}
@@ -1557,7 +1557,7 @@ MonoBehaviour:
     light:
       lightObj: {fileID: 0}
       lightMesh: {fileID: 0}
-    callback: {fileID: 0}
+    callbacks: []
     crosshairPosition: {fileID: 0}
     crosshairPositionDualMode: {fileID: 0}
   - identifier: {fileID: 11400000, guid: 772617e19f582d24e99185a7e315ecb1, type: 2}
@@ -1566,7 +1566,7 @@ MonoBehaviour:
     light:
       lightObj: {fileID: 0}
       lightMesh: {fileID: 0}
-    callback: {fileID: 0}
+    callbacks: []
     crosshairPosition: {fileID: 0}
     crosshairPositionDualMode: {fileID: 0}
   - identifier: {fileID: 11400000, guid: e45daca13458b5442b31c509e17dcdd3, type: 2}
@@ -1575,7 +1575,7 @@ MonoBehaviour:
     light:
       lightObj: {fileID: 0}
       lightMesh: {fileID: 0}
-    callback: {fileID: 0}
+    callbacks: []
     crosshairPosition: {fileID: 0}
     crosshairPositionDualMode: {fileID: 0}
   - identifier: {fileID: 11400000, guid: 18d0848814a93ad4e84ed2d8369616d7, type: 2}
@@ -1584,7 +1584,7 @@ MonoBehaviour:
     light:
       lightObj: {fileID: 0}
       lightMesh: {fileID: 0}
-    callback: {fileID: 0}
+    callbacks: []
     crosshairPosition: {fileID: 0}
     crosshairPositionDualMode: {fileID: 0}
   - identifier: {fileID: 11400000, guid: 37ac0c44aa4196648a50297b32f86564, type: 2}
@@ -1594,7 +1594,8 @@ MonoBehaviour:
     light:
       lightObj: {fileID: 15625141}
       lightMesh: {fileID: 0}
-    callback: {fileID: 2079282097}
+    callbacks:
+    - {fileID: 2079282097}
     crosshairPosition: {fileID: 974169442}
     crosshairPositionDualMode: {fileID: 165005939}
   - identifier: {fileID: 11400000, guid: 620652e810e29ae41a7035b52590ea19, type: 2}
@@ -1604,7 +1605,8 @@ MonoBehaviour:
     light:
       lightObj: {fileID: 0}
       lightMesh: {fileID: 0}
-    callback: {fileID: 1889329589}
+    callbacks:
+    - {fileID: 1889329589}
     crosshairPosition: {fileID: 1294681354}
     crosshairPositionDualMode: {fileID: 1177490950}
   - identifier: {fileID: 11400000, guid: ce48261ef6954404ea40951170265dcb, type: 2}
@@ -1614,7 +1616,8 @@ MonoBehaviour:
     light:
       lightObj: {fileID: 0}
       lightMesh: {fileID: 0}
-    callback: {fileID: 2038427064}
+    callbacks:
+    - {fileID: 2038427064}
     crosshairPosition: {fileID: 1316753582}
     crosshairPositionDualMode: {fileID: 2087283910}
   weaponRayLayerMask:
@@ -1627,6 +1630,8 @@ MonoBehaviour:
   interactionText: {fileID: 11400000, guid: 5dac2dd1d7708de438ddef72064e27e1, type: 2}
   crosshairPosition: {fileID: 11400000, guid: 2acb56cb4e3ed974285c02dc7762a19f, type: 2}
   crosshairSprite: {fileID: 11400000, guid: a6f4d6f20a8ab254a999a5d0059dcb2c, type: 2}
+  toggleFlashlightInputState: {fileID: 11400000, guid: 89b39ed45061c494c9c00600f2f8a5b8, type: 2}
+  interactInputState: {fileID: 11400000, guid: 32e8203de1320374b8e65e5ebf161c41, type: 2}
   cameraShaker: {fileID: 11400000, guid: 07ad4a2a6cd7f854cb9981759e194799, type: 2}
 --- !u!114 &2633946819393677481
 MonoBehaviour:
@@ -1712,8 +1717,8 @@ MonoBehaviour:
   broadcastPosition: {fileID: 11400000, guid: 166ed2ae81a555c4f98450f1b36c3c8a, type: 2}
   broadcastDirection: {fileID: 11400000, guid: 82df65560a7dd6e459ee7e186b8b3ebc, type: 2}
   mouseLook:
-    XSensitivity: 1
-    YSensitivity: 1
+    XSensitivity: 0.1
+    YSensitivity: 0.1
     clampVerticalRotation: 1
     MinimumX: -90
     MaximumX: 90
