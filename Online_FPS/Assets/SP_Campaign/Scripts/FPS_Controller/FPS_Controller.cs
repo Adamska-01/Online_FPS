@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityStandardAssets.Characters.FirstPerson;
 
 
 public enum PlayerMoveStatus 
@@ -45,27 +45,26 @@ public class FPS_Controller : MonoBehaviour
 
 	[Header("Others")]
 	// Takes care of mouse look
-    [SerializeField] private UnityStandardAssets.Characters.FirstPerson.MouseLook mouseLook;
+	[SerializeField] private MouseLook mouseLook;
 	[SerializeField, Range(0.0f, 1.0f)] private float npcStickiness = 0.5f;
 
 	// Private internals
-	private Camera  cam                   = null;
-	private Vector2 inputVector           = Vector2.zero;
-	private Vector2 rotationVector        = Vector2.zero;
-	private Vector3 moveDirection         = Vector3.zero;
-	private Vector3 localSpaceCameraPos   = Vector3.zero;
-	private bool    jumpButtonPressed     = false;
-	private bool    previouslyGrounded    = false;
-	private bool    isWalking             = true;
-	private bool    isJumping             = false;
-	private bool    isCrouching           = false;
-	private bool    freezeMovement        = false;
-	private float   controllerHeight      = 0.0f;
-	private float   inAirTime             = 0.1f;
-	private float   inAirCounter          = 0.0f;
-	private float   dragMultiplier        = 1.0f;
-	private float   dragMultiplierLimit   = 1.0f;
-	private float   speedOverride         = 0.0f;
+	private Camera	cam					= null;
+	private Vector2	inputVector			= Vector2.zero;
+	private Vector3	moveDirection		= Vector3.zero;
+	private Vector3	localSpaceCameraPos	= Vector3.zero;
+	private bool	jumpButtonPressed	= false;
+	private bool	previouslyGrounded	= false;
+	private bool	isWalking			= true;
+	private bool	isJumping			= false;
+	private bool	isCrouching			= false;
+	private bool	freezeMovement		= false;
+	private float	controllerHeight	= 0.0f;
+	private float	inAirTime			= 0.1f;
+	private float	inAirCounter		= 0.0f;
+	private float	dragMultiplier		= 1.0f;
+	private float	dragMultiplierLimit	= 1.0f;
+	private float	speedOverride		= 0.0f;
 
 	// Timers
 	private float fallingTimer = 0.0f;
@@ -91,7 +90,7 @@ public class FPS_Controller : MonoBehaviour
 
 		characterController = GetComponent<CharacterController>();
 		controllerHeight = characterController.height;
-    }
+	}
 
 	protected void Start()
 	{
@@ -100,8 +99,8 @@ public class FPS_Controller : MonoBehaviour
 			// Init headbob
 			localSpaceCameraPos = cam.transform.localPosition;
 
-            // Setup Mouse Look Script
-            mouseLook.Init(transform, cam.transform);
+			// Setup Mouse Look Script
+			mouseLook.Init(transform, cam.transform);
 		}
 
 		movementStatus = PlayerMoveStatus.NotMoving;
@@ -125,14 +124,8 @@ public class FPS_Controller : MonoBehaviour
 			fallingTimer += Time.deltaTime;
 		}
 
-        //Process mouse look
-        if (Time.deltaTime > Mathf.Epsilon && cam != null)
-        {
-            mouseLook.LookRotation(transform, cam.transform, rotationVector.x, rotationVector.y);
-        }
-
-        //Calculate character status 
-        if (!previouslyGrounded && characterController.isGrounded && inAirCounter > inAirTime)
+		//Calculate character status 
+		if (!previouslyGrounded && characterController.isGrounded && inAirCounter > inAirTime)
 		{
 			if(fallingTimer > 0.5f)
 			{
@@ -183,13 +176,13 @@ public class FPS_Controller : MonoBehaviour
 	protected void FixedUpdate()
 	{
 		//Set the desired speed to be either our walking speed or our running speed
-		float speed = isCrouching ? crouchSpeed : isWalking ? walkSpeed : Mathf.Lerp(walkSpeed, RunSpeed, stamina.Value / MAX_STAMINA);
+		var speed = isCrouching ? crouchSpeed : isWalking ? walkSpeed : Mathf.Lerp(walkSpeed, RunSpeed, stamina.Value / MAX_STAMINA);
 		
 		if (speedOverride > 0.0f) // Apply speed override (if there is)
 			speed = speedOverride;
 
 		//Always move along the camera forward as it is the direction that it is being aimed at
-		Vector3 desiredMove = transform.forward * inputVector.y + transform.right * inputVector.x;
+		var desiredMove = transform.forward * inputVector.y + transform.right * inputVector.x;
 
 		//Get a normal of the surface that is being touched to move along it 
 		RaycastHit hitInfo;
@@ -228,8 +221,8 @@ public class FPS_Controller : MonoBehaviour
 		characterController.Move(moveDirection * Time.fixedDeltaTime);
 		
 		//Head bob
-		Vector3 camShakeOffset = cameraShakerOffset == null ? Vector3.zero : cameraShakerOffset.Value;
-		Vector3 speedXZ = new Vector3(characterController.velocity.x, 0.0f, characterController.velocity.z);
+		var camShakeOffset = cameraShakerOffset == null ? Vector3.zero : cameraShakerOffset.Value;
+		var speedXZ = new Vector3(characterController.velocity.x, 0.0f, characterController.velocity.z);
 		if(speedXZ.magnitude > 0.01f)
 		{
 			cam.transform.localPosition = localSpaceCameraPos + headBob.GetVectorOffset(speedXZ.magnitude * ((isCrouching || isWalking) ? 1.0f : runStepLengthen)) + camShakeOffset;
@@ -244,52 +237,30 @@ public class FPS_Controller : MonoBehaviour
 		broadcastDirection.Value = transform.forward;
 	}
 
-	private void PlayFootStepSound()
-	{
-		if (AudioManager.Instance != null && footsteps != null)
-		{
-			AudioClip soundToPlay;
-			if(isCrouching)
-			{
-				soundToPlay = footsteps[1];
-			}
-			else
-			{
-				soundToPlay = footsteps[0];
-			}
-
-			//Play sound
-			AudioManager.Instance.PlayOneShotSound(footsteps.AudioGroup, 
-													soundToPlay, 
-													transform.position, 
-													isCrouching ? crouchVolumeAttenuation * footsteps.Volume : footsteps.Volume, 
-													footsteps.SpatialBlend, 
-													footsteps.Priority);
-		}
-	}
 
 	#region Player Input
 	public void Move(Vector2 movementVector)
 	{
 		inputVector = movementVector;
 
-        // Handle run input
-        if (!isWalking)
+		// Handle run input
+		if (!isWalking)
 		{
-			float dot = Vector2.Dot(inputVector.normalized, Vector2.up);
+			var dot = Vector2.Dot(inputVector.normalized, Vector2.up);
 
 			isWalking = !(dot >= 0.5f && dot <= 1.0f); // Only run forward
 		}
 
-        //Normalize input if less than 1
-        if (inputVector.sqrMagnitude > 1)
+		//Normalize input if less than 1
+		if (inputVector.sqrMagnitude > 1)
 			inputVector.Normalize();
 	}
 
 	public void Run()
 	{
-        float dot = Vector2.Dot(inputVector.normalized, Vector2.up);
-        isWalking = !(dot >= 0.5f && dot <= 1.0f); // Only run forward
+		var dot = Vector2.Dot(inputVector.normalized, Vector2.up);
+
+		isWalking = !(dot >= 0.5f && dot <= 1.0f); // Only run forward
 	}
 
 	public void Jump()
@@ -313,12 +284,32 @@ public class FPS_Controller : MonoBehaviour
 
 	public void Look(Vector2 lookVector)
 	{
-		rotationVector = lookVector;
-    }
-    #endregion
+		if (Time.deltaTime <= Mathf.Epsilon || cam == null)
+			return;
 
-    public void DoStickiness()
+		mouseLook.LookRotation(transform, cam.transform, lookVector.x, lookVector.y);
+	}
+	#endregion
+
+	public void DoStickiness()
 	{
 		dragMultiplier = 1.0f - npcStickiness;
+	}
+
+
+	private void PlayFootStepSound()
+	{
+		if (AudioManager.Instance == null || footsteps == null)
+			return;
+
+		var soundToPlay = isCrouching ? footsteps[1] : footsteps[0];
+
+		//Play sound
+		AudioManager.Instance.PlayOneShotSound(footsteps.AudioGroup,
+												soundToPlay,
+												transform.position,
+												isCrouching ? crouchVolumeAttenuation * footsteps.Volume : footsteps.Volume,
+												footsteps.SpatialBlend,
+												footsteps.Priority);
 	}
 }
