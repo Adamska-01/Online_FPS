@@ -52,7 +52,7 @@
                 },
                 {
                     "name": "Look",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "e3d0a6a7-68e4-4168-be16-a47a6f0ed013",
                     "expectedControlType": "Vector2",
                     "processors": "",
@@ -117,6 +117,24 @@
                     "name": "Inventory_Toggle",
                     "type": "Button",
                     "id": "bd9d93c5-c6e2-4165-afc0-f1c6cc57fb64",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Use",
+                    "type": "Button",
+                    "id": "126f82ea-1b3b-455f-a6ab-5fcfb032ed46",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Flashlight",
+                    "type": "Button",
+                    "id": "7fac07bc-5154-4868-9645-d5dbde12748d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -316,7 +334,7 @@
                     "id": "c62fb911-1961-4a9d-9575-98219d3dbc65",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "NormalizeVector2,StickDeadzone",
                     "groups": "",
                     "action": "Look",
                     "isComposite": false,
@@ -396,6 +414,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Inventory_Toggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e95b9bab-9a2c-4521-9b1f-5a5a17ed49b4",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Use",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9fd993c1-6cc1-4f89-bbc5-7866148740f2",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flashlight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0ac97cb9-11a0-4c50-ba3b-ab82a9fe4f1c",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flashlight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

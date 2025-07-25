@@ -1,4 +1,5 @@
 using FPS.Utility;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,14 +12,18 @@ public class PlayerInput_Gameplay : MonoBehaviour
 	[SerializeField]
 	private FPS_Controller fpsController;
 
+	[Header("Shared Variables - Input States")]
+	[SerializeField] private SharedBool toggleFlashlightInputState = null;
+	[SerializeField] private SharedBool interactInputState = null;
+
 
 	void Awake()
-    {
+	{
 		Guard.AgainstNull(chrManager, nameof(chrManager));
 		Guard.AgainstNull(fpsController, nameof(fpsController));
 	}
 
-	
+
 	// Movement
 	public void Movement_PlayerInput(InputAction.CallbackContext context)
 		=> fpsController.Move(context.ReadValue<Vector2>());
@@ -69,6 +74,8 @@ public class PlayerInput_Gameplay : MonoBehaviour
 		if (!context.performed)
 			return;
 
+		Debug.Log("ADS");
+
 		chrManager?.ADS();
 	}
 
@@ -78,5 +85,35 @@ public class PlayerInput_Gameplay : MonoBehaviour
 			return;
 
 		chrManager?.ReloadCurrentWeapon();
+	}
+
+	public void ToggleFlashlight(InputAction.CallbackContext context)
+	{
+		if (!context.performed)
+			return;
+
+		toggleFlashlightInputState.Value = true;
+
+		_ = ResetInputStateNextFrame(toggleFlashlightInputState);
+	}
+
+
+	// Inventory
+	public void Use_PlayerInput(InputAction.CallbackContext context)
+	{
+		if (!context.performed)
+			return;
+
+		interactInputState.Value = true;
+
+		_ = ResetInputStateNextFrame(interactInputState);
+	}
+
+
+	private async Task ResetInputStateNextFrame(SharedBool inputState)
+	{
+		await Task.Yield();
+
+		inputState.Value = false;
 	}
 }

@@ -74,7 +74,7 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
                 },
                 {
                     ""name"": ""Look"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""e3d0a6a7-68e4-4168-be16-a47a6f0ed013"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -139,6 +139,24 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
                     ""name"": ""Inventory_Toggle"",
                     ""type"": ""Button"",
                     ""id"": ""bd9d93c5-c6e2-4165-afc0-f1c6cc57fb64"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Use"",
+                    ""type"": ""Button"",
+                    ""id"": ""126f82ea-1b3b-455f-a6ab-5fcfb032ed46"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Flashlight"",
+                    ""type"": ""Button"",
+                    ""id"": ""7fac07bc-5154-4868-9645-d5dbde12748d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -338,7 +356,7 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
                     ""id"": ""c62fb911-1961-4a9d-9575-98219d3dbc65"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""NormalizeVector2,StickDeadzone"",
                     ""groups"": """",
                     ""action"": ""Look"",
                     ""isComposite"": false,
@@ -420,6 +438,39 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
                     ""action"": ""Inventory_Toggle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e95b9bab-9a2c-4521-9b1f-5a5a17ed49b4"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9fd993c1-6cc1-4f89-bbc5-7866148740f2"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Flashlight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0ac97cb9-11a0-4c50-ba3b-ab82a9fe4f1c"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Flashlight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -469,6 +520,8 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
         m_Gameplay_Next_Weapon = m_Gameplay.FindAction("Next_Weapon", throwIfNotFound: true);
         m_Gameplay_Reload = m_Gameplay.FindAction("Reload", throwIfNotFound: true);
         m_Gameplay_Inventory_Toggle = m_Gameplay.FindAction("Inventory_Toggle", throwIfNotFound: true);
+        m_Gameplay_Use = m_Gameplay.FindAction("Use", throwIfNotFound: true);
+        m_Gameplay_Flashlight = m_Gameplay.FindAction("Flashlight", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Inventory_Toggle = m_UI.FindAction("Inventory_Toggle", throwIfNotFound: true);
@@ -544,6 +597,8 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
     private readonly InputAction m_Gameplay_Next_Weapon;
     private readonly InputAction m_Gameplay_Reload;
     private readonly InputAction m_Gameplay_Inventory_Toggle;
+    private readonly InputAction m_Gameplay_Use;
+    private readonly InputAction m_Gameplay_Flashlight;
     public struct GameplayActions
     {
         private @Player_Input_Actions m_Wrapper;
@@ -561,6 +616,8 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
         public InputAction @Next_Weapon => m_Wrapper.m_Gameplay_Next_Weapon;
         public InputAction @Reload => m_Wrapper.m_Gameplay_Reload;
         public InputAction @Inventory_Toggle => m_Wrapper.m_Gameplay_Inventory_Toggle;
+        public InputAction @Use => m_Wrapper.m_Gameplay_Use;
+        public InputAction @Flashlight => m_Wrapper.m_Gameplay_Flashlight;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -609,6 +666,12 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
                 @Inventory_Toggle.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventory_Toggle;
                 @Inventory_Toggle.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventory_Toggle;
                 @Inventory_Toggle.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventory_Toggle;
+                @Use.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnUse;
+                @Use.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnUse;
+                @Use.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnUse;
+                @Flashlight.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFlashlight;
+                @Flashlight.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFlashlight;
+                @Flashlight.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFlashlight;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -652,6 +715,12 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
                 @Inventory_Toggle.started += instance.OnInventory_Toggle;
                 @Inventory_Toggle.performed += instance.OnInventory_Toggle;
                 @Inventory_Toggle.canceled += instance.OnInventory_Toggle;
+                @Use.started += instance.OnUse;
+                @Use.performed += instance.OnUse;
+                @Use.canceled += instance.OnUse;
+                @Flashlight.started += instance.OnFlashlight;
+                @Flashlight.performed += instance.OnFlashlight;
+                @Flashlight.canceled += instance.OnFlashlight;
             }
         }
     }
@@ -704,6 +773,8 @@ public partial class @Player_Input_Actions : IInputActionCollection2, IDisposabl
         void OnNext_Weapon(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnInventory_Toggle(InputAction.CallbackContext context);
+        void OnUse(InputAction.CallbackContext context);
+        void OnFlashlight(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
