@@ -271,6 +271,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d76982e1-ca9e-468b-9340-632d51480df8
     m_ActionName: UI/Inventory_Toggle[/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6779593973030578423}
+        m_TargetAssemblyTypeName: PlayerInput_Gameplay, Assembly-CSharp
+        m_MethodName: Use_PlayerInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 126f82ea-1b3b-455f-a6ab-5fcfb032ed46
+    m_ActionName: Gameplay/Use[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6779593973030578423}
+        m_TargetAssemblyTypeName: PlayerInput_Gameplay, Assembly-CSharp
+        m_MethodName: ToggleFlashlight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7fac07bc-5154-4868-9645-d5dbde12748d
+    m_ActionName: Gameplay/Flashlight[/Keyboard/f]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -290,6 +322,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chrManager: {fileID: 0}
   fpsController: {fileID: 0}
+  toggleFlashlightInputState: {fileID: 11400000, guid: 89b39ed45061c494c9c00600f2f8a5b8, type: 2}
+  interactInputState: {fileID: 11400000, guid: 32e8203de1320374b8e65e5ebf161c41, type: 2}
 --- !u!114 &6779593973030578420
 MonoBehaviour:
   m_ObjectHideFlags: 0
