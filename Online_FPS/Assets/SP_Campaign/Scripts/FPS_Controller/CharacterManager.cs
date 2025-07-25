@@ -1,9 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.InputSystem;
+
 
 /// <summary>
 /// Manages the player character. This is the conduit to the Arms Animator, the Inventory 
@@ -52,8 +50,13 @@ public class CharacterManager : MonoBehaviour
 	[SerializeField] private SharedString interactionText = null;
 	[SerializeField] private SharedVector3 crosshairPosition = null;
 	[SerializeField] private SharedSprite crosshairSprite = null;
+	[SerializeField] private SharedBool toggleFlashlightInputState = null;
+	[SerializeField] private SharedBool interactInputState = null;
+
+	[Header("Other")]
 	[SerializeField] private VectorShaker cameraShaker = null;
 	
+
 	// Internal
 	private Collider col= null;
 	private FPS_Controller fpsController = null;
@@ -63,7 +66,6 @@ public class CharacterManager : MonoBehaviour
 	//Arms & Weapons 
 	private WeaponController weaponController = null;
 	private Flashlight secondaryFlashlight = null; // TODO: make a 'flashlight controller' or something
-	private bool canSwitchWeapons = false;
 
 	private Dictionary<ScriptableObject, ArmsObject> armsObjectsDictionary = new Dictionary<ScriptableObject, ArmsObject>();
 
@@ -76,13 +78,14 @@ public class CharacterManager : MonoBehaviour
 	private int crosshairAlphaHash      = Animator.StringToHash("Crosshair Alpha");          // Transparency of the crosshair
 
 
-    public event Action OnVariableValueChanged; 
+	public event Action OnVariableValueChanged; 
 	public Action OnPickUpAmmo;
 
-    //Properties
-    public FPS_Controller FPSController { get { return fpsController; } }
-    public WeaponController WPNController { get { return weaponController; } }
+	//Properties
+	public FPS_Controller FPSController { get { return fpsController; } }
+	public WeaponController WPNController { get { return weaponController; } }
 	public Flashlight SecondaryFlashlight { get { return secondaryFlashlight; } set { secondaryFlashlight = value; } }
+
 
 	void Awake()
 	{
@@ -111,9 +114,9 @@ public class CharacterManager : MonoBehaviour
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
 
-		ArmsBaseSMB[] stateMachineBehaviours = armsAnimator.GetBehaviours<ArmsBaseSMB>();
+		var stateMachineBehaviours = armsAnimator.GetBehaviours<ArmsBaseSMB>();
 		Dictionary<ScriptableObject, List<ArmsBaseSMB>> stateMachineBehavioursByID = new Dictionary<ScriptableObject, List<ArmsBaseSMB>>();
-		foreach (ArmsBaseSMB item in stateMachineBehaviours)
+		foreach (var item in stateMachineBehaviours)
 		{
 			// Store this manager to each behaviour
 			item.characterMgr = this;
@@ -135,22 +138,22 @@ public class CharacterManager : MonoBehaviour
 
 		// Copy over the fps weapon prefabs in the scene (attached to our
 		// arms) stored in a list into a dictionary for quick runtime access
-		for (int i = 0; i < armsObjects.Count; i++)
+		for (var i = 0; i < armsObjects.Count; i++)
 		{
-			ArmsObject armsObject = armsObjects[i];
+			var armsObject = armsObjects[i];
 			if (armsObject != null && armsObject.identifier != null) 
 			{
 				// Store the gameobject list in the dictionary by ID
 				armsObjectsDictionary.Add(armsObject.identifier, armsObject);
 
 				// See if this weapon has an AnimatorStateCallback so that the animator can call it
-				if (armsObject.callback != null && stateMachineBehavioursByID.TryGetValue(armsObject.identifier, out List<ArmsBaseSMB> behaviourList))
+				if (armsObject.callbacks.Count > 0 && stateMachineBehavioursByID.TryGetValue(armsObject.identifier, out List<ArmsBaseSMB> behaviourList))
 				{
-					foreach (ArmsBaseSMB item in behaviourList)
+					foreach (var item in behaviourList)
 					{
 						if (item != null)
 						{
-							item.callbackHandler = armsObject.callback;
+							item.callbackHandlers = armsObject.callbacks;
 						}
 					}
 				}
@@ -163,27 +166,27 @@ public class CharacterManager : MonoBehaviour
 
 		// Set the starting state of the flashlight
 		ActivateFlashlight(flashlightOnStart);
-    }
+	}
 
 	private void OnEnable()
 	{
 		if (weaponController == null)
 		{
-            weaponController = new WeaponController(this,
-                                                sceneCam,
-                                                armsAnimator,
-                                                defaultWeapon,
-                                                inventory,
-                                                soundEmitter,
-                                                inventoryUI,
-                                                crosshairPosition,
-                                                crosshairSprite,
-                                                cameraShaker,
-                                                weaponRayLayerMask);
-        }
+			weaponController = new WeaponController(this,
+												sceneCam,
+												armsAnimator,
+												defaultWeapon,
+												inventory,
+												soundEmitter,
+												inventoryUI,
+												crosshairPosition,
+												crosshairSprite,
+												cameraShaker,
+												weaponRayLayerMask);
+		}
 
 		weaponController.RegisterWeaponEvents();
-    }
+	}
 	
 	private void OnDisable()
 	{
@@ -216,7 +219,7 @@ public class CharacterManager : MonoBehaviour
 
 		weaponController.UpdateWeaponControllerState();
 
-        ProcessInteractableItems(); // (Interactable Raycast)
+		ProcessInteractableItems(); // (Interactable Raycast)
 				
 		if(fpsController != null)
 		{
@@ -291,12 +294,9 @@ public class CharacterManager : MonoBehaviour
 				}
 			}
 
-			if(armsAnimator != null)
+			if(armsAnimator != null && toggleFlashlightInputState.Value)
 			{
-				if(Input.GetButtonDown("Flashlight"))
-				{
-					ActivateFlashlight(!armsAnimator.GetBool(flashlightHash));
-				}
+				ActivateFlashlight(!armsAnimator.GetBool(flashlightHash));
 			}
 		}
 	}
@@ -355,7 +355,7 @@ public class CharacterManager : MonoBehaviour
 				hit = hits[i];
 
 				//Fetch interactive script from GameSceneManager and cache if it has an higher priority
-				InteractiveItem interactiveObject = gameSceneManger.GetInteractiveItem(hit.collider.GetInstanceID());
+				var interactiveObject = gameSceneManger.GetInteractiveItem(hit.collider.GetInstanceID());
 				if (interactiveObject != null && interactiveObject.Priority > highestPriority)
 				{
 					priorityObject = interactiveObject;
@@ -372,17 +372,13 @@ public class CharacterManager : MonoBehaviour
 				}
 
 				//Use/Get Iteractable 
-				if(!(priorityObject.GetType() == typeof(CollectableWeapon) && !canSwitchWeapons))
+				if(interactInputState.Value)
 				{
-					if (Input.GetButtonDown("Use"))
-					{
-						priorityObject.Activate(this);
+					priorityObject.Activate(this);
 
-						// Should set up an event ("OnPickUpAmmo") and subscribe to it, but ehi, give me a break
-						if (weaponController.CurrentWeapon != null)
-						{
-							OnPickUpAmmo?.Invoke();
-						}
+					if (weaponController.CurrentWeapon != null)
+					{
+						OnPickUpAmmo?.Invoke();
 					}
 				}
 			}
@@ -475,7 +471,7 @@ public class CharacterManager : MonoBehaviour
 		armsObjectsDictionary.TryGetValue(_weaponKey, out ArmsObject armsObject);
 
 		return armsObject;
-    }
+	}
 
 	public void CompleteLevel()
 	{
@@ -500,7 +496,7 @@ public class CharacterManager : MonoBehaviour
 
 
 	#region Player Input - Weapons
-    public void SwitchWeapon(int weaponIndex)
+	public void SwitchWeapon(int weaponIndex)
 		=> weaponController?.SwitchWeapon(weaponIndex);
 
 	public void FireWeapon(bool isPerformed, bool isCanceled)

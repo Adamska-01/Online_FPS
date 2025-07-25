@@ -5,6 +5,9 @@ public class MuzzleFlashSMB : ArmsBaseSMB
 {
 	public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		callbackHandler?.OnAction("Do_Muzzle", characterMgr);
+		foreach (var handler in callbackHandlers)
+		{
+			handler?.OnAction("Do_Muzzle", characterMgr);
+		}
 	}
 }
