@@ -1,36 +1,35 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 
 public class WeaponController
 {
-    // Constructor-Assigned
-    private CharacterManager characterManager = null;
+	// Constructor-Assigned
+	private CharacterManager characterManager = null;
 	private Camera sceneCam = null;
-    private Animator armsAnimator = null;
-    private InventoryItemWeapon defaultWeapon = null;
-    private Inventory inventory = null;
-    private AISoundEmitter soundEmitter = null;
-    private GameObject inventoryUI = null;
+	private Animator armsAnimator = null;
+	private InventoryItemWeapon defaultWeapon = null;
+	private Inventory inventory = null;
+	private AISoundEmitter soundEmitter = null;
+	private GameObject inventoryUI = null;
 	private SharedVector3 crosshairPosition = null;
 	private SharedSprite crosshairSprite = null;
-    private VectorShaker cameraShaker = null;
+	private VectorShaker cameraShaker = null;
 	private LayerMask weaponRayLayerMask = new LayerMask();
 
-    // Internal
+	// Internal
 	private GameSceneManager gameSceneManger = null;
-    private InventoryItemWeapon currentWeapon = null;
-    private InventoryItemWeapon nextWeapon = null;
-    private InventoryWeaponMountInfo nextWeaponMountInfo = null;
-    private bool canSwitchWeapons = false;
-    private IEnumerator switchWeaponCoroutine = null;
-    private int availableAmmo = 0;
-    private float initialFOV = 60.0f;
+	private InventoryItemWeapon currentWeapon = null;
+	private InventoryItemWeapon nextWeapon = null;
+	private InventoryWeaponMountInfo nextWeaponMountInfo = null;
+	private bool canSwitchWeapons = false;
+	private IEnumerator switchWeaponCoroutine = null;
+	private int availableAmmo = 0;
+	private float initialFOV = 60.0f;
 
-    // Animator Hashes
-    private int weaponAnimHash          = Animator.StringToHash("Weapon Anim");         // The current sub-state machine to play for the selected weapon
+	// Animator Hashes
+	private int weaponAnimHash          = Animator.StringToHash("Weapon Anim");         // The current sub-state machine to play for the selected weapon
 	private int clearWeaponHash         = Animator.StringToHash("Clear Weapon");        // Hash of Clear Weapon Trigger in animator
 	private int canSwitchWeaponsHash    = Animator.StringToHash("Can Switch Weapons");  // Can we switch to a different weapon at the moment
 	private int attackAnimHash          = Animator.StringToHash("Attack Anim");         // Used by machines that have several random attack states
@@ -42,23 +41,23 @@ public class WeaponController
 	private int dualHandedWeaponHash    = Animator.StringToHash("Dual Handed Weapon");  // Is the current weapon two handed
 	private int reloadHash              = Animator.StringToHash("Reload");              // Do we require a reload
 	private int autoFireHash            = Animator.StringToHash("Auto Fire");           // Does the weapon support auto fire
-    private int reloadRepeatHash        = Animator.StringToHash("Reload Repeat");       // How many times should the reload animation loop (used for partial reload types)
+	private int reloadRepeatHash        = Animator.StringToHash("Reload Repeat");       // How many times should the reload animation loop (used for partial reload types)
 
-    // Properties 
+	// Properties 
 	public InventoryItemWeapon CurrentWeapon { get { return currentWeapon; } }
 
 
-    public WeaponController(CharacterManager characterManager,
-                            Camera sceneCam,
-                            Animator armsAnimator,
-                            InventoryItemWeapon defaultWeapon,
-                            Inventory inventory,
-                            AISoundEmitter soundEmitter,
-                            GameObject inventoryUI,
-                            SharedVector3 crosshairPosition,
-                            SharedSprite crosshairSprite,
-                            VectorShaker cameraShaker,
-                            LayerMask weaponRayLayerMask)
+	public WeaponController(CharacterManager characterManager,
+							Camera sceneCam,
+							Animator armsAnimator,
+							InventoryItemWeapon defaultWeapon,
+							Inventory inventory,
+							AISoundEmitter soundEmitter,
+							GameObject inventoryUI,
+							SharedVector3 crosshairPosition,
+							SharedSprite crosshairSprite,
+							VectorShaker cameraShaker,
+							LayerMask weaponRayLayerMask)
 	{
 		this.characterManager = characterManager;
 		this.sceneCam = sceneCam;
@@ -71,212 +70,203 @@ public class WeaponController
 		this.crosshairSprite = crosshairSprite;
 		this.cameraShaker = cameraShaker;
 		this.weaponRayLayerMask = weaponRayLayerMask;
-        
-        if (this.sceneCam != null)
-        {
-            this.initialFOV = this.sceneCam.fieldOfView;
-        }
+		
+		if (this.sceneCam != null)
+		{
+			this.initialFOV = this.sceneCam.fieldOfView;
+		}
 
-        gameSceneManger = GameSceneManager.Instance;
-    }
+		gameSceneManger = GameSceneManager.Instance;
+	}
 
-    public void RegisterWeaponEvents()
-    {
-        if (inventory != null)
-        {
-            inventory.OnWeaponChange.AddListener(OnSwitchWeapon);
-            inventory.OnWeaponDropped.AddListener(OnDrophWeapon);
-        }
+	public void RegisterWeaponEvents()
+	{
+		if (inventory != null)
+		{
+			inventory.OnWeaponChange.AddListener(OnSwitchWeapon);
+			inventory.OnWeaponDropped.AddListener(OnDrophWeapon);
+		}
 
-        if (characterManager != null)
-        {
-            characterManager.OnPickUpAmmo += UpdateAvailableAmmo;
-        }
-    }
+		if (characterManager != null)
+		{
+			characterManager.OnPickUpAmmo += UpdateAvailableAmmo;
+		}
+	}
 
-    public void DeregisterWeaponEveents()
-    {
-        if (inventory != null)
-        {
-            inventory.OnWeaponChange.RemoveListener(OnSwitchWeapon);
-            inventory.OnWeaponDropped.RemoveListener(OnDrophWeapon);
-        }
+	public void DeregisterWeaponEveents()
+	{
+		if (inventory != null)
+		{
+			inventory.OnWeaponChange.RemoveListener(OnSwitchWeapon);
+			inventory.OnWeaponDropped.RemoveListener(OnDrophWeapon);
+		}
 
-        if (characterManager != null)
-        {
-            characterManager.OnPickUpAmmo -= UpdateAvailableAmmo;
-        }
-    }
+		if (characterManager != null)
+		{
+			characterManager.OnPickUpAmmo -= UpdateAvailableAmmo;
+		}
+	}
 
-    public void UpdateWeaponControllerState()
-    {
-        if (armsAnimator != null)
-        {
-            // Grab the current state of the animator and set the 'canSwitchWeapon' bool
-            canSwitchWeapons = (armsAnimator.GetFloat(canSwitchWeaponsHash) > 0.75f) ? true : false;
+	public void UpdateWeaponControllerState()
+	{
+		if (armsAnimator == null)
+			return;
 
-            // Set FOV based (fetched by the animator parameter)
-            float zoomFOVWeight = armsAnimator.GetFloat(dualModeFOVHash);
-            if (sceneCam != null && !zoomFOVWeight.Equals(0.0f) && currentWeapon != null && currentWeapon.DualMode)
-            {
-                sceneCam.fieldOfView = Mathf.Lerp(initialFOV, currentWeapon.DualModeFOV, zoomFOVWeight);
-            }
-            else
-            {
-                sceneCam.fieldOfView = initialFOV;
-            }
-        }
-    }
+		// Grab the current state of the animator and set the 'canSwitchWeapon' bool
+		canSwitchWeapons = (armsAnimator.GetFloat(canSwitchWeaponsHash) > 0.75f) ? true : false;
 
-    public void ShootAndDoDamage(int _hitDir = 0)
-    {
-        // Has fire request been successful?
-        if (inventory != null &&
-            currentWeapon != null &&
-            currentWeapon.WeaponFeedType == InventoryWeaponFeedType.Ammunition &&
-            inventory.GetAvailableAmmo(currentWeapon.Ammo, AmmoAmountRequestType.WeaponAmmoOnly) > 0)
-        {
-            inventory.DecreaseAmmoInWeapon(currentWeapon.WeaponType == InventoryWeaponType.TwoHanded ? 1 : 0);
+		// Set FOV based (fetched by the animator parameter)
+		var zoomFOVWeight = armsAnimator.GetFloat(dualModeFOVHash);
+		if (sceneCam != null && !zoomFOVWeight.Equals(0.0f) && currentWeapon != null && currentWeapon.DualMode)
+		{
+			sceneCam.fieldOfView = Mathf.Lerp(initialFOV, currentWeapon.DualModeFOV, zoomFOVWeight);
+		}
+		else
+		{
+			sceneCam.fieldOfView = initialFOV;
+		}
+	}
 
-            if (inventory.GetAvailableAmmo(currentWeapon.Ammo, AmmoAmountRequestType.WeaponAmmoOnly) < 1)
-            {
-                armsAnimator?.SetBool(autoFireHash, false);
-            }
+	public void ShootAndDoDamage(int _hitDir = 0)
+	{
+		// Has fire request been successful?
+		if (inventory != null &&
+			currentWeapon != null &&
+			currentWeapon.WeaponFeedType == InventoryWeaponFeedType.Ammunition &&
+			inventory.GetAvailableAmmo(currentWeapon.Ammo, AmmoAmountRequestType.WeaponAmmoOnly) > 0)
+		{
+			inventory.DecreaseAmmoInWeapon(currentWeapon.WeaponType == InventoryWeaponType.TwoHanded ? 1 : 0);
 
-            ArmsObject armsObject = characterManager.GetArmObjectFromDictionary(currentWeapon); ;
-            if (armsObject != null)
-            {
-                WeaponAnimatorStateCallback weaponArmsCallback = armsObject.callback as WeaponAnimatorStateCallback;
-                if (weaponArmsCallback != null)
-                {
-                    weaponArmsCallback.DoMuzzleFlash();
-                }
-            }
-        }
+			if (inventory.GetAvailableAmmo(currentWeapon.Ammo, AmmoAmountRequestType.WeaponAmmoOnly) < 1)
+			{
+				armsAnimator?.SetBool(autoFireHash, false);
+			}
+		}
 
-        // Set the rest
-        InventoryItemWeapon weapon = currentWeapon == null ? defaultWeapon : currentWeapon;
-        if (weapon != null)
-        {
-            soundEmitter.SetRadius(weapon.SoundRadius);
+		// Set the rest
+		var weapon = currentWeapon == null ? defaultWeapon : currentWeapon;
 
-            InventoryWeaponMountInfo wmi = null;
+		if (weapon == null)
+			return;
 
-            if (weapon != defaultWeapon && inventory != null && weapon.WeaponType != InventoryWeaponType.None)
-            {
-                // Weapon condition
-                wmi = inventory.GetWeapon(weapon.WeaponType == InventoryWeaponType.SingleHanded ? 0 : 1);
-                if (wmi != null)
-                {
-                    wmi.condition = Mathf.Max(0.0f, wmi.condition - weapon.ConditionDepletion);
-                }
-            }
+		soundEmitter.SetRadius(weapon.SoundRadius);
 
-            // Camera shake
-            if (cameraShaker != null && weapon.ShakeType == InventoryItemWeaponShakeType.OnFire)
-            {
-                cameraShaker.ShakeVector(weapon.ShakeDuration, weapon.ShakeMagnitude, weapon.ShakeDamping);
-            }
+		InventoryWeaponMountInfo wmi = null;
 
-            // Raycast
-            if (sceneCam == null || gameSceneManger == null)
-                return;
+		if (weapon != defaultWeapon && inventory != null && weapon.WeaponType != InventoryWeaponType.None)
+		{
+			// Weapon condition
+			wmi = inventory.GetWeapon(weapon.WeaponType == InventoryWeaponType.SingleHanded ? 0 : 1);
+			if (wmi != null)
+			{
+				wmi.condition = Mathf.Max(0.0f, wmi.condition - weapon.ConditionDepletion);
+			}
+		}
 
-            Ray ray;
-            RaycastHit hit = new RaycastHit();
-            RaycastHit[] hits;
-            bool isSomethingHit = false;
+		// Camera shake
+		if (cameraShaker != null && weapon.ShakeType == InventoryItemWeaponShakeType.OnFire)
+		{
+			cameraShaker.ShakeVector(weapon.ShakeDuration, weapon.ShakeMagnitude, weapon.ShakeDamping);
+		}
 
-            ray = sceneCam.ScreenPointToRay(crosshairPosition.Value);
+		// Raycast
+		if (sceneCam == null || gameSceneManger == null)
+			return;
 
-            if (weapon.RayRadius > 0.0f) // eg. shotgun, rpg, etc..
-            {
-                // Move the origin back a bit as the sphere cast only works from half sphere onward
-                ray.origin = ray.origin - characterManager.transform.forward * weapon.RayRadius;
+		Ray ray;
+		RaycastHit hit = new RaycastHit();
+		RaycastHit[] hits;
+		bool isSomethingHit = false;
 
-                hits = Physics.SphereCastAll(ray, weapon.RayRadius, weapon.Range, weaponRayLayerMask.value, QueryTriggerInteraction.Ignore);
+		ray = sceneCam.ScreenPointToRay(crosshairPosition.Value);
 
-                foreach (var potentialHit in hits)
-                {
-                    if (potentialHit.transform.gameObject.layer == LayerMask.NameToLayer("AI_BodyPart"))
-                    {
-                        Ray sightTestRay = ray;
-                        ray.origin += characterManager.transform.forward * weapon.RayRadius; // <Move forward again for the normal raycast
+		if (weapon.RayRadius > 0.0f) // eg. shotgun, rpg, etc..
+		{
+			// Move the origin back a bit as the sphere cast only works from half sphere onward
+			ray.origin = ray.origin - characterManager.transform.forward * weapon.RayRadius;
 
-                        sightTestRay.direction = potentialHit.point - sightTestRay.origin;
+			hits = Physics.SphereCastAll(ray, weapon.RayRadius, weapon.Range, weaponRayLayerMask.value, QueryTriggerInteraction.Ignore);
 
-                        if (Physics.Raycast(sightTestRay, out hit, 1000, weaponRayLayerMask.value, QueryTriggerInteraction.Ignore))
-                        {
-                            if (potentialHit.transform == hit.transform)
-                            {
-                                if (hit.rigidbody != null)
-                                {
-                                    AIStateMachine stateMachine = gameSceneManger.GetAIStateMachine(hit.rigidbody.GetInstanceID());
-                                    if (stateMachine != null)
-                                    {
-                                        float damage = weapon.GetAttentuatedDamage(hit.rigidbody.tag, hit.distance) * (wmi == null ? 1 : wmi.condition / 100.0f);
+			foreach (var potentialHit in hits)
+			{
+				if (potentialHit.transform.gameObject.layer != LayerMask.NameToLayer("AI_BodyPart"))
+					continue;
 
-                                        stateMachine.TakeDamage(hit.point,
-                                                                ray.direction * weapon.GetAttentuatedForce(hit.distance),
-                                                                (int)damage,
-                                                                hit.rigidbody,
-                                                                characterManager,
-                                                                _hitDir);
+				var sightTestRay = ray;
+				ray.origin += characterManager.transform.forward * weapon.RayRadius; // <Move forward again for the normal raycast
+				sightTestRay.direction = potentialHit.point - sightTestRay.origin;
 
-                                        isSomethingHit = true;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if (Physics.Raycast(ray, out hit, weapon.Range, weaponRayLayerMask.value, QueryTriggerInteraction.Ignore))
-                {
-                    UnityEngine.Debug.Log("Fist hit");
-                    if (hit.rigidbody != null)
-                    {
-                        AIStateMachine stateMachine = gameSceneManger.GetAIStateMachine(hit.rigidbody.GetInstanceID());
-                        if (stateMachine != null)
-                        {
-                            float damage = weapon.GetAttentuatedDamage(hit.rigidbody.tag, hit.distance) * (wmi == null ? 1 : wmi.condition / 100.0f);
+				if (!Physics.Raycast(sightTestRay, out hit, 1000, weaponRayLayerMask.value, QueryTriggerInteraction.Ignore))
+					continue;
 
-                            stateMachine.TakeDamage(hit.point,
-                                                    ray.direction * weapon.GetAttentuatedForce(hit.distance),
-                                                    (int)damage,
-                                                    hit.rigidbody,
-                                                    characterManager,
-                                                    _hitDir);
+				if (potentialHit.transform != hit.transform)
+					continue;
 
-                            isSomethingHit = true;
-                        }
-                    }
-                }
-            }
+				if (hit.rigidbody == null)
+					continue;
 
-            if (isSomethingHit && cameraShaker != null && weapon.ShakeType == InventoryItemWeaponShakeType.OnHit)
-            {
-                cameraShaker.ShakeVector(weapon.ShakeDuration, weapon.ShakeMagnitude, weapon.ShakeDamping);
-            }
-        }
-    }
+				var stateMachine = gameSceneManger.GetAIStateMachine(hit.rigidbody.GetInstanceID());
 
-    public void SwitchMount(InventoryItemWeapon _nextWeapon)
-    {
-        if (canSwitchWeapons && switchWeaponCoroutine == null)
-        {
-            switchWeaponCoroutine = SwitchWeaponInternal(_nextWeapon, null);
-            SO_CoroutineRunner.Instance?.StartCoroutine(switchWeaponCoroutine);
-        }
-    }
+				if (stateMachine == null)
+					continue;
+
+				var damage = weapon.GetAttentuatedDamage(hit.rigidbody.tag, hit.distance) * (wmi == null ? 1 : wmi.condition / 100.0f);
+
+				stateMachine.TakeDamage(hit.point,
+										ray.direction * weapon.GetAttentuatedForce(hit.distance),
+										(int)damage,
+										hit.rigidbody,
+										characterManager,
+										_hitDir);
+
+				isSomethingHit = true;
+			}
+		}
+		else
+		{
+			if (Physics.Raycast(ray, out hit, weapon.Range, weaponRayLayerMask.value, QueryTriggerInteraction.Ignore))
+			{
+				UnityEngine.Debug.Log("Fist hit");
+				if (hit.rigidbody != null)
+				{
+					AIStateMachine stateMachine = gameSceneManger.GetAIStateMachine(hit.rigidbody.GetInstanceID());
+					if (stateMachine != null)
+					{
+						float damage = weapon.GetAttentuatedDamage(hit.rigidbody.tag, hit.distance) * (wmi == null ? 1 : wmi.condition / 100.0f);
+
+						stateMachine.TakeDamage(hit.point,
+												ray.direction * weapon.GetAttentuatedForce(hit.distance),
+												(int)damage,
+												hit.rigidbody,
+												characterManager,
+												_hitDir);
+
+						isSomethingHit = true;
+					}
+				}
+			}
+		}
+
+		if (isSomethingHit && cameraShaker != null && weapon.ShakeType == InventoryItemWeaponShakeType.OnHit)
+		{
+			cameraShaker.ShakeVector(weapon.ShakeDuration, weapon.ShakeMagnitude, weapon.ShakeDamping);
+		}
+	}
+
+	public void SwitchMount(InventoryItemWeapon _nextWeapon)
+	{
+		if (!canSwitchWeapons || switchWeaponCoroutine != null)
+			return;
+
+		switchWeaponCoroutine = SwitchWeaponInternal(_nextWeapon, null);
+		SO_CoroutineRunner.Instance?.StartCoroutine(switchWeaponCoroutine);
+	}
 
 	#region Player Input
 	public void SwitchWeapon(int index)
 	{
-        if (index < 0 || index > 1)
-            throw new ArgumentException($"The weapon index ({index}) is out of bounds");
+		if (index < 0 || index > 1)
+			throw new ArgumentException($"The weapon index ({index}) is out of bounds");
 
 		SwitchMountInternal(index);
 	}
@@ -286,10 +276,10 @@ public class WeaponController
 		if (isCanceled)
 			armsAnimator.SetBool(autoFireHash, false);
 
-        if (!isPerformed)
-            return;
+		if (!isPerformed)
+			return;
 		
-        int attackAnim = 1;
+		int attackAnim = 1;
 		bool autofireEnabled = false;
 		bool canFire = true;
 
@@ -327,6 +317,9 @@ public class WeaponController
 
 	public void ADS()
 	{
+		if (currentWeapon == null || !currentWeapon.DualMode)
+			return;
+
 		armsAnimator.SetBool(dualModeActiveHash, !armsAnimator.GetBool(dualModeActiveHash));
 	}
 
@@ -359,208 +352,200 @@ public class WeaponController
 
 	private void OnSwitchWeapon(InventoryWeaponMountInfo _weaponMount)
 	{
-        if (canSwitchWeapons && _weaponMount != null && _weaponMount.weapon && switchWeaponCoroutine == null)
-        {
-            switchWeaponCoroutine = SwitchWeaponInternal(_weaponMount.weapon, _weaponMount);
-            SO_CoroutineRunner.Instance?.StartCoroutine(switchWeaponCoroutine);
-        }
-    }
+		if (canSwitchWeapons && _weaponMount != null && _weaponMount.weapon && switchWeaponCoroutine == null)
+		{
+			switchWeaponCoroutine = SwitchWeaponInternal(_weaponMount.weapon, _weaponMount);
+			SO_CoroutineRunner.Instance?.StartCoroutine(switchWeaponCoroutine);
+		}
+	}
 
-    private void OnDrophWeapon(InventoryItemWeapon _weapon)
+	private void OnDrophWeapon(InventoryItemWeapon _weapon)
 	{
-        // We only want to process this event when the UI is active. This is out way of responding to
-        // a DropWeapon event within the UI so that our Arms and Weapons hierarchy stays synced.
-        if ((inventoryUI && !inventoryUI.activeSelf) || !inventoryUI)
-            return;
+		// We only want to process this event when the UI is active. This is out way of responding to
+		// a DropWeapon event within the UI so that our Arms and Weapons hierarchy stays synced.
+		if ((inventoryUI && !inventoryUI.activeSelf) || !inventoryUI)
+			return;
 
-        // Is the weapon we are dropping the current weapon we are using
-        // because if so we need to remove if from our arms
-        if (currentWeapon == _weapon && currentWeapon != null)
-        {
-            // Deactivate the corresponding arms object
-            characterManager.GetArmObjectFromDictionary(currentWeapon)?.SetAllSceneObjectsActiveState(false);
+		// Is the weapon we are dropping the current weapon we are using
+		// because if so we need to remove if from our arms
+		if (currentWeapon != _weapon || currentWeapon == null)
+			return;
 
-            // TODO: Check if this is fine to remove
-            // We have processed this mouse action so clear it
-            //Input.ResetInputAxes();
+		// Deactivate the corresponding arms object
+		characterManager.GetArmObjectFromDictionary(currentWeapon)?.SetAllSceneObjectsActiveState(false);
 
-            // Force the animator to an immediate disarmed state
-            armsAnimator?.SetTrigger(clearWeaponHash);
-            armsAnimator?.SetBool(weaponArmedHash, false);
-            armsAnimator?.SetInteger(weaponAnimHash, 0);
+		// TODO: Check if this is fine to remove
+		// We have processed this mouse action so clear it
+		//Input.ResetInputAxes();
 
-            currentWeapon = null;
-        }
-    }
+		// Force the animator to an immediate disarmed state
+		armsAnimator?.SetTrigger(clearWeaponHash);
+		armsAnimator?.SetBool(weaponArmedHash, false);
+		armsAnimator?.SetInteger(weaponAnimHash, 0);
 
-    public void EnableWeapon_AnimatorCallback()
-    {
-        // Assign next weapon to the correct mount
-        if (nextWeapon != null)
-        {
-            if (nextWeapon != currentWeapon && nextWeaponMountInfo != null && inventory)
-            {
-                inventory.AssignWeapon((nextWeapon.WeaponType == InventoryWeaponType.SingleHanded) ? 0 : 1, nextWeaponMountInfo);
-            }
+		currentWeapon = null;
+	}
 
-            // Get the weapon we switched to and set it on (active)
-            var armsObj = characterManager.GetArmObjectFromDictionary(nextWeapon);
-            if (armsObj != null)
-            {
-                armsObj.SetAllSceneObjectsActiveState(true);
+	public void EnableWeapon_AnimatorCallback()
+	{
+		// Assign next weapon to the correct mount
+		if (nextWeapon != null)
+		{
+			if (nextWeapon != currentWeapon && nextWeaponMountInfo != null && inventory)
+			{
+				inventory.AssignWeapon((nextWeapon.WeaponType == InventoryWeaponType.SingleHanded) ? 0 : 1, nextWeaponMountInfo);
+			}
 
-                // Also assign weapon's secondary flashlight (if available on the gun)
-                characterManager.SecondaryFlashlight = armsObj.light;
-            }
+			// Get the weapon we switched to and set it on (active)
+			var armsObj = characterManager.GetArmObjectFromDictionary(nextWeapon);
+			if (armsObj != null)
+			{
+				armsObj.SetAllSceneObjectsActiveState(true);
 
-            // This is our new current weapon
-            currentWeapon = nextWeapon;
+				// Also assign weapon's secondary flashlight (if available on the gun)
+				characterManager.SecondaryFlashlight = armsObj.light;
+			}
 
-            // Assign weapon-specific crosshair sprite  
-            if (crosshairSprite != null)
-            {
-                crosshairSprite.Value = currentWeapon.Crosshair;
-            }
+			// This is our new current weapon
+			currentWeapon = nextWeapon;
 
-            // Also get available ammo for that weapon
-            if (inventory != null)
-            {
-                availableAmmo = inventory.GetAvailableAmmo(currentWeapon.Ammo, AmmoAmountRequestType.NoWeaponAmmo);
-            }
-        }
+			// Assign weapon-specific crosshair sprite  
+			if (crosshairSprite != null)
+			{
+				crosshairSprite.Value = currentWeapon.Crosshair;
+			}
 
-        // Switching weapon process complete
-        armsAnimator?.SetBool(switchingWeaponHash, false);
+			// Also get available ammo for that weapon
+			if (inventory != null)
+			{
+				availableAmmo = inventory.GetAvailableAmmo(currentWeapon.Ammo, AmmoAmountRequestType.NoWeaponAmmo);
+			}
+		}
 
-        // Weapon has been switched so there is no weapon waiting any longer
-        nextWeaponMountInfo = null;
-        nextWeapon = null;
-    }
+		// Switching weapon process complete
+		armsAnimator?.SetBool(switchingWeaponHash, false);
 
-    public void DisableWeapon_AnimatorCallback()
-    {
-        if (currentWeapon != null) // There is no weapon to deactivate
-        {
-            // Get current weapon and switch it off
-            var armsObj = characterManager.GetArmObjectFromDictionary(currentWeapon);
-            if (armsObj != null)
-            {
-                armsObj.SetAllSceneObjectsActiveState(false);
-            }
-        }
+		// Weapon has been switched so there is no weapon waiting any longer
+		nextWeaponMountInfo = null;
+		nextWeapon = null;
+	}
 
-        // Drop the current weapon (if the weapon switch is instigated by the inventory system)
-        if (nextWeapon != null && nextWeaponMountInfo != null && nextWeaponMountInfo.weapon != null)
-        {
-            inventory?.DropWeaponItem((nextWeaponMountInfo.weapon.WeaponType == InventoryWeaponType.TwoHanded) ? 1 : 0);
-        }
+	public void DisableWeapon_AnimatorCallback()
+	{
+		if (currentWeapon != null) // There is no weapon to deactivate
+		{
+			// Get current weapon and switch it off
+			var armsObj = characterManager.GetArmObjectFromDictionary(currentWeapon);
+			if (armsObj != null)
+			{
+				armsObj.SetAllSceneObjectsActiveState(false);
+			}
+		}
 
-        // Since we dropped, we currently have no weapon
-        currentWeapon = null;
+		// Drop the current weapon (if the weapon switch is instigated by the inventory system)
+		if (nextWeapon != null && nextWeaponMountInfo != null && nextWeaponMountInfo.weapon != null)
+		{
+			inventory?.DropWeaponItem((nextWeaponMountInfo.weapon.WeaponType == InventoryWeaponType.TwoHanded) ? 1 : 0);
+		}
 
-        // Clear weapon-specific crosshair sprite  
-        if (crosshairSprite != null)
-        {
-            crosshairSprite.Value = null;
-        }
+		// Since we dropped, we currently have no weapon
+		currentWeapon = null;
 
-        // Clear secondary flashlight
-        characterManager.SecondaryFlashlight = null;
-    }
+		// Clear weapon-specific crosshair sprite  
+		if (crosshairSprite != null)
+		{
+			crosshairSprite.Value = null;
+		}
 
-    public void ReloadWeapon_AnimatorCallback(InventoryWeaponType _type)
-    {
-        if (inventory == null || currentWeapon == null || currentWeapon.WeaponType == InventoryWeaponType.None)
-            return;
+		// Clear secondary flashlight
+		characterManager.SecondaryFlashlight = null;
+	}
 
-        // Reload (Inventory-Wise)
-        inventory.ReloadWeaponItem(currentWeapon.WeaponType == InventoryWeaponType.SingleHanded ? 0 : 1, false);
+	public void ReloadWeapon_AnimatorCallback(InventoryWeaponType _type)
+	{
+		if (inventory == null || currentWeapon == null || currentWeapon.WeaponType == InventoryWeaponType.None)
+			return;
 
-        availableAmmo = inventory.GetAvailableAmmo(currentWeapon.Ammo, AmmoAmountRequestType.NoWeaponAmmo);
-    }
+		// Reload (Inventory-Wise)
+		inventory.ReloadWeaponItem(currentWeapon.WeaponType == InventoryWeaponType.SingleHanded ? 0 : 1, false);
+
+		availableAmmo = inventory.GetAvailableAmmo(currentWeapon.Ammo, AmmoAmountRequestType.NoWeaponAmmo);
+	}
 
 
-    private IEnumerator SwitchWeaponInternal(InventoryItemWeapon _nextWeapon, InventoryWeaponMountInfo _weaponMount)
-    {
-        if (armsAnimator == null) // We need an animator to switch weapons 
-        {
-            switchWeaponCoroutine = null;
-            yield break;
-        }
+	private IEnumerator SwitchWeaponInternal(InventoryItemWeapon _nextWeapon, InventoryWeaponMountInfo _weaponMount)
+	{
+		if (armsAnimator == null) // We need an animator to switch weapons 
+		{
+			switchWeaponCoroutine = null;
+			yield break;
+		}
 
-        // Cancel the reload (if there is a pending reload) 
-        armsAnimator.SetBool(reloadHash, false);
+		// Cancel the reload (if there is a pending reload) 
+		armsAnimator.SetBool(reloadHash, false);
 
-        // Disarm current weapon 
-        armsAnimator.SetBool(weaponArmedHash, false);
+		// Disarm current weapon 
+		armsAnimator.SetBool(weaponArmedHash, false);
 
-        // The weapon we wish to transition next
-        nextWeapon = _nextWeapon;
+		// The weapon we wish to transition next
+		nextWeapon = _nextWeapon;
 
-        // Pick up info - If null then the weapon is assumed already be mount and will not be added in the inventory
-        nextWeaponMountInfo = _weaponMount;
+		// Pick up info - If null then the weapon is assumed already be mount and will not be added in the inventory
+		nextWeaponMountInfo = _weaponMount;
 
-        if (_nextWeapon != null)
-        {
-            // Let animator know we are transitioning to a single/dual handed weapon
-            // In case of single handed weapon, we allow to bring up the flash light in the left hand. 
-            armsAnimator.SetBool(dualHandedWeaponHash, _nextWeapon.WeaponType == InventoryWeaponType.TwoHanded);
-            armsAnimator.SetBool(switchingWeaponHash, true);
+		if (_nextWeapon != null)
+		{
+			// Let animator know we are transitioning to a single/dual handed weapon
+			// In case of single handed weapon, we allow to bring up the flash light in the left hand. 
+			armsAnimator.SetBool(dualHandedWeaponHash, _nextWeapon.WeaponType == InventoryWeaponType.TwoHanded);
+			armsAnimator.SetBool(switchingWeaponHash, true);
 
-            // Force a wait state so the animator can pick up on a switch between two weapons of the same type
-            yield return new WaitForSecondsRealtime(0.2f);
+			// Force a wait state so the animator can pick up on a switch between two weapons of the same type
+			yield return new WaitForSecondsRealtime(0.2f);
 
-            // Arm next weapon
-            armsAnimator.SetBool(weaponArmedHash, true);
-            armsAnimator.SetInteger(weaponAnimHash, _nextWeapon.WeaponAnim);
-        }
+			// Arm next weapon
+			armsAnimator.SetBool(weaponArmedHash, true);
+			armsAnimator.SetInteger(weaponAnimHash, _nextWeapon.WeaponAnim);
+		}
 
-        // Free this coroutine
-        switchWeaponCoroutine = null;
-    }
-    
-    private void SwitchMountInternal(int _mountIndex)
-    {
-        if (armsAnimator != null)
-        {
-            InventoryWeaponMountInfo weaponMountInfo = null;
-            if (inventory != null)
-            {
-                weaponMountInfo = inventory.GetWeapon(_mountIndex);
-            }
+		// Free this coroutine
+		switchWeaponCoroutine = null;
+	}
+	
+	private void SwitchMountInternal(int _mountIndex)
+	{
+		if (armsAnimator == null)
+			return;
 
-            // Only process this keypress if we have something at the mount 
-            if (weaponMountInfo != null && weaponMountInfo.weapon != null)
-            {
-                // Just toggle its armed state if the weapon we have is the one current one 
-                if (currentWeapon == weaponMountInfo.weapon)
-                {
-                    //Get current armed status
-                    bool weaponArmed = armsAnimator.GetBool(weaponArmedHash);
-                    weaponArmed = !weaponArmed;
+		var weaponMountInfo = inventory?.GetWeapon(_mountIndex);
 
-                    if (weaponArmed)
-                    {
-                        nextWeapon = weaponMountInfo.weapon;
-                    }
-                    else
-                    {
-                        nextWeapon = null;
-                    }
+		// Only process this keypress if we have something at the mount 
+		if (weaponMountInfo == null || weaponMountInfo.weapon == null)
+			return;
 
-                    // Instruct animator to arm/disarm weapon 
-                    armsAnimator.SetBool(weaponArmedHash, weaponArmed);
-                }
-                else // Switch to the other weapon
-                {
-                    SwitchMount(weaponMountInfo.weapon);
-                }
-            }
-        }
-    }
+		// Just toggle its armed state if the weapon we have is the one current one 
+		if (currentWeapon == weaponMountInfo.weapon)
+		{
+			//Get current armed status
+			var weaponArmed = armsAnimator.GetBool(weaponArmedHash);
+			
+			weaponArmed = !weaponArmed;
 
-    private void UpdateAvailableAmmo()
-    {
-        availableAmmo = inventory.GetAvailableAmmo(currentWeapon.Ammo, AmmoAmountRequestType.NoWeaponAmmo);
-    }
+			nextWeapon = weaponArmed ? weaponMountInfo.weapon : null;
+
+			// Instruct animator to arm/disarm weapon 
+			armsAnimator.SetBool(weaponArmedHash, weaponArmed);
+		}
+		else // Switch to the other weapon
+		{
+			SwitchMount(weaponMountInfo.weapon);
+		}
+
+		armsAnimator.SetBool(dualModeActiveHash, false);
+	}
+
+	private void UpdateAvailableAmmo()
+	{
+		availableAmmo = inventory.GetAvailableAmmo(currentWeapon.Ammo, AmmoAmountRequestType.NoWeaponAmmo);
+	}
 }
