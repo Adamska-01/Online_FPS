@@ -33,11 +33,11 @@ RectTransform:
   m_Father: {fileID: 4372601627153120428}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -122.62, y: 0}
-  m_SizeDelta: {x: 245, y: 126}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 17.544983, y: -18.169952}
+  m_SizeDelta: {x: 350.35, y: 180.18}
+  m_Pivot: {x: 0, y: 1}
 --- !u!222 &4372601625924505364
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -111,7 +111,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 61.25, y: 32.56}
+  m_AnchoredPosition: {x: 82, y: 22.999996}
   m_SizeDelta: {x: 122.5, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4372601626017256963
@@ -169,8 +169,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -246,7 +246,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -60.9, y: -35.162064}
+  m_AnchoredPosition: {x: -55, y: -71}
   m_SizeDelta: {x: 122.5, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4372601626215512063
@@ -306,8 +306,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -383,7 +383,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 61.25, y: 7.56}
+  m_AnchoredPosition: {x: 81.99997, y: -12.560005}
   m_SizeDelta: {x: 122.5, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4372601626434398718
@@ -443,8 +443,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -558,7 +558,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.093, y: -49.711994}
+  m_AnchoredPosition: {x: 3.806994, y: -85.54992}
   m_SizeDelta: {x: 240.815, y: 26.577}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4372601626615237975
@@ -649,8 +649,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 122.38001, y: 0}
-  m_SizeDelta: {x: 245, y: 126}
+  m_AnchoredPosition: {x: 184.1, y: 16}
+  m_SizeDelta: {x: 340, y: 186.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4372601627153120429
 GameObject:
@@ -664,6 +664,8 @@ GameObject:
   - component: {fileID: 4372601627153120418}
   - component: {fileID: 4372601627153120419}
   - component: {fileID: 7501185281025014341}
+  - component: {fileID: 1153983893428487868}
+  - component: {fileID: 1153983894496041525}
   m_Layer: 5
   m_Name: Weapon_Mount
   m_TagString: Untagged
@@ -750,6 +752,128 @@ MonoBehaviour:
   weaponMountAmmoInfo: {fileID: 4372601627578642763}
   weaponMountRounds: {fileID: 4372601626017256972}
   weaponMountReloadType: {fileID: 4372601626434398719}
+--- !u!114 &1153983893428487868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4372601627153120429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
+          m_MethodName: OnEnterWeaponMount
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 4372601627153120419}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
+          m_MethodName: OnExitWeaponMount
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 4372601627153120419}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
+          m_MethodName: OnClickWeaponMount
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 4372601627153120419}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1153983894496041525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4372601627153120429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
+          m_MethodName: OnEnterWeaponMount
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 4372601627153120419}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
+          m_MethodName: OnExitWeaponMount
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 4372601627153120419}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: PlayerInventoryUI, Assembly-CSharp
+          m_MethodName: OnClickWeaponMount
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 4372601627153120419}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &4372601627252797537
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,8 +909,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -55.791, y: 32.56}
-  m_SizeDelta: {x: 111.583, y: 25}
+  m_AnchoredPosition: {x: -55.791, y: 23}
+  m_SizeDelta: {x: 120, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4372601627252797542
 CanvasRenderer:
@@ -843,8 +967,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -951,7 +1075,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Weapon Type
+  m_text: Dual Handed
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 60946a5b1d69a2c4bad9c3f6a6e6209a, type: 2}
   m_sharedMaterial: {fileID: -5877488383748759648, guid: 60946a5b1d69a2c4bad9c3f6a6e6209a, type: 2}
@@ -1055,8 +1179,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -55.791, y: 7.56}
-  m_SizeDelta: {x: 111.583, y: 25}
+  m_AnchoredPosition: {x: -55.791, y: -12.559954}
+  m_SizeDelta: {x: 120, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4372601627434972317
 CanvasRenderer:
@@ -1113,8 +1237,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1345,8 +1469,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -17.722}
-  m_SizeDelta: {x: 245, y: 90.556}
+  m_AnchoredPosition: {x: 0, y: -24}
+  m_SizeDelta: {x: 300, y: 65.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4372601627709871708
 GameObject:
@@ -1384,7 +1508,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 45.278}
-  m_SizeDelta: {x: 245, y: 35.444}
+  m_SizeDelta: {x: 300, y: 35.444}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4372601627709871697
 CanvasRenderer:
@@ -1441,8 +1565,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 29
-  m_fontSizeBase: 29
+  m_fontSize: 47.5
+  m_fontSizeBase: 47.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
