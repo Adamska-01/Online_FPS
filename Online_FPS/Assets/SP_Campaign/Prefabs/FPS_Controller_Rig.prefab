@@ -1521,7 +1521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meleeTrigger: {fileID: 2633946818584126980}
-  cameraBloodEffect: {fileID: 0}
+  cameraBloodEffect: {fileID: 5896919464706852536}
   sceneCam: {fileID: 2633946818704069685}
   soundEmitter: {fileID: 2633946820111181205}
   walkRadius: 0
