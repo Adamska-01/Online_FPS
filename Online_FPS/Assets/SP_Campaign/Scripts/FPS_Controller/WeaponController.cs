@@ -445,7 +445,13 @@ public class WeaponController
 		// Drop the current weapon (if the weapon switch is instigated by the inventory system)
 		if (nextWeapon != null && nextWeaponMountInfo != null && nextWeaponMountInfo.weapon != null)
 		{
-			inventory?.DropWeaponItem((nextWeaponMountInfo.weapon.WeaponType == InventoryWeaponType.TwoHanded) ? 1 : 0);
+			var droppedWeapon = inventory?.DropWeaponItem((nextWeaponMountInfo.weapon.WeaponType == InventoryWeaponType.TwoHanded) ? 1 : 0);
+			
+			if (droppedWeapon != null)
+			{
+				droppedWeapon.transform.position = nextWeaponMountInfo.PickUpPosition;
+				droppedWeapon.transform.rotation = nextWeaponMountInfo.PickUpRotation;
+			}
 		}
 
 		// Since we dropped, we currently have no weapon

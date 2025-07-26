@@ -144,6 +144,7 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
 			case InventoryItemType.Recording:
 				return AddRecordingItem(invItem as InventoryItemAudio, _collectableItem as CollectableAudio, _playAudio);
 			case InventoryItemType.Weapon:
+				// This function can't return false. fix it
 				return AddWeaponItem(invItem as InventoryItemWeapon, _collectableItem as CollectableWeapon, _playAudio);
 		}
 
@@ -329,24 +330,24 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
 		backpacks[_mountIndex].item = null;
 	}
 
-	public override void DropWeaponItem(int _mountIndex, bool _playAudio = true)
+	public override CollectableItem DropWeaponItem(int _mountIndex, bool _playAudio = true)
 	{
 		if (_mountIndex < 0 || _mountIndex >= weapons.Count)
-			return;
+			return null;
 
-		//Get backpack mount from index
-		InventoryWeaponMountInfo weaponMountInfo = weapons[_mountIndex];
+		// Get backpack mount from index
+		var weaponMountInfo = weapons[_mountIndex];
 		if (weaponMountInfo == null || weaponMountInfo.weapon == null)
-			return;
+			return null;
 
-		InventoryItemWeapon weapon = weapons[_mountIndex].weapon;
+		var weapon = weapons[_mountIndex].weapon;
 
-		//Calculate spawn position (in front of the player)
+		// Calculate spawn position (in front of the player)
 		Vector3 pos = playerPosition != null ? playerPosition.Value : Vector3.zero;
 		pos += playerDirection != null ? playerDirection.Value : Vector3.zero;
 
-		//Drop
-		CollectableWeapon sceneWeapon = weapon.Drop(pos, _playAudio) as CollectableWeapon;
+		var sceneWeapon = weapon.Drop(pos, _playAudio) as CollectableWeapon;
+
 		//Copy over the weapon instance data
 		if (sceneWeapon != null)
 		{
@@ -361,6 +362,8 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
 
 		//Notify listeners that a weapon has been dropped 
 		OnWeaponDropped?.Invoke(weapon);
+
+		return sceneWeapon;
 	}
 
 	public override void DropAmmoItem(int _mountIndex, bool _playAudio = true)
@@ -696,7 +699,9 @@ public class PlayerInventory : Inventory, ISerializationCallbackReceiver
 		{
 			weapon = _inventoryItem,
 			condition = _collectableItem.Condition,
-			inGunRounds = _collectableItem.Rounds
+			inGunRounds = _collectableItem.Rounds,
+			PickUpPosition = _collectableItem.transform.position,
+			PickUpRotation = _collectableItem.transform.rotation
 		};
 
 		//Notify listeners that a weapon has been changed
