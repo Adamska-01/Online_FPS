@@ -189,6 +189,21 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-8758143412756873474
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed780f9bc2313a242b776ad7905dd8ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: {fileID: 0}
+  characterMgr: {fileID: 0}
+  callbackHandlers: []
 --- !u!1102 &-8640512782706719423
 AnimatorState:
   serializedVersion: 6
@@ -7706,6 +7721,22 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &6888759661852477978
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27bc12dc4b5087746b9bb8aceb1efb0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: {fileID: 0}
+  characterMgr: {fileID: 0}
+  callbackHandlers: []
+  weaponType: 0
 --- !u!1101 &6938041883219002015
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
