@@ -20,10 +20,8 @@ MonoBehaviour:
   inventoryActionText: 
   replacementItem: {fileID: 0}
   collectableItem: {fileID: 1385866821017414223, guid: 199cb8f5ac9f9014985dbdb0b20a52aa, type: 3}
-  invDescription: "It may not look pretty but an Axe to the head is a tried and tested
-    way of putting a Raggie down to good.\r\n\r\nVery lethal when correct contact
-    is made with the Raggie skull but suffers from accuracy problems due to only
-    a single lethal edge.\r"
+  invDescription: "Axe \u2014 Highly lethal with a direct hit to the skull, but limited
+    by a single striking edge and low accuracy."
   category: 5
   audio: {fileID: 11400000, guid: 808bfafc9a6d97045b6baeea4803ce53, type: 2}
   weaponType: 1

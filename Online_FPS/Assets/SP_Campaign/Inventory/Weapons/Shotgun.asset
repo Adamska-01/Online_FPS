@@ -20,10 +20,8 @@ MonoBehaviour:
   inventoryActionText: 
   replacementItem: {fileID: 0}
   collectableItem: {fileID: -1688555370613262779, guid: f6a1877e12373b94d9edb33a4030a232, type: 3}
-  invDescription: "What the Shotgun lacks in range and accuracy it more than makes
-    up for in pure destructive power. This makes it ideal for close range combat.\r\n\r\nCan
-    chamber six cartridges simultaneously allowing for mutliple kills before requiring
-    a reload.\r"
+  invDescription: Powerful at close range, the shotgun deals high damage but has
+    limited range and accuracy. It holds six shells for multiple shots before reloading.
   category: 5
   audio: {fileID: 11400000, guid: 13c509199c7d21b4a942300b25132852, type: 2}
   weaponType: 2

@@ -20,10 +20,8 @@ MonoBehaviour:
   inventoryActionText: 
   replacementItem: {fileID: 0}
   collectableItem: {fileID: 2875615359503507595, guid: 13b72367c27ee8542b9c58121836c2a2, type: 3}
-  invDescription: "This construction strength Crowbar can pass through skull bone
-    like a wire through cheese.\r\n\r\nIt is a lethal close range melee weapon but
-    as with all crowbars, lacks a little in precision. If you get a good clean head
-    shot though, the Raggy isn't getting back up. \r"
+  invDescription: "A heavy-duty crowbar for lethal close-range combat. Powerful but
+    imprecise \u2014 a clean headshot ensures the target stays down."
   category: 5
   audio: {fileID: 11400000, guid: 5f5be9ac6258df04da51bbfe29e6fa51, type: 2}
   weaponType: 1

@@ -20,19 +20,8 @@ MonoBehaviour:
   inventoryActionText: 
   replacementItem: {fileID: 0}
   collectableItem: {fileID: 50285019875067946, guid: 4c0415be25937c84bbee31aba31080d9, type: 3}
-  invDescription: 'This accurate and lethal blade will make you feel safe when you
-    sleep at night.
-
-
-
-    While accurate enough to take down a Raggie with a single
-    strike, the only downside of this bad-boy is its short range compared to other
-    melee weapons.
-
-
-
-    If you don''t mind getting in real close...this could be
-    for you.'
+  invDescription: A precise, high-damage melee weapon with limited range. Best for
+    close-quarters combat.
   category: 5
   audio: {fileID: 11400000, guid: 5f5be9ac6258df04da51bbfe29e6fa51, type: 2}
   weaponType: 1

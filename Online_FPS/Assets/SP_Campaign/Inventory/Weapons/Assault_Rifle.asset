@@ -20,10 +20,8 @@ MonoBehaviour:
   inventoryActionText: 
   replacementItem: {fileID: 0}
   collectableItem: {fileID: 5113335313209987361, guid: 64d496a942b480245b6396daff49f440, type: 3}
-  invDescription: "Based on the Special Forces M4A1 SOPMOD, this lethally accurate
-    assault rifle is capable of fully automatic fire.\r\n\r\nIt has a decent medium
-    to long range capability and is supplied with ammunition via cartridges containing
-    up to 30 rounds each.\r"
+  invDescription: A fully automatic assault rifle with good medium to long-range
+    accuracy, using 30-round magazines.
   category: 5
   audio: {fileID: 11400000, guid: 7ef180421ee83ea4ba8d1c261d4b6ff1, type: 2}
   weaponType: 2

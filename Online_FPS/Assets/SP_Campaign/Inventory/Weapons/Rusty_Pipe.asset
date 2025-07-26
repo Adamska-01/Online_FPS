@@ -20,9 +20,8 @@ MonoBehaviour:
   inventoryActionText: 
   replacementItem: {fileID: 0}
   collectableItem: {fileID: 8929421518037695209, guid: 93eecd8b044c1624bbe7ae4714b16919, type: 3}
-  invDescription: "This rusty off-cut of pipe is barely a weapon at all. This crude
-    and blunt bludgeoning apparatus will not serve you well in a multi-raggie attack
-    but it can get you out of a tight fix in a one-on-one situation.\r"
+  invDescription: A crude, blunt weapon. Ineffective against groups but useful in
+    one-on-one fights.
   category: 5
   audio: {fileID: 11400000, guid: 5f5be9ac6258df04da51bbfe29e6fa51, type: 2}
   weaponType: 1
