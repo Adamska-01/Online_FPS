@@ -20,17 +20,17 @@ MonoBehaviour:
       m_Calls: []
   weaponMounts:
   - weapon: {fileID: 11400000, guid: 620652e810e29ae41a7035b52590ea19, type: 2}
-    condition: 0
+    condition: 100
     inGunRounds: 0
   - weapon: {fileID: 11400000, guid: 37ac0c44aa4196648a50297b32f86564, type: 2}
-    condition: 0
+    condition: 100
     inGunRounds: 0
   ammoMounts:
-  - ammo: {fileID: 11400000, guid: 88c615d11a9588247873eb3d54bd9bab, type: 2}
+  - ammo: {fileID: 0}
     rounds: 15
-  - ammo: {fileID: 11400000, guid: caadf9aba6028a54ea71c37f4800dae4, type: 2}
+  - ammo: {fileID: 0}
     rounds: 8
-  - ammo: {fileID: 11400000, guid: a6e85a8c4d42d4247aad6029c286b71a, type: 2}
+  - ammo: {fileID: 0}
     rounds: 4
   - ammo: {fileID: 0}
     rounds: 0
@@ -39,13 +39,13 @@ MonoBehaviour:
   - ammo: {fileID: 0}
     rounds: 0
   backpackMounts:
-  - item: {fileID: 11400000, guid: 05bf990f786357349a1adf2f11553cdd, type: 2}
   - item: {fileID: 0}
-  - item: {fileID: 11400000, guid: e473942d3efe43f4186883608b302661, type: 2}
-  - item: {fileID: 11400000, guid: 8b37e97dbcf5e434cb375d3d6a842fb2, type: 2}
-  - item: {fileID: 11400000, guid: 587c8bc0b9cc6e946ae0e75a75e7d6f9, type: 2}
   - item: {fileID: 0}
-  - item: {fileID: 11400000, guid: 64aaf34cb08d45047aba9e81550799be, type: 2}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
+  - item: {fileID: 0}
   - item: {fileID: 0}
   - item: {fileID: 0}
   - item: {fileID: 0}
